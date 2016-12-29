@@ -1,0 +1,14 @@
+﻿{
+  "maintenance": {
+    "IPO":"IPO",
+    "IPOMaintenance":"IPO管理",
+    "newIPO":"新IPO"  
+  },
+  
+  "createIPO": {
+	"IPO":"IPO",
+    "IPOMaintenance":"IPO管理",
+    "IPOMaster":"IPO资料"	
+	}
+  
+}

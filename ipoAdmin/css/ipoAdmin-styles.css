@@ -1,0 +1,180 @@
+/* --- general start --- */
+
+h1 {
+	font-size: 24px !important;
+	font-weight: bold !important;
+	line-height: 40px !important;
+}
+
+.page-margin {
+	position: relative;
+	top: 45px;
+	margin-bottom: 10px !important;
+	margin-right: 10px !important;
+	margin-left: 10px !important;
+}
+
+/* --- admin header start --- */
+.admin-header {
+
+	padding-top: 3px;
+	padding-bottom: 2px;
+	padding-right: 3px;
+	padding-left: 3px;
+	color: #808080;
+}
+
+.admin-header-selected {
+	color: #404040;	
+}
+
+.container {
+	position: absolute;
+	padding-right: 0px;
+	padding-left: 0px;
+}
+.btn-ribbon{
+	color: #fff;
+	background-color:#FD9999;
+	border-color: #FD9999;
+	display: inline-block;
+    padding: 6px 12px;
+    margin-bottom: 0;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.42857143;
+    text-align: left;
+    white-space: nowrap;
+    vertical-align: middle;    
+    touch-action: manipulation;
+    cursor: pointer;
+    -webkit-user-select: none;    
+    user-select: none;
+    background-image: none;
+    border: 1px solid transparent;
+    border-radius: 4px;   
+    -moz-user-select: none;
+    -ms-user-select: none;
+    
+}
+.breadcrumb>li+li:before{
+	padding: 0 5px;
+    color: #ccc;    
+	content: ">";
+}
+::-webkit-input-placeholder { /* WebKit, Blink, Edge */
+    color:    #55bbde !important;
+    font-style:italic;
+}
+::-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+   color:    #55bbde !important;
+   opacity:  1;
+   font-style:italic;
+}
+::-moz-placeholder { /* Mozilla Firefox 19+ */
+   color:    #55bbde !important;
+   opacity:  1;
+   font-style:italic;   
+}
+::-ms-input-placeholder { /* Internet Explorer 10-11 */
+   color:    #55bbde !important;
+   font-style:italic;   
+}
+.glyphicon-calendar:before{
+	color: #5bc0de;	
+}
+.glyphicon-time:before{
+	color: #5bc0de;	
+}
+.reqpad{
+	padding: 6px 23% !important;
+}
+.reqpadlong{
+	padding: 6px 8% !important;
+}
+.form-horizontal .has-feedback .form-control-feedback{
+	right:73%;
+}
+.longadd{
+	right:89% !important;
+}
+.input-group-addon{
+	background-color: #fff;
+    border: 1px solid #fff;
+}
+.navbar>.container .navbar-brand, .navbar>.container-fluid .navbar-brand{
+	/* margin-left:300px; */
+}
+.navbar-default .navbar-nav > li > a:focus, .navbar-default .navbar-nav > li > a:hover{
+	background-color: #12d6f6 !important;
+	color: #fff;
+}
+.badge {
+	color: #999;
+	background-color: #fff;
+}
+.navbar-default .navbar-nav>li>a{
+	/* a链接中字体颜色 */
+	color: #fff;
+}
+.navbar-default{
+	background-color: #fff;
+    border-color: #fff;
+}
+hr {
+    margin-top: 20px;
+    margin-bottom: 0px;
+}
+ #abasic{
+	background-color: #ddd;
+	display: inline-block;  	
+  	transform:skew(-45deg); 	
+  	/* margin-left:20px; 
+  	     transform:skew(-45deg,0deg); 
+  	     -ms-transform:skew(-45deg,0deg); IE 9 
+  	     -moz-transform:skew(-45deg,0deg); Firefox 
+  	     -webkit-transform:skew(-45deg,0deg); Safari and Chrome 
+  	     -o-transform:skew(-45deg,0deg); Opera 
+  	     overflow:hidden; */ 
+
+} 
+#afee,#aquantity,#afinancing {
+	background-color: #ddd;
+	display: inline-block;  	
+  	transform: skew(-45deg);
+  	border: 2px solid white;
+  	border-style:none solid;	
+}
+#abasicdiv{
+	transform: skew(45deg);
+	/* margin-left:-180px; 
+	    transform:skew(45deg,0deg); 
+	    -ms-transform:skew(45deg,0deg); IE 9 
+	    -moz-transform:skew(45deg,0deg); Firefox 
+	    -webkit-transform:skew(45deg,0deg); Safari and Chrome 
+	    -o-transform:skew(45deg,0deg); Opera  */
+}
+#afeediv,#aquantitydiv,#afinancingdiv{
+	transform: skew(45deg);
+}
+/* .breadcrumb{
+	padding: 8px 400px;	
+} */
+#xianzhi{
+	background-color: #12d6f6 !important;	
+    display: inline-block;
+   
+}
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,183 @@
+<div id="header" class="container">
+	<nav class="navbar">
+		<div class="container-fluid">		
+			<h1 class="admin-header">
+				<span>{{'maintenance.IPO'|translate}} > <span class="admin-header-selected">{{'maintenance.IPOMaintenance'|translate}}</span>
+			</h1>		
+		</div>
+	</nav>
+</div>
+<br><br>
+
+<div class="container-fluid page-margin">
+	<div>			
+		<!-- Major Filter Panel -->		
+		<div class="row">
+			  <div class="col-sm-1">
+			  <h4>Status: </h4>
+			  </div>
+			  <div class="col-sm-11">
+					<button type="button" class="btn btn-default" style="width:140px">All <span class="badge">7</span></button>
+					<button type="button" class="btn btn-info" style="width:140px">Pending <span class="badge">3</span></button>    
+					<button type="button" class="btn btn-success" style="width:140px">Coming <span class="badge">5</span></button>
+					<button type="button" class="btn btn-warning" style="width:140px">Opening <span class="badge">5</span></button>        
+					<button type="button" class="btn btn-danger" style="width:140px">Ended <span class="badge">5</span></button>        
+					<button type="button" class="btn btn-primary" style="width:140px">Closed <span class="badge">5</span></button>  
+			  </div>
+		</div>
+		<br>	
+		<!--Filter Detail Panel -->	
+		<ul class="nav navbar-nav navbar-left" >
+					<li>
+						<a class="nav-menu-item">modify by myself</a>
+					</li>
+					<li class="dropdown" dropdown="">
+						<a dropdown-toggle="collapse" class="dropdown-toggle nav-menu-item" data-toggle="dropdown"><span>Show options</span><b class="caret"></b></a>
+						<ul class="dropdown-menu" >
+							<li ng-repeat="client in clients"><a class="nav-menu-item" ng-click="clientIdOnChange(client)">{{client.clientId}}</a></li>
+						</ul>
+					</li>
+		</ul>
+		<br><br><br>
+		<!--Floating Panel -->	
+		<div class="row">
+			  <div class="col-sm-2">
+				  <button type="button" class="btn btn-primary" ui-sref="createIPO" style="width:140px">{{'maintenance.newIPO'|translate}}</button>
+					<table class="table">
+						<thead>
+						  <tr>
+							<th>Filter</th>       
+						  </tr>
+						</thead>
+						<tbody>					 
+						  <tr class="success">
+							<td>Status</td>				   
+						  </tr>
+						  <tr class="danger">
+							<td>IPO Name</td>						
+						  </tr>
+						  <tr class="info">
+							<td>Subscription Status</td>						
+						  </tr>
+						  <tr class="warning">
+							<td>Modified by</td>						
+						  </tr>
+						  <tr class="active">
+							<td>Active</td>						
+						  </tr>
+						</tbody>
+				  </table>			  
+			  </div>
+			  <!--Record List Panel -->	
+			  <div class="col-sm-10">
+				  <div class="row">
+					  <ul class="nav navbar-nav navbar-left" >
+							<li>
+								<a class="nav-menu-item">Sort by:</a>
+							</li>
+							<li class="dropdown" dropdown="">
+								<a dropdown-toggle="collapse" class="dropdown-toggle nav-menu-item" data-toggle="dropdown"><span>Last Modified Time</span><b class="caret"></b></a>
+								<ul class="dropdown-menu" >
+									<li ng-repeat="client in clients"><a class="nav-menu-item" ng-click="clientIdOnChange(client)">{{client.clientId}}</a></li>
+								</ul>
+							</li>
+							<li class="dropdown" dropdown="">
+								<a dropdown-toggle="collapse" class="dropdown-toggle nav-menu-item" data-toggle="dropdown"><span>Modified By</span><b class="caret"></b></a>
+								<ul class="dropdown-menu" >
+									<li ng-repeat="client in clients"><a class="nav-menu-item" ng-click="clientIdOnChange(client)">{{client.clientId}}</a></li>
+								</ul>
+							</li>
+							<li class="dropdown" dropdown="">
+								<a dropdown-toggle="collapse" class="dropdown-toggle nav-menu-item" data-toggle="dropdown"><span>IPO Name</span><b class="caret"></b></a>
+								<ul class="dropdown-menu" >
+									<li ng-repeat="client in clients"><a class="nav-menu-item" ng-click="clientIdOnChange(client)">{{client.clientId}}</a></li>
+								</ul>
+							</li>
+							<li class="dropdown" dropdown="">
+								<a dropdown-toggle="collapse" class="dropdown-toggle nav-menu-item" data-toggle="dropdown"><span>Subscription Start</span><b class="caret"></b></a>
+								<ul class="dropdown-menu" >
+									<li ng-repeat="client in clients"><a class="nav-menu-item" ng-click="clientIdOnChange(client)">{{client.clientId}}</a></li>
+								</ul>
+							</li>
+							<li class="dropdown" dropdown="">
+								<a dropdown-toggle="collapse" class="dropdown-toggle nav-menu-item" data-toggle="dropdown"><span>Subscription End</span><b class="caret"></b></a>
+								<ul class="dropdown-menu" >
+									<li ng-repeat="client in clients"><a class="nav-menu-item" ng-click="clientIdOnChange(client)">{{client.clientId}}</a></li>
+								</ul>
+							</li>
+							<li class="dropdown" dropdown="">
+								<a dropdown-toggle="collapse" class="dropdown-toggle nav-menu-item" data-toggle="dropdown"><span>Closing Date</span><b class="caret"></b></a>
+								<ul class="dropdown-menu" >
+									<li ng-repeat="client in clients"><a class="nav-menu-item" ng-click="clientIdOnChange(client)">{{client.clientId}}</a></li>
+								</ul>
+							</li>
+					  </ul>
+				 </div>  
+					<div class="row">							  						  
+						<div style="height:500px;overflow-y:scroll">
+							<div class="panel-group">
+								<div class="panel panel-default">
+								  <div class="panel-heading">Panel with panel-default class</div>
+								  <div class="panel-body">Panel Content</div>
+								</div>
+
+								<div class="panel panel-primary">
+								  <div class="panel-heading">Panel with panel-primary class</div>
+								  <div class="panel-body">Panel Content</div>
+								</div>
+
+								<div class="panel panel-success">
+								  <div class="panel-heading">Panel with panel-success class</div>
+								  <div class="panel-body">Panel Content</div>
+								</div>
+
+								<div class="panel panel-info">
+								  <div class="panel-heading">Panel with panel-info class</div>
+								  <div class="panel-body">Panel Content</div>
+								</div>
+
+								<div class="panel panel-warning">
+								  <div class="panel-heading">Panel with panel-warning class</div>
+								  <div class="panel-body">Panel Content</div>
+								</div>
+
+								<div class="panel panel-danger">
+								  <div class="panel-heading">Panel with panel-danger class</div>
+								  <div class="panel-body">Panel Content</div>
+								</div>
+								<div class="panel panel-default">
+								  <div class="panel-heading">Panel with panel-default class</div>
+								  <div class="panel-body">Panel Content</div>
+								</div>
+
+								<div class="panel panel-primary">
+								  <div class="panel-heading">Panel with panel-primary class</div>
+								  <div class="panel-body">Panel Content</div>
+								</div>
+
+								<div class="panel panel-success">
+								  <div class="panel-heading">Panel with panel-success class</div>
+								  <div class="panel-body">Panel Content</div>
+								</div>
+
+								<div class="panel panel-info">
+								  <div class="panel-heading">Panel with panel-info class</div>
+								  <div class="panel-body">Panel Content</div>
+								</div>
+
+								<div class="panel panel-warning">
+								  <div class="panel-heading">Panel with panel-warning class</div>
+								  <div class="panel-body">Panel Content</div>
+								</div>
+								
+								<div class="panel panel-danger">
+								  <div class="panel-heading">Panel with panel-danger class</div>
+								  <div class="panel-body">Panel Content</div>
+								</div>
+						  </div>			  			  			  
+					  </div>		  
+				  </div>		
+		      </div>
+	   </div>
+  </div>
+</div>
