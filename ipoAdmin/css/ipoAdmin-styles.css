@@ -160,10 +160,32 @@ hr {
 /* .breadcrumb{
 	padding: 8px 400px;	
 } */
+@-moz-document url-prefix() {
+  fieldset { display: table-cell; }
+}
+.tdclass{
+	text-align: center;
+	color: #12d6f6;	
+	border-top: none !important;	
+}
+.thclass{	
+	text-align: center;
+	background-color:#338db0;
+	color: #fff;
+	border-top: none !important;	
+}
+.tds{
+	color:#ddd;
+}
 #xianzhi{
 	background-color: #12d6f6 !important;	
-    display: inline-block;
-   
+    display: inline-block;   
+}
+
+
+.scrollspy-example 
+{    
+    overflow: auto;   
 }
 
 

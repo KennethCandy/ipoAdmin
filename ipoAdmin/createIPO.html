@@ -81,8 +81,8 @@
 		          <a class="navbar-brand" href="#"></a>
 		        </div>
 		        <div class="collapse navbar-collapse bs-example-js-navbar-scrollspy">
-		          <ul class="nav navbar-nav">
-		            <li><a id="abasic" href="#basic"><div id="abasicdiv"><span class="badge">1</span> Basic Information -0%</div></a></li>
+		          <ul class="nav navbar-nav">	<!-- #basic -->	          	          	
+		            <li><a id="abasic" href="https://www.baidu.com"><div id="abasicdiv"><span class="badge">1</span> Basic Information -0%</div></a></li>
     				<li><a id="afee" href="#fee"><div id="afeediv"><span class="badge">2</span> Fee and Charges -0%</div></a></li>
     				<li><a id="aquantity" href="#quantity"><div id="aquantitydiv"><span class="badge">3</span> Quantity/Amount Table -0%</div></a></li>
     				<li><a id="afinancing" href="#financing"><div id="afinancingdiv"><span class="badge">4</span> Financing -0%</div></a></li>
@@ -90,8 +90,7 @@
 		        </div>
 		      </div>
 		    </nav>			
-			<div id="scrollbody" class="scrollspy-example " data-spy="scroll" data-target="#navbar-example" data-offset="3"style="position: relative">			
-			<div >					
+				<div id="scrollbody" class="scrollspy-example " data-spy="scroll" data-target="#navbar-example" data-offset="0"style="position: relative">							
 				<form class="form-horizontal" role="form" style="height:450px;overflow-x: hidden">			
 					<div class="form-group" id="basic">
 					    <label for="StockCode" class="col-sm-5 control-label">Stock Code</label>
@@ -130,9 +129,9 @@
 							  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"style="width:160px;font-style:italic;color:#55bbde !important">(Requeried)
 							  <span class="caret" style="margin-left: 45px;"></span></button>
 							  <ul class="dropdown-menu" role="menu" id="StockCurrency">
-							    <li>HKD</li>
-							    <li>CHD</li>
-							    <li>HSD</li>							    						    
+							    <li><a href="#" style="text-align:center">HKD</a></li>
+							    <li><a href="#" style="text-align:center">CHD</a></li>
+							    <li><a href="#" style="text-align:center">HSD</a></li>							    						    
 							  </ul>
 							</div>		  		
 					    </div>
@@ -253,7 +252,7 @@
 					      <textarea class="form-control" id="RemarkforInternal" rows="3"></textarea>
 					    </div>								    
 					</div>
-					<div class="form-group " id="fee">
+					<div class="form-group " id="fee" name = "fee">
 					    <label for="CommissionRate" class="col-sm-5 control-label">Commission Rate</label>  
 					    <div class="col-sm-2 ">	
 					    <div class="input-group">							    
@@ -304,9 +303,9 @@
 					    <div class="btn-group">
 						<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"style="width:160px;font-style:italic;color:#55bbde !important">(Requeried) <span class="caret" style="margin-left: 45px;"></span></button>
 							<ul class="dropdown-menu" role="menu" id="CurrencyofHandingFee">
-							    <li>HKD</li>
-							    <li>CHD</li>
-							    <li>HSD</li>									    						    
+							    <li><a href="#" style="text-align:center">HKD</a></li>
+							    <li><a href="#" style="text-align:center">CHD</a></li>
+							    <li><a href="#" style="text-align:center">HSD</a></li>	    						    
 							</ul>
 						</div>
 					    </div>							    
@@ -319,16 +318,97 @@
 					    </div>
 					    </div>							    
 					</div>
-					<div class="form-group" id="quantity">
+					<div class="form-group">
 					    <label for="FinancingHandingFee" class="col-sm-5 control-label">Financing Handing Fee</label>  
 					    <div class="col-sm-2 ">					    							    
 					    <input type="text" class="form-control" id="FinancingHandingFee" >					    
 					    </div>							    
 					</div>
 
-					 <!--  4.2.5.5	Quantity/Amount Table meiyounong-->
-						
+					<!--  4.2.5.5	Quantity/Amount Table -->
+					<div class="form-group" id="quantity" >
+						<div class="table-responsive col-sm-offset-3 col-sm-5"style="height:300px;padding-right: 0px;" >
+						    <table class="table table-hover table-condensed" >
+						    	<thead>
+						    		<th class="thclass" >Range</th>
+						    		<th class="thclass">Quantity</th>
+						    		<th class="thclass">Amount</th>
+						    		<th class="thclass"></th>						    		
+						    	</thead>
+						    	<tbody>
+						    		<tr >
+						    			<td class="tdclass">0 < quantity <= 10000</td>
+						    			<td class="tdclass">2000</td>
+						    			<td class="tdclass">2000</td>
+						    			<td class="tdclass"><span class="glyphicon glyphicon-remove tds"></span></td>
+						    		</tr>
+						    		<tr >
+						    			<td class="tdclass">0 < quantity <= 10000</td>
+						    			<td class="tdclass">4000</td>
+						    			<td class="tdclass">4000</td>
+						    			<td class="tdclass"><span class="glyphicon glyphicon-remove tds"></span></td>
+						    		</tr>
+						    		<tr>
+						    			<td class="tdclass">0 < quantity <= 10000</td>
+						    			<td class="tdclass">6000</td>
+						    			<td class="tdclass">6000</td>
+						    			<td class="tdclass"><span class="glyphicon glyphicon-remove tds"></span></td>
+						    		</tr>
+						    		<tr>
+						    			<td class="tdclass">0 < quantity <= 10000</td>
+						    			<td class="tdclass">8000</td>
+						    			<td class="tdclass">8000</td>
+						    			<td class="tdclass"><span class="glyphicon glyphicon-remove tds"></span></td>
+						    		</tr>
+						    		<tr>
+						    			<td class="tdclass">0 < quantity <= 10000</td>
+						    			<td class="tdclass">10000</td>
+						    			<td class="tdclass">10000</td>
+						    			<td class="tdclass"><span class="glyphicon glyphicon-remove tds"></span></td>
+						    		</tr>
+						    		<tr>
+						    			<td class="tdclass">10000 < quantity <= 30000</td>
+						    			<td class="tdclass">14000</td>
+						    			<td class="tdclass">14000</td>
+						    			<td class="tdclass"><span class="glyphicon glyphicon-remove tds"></span></td>
+						    		</tr>
+						    		<tr>
+						    			<td class="tdclass">10000 < quantity <= 30000</td>
+						    			<td class="tdclass">18000</td>
+						    			<td class="tdclass">18000</td>
+						    			<td class="tdclass"><span class="glyphicon glyphicon-remove tds"></span></td>
+						    		</tr>
+						    		<tr>
+						    			<td class="tdclass">10000 < quantity <= 30000</td>
+						    			<td class="tdclass">22000</td>
+						    			<td class="tdclass">22000</td>
+						    			<td class="tdclass"><span class="glyphicon glyphicon-remove tds"></span></td>
+						    		</tr>
+						    		<tr>
+						    			<td class="tdclass">10000 < quantity <= 30000</td>
+						    			<td class="tdclass">26000</td>
+						    			<td class="tdclass">26000</td>
+						    			<td class="tdclass"><span class="glyphicon glyphicon-remove tds"></span></td>
+						    		</tr>
+						    		<tr>
+						    			<td class="tdclass">10000 < quantity <= 30000</td>
+						    			<td class="tdclass">30000</td>
+						    			<td class="tdclass">30000</td>
+						    			<td class="tdclass"><span class="glyphicon glyphicon-remove tds"></span></td>
+						    		</tr>
+						    	</tbody>
+						    </table>
+						</div>						
+				      	<div class="form-group " id="financing" style="border:2px solid #12d6f6;height:300px;width:300px; float:right;margin-right:120px;">
+											      
+						   <div >	
+						    	<label for="ProvideIPOfinancing" class=" control-label" style="
+								text-align: left; padding-left: 0">Provide IPO financing</label>
+						    </div>
+						</div>
+					</div>						
 
+					<!-- 4.2.5.5	Quantity/Amount Table start-->
 					<div class="form-group" id="financing">
 						<div class="col-sm-offset-4 col-sm-1">
 					      	<div class="checkbox"style="float:right" id="ProvideIPOfinancing">
@@ -430,8 +510,7 @@
 
 							
 				</form>								  
-			</div>
-			</div>
+			</div>			
 			</div><!--Record details panel end-->							 		  
 		</div> 		
 </div>	
