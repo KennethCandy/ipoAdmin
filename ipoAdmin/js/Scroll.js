@@ -1,19 +1,12 @@
-/*$('#scrollbody').scrollspy({ target: '#navbar-example' })  
-$('[data-spy="scroll"]').each(function () {
-  var $spy = $(this).scrollspy('refresh')
-  console.log(123456)
-  alert(13);
-}) 
+$(document).ready(function() {
 
-$(window).scroll(function () {  
-    $('#scrollbody').scrollspy({ target: '#navbar-example' })  
-    $('[data-spy="scroll"]').each(function () {
-      var $spy = $(this).scrollspy('refresh')  
-    })
-}); 
-$(function () {
-        $('.scrollspy-example').scrollspy({ target:'#navbar-example' });
-        alert(12);
+    $("#IPOClosingDate").daterangepicker({
+        "startDate": "12/28/2016",
+        "endDate": "01/03/2017"
+    });
+
+  
 })
-*/
-$('#myModal').modal('toggle');
+
+
+
