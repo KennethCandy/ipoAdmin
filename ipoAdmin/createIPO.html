@@ -327,14 +327,18 @@
 
 					<!--  4.2.5.5	Quantity/Amount Table -->
 					<div class="form-group" id="quantity" >
-						<div class="table-responsive col-sm-offset-3 col-sm-5"style="height:300px;padding-right: 0px;" >
-						    <table class="table table-hover table-condensed" >
-						    	<thead>
+						<div class="table-responsive col-sm-offset-3 col-sm-5"style="height:32px;padding-right: 0px;" >
+							<table class="table table-hover table-condensed" >
+								<thead>
 						    		<th class="thclass" >Range</th>
 						    		<th class="thclass">Quantity</th>
 						    		<th class="thclass">Amount</th>
 						    		<th class="thclass"></th>						    		
 						    	</thead>
+							</table>
+						</div>
+						<div class="table-responsive col-sm-offset-3 col-sm-5"style="height:300px;padding-right: 0px;" >
+						    <table class="table table-hover table-condensed" >						    	
 						    	<tbody>
 						    		<tr >
 						    			<td class="tdclass">0 < quantity <= 10000</td>
@@ -399,12 +403,47 @@
 						    	</tbody>
 						    </table>
 						</div>						
-				      	<div class="popover right " id="financing" style="display:block;border:2px solid #12d6f6;height:300px;width:350px; float:right;margin-right:70px;position:relative;max-width: 350px;">
+				      	<div class="popover right " id="financing" style="display:block;border:2px solid #12d6f6;height:332px;width:380px; float:right;margin-right:20px;position:relative;max-width: 380px;">
 							<div class="arrow" style="border-right-color:#12d6f6;"></div>	      
-						    <div >	
-						    	<label for="ProvideIPOfinancing" class=" control-label" style="
-								text-align: left; padding-left: 0">Provide IPO financing</label>
+						    <div class="row">	
+						    	<label for="QuantityFrom" class="col-sm-offset-1 col-sm-5 control-label" style="
+								text-align: left; padding-left:15px">Quantity From</label>
+								<label for="QuantityTo" class="col-sm-6 control-label" style="
+								text-align: left; padding-left:15px">Quantity To(inclusive)</label>
 						    </div>
+						    <div class="row">	
+						    	<div class=" col-sm-offset-1 col-sm-5 ">					    							    
+							    <input type="text" class="form-control" id="QuantityFrom" placeholder="(Required)">					    
+							    </div>
+								<div class="col-sm-5 ">					    							    
+							    <input type="text" class="form-control" id="QuantityTo" placeholder="(Required)">					    
+							    </div>
+						    </div>
+						    <div class="row">	
+						    	<label for="Interval" class="col-sm-offset-1 col-sm-8 control-label" style="
+								text-align: left; padding-left:15px">Interval</label>
+								<div class="col-sm-offset-1 col-sm-5">					    							    
+							    <input type="text" class="form-control" id="Interval" placeholder="(Required)">					    
+							    </div>
+						    </div>
+						    <div class="row">	
+						    	<label for="CalculationMethod" class="col-sm-offset-1 col-sm-8 control-label" style="
+								text-align: left; padding-left:15px">Calculation Method</label>
+								<div class="col-sm-offset-1 col-sm-10">					    							    
+							    <input type="text" class="form-control" id="CalculationMethod" placeholder="Round Lump Sum Amount">					    
+							    </div>
+						    </div>
+							<div style="height:80px;"></div>
+						    <div class="row">	
+						    	<label for="CalculationMethod" class="col-sm-offset-1 col-sm-8 control-label" style="
+								text-align: left; padding-left:15px"><button id="addcm" type="button" class="btn btn-info" style="width:80px;">Add</button></label>								
+						    </div>
+
+						</div>
+						<div class="table-responsive col-sm-offset-3 col-sm-5"style="height:45px;padding-right: 0px;overflow:hidden" >
+						<table class="table  table-condensed" >
+							<tr><td class="tdclass" colspan="3" align="center"><button id="three" type="button" class="btn btn-info" style="width:100px;">Remove All</button></td></tr>
+						</table>
 						</div>
 					</div>						
 
@@ -511,13 +550,17 @@
 					    <label for="SpecialInterestRateTable" class="col-sm-offset-3 col-sm-5 control-label"style="text-align:left;">Special Interest Rate Table<span style="color:#55bbde !important;font-style:italic;">(Required)</span></label>							    
 					</div>
 					<div class="form-group">
+						<div class="table-responsive col-sm-offset-3 col-sm-5"style="height:32px;padding-right: 0px;" >
+						<table class="table table-hover table-condensed" >
+							<thead>
+					    		<th class="thclass" >Loan Amount Above</th>
+					    		<th class="thclass">Interest Rate(% p.a.)</th>						    		
+					    		<th class="thclass"></th>						    		
+						    </thead>
+						</table>
+						</div>
 						<div class="table-responsive col-sm-offset-3 col-sm-5"style="height:300px;padding-right: 0px;" >
-						    <table class="table table-hover table-condensed" >
-						    	<thead>
-						    		<th class="thclass" >Loan Amount Above</th>
-						    		<th class="thclass">Interest Rate(% p.a.)</th>						    		
-						    		<th class="thclass"></th>						    		
-						    	</thead>
+						    <table class="table table-hover table-condensed" >						    	
 						    	<tbody>
 						    		<tr >
 						    			<td class="tdclass">> 10000</td>
@@ -568,19 +611,62 @@
 						    			<td class="tdclass">> 10000</td>
 						    			<td class="tdclass">26000</td>
 						    			<td class="tdclass"><span class="glyphicon glyphicon-remove tds"></span></td>
-						    		</tr>
-						    		<tr><td class="tdclass" colspan="3" align="center"><button type="button" class="btn btn-info" style="width:100px;">Remove All</button></td></tr>
+						    		</tr>						    		
 						    	</tbody>
 						    </table>
-						</div>						
-				      	<div class="popover right " id="financing" style="display:block;border:2px solid #12d6f6;height:300px;width:350px; float:right;margin-right:70px;position:relative;max-width: 350px;">
-							<div class="arrow" style="border-right-color:#12d6f6;"></div>	<!-- left:-13px;border-width: 13px; -->      
-						    <div >	
-						    	<label for="ProvideIPOfinancing" class=" control-label" style="
-								text-align: left; padding-left: 0">Provide IPO financing</label>
+						</div>												
+				      	<div class="popover right " id="financing" style="display:block;border:2px solid #12d6f6;height:332px;width:380px; float:right;margin-right:20px;position:relative;max-width: 380px;">
+							<div class="arrow" style="border-right-color:#12d6f6;"></div>	
+						    <div class="row">	
+						    	<label for="QuantityFrom" class=" col-sm-8 control-label" style="
+								text-align: left; padding-left:15px">Load from templates</label>			
+						    </div>
+						    <div class="row">	
+						    	<div class="  col-sm-8 ">	    							    
+							    <input type="text" class="form-control" id="QuantityFrom" >					    
+							    </div>
+								<div class="col-sm-3 ">					    							    
+							    <button id="loadt" type="button" class="btn btn-info" style="width:80px;">Load</button>					    
+							    </div>
+						    </div>
+						    <div class="row">	
+						    	<label for="LoadAmountAbove" class=" col-sm-5 control-label" style="
+								text-align: left; padding-left:15px">Load Amount Above</label>
+								<label for="QuantityTo" class="col-sm-7 control-label" style="
+								text-align: left; padding-left:15px">Specical Interest Rate(p.a)</label>
+						    </div>
+						    <div class="row">	
+						    	<div class=" col-sm-6 ">					    							    
+							    <input type="text" class="form-control" id="QuantityFrom" placeholder="(Required)">					    
+							    </div>
+								<div class="col-sm-6 ">					    							    
+							    <input type="text" class="form-control" id="QuantityTo" placeholder="(Required)">					    
+							    </div>
+						    </div>
+						    <div class="row">	
+						    	<label for="CalculationMethod" class=" col-sm-8 control-label" style="
+								text-align: left; padding-left:15px"><button id="addcm" type="button" class="btn btn-info" style="width:80px;">Add</button></label>								
+						    </div>
+						    <div class="row">	
+						    	<label for="CalculationMethod" class=" col-sm-8 control-label" style="
+								text-align: left; padding-left:15px">Calculation Method</label>
+								<div class=" col-sm-10">					    							    
+							    <input type="text" class="form-control" id="CalculationMethod" >					    
+							    </div>
+						    </div>							
+						    <div class="row">	
+						    	<label for="CalculationMethod" class=" col-sm-8 control-label" style="
+								text-align: left; padding-left:15px"><button id="addcm" type="button" class="btn btn-info" style="width:80px;">Save</button></label>								
 						    </div>
 						</div>
+						<div class="table-responsive col-sm-offset-3 col-sm-5"style="height:45px;padding-right: 0px;overflow:hidden" >
+						<table class="table  table-condensed" >
+							<tr><td class="tdclass" colspan="3" align="center"><button id="four" type="button" class="btn btn-info" style="width:100px;">Remove All</button></td></tr>
+						</table>
+						</div>
 					</div>
+
+					<div class="form-group"style="height:80px;"></div>
 							
 				</form>								  
 			</div>			
@@ -588,7 +674,7 @@
 		</div> 		
 </div>	
 
-<div class="col-sm-12" style="position:fixed;bottom:5%">
+<div class="col-sm-12" ><!-- style="position:fixed;bottom:5%" -->
 
 	<ol class="breadcrumb" style="margin:0 auto">
 	  	<li><a style="text-decoration:none">Back to</a></li>
