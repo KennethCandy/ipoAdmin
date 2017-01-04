@@ -30,7 +30,7 @@
 					</div>		
 			  </div>
 			  <div class="col-sm-4"><span ng-class="getMinute(currentIPO.marginCloseTime)"></span>
-					<p class="text-center">Last modified by Aimer Chau on {{getCurrentDate()}} at {{getCurrentDateTime()}}</p>					
+					<p class="text-center">Last modified by <strong>Aimer Chau</strong> on <strong>{{getCurrentDate()}}</strong> at <strong>{{theTime}}</strong></p>					
 			  </div>
 			 </div>
 		</div><hr style="margin-top:0px">
@@ -82,10 +82,10 @@
 		        </div>
 		        <div class="collapse navbar-collapse bs-example-js-navbar-scrollspy">
 		          <ul class="nav navbar-nav">	<!-- #basic -->	          	          	
-		            <li><a id="abasic" href="https://www.baidu.com"><div id="abasicdiv"><span class="badge">1</span> Basic Information -0%</div></a></li>
-    				<li><a id="afee" href="#fee"><div id="afeediv"><span class="badge">2</span> Fee and Charges -0%</div></a></li>
-    				<li><a id="aquantity" href="#quantity"><div id="aquantitydiv"><span class="badge">3</span> Quantity/Amount Table -0%</div></a></li>
-    				<li><a id="afinancing" href="#financing"><div id="afinancingdiv"><span class="badge">4</span> Financing -0%</div></a></li>
+		            <li><a id="abasic" href="javascript:document.getElementById('basic').scrollIntoView()"><div id="abasicdiv"><span class="badge">1</span> Basic Information -0%</div></a></li>
+    				<li><a id="afee" href="javascript:document.getElementById('fee').scrollIntoView()" ><div id="afeediv"><span class="badge">2</span> Fee and Charges -0%</div></a></li>
+    				<li><a id="aquantity" href="javascript:document.getElementById('quantity').scrollIntoView()"><div id="aquantitydiv"><span class="badge">3</span> Quantity/Amount Table -0%</div></a></li>
+    				<li><a id="afinancing" href="javascript:document.getElementById('financing').scrollIntoView()"><div id="afinancingdiv"><span class="badge">4</span> Financing -0%</div></a></li>
 		          </ul>
 		        </div>
 		      </div>
@@ -343,25 +343,25 @@
 						    			<td class="tdclass"><span class="glyphicon glyphicon-remove tds"></span></td>
 						    		</tr>
 						    		<tr >
-						    			<td class="tdclass">0 < quantity <= 10000</td>
+						    			<td class="tdclass"></td>
 						    			<td class="tdclass">4000</td>
 						    			<td class="tdclass">4000</td>
 						    			<td class="tdclass"><span class="glyphicon glyphicon-remove tds"></span></td>
 						    		</tr>
 						    		<tr>
-						    			<td class="tdclass">0 < quantity <= 10000</td>
+						    			<td class="tdclass"></td>
 						    			<td class="tdclass">6000</td>
 						    			<td class="tdclass">6000</td>
 						    			<td class="tdclass"><span class="glyphicon glyphicon-remove tds"></span></td>
 						    		</tr>
 						    		<tr>
-						    			<td class="tdclass">0 < quantity <= 10000</td>
+						    			<td class="tdclass"></td>
 						    			<td class="tdclass">8000</td>
 						    			<td class="tdclass">8000</td>
 						    			<td class="tdclass"><span class="glyphicon glyphicon-remove tds"></span></td>
 						    		</tr>
 						    		<tr>
-						    			<td class="tdclass">0 < quantity <= 10000</td>
+						    			<td class="tdclass"></td>
 						    			<td class="tdclass">10000</td>
 						    			<td class="tdclass">10000</td>
 						    			<td class="tdclass"><span class="glyphicon glyphicon-remove tds"></span></td>
@@ -373,25 +373,25 @@
 						    			<td class="tdclass"><span class="glyphicon glyphicon-remove tds"></span></td>
 						    		</tr>
 						    		<tr>
-						    			<td class="tdclass">10000 < quantity <= 30000</td>
+						    			<td class="tdclass"></td>
 						    			<td class="tdclass">18000</td>
 						    			<td class="tdclass">18000</td>
 						    			<td class="tdclass"><span class="glyphicon glyphicon-remove tds"></span></td>
 						    		</tr>
 						    		<tr>
-						    			<td class="tdclass">10000 < quantity <= 30000</td>
+						    			<td class="tdclass"></td>
 						    			<td class="tdclass">22000</td>
 						    			<td class="tdclass">22000</td>
 						    			<td class="tdclass"><span class="glyphicon glyphicon-remove tds"></span></td>
 						    		</tr>
 						    		<tr>
-						    			<td class="tdclass">10000 < quantity <= 30000</td>
+						    			<td class="tdclass"></td>
 						    			<td class="tdclass">26000</td>
 						    			<td class="tdclass">26000</td>
 						    			<td class="tdclass"><span class="glyphicon glyphicon-remove tds"></span></td>
 						    		</tr>
 						    		<tr>
-						    			<td class="tdclass">10000 < quantity <= 30000</td>
+						    			<td class="tdclass"></td>
 						    			<td class="tdclass">30000</td>
 						    			<td class="tdclass">30000</td>
 						    			<td class="tdclass"><span class="glyphicon glyphicon-remove tds"></span></td>
@@ -399,9 +399,9 @@
 						    	</tbody>
 						    </table>
 						</div>						
-				      	<div class="form-group " id="financing" style="border:2px solid #12d6f6;height:300px;width:300px; float:right;margin-right:120px;">
-											      
-						   <div >	
+				      	<div class="popover right " id="financing" style="display:block;border:2px solid #12d6f6;height:300px;width:350px; float:right;margin-right:70px;position:relative;max-width: 350px;">
+							<div class="arrow" style="border-right-color:#12d6f6;"></div>	      
+						    <div >	
 						    	<label for="ProvideIPOfinancing" class=" control-label" style="
 								text-align: left; padding-left: 0">Provide IPO financing</label>
 						    </div>
@@ -507,7 +507,80 @@
 					</div>
 
 					<!-- 4.2.5.5	Quantity/Amount Table -->
-
+					<div class="form-group">
+					    <label for="SpecialInterestRateTable" class="col-sm-offset-3 col-sm-5 control-label"style="text-align:left;">Special Interest Rate Table<span style="color:#55bbde !important;font-style:italic;">(Required)</span></label>							    
+					</div>
+					<div class="form-group">
+						<div class="table-responsive col-sm-offset-3 col-sm-5"style="height:300px;padding-right: 0px;" >
+						    <table class="table table-hover table-condensed" >
+						    	<thead>
+						    		<th class="thclass" >Loan Amount Above</th>
+						    		<th class="thclass">Interest Rate(% p.a.)</th>						    		
+						    		<th class="thclass"></th>						    		
+						    	</thead>
+						    	<tbody>
+						    		<tr >
+						    			<td class="tdclass">> 10000</td>
+						    			<td class="tdclass">2000</td>						    			
+						    			<td class="tdclass"><span class="glyphicon glyphicon-remove tds"></span></td>
+						    		</tr>
+						    		<tr >
+						    			<td class="tdclass">> 10000</td>
+						    			<td class="tdclass">4000</td>
+						    			<td class="tdclass"><span class="glyphicon glyphicon-remove tds"></span></td>
+						    		</tr>
+						    		<tr>
+						    			<td class="tdclass">> 10000</td>
+						    			<td class="tdclass">6000</td>
+						    			<td class="tdclass"><span class="glyphicon glyphicon-remove tds"></span></td>
+						    		</tr>
+						    		<tr>
+						    			<td class="tdclass">> 10000</td>
+						    			<td class="tdclass">8000</td>
+						    			<td class="tdclass"><span class="glyphicon glyphicon-remove tds"></span></td>
+						    		</tr>
+						    		<tr>
+						    			<td class="tdclass">> 10000</td>
+						    			<td class="tdclass">8000</td>
+						    			<td class="tdclass"><span class="glyphicon glyphicon-remove tds"></span></td>
+						    		</tr>
+						    		<tr>
+						    			<td class="tdclass">> 10000</td>
+						    			<td class="tdclass">8000</td>
+						    			<td class="tdclass"><span class="glyphicon glyphicon-remove tds"></span></td>
+						    		</tr>
+						    		<tr>
+						    			<td class="tdclass">> 10000</td>
+						    			<td class="tdclass">8000</td>
+						    			<td class="tdclass"><span class="glyphicon glyphicon-remove tds"></span></td>
+						    		</tr>
+						    		<tr>
+						    			<td class="tdclass">> 10000</td>
+						    			<td class="tdclass">26000</td>
+						    			<td class="tdclass"><span class="glyphicon glyphicon-remove tds"></span></td>
+						    		</tr>
+						    		<tr>
+						    			<td class="tdclass">> 10000</td>
+						    			<td class="tdclass">26000</td>
+						    			<td class="tdclass"><span class="glyphicon glyphicon-remove tds"></span></td>
+						    		</tr>
+						    		<tr>
+						    			<td class="tdclass">> 10000</td>
+						    			<td class="tdclass">26000</td>
+						    			<td class="tdclass"><span class="glyphicon glyphicon-remove tds"></span></td>
+						    		</tr>
+						    		<tr><td class="tdclass" colspan="3" align="center"><button type="button" class="btn btn-info" style="width:100px;">Remove All</button></td></tr>
+						    	</tbody>
+						    </table>
+						</div>						
+				      	<div class="popover right " id="financing" style="display:block;border:2px solid #12d6f6;height:300px;width:350px; float:right;margin-right:70px;position:relative;max-width: 350px;">
+							<div class="arrow" style="border-right-color:#12d6f6;"></div>	<!-- left:-13px;border-width: 13px; -->      
+						    <div >	
+						    	<label for="ProvideIPOfinancing" class=" control-label" style="
+								text-align: left; padding-left: 0">Provide IPO financing</label>
+						    </div>
+						</div>
+					</div>
 							
 				</form>								  
 			</div>			
@@ -519,9 +592,9 @@
 
 	<ol class="breadcrumb" style="margin:0 auto">
 	  	<li><a style="text-decoration:none">Back to</a></li>
-	  	<li><a href="#">Basic Information</a></li>
-	  	<li><a href="#">Fee and Charges</a></li>
-	  	<li><a href="#">Quantity/Amount Table</a></li>  	
-	  	<li class="active">Financing</li>
+	  	<li><a href="javascript:document.getElementById('basic').scrollIntoView()">Basic Information</a></li>
+	  	<li><a href="javascript:document.getElementById('fee').scrollIntoView()">Fee and Charges</a></li>
+	  	<li><a href="javascript:document.getElementById('quantity').scrollIntoView()">Quantity/Amount Table</a></li>  	
+	  	<li class="active"><a href="javascript:document.getElementById('financing').scrollIntoView()">Financing</a></li>
 	</ol>
 </div>

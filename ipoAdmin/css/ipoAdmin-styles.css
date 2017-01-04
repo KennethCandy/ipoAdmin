@@ -177,18 +177,13 @@ hr {
 .tds{
 	color:#ddd;
 }
-#xianzhi{
-	background-color: #12d6f6 !important;	
-    display: inline-block;   
+/*::-webkit-scrollbar{
+	display:none;
+}*/
+
+.popover.right>.arrow:after{
+	left: 3px;/*右三角宽度*/
 }
-
-
-.scrollspy-example 
-{    
-    overflow: auto;   
-}
-
-
 
 
 
