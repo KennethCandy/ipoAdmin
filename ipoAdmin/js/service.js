@@ -2,6 +2,9 @@ var app = angular.module('ipoAdminApp.service', ['pascalprecht.translate'])
 
 app.service('sharedProperties', ['$rootScope', function ($rootScope) {
 	return {
+		getIPOMakerCheckerRole: function(){
+			return getSessionStorage().getItem('ipoMakerCheckerRole');
+		},
 		getBaseURL: function() {
 			if ($rootScope.baseURL == undefined) {
 				return "";
@@ -128,13 +131,14 @@ app.service('sharedProperties', ['$rootScope', function ($rootScope) {
 			this.removeCurrentIPOFinancingRatio();
 			this.removeCurrentIPOReqId();
 		},
-		setBypassLoginData: function(lang, clientId, clientIds, baseURL) {
+		setBypassLoginData: function(lang, clientId, clientIds, baseURL,ipoMakerCheckerRole) {
 			$rootScope.baseURL = baseURL;
 			getSessionStorage().setItem('deviceType', DEVICE_CLIENT);
 			getSessionStorage().setItem('agreed', AGREED);
 			getSessionStorage().setItem('language', lang);
 			getSessionStorage().setItem('clientId', clientId);
 			getSessionStorage().setItem('clientIds', clientIds);
+			getSessionStorage().setItem('ipoMakerCheckerRole', ipoMakerCheckerRole);			
 		}
 	}
 }]);

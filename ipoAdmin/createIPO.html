@@ -95,37 +95,37 @@
 					<div class="form-group" id="basic">
 					    <label for="StockCode" class="col-sm-5 control-label">Stock Code</label>
 					    <div class="col-sm-5">
-					      <input type="text" class="form-control" id="StockCode" placeholder="(Required)">
-					    </div>
+					      <input type="text" class="form-control" id="StockCode" placeholder="(Required)" ng-disabled="{{machkerf}}"ng-blur="padLeft('12',5)" >
+					    </div>					    
 					</div>
 					<div class="form-group">
 					    <label for="EnglishStockName" class="col-sm-5 control-label">English Stock Name</label>
 					    <div class="col-sm-5">
-					      <input type="text" class="form-control" id="EnglishStockName" placeholder="(Required)">
+					      <input type="text" class="form-control " id="EnglishStockName" placeholder="(Required)" ng-disabled="{{machkerf}}">
 					    </div>
 					</div>
 					<div class="form-group">
 					    <label for="TranditionalChineseName" class="col-sm-5 control-label">Tranditional Chinese Name</label>
 					    <div class="col-sm-5">
-					      <input type="text" class="form-control" id="TranditionalChineseName" placeholder="(Required)">
+					      <input type="text" class="form-control" id="TranditionalChineseName" placeholder="(Required)" ng-disabled="{{machkerf}}">
 					    </div>
 					</div>
 					<div class="form-group">
 					    <label for="SimplifiedChineseName" class="col-sm-5 control-label">Simplified Chinese Name</label>
 					    <div class="col-sm-5">
-					      <input type="text" class="form-control" id="SimplifiedChineseName" placeholder="(Required)">
+					      <input type="text" class="form-control" id="SimplifiedChineseName" placeholder="(Required)" ng-disabled="{{machkerf}}">
 					    </div>
 					</div>
 					<div class="form-group">
 					    <label for="NumberofOfferShares/UnitunderGlobalOffering" class="col-sm-5 control-label">Number of Offer Shares / Unit under Global Offering</label>
 					    <div class="col-sm-5">
-					      <input type="text" class="form-control" id="NumberofOfferShares/UnitunderGlobalOffering" >
+					      <input type="text" class="form-control" id="NumberofOfferShares/UnitunderGlobalOffering" ng-disabled="{{machkerf}}">
 					    </div>
 					</div>
 					<div class="form-group" >
 					    <label for="StockCurrency" class="col-sm-5 control-label">Stock Currency</label>
 					    <div class="col-sm-2">
-							<div class="btn-group">
+							<!-- <div class="btn-group">
 							  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"style="width:160px;font-style:italic;color:#55bbde !important">(Requeried)
 							  <span class="caret" style="margin-left: 45px;"></span></button>
 							  <ul class="dropdown-menu" role="menu" id="StockCurrency">
@@ -133,130 +133,135 @@
 							    <li><a href="#" style="text-align:center">CHD</a></li>
 							    <li><a href="#" style="text-align:center">HSD</a></li>							    						    
 							  </ul>
-							</div>		  		
+							</div> -->
+							<select class="form-control " ng-disabled="{{machkerf}}">
+								<option value=""  style="text-align:center">HKD</option>
+								<option value=""  style="text-align:center">CHD</option>
+								<option value=""  style="text-align:center">HSD</option> 
+							</select>		  		
 					    </div>
 					</div>
 					<div class="form-group">
 					    <label for="OfferPriceRangeStart" class="col-sm-5 control-label">Offer Price Range</label>
 					    <div class="col-sm-2">
-					      <input type="text" class="form-control col-sm-2" id="OfferPriceRangeStart" placeholder="(Required)">
+					      <input type="text" class="form-control col-sm-2" id="OfferPriceRangeStart" placeholder="(Required)" ng-disabled="{{machkerf}}">
 					    </div>
 					    <label for="OfferPriceRangeEnd" class="col-sm-1 control-label" style="text-align:center"> · </label>
 					    <div class="col-sm-2">
-					    <input type="text" class="form-control col-sm-2" id="OfferPriceRangeEnd" placeholder="(Required)">
+					    <input type="text" class="form-control col-sm-2" id="OfferPriceRangeEnd" placeholder="(Required)" ng-disabled="{{machkerf}}">
 					    </div>
 					</div>
 					<div class="form-group">
 					    <label for="BroadLot" class="col-sm-5 control-label">Broad Lot</label>
 					    <div class="col-sm-5">
-					      <input type="text" class="form-control" id="BroadLot" placeholder="(Required)">
+					      <input type="text" class="form-control" id="BroadLot" placeholder="(Required)" ng-disabled="{{machkerf}}">
 					    </div>
 					</div>
 					<div class="form-group">
 					    <label for="NominalValue" class="col-sm-5 control-label">Nominal Value</label>
 					    <div class="col-sm-5">
-					      <input type="text" class="form-control " id="NominalValue" >
+					      <input type="text" class="form-control " id="NominalValue" ng-disabled="{{machkerf}}">
 					    </div>
 					</div>
 					<div class="form-group has-feedback">
 					    <label for="OnlineIPOStartDate" class="col-sm-5 control-label">Online IPO Start Date</label>
 					    <div class="col-sm-2">					      
 						    <span class="glyphicon glyphicon-calendar form-control-feedback"></span>
-						    <input type="text" class="form-control reqpad" id="OnlineIPOStartDate" placeholder="(Required)"> 
+						    <input type="text" class="form-control reqpad" id="OnlineIPOStartDate" placeholder="(Required)" ng-disabled="{{machkerf}}"> 
 					    </div>
 					    <label for="OnlineIPOStartTime" class="col-sm-1" style="text-align:center">Time</label>
 					    <div class="col-sm-2">
 						  <span class="glyphicon glyphicon-time form-control-feedback"></span>
-					      <input type="text" class="form-control reqpad" id="OnlineIPOStartTime" placeholder="(Required)">
+					      <input type="text" class="form-control reqpad" id="OnlineIPOStartTime" placeholder="(Required)"ng-disabled="{{machkerf}}">
 					   </div>
 					</div>
 					<div class="form-group has-feedback">
 					    <label for="OnlineIPOEndDate" class="col-sm-5 control-label">Online IPO End Date</label>
 					    <div class="col-sm-2">
 						  <span class="glyphicon glyphicon-calendar form-control-feedback"></span>
-					      <input type="text" class="form-control reqpad" id="OnlineIPOEndDate" placeholder="(Required)">
+					      <input type="text" class="form-control reqpad" id="OnlineIPOEndDate" placeholder="(Required)"ng-disabled="{{machkerf}}">
 					    </div>
 					    <label for="OnlineIPOEndTime" class="col-sm-1" style="text-align:center">Time</label>
 					    <div class="col-sm-2">
 						  <span class="glyphicon glyphicon-time form-control-feedback"></span>
-					      <input type="text" class="form-control reqpad" id="OnlineIPOEndTime" placeholder="(Required)">
+					      <input type="text" class="form-control reqpad" id="OnlineIPOEndTime" placeholder="(Required)"ng-disabled="{{machkerf}}">
 					    </div>
 					</div>
 					<div class="form-group has-feedback">
 					    <label for="IPOClosingDate" class="col-sm-5 control-label">IPO Closing Date</label>
 					    <div class="col-sm-2" >
 						  <span class="glyphicon glyphicon-calendar form-control-feedback"></span>
-					      <input type="text" class="form-control reqpad" id="IPOClosingDate" placeholder="(Required)">
+					      <input type="text" class="form-control reqpad" id="IPOClosingDate" placeholder="(Required)"ng-disabled="{{machkerf}}">
 					    </div>					    
 					    <label for="IPOClosingTime" class="col-sm-1" style="text-align:center">Time</label>
 					    <div class="col-sm-2">
 						  <span class="glyphicon glyphicon-time form-control-feedback"></span>
-					      <input type="text" class="form-control reqpad" id="IPOClosingTime" placeholder="(Required)">
+					      <input type="text" class="form-control reqpad" id="IPOClosingTime" placeholder="(Required)"ng-disabled="{{machkerf}}">
 					    </div>
 					</div>
 					<div class="form-group has-feedback">
 					    <label for="PriceFixingDate" class="col-sm-5 control-label">Price Fixing Date</label>
 					    <div class="col-sm-5">
 					      <span class="glyphicon glyphicon-calendar form-control-feedback longadd"></span>
-					      <input type="text" class="form-control reqpadlong" id="PriceFixingDate" >
+					      <input type="text" class="form-control reqpadlong" id="PriceFixingDate" ng-disabled="{{machkerf}}">
 					    </div>
 					</div>
 					<div class="form-group has-feedback">
 					   <label for="ResultAnnouncementDate" class="col-sm-5 control-label">Result Announcement Date</label>
 					    <div class="col-sm-5">
 						  <span class="glyphicon glyphicon-calendar form-control-feedback longadd"></span>
-					      <input type="text" class="form-control reqpadlong" id="ResultAnnouncementDate" >
+					      <input type="text" class="form-control reqpadlong" id="ResultAnnouncementDate" ng-disabled="{{machkerf}}">
 					    </div>
 					</div>
 					<div class="form-group has-feedback">
 					    <label for="DispatchofSharesandRefundDate" class="col-sm-5 control-label">Dispatch of Shares and Refund Date</label>
 					    <div class="col-sm-5">
 						  <span class="glyphicon glyphicon-calendar form-control-feedback longadd"></span>
-					      <input type="text" class="form-control reqpadlong" id="DispatchofSharesandRefundDate" >
+					      <input type="text" class="form-control reqpadlong" id="DispatchofSharesandRefundDate" ng-disabled="{{machkerf}}">
 					    </div>
 					</div>
 					<div class="form-group has-feedback">
 					    <label for="ListingDate" class="col-sm-5 control-label">Listing Date</label>
 					    <div class="col-sm-5">
 						  <span class="glyphicon glyphicon-calendar form-control-feedback longadd"></span>
-					      <input type="text" class="form-control reqpadlong" id="ListingDate" placeholder="(Required)">
+					      <input type="text" class="form-control reqpadlong" id="ListingDate" placeholder="(Required)"ng-disabled="{{machkerf}}">
 					    </div>
 					</div>
 					<div class="form-group">
 					    <label for="FinalOfferPrice" class="col-sm-5 control-label">Final Offer Price</label>
 					    <div class="col-sm-5">
-					      <input type="text" class="form-control" id="FinalOfferPrice" >
+					      <input type="text" class="form-control" id="FinalOfferPrice" ng-disabled="{{machkerf}}">
 					    </div>
 					</div>
 					<div class="form-group">
 					    <label for="Prospectuses(TranditionalChinese)URL" class="col-sm-5 control-label">Prospectuses(Tranditional Chinese) URL</label>
 					    <div class="col-sm-5">
-					      <input type="url" class="form-control" id="Prospectuses(TranditionalChinese)URL" >
+					      <input type="url" class="form-control" id="Prospectuses(TranditionalChinese)URL" ng-disabled="{{machkerf}}">
 					    </div>
 					</div>
 					<div class="form-group" >
 					    <label for="Prospectuses(SimplifiedChinese)URL" class="col-sm-5 control-label">Prospectuses(Simplified Chinese) URL</label>
 					    <div class="col-sm-5">
-					      <input type="url" class="form-control" id="Prospectuses(SimplifiedChinese)URL" >
+					      <input type="url" class="form-control" id="Prospectuses(SimplifiedChinese)URL" ng-disabled="{{machkerf}}">
 					    </div>
 					</div>
 					<div class="form-group">
 					    <label for="RemarkforExternal" class="col-sm-5 control-label">Remark for External</label>	    
 					    <div class="col-sm-5 ">								      
-					      <textarea class="form-control" id="RemarkforExternal" rows="3"></textarea>
+					      <textarea class="form-control" id="RemarkforExternal" rows="3"ng-disabled="{{machkerf}}"></textarea>
 					    </div>
 					</div>
 					<div class="form-group">								  
 					    <label for="RemarkforInternal" class="col-sm-5 control-label">Remark for Internal</label>	   
 					    <div class="col-sm-5 ">								      
-					      <textarea class="form-control" id="RemarkforInternal" rows="3"></textarea>
+					      <textarea class="form-control" id="RemarkforInternal" rows="3" ng-disabled="{{machkerf}}"></textarea>
 					    </div>								    
 					</div>
 					<div class="form-group " id="fee" name = "fee">
 					    <label for="CommissionRate" class="col-sm-5 control-label">Commission Rate</label>  
 					    <div class="col-sm-2 ">	
 					    <div class="input-group">							    
-					    <input type="text" class="form-control" id="CommissionRate" placeholder="(Required)">
+					    <input type="text" class="form-control" id="CommissionRate" placeholder="(Required)"ng-disabled="{{machkerf}}">
 					    <span class="input-group-addon ">%</span>
 					    </div>
 					    </div>							    
@@ -265,7 +270,7 @@
 					    <label for="LevyRate" class="col-sm-5 control-label">Levy Rate</label>  
 					    <div class="col-sm-2 ">	
 					    <div class="input-group">							    
-					    <input type="text" class="form-control" id="LevyRate" placeholder="(Required)">
+					    <input type="text" class="form-control" id="LevyRate" placeholder="(Required)"ng-disabled="{{machkerf}}">
 					    <span class="input-group-addon">%</span>
 					    </div>
 					    </div>							    
@@ -274,7 +279,7 @@
 					    <label for="TradingFeeRate" class="col-sm-5 control-label">Trading Fee Rate</label>  
 					    <div class="col-sm-2 ">	
 					    <div class="input-group">							    
-					    <input type="text" class="form-control" id="TradingFeeRate" placeholder="(Required)">
+					    <input type="text" class="form-control" id="TradingFeeRate" placeholder="(Required)"ng-disabled="{{machkerf}}">
 					    <span class="input-group-addon">%</span>
 					    </div>
 					    </div>							    
@@ -283,7 +288,7 @@
 					    <label for="InvestorCompensationLevyRate" class="col-sm-5 control-label">Investor Compensation Levy Rate</label>  
 					    <div class="col-sm-2 ">	
 					    <div class="input-group">							    
-					    <input type="text" class="form-control" id="InvestorCompensationLevyRate" >
+					    <input type="text" class="form-control" id="InvestorCompensationLevyRate" ng-disabled="{{machkerf}}">
 					    <span class="input-group-addon">%</span>
 					    </div>
 					    </div>							    
@@ -292,7 +297,7 @@
 					    <label for="ClientRebateRate" class="col-sm-5 control-label">Client Rebate Rate</label>  
 					    <div class="col-sm-2 ">	
 					    <div class="input-group">							    
-					    <input type="text" class="form-control" id="ClientRebateRate" >
+					    <input type="text" class="form-control" id="ClientRebateRate" ng-disabled="{{machkerf}}">
 					    <span class="input-group-addon">%</span>
 					    </div>
 					    </div>							    
@@ -300,51 +305,54 @@
 					<div class="form-group">
 					    <label for="CurrencyofHandingFee" class="col-sm-5 control-label">Currency of Handing Fee</label>
 					    <div class="col-sm-2 ">	
-					    <div class="btn-group">
+					    <!-- <div class="btn-group">
 						<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"style="width:160px;font-style:italic;color:#55bbde !important">(Requeried) <span class="caret" style="margin-left: 45px;"></span></button>
 							<ul class="dropdown-menu" role="menu" id="CurrencyofHandingFee">
 							    <li><a href="#" style="text-align:center">HKD</a></li>
 							    <li><a href="#" style="text-align:center">CHD</a></li>
 							    <li><a href="#" style="text-align:center">HSD</a></li>	    						    
 							</ul>
-						</div>
+						</div> -->
+						<select class="form-control "ng-disabled="{{machkerf}}">
+								<option value=""  style="text-align:center">HKD</option>
+								<option value=""  style="text-align:center">CHD</option>
+								<option value=""  style="text-align:center">HSD</option> 
+						</select>
 					    </div>							    
 					</div>
 					<div class="form-group">
 					    <label for="HandingFee" class="col-sm-5 control-label">Handing Fee</label>  
-					    <div class="col-sm-2 ">	
-					    <div class="input-group">							    
-					    <input type="text" class="form-control" id="HandingFee" placeholder="(Required)">    
-					    </div>
+					    <div class="col-sm-2 ">					    						    
+					    <input type="text" class="form-control" id="HandingFee" placeholder="(Required)"ng-disabled="{{machkerf}}">				    
 					    </div>							    
 					</div>
 					<div class="form-group">
 					    <label for="FinancingHandingFee" class="col-sm-5 control-label">Financing Handing Fee</label>  
 					    <div class="col-sm-2 ">					    							    
-					    <input type="text" class="form-control" id="FinancingHandingFee" >					    
+					    <input type="text" class="form-control" id="FinancingHandingFee" ng-disabled="{{machkerf}}">					    
 					    </div>							    
 					</div>
 
 					<!--  4.2.5.5	Quantity/Amount Table -->
 					<div class="form-group" id="quantity" >
-						<div class="table-responsive col-sm-offset-3 col-sm-5"style="height:32px;padding-right: 0px;" >
+						<div class="table-responsive col-sm-offset-2 col-sm-5"style="height:32px;padding-right: 0px;overflow:hidden" >
 							<table class="table table-hover table-condensed" >
 								<thead>
-						    		<th class="thclass" >Range</th>
-						    		<th class="thclass">Quantity</th>
-						    		<th class="thclass">Amount</th>
-						    		<th class="thclass"></th>						    		
+						    		<th class="thclass" style="width:40%">Range </th>
+						    		<th class="thclass" style="width:25%">Quantity</th>
+						    		<th class="thclass" style="width:25%">Amount</th>
+						    		<th class="thclass" style="width:10%"></th>						    		
 						    	</thead>
 							</table>
 						</div>
-						<div class="table-responsive col-sm-offset-3 col-sm-5"style="height:300px;padding-right: 0px;" >
+						<div class="table-responsive col-sm-offset-2 col-sm-5"style="height:300px;padding-right: 0px;" >
 						    <table class="table table-hover table-condensed" >						    	
 						    	<tbody>
 						    		<tr >
-						    			<td class="tdclass">0 < quantity <= 10000</td>
-						    			<td class="tdclass">2000</td>
-						    			<td class="tdclass">2000</td>
-						    			<td class="tdclass"><span class="glyphicon glyphicon-remove tds"></span></td>
+						    			<td class="tdclass" style="width:40%">0 < quantity <= 10000</td>
+						    			<td class="tdclass" style="width:25%">2000</td>
+						    			<td class="tdclass" style="width:25%">2000</td>
+						    			<td class="tdclass" style="width:10%"><span class="glyphicon glyphicon-remove tds"></span></td>
 						    		</tr>
 						    		<tr >
 						    			<td class="tdclass"></td>
@@ -403,7 +411,7 @@
 						    	</tbody>
 						    </table>
 						</div>						
-				      	<div class="popover right " id="financing" style="display:block;border:2px solid #12d6f6;height:332px;width:380px; float:right;margin-right:20px;position:relative;max-width: 380px;">
+				      	<div class="popover right "  style="display:block;border:2px solid #12d6f6;height:300px;width:32%; float:left;margin-left:30px;position:relative;max-width:none;"ng-show="{{!machkerf}}">
 							<div class="arrow" style="border-right-color:#12d6f6;"></div>	      
 						    <div class="row">	
 						    	<label for="QuantityFrom" class="col-sm-offset-1 col-sm-5 control-label" style="
@@ -433,16 +441,16 @@
 							    <input type="text" class="form-control" id="CalculationMethod" placeholder="Round Lump Sum Amount">					    
 							    </div>
 						    </div>
-							<div style="height:80px;"></div>
+							<div style="height:60px;"></div>
 						    <div class="row">	
-						    	<label for="CalculationMethod" class="col-sm-offset-1 col-sm-8 control-label" style="
+						    	<label  class="col-sm-offset-1 col-sm-8 control-label" style="
 								text-align: left; padding-left:15px"><button id="addcm" type="button" class="btn btn-info" style="width:80px;">Add</button></label>								
 						    </div>
 
 						</div>
-						<div class="table-responsive col-sm-offset-3 col-sm-5"style="height:45px;padding-right: 0px;overflow:hidden" >
+						<div class="table-responsive col-sm-offset-2 col-sm-5"style="height:45px;padding-right: 0px;overflow:hidden" >
 						<table class="table  table-condensed" >
-							<tr><td class="tdclass" colspan="3" align="center"><button id="three" type="button" class="btn btn-info" style="width:100px;">Remove All</button></td></tr>
+							<tr><td class="tdclass" colspan="3" align="center"><button id="three" type="button" class="btn btn-info" style="width:100px;"ng-disabled="{{machkerf}}">Remove All</button></td></tr>
 						</table>
 						</div>
 					</div>						
@@ -452,7 +460,7 @@
 						<div class="col-sm-offset-4 col-sm-1">
 					      	<div class="checkbox"style="float:right" id="ProvideIPOfinancing">
 					        <label>
-					          	<input type="checkbox"checked="checked">
+					          	<input type="checkbox"checked="checked"ng-disabled="{{machkerf}}">
 					        </label>
 					     	</div>
 					    </div>				      
@@ -465,55 +473,55 @@
 					    <label for="FinancingStartDate" class="col-sm-5 control-label">Financing Start Date</label>
 					    <div class="col-sm-2">
 						  <span class="glyphicon glyphicon-calendar form-control-feedback"></span>
-						  <input type="text" class="form-control reqpad" id="FinancingStartDate" placeholder="(Required)">
+						  <input type="text" class="form-control reqpad" id="FinancingStartDate" placeholder="(Required)"ng-disabled="{{machkerf}}">
 					    </div>
 					    <label for="FinancingStartTime" class="col-sm-1" style="text-align:center">Time</label>
 					    <div class="col-sm-2">
 						  <span class="glyphicon glyphicon-time form-control-feedback"></span>
-					      <input type="text" class="form-control reqpad" id="FinancingStartTime" placeholder="(Required)">
+					      <input type="text" class="form-control reqpad" id="FinancingStartTime" placeholder="(Required)"ng-disabled="{{machkerf}}">
 					    </div>
 					</div>
 					<div class="form-group has-feedback">
 					    <label for="FinancingEndDate" class="col-sm-5 control-label">Financing End Date</label>
 					    <div class="col-sm-2">
 						    <span class="glyphicon glyphicon-calendar form-control-feedback"></span>
-						    <input type="text" class="form-control reqpad" id="FinancingEndDate" placeholder="(Required)">
+						    <input type="text" class="form-control reqpad" id="FinancingEndDate" placeholder="(Required)"ng-disabled="{{machkerf}}">
 					    </div>
 					    <label for="FinancingEndTime" class="col-sm-1" style="text-align:center">Time</label>
 					    <div class="col-sm-2">
 						   <span class="glyphicon glyphicon-time form-control-feedback"></span>
-					       <input type="text" class="form-control reqpad" id="FinancingEndTime" placeholder="(Required)">
+					       <input type="text" class="form-control reqpad" id="FinancingEndTime" placeholder="(Required)"ng-disabled="{{machkerf}}">
 					    </div>
 					</div>
 					<div class="form-group">
 					    <label for="InterestDay" class="col-sm-5 control-label">Interest Day</label>  
 					    <div class="col-sm-2 ">					    						    
-					    <input type="text" class="form-control" id="InterestDay" placeholder="0">					    
+					    <input type="text" class="form-control" id="InterestDay" placeholder="0"ng-disabled="{{machkerf}}">					    
 					    </div>							    
 					</div>
 					<div class="form-group">
 					    <label for="MaxLoanAmountperApplication" class="col-sm-5 control-label">Max Loan Amount per Application</label>  
 					    <div class="col-sm-5 ">					    							    
-					    <input type="text" class="form-control" id="MaxLoanAmountperApplication" >    
+					    <input type="text" class="form-control" id="MaxLoanAmountperApplication" ng-disabled="{{machkerf}}">    
 					    </div>							    
 					</div>
 					<div class="form-group">
 					    <label for="MinLoanAmountperApplication" class="col-sm-5 control-label">Min Loan Amount per Application</label>  
 					    <div class="col-sm-5 ">					    							    
-					    <input type="text" class="form-control" id="MinLoanAmountperApplication" >    
+					    <input type="text" class="form-control" id="MinLoanAmountperApplication" ng-disabled="{{machkerf}}">    
 					    </div>							    
 					</div>
 					<div class="form-group">
 					    <label for="Minno.ofsharespapliedforIPOLoan" class="col-sm-5 control-label">Min no.of shares paplied for IPO Loan</label>  
 					    <div class="col-sm-5 ">					    							    
-					    <input type="text" class="form-control" id="Minno.ofsharespapliedforIPOLoan" >    
+					    <input type="text" class="form-control" id="Minno.ofsharespapliedforIPOLoan" ng-disabled="{{machkerf}}">    
 					    </div>							    
 					</div>
 					<div class="form-group">
 					    <label for="MaxLoanRatio" class="col-sm-5 control-label">Max Loan Ratio</label>  
 					    <div class="col-sm-2 ">	
 					    <div class="input-group">							    
-					    <input type="text" class="form-control" id="MaxLoanRatio" placeholder="(Required)">
+					    <input type="text" class="form-control" id="MaxLoanRatio" placeholder="(Required)"ng-disabled="{{machkerf}}">
 					    <span class="input-group-addon">%</span>
 					    </div>
 					    </div>							    
@@ -522,24 +530,24 @@
 					    <label for="MustUseMaxLoan" class="col-sm-5 control-label" >Provide IPO financing</label>   
 					    <div class="col-sm-3">
 					      <label class="radio-inline">
-							  <input type="radio" name="MustUseMaxLoanYes" id="MustUseMaxLoanYes" value="yes" > Yes
+							  <input type="radio" name="MustUseMaxLoanYes" id="MustUseMaxLoanYes" value="yes" ng-disabled="{{machkerf}}"> Yes
 						  </label>
 						 <label class="radio-inline">
-						     <input type="radio" name="MustUseMaxLoanNo" id="MustUseMaxLoanNo" value="no"> No
+						     <input type="radio" name="MustUseMaxLoanNo" id="MustUseMaxLoanNo" value="no"ng-disabled="{{machkerf}}"> No
 						 </label>
 					    </div>
 					</div>
 					<div class="form-group">
 					    <label for="AllowedLoanRatioSelectedby" class="col-sm-5 control-label">Allowed Loan Ratio (Selected by ".")</label>  
 					    <div class="col-sm-5 ">					    							    
-					    <input type="text" class="form-control" id="AllowedLoanRatioSelectedby" placeholder="(eg.10.20.30.40.50.60.70.80.90)">    
+					    <input type="text" class="form-control" id="AllowedLoanRatioSelectedby" placeholder="(eg.10.20.30.40.50.60.70.80.90)"ng-disabled="{{machkerf}}">    
 					    </div>							    
 					</div>
 					<div class="form-group">
 					    <label for="BasicInterestRate" class="col-sm-5 control-label">Basic Interest Rate</label>  
 					    <div class="col-sm-2 ">	
 					    <div class="input-group">							    
-					    <input type="text" class="form-control" id="BasicInterestRate" placeholder="(Required)">
+					    <input type="text" class="form-control" id="BasicInterestRate" placeholder="(Required)"ng-disabled="{{machkerf}}">
 					    <span class="input-group-addon">%</span>
 					    </div>
 					    </div>							    
@@ -547,19 +555,19 @@
 
 					<!-- 4.2.5.5	Quantity/Amount Table -->
 					<div class="form-group">
-					    <label for="SpecialInterestRateTable" class="col-sm-offset-3 col-sm-5 control-label"style="text-align:left;">Special Interest Rate Table<span style="color:#55bbde !important;font-style:italic;">(Required)</span></label>							    
+					    <label for="SpecialInterestRateTable" class="col-sm-offset-2 col-sm-5 control-label"style="text-align:left;">Special Interest Rate Table<span style="color:#55bbde !important;font-style:italic;">(Required)</span></label>							    
 					</div>
 					<div class="form-group">
-						<div class="table-responsive col-sm-offset-3 col-sm-5"style="height:32px;padding-right: 0px;" >
+						<div class="table-responsive col-sm-offset-2 col-sm-5"style="height:32px;padding-right: 0px;overflow:hidden" >
 						<table class="table table-hover table-condensed" >
 							<thead>
 					    		<th class="thclass" >Loan Amount Above</th>
-					    		<th class="thclass">Interest Rate(% p.a.)</th>						    		
-					    		<th class="thclass"></th>						    		
+					    		<th class="thclass" style="text-align:left;">Interest Rate(% p.a.)</th>		    		
+					    		<th class="thclass"></th>					    						    		
 						    </thead>
 						</table>
 						</div>
-						<div class="table-responsive col-sm-offset-3 col-sm-5"style="height:300px;padding-right: 0px;" >
+						<div class="table-responsive col-sm-offset-2 col-sm-5"style="height:300px;padding-right: 0px;" >
 						    <table class="table table-hover table-condensed" >						    	
 						    	<tbody>
 						    		<tr >
@@ -615,53 +623,54 @@
 						    	</tbody>
 						    </table>
 						</div>												
-				      	<div class="popover right " id="financing" style="display:block;border:2px solid #12d6f6;height:332px;width:380px; float:right;margin-right:20px;position:relative;max-width: 380px;">
+				      	<div class="popover right " style="display:block;border:2px solid #12d6f6;height:300px;width:32%; float:left;margin-left:30px;position:relative;max-width: none;"ng-show="{{!machkerf}}">
 							<div class="arrow" style="border-right-color:#12d6f6;"></div>	
 						    <div class="row">	
-						    	<label for="QuantityFrom" class=" col-sm-8 control-label" style="
+						    	<label for="Loadfromtemplates" class="col-sm-offset-1 col-sm-8 control-label" style="
 								text-align: left; padding-left:15px">Load from templates</label>			
 						    </div>
 						    <div class="row">	
-						    	<div class="  col-sm-8 ">	    							    
-							    <input type="text" class="form-control" id="QuantityFrom" >					    
+						    	<div class="col-sm-offset-1  col-sm-7 ">	    							    
+							    <input type="text" class="form-control" id="Loadfromtemplates" >					    
 							    </div>
 								<div class="col-sm-3 ">					    							    
 							    <button id="loadt" type="button" class="btn btn-info" style="width:80px;">Load</button>					    
 							    </div>
 						    </div>
 						    <div class="row">	
-						    	<label for="LoadAmountAbove" class=" col-sm-5 control-label" style="
+						    	<label for="LoadAmountAbove" class="col-sm-offset-1 col-sm-5 control-label" style="
 								text-align: left; padding-left:15px">Load Amount Above</label>
-								<label for="QuantityTo" class="col-sm-7 control-label" style="
+								<label for="SpecicalInterestRate" class="col-sm-6 control-label" style="
 								text-align: left; padding-left:15px">Specical Interest Rate(p.a)</label>
 						    </div>
 						    <div class="row">	
-						    	<div class=" col-sm-6 ">					    							    
-							    <input type="text" class="form-control" id="QuantityFrom" placeholder="(Required)">					    
+						    	<div class="col-sm-offset-1 col-sm-5 ">					    							    
+							    <input type="text" class="form-control" id="LoadAmountAbove" placeholder="(Required)">					    
 							    </div>
-								<div class="col-sm-6 ">					    							    
-							    <input type="text" class="form-control" id="QuantityTo" placeholder="(Required)">					    
+								<div class="col-sm-5 ">					    							    
+							    <input type="text" class="form-control" id="SpecicalInterestRate" placeholder="(Required)">					    
 							    </div>
 						    </div>
 						    <div class="row">	
-						    	<label for="CalculationMethod" class=" col-sm-8 control-label" style="
-								text-align: left; padding-left:15px"><button id="addcm" type="button" class="btn btn-info" style="width:80px;">Add</button></label>								
+						    	<label  class="col-sm-offset-1 col-sm-8 control-label" style="
+								text-align: left; padding-left:15px"><button id="addlaasir" type="button" class="btn btn-info" style="width:80px;">Add</button></label>								
 						    </div>
 						    <div class="row">	
-						    	<label for="CalculationMethod" class=" col-sm-8 control-label" style="
-								text-align: left; padding-left:15px">Calculation Method</label>
-								<div class=" col-sm-10">					    							    
-							    <input type="text" class="form-control" id="CalculationMethod" >					    
+						    	<label for="Saveastemplatewithname" class="col-sm-offset-1 col-sm-8 control-label" style="
+								text-align: left; padding-left:15px">Save as template with name</label>
+								<div class="col-sm-offset-1 col-sm-10">					    							    
+							    <input type="text" class="form-control" id="Saveastemplatewithname" >					    
 							    </div>
-						    </div>							
+						    </div>
+						    <div style="height:20px;"></div>							
 						    <div class="row">	
-						    	<label for="CalculationMethod" class=" col-sm-8 control-label" style="
-								text-align: left; padding-left:15px"><button id="addcm" type="button" class="btn btn-info" style="width:80px;">Save</button></label>								
+						    	<label  class="col-sm-offset-1 col-sm-8 control-label" style="
+								text-align: left; padding-left:15px"><button id="savetn" type="button" class="btn btn-info" style="width:80px;">Save</button></label>								
 						    </div>
 						</div>
-						<div class="table-responsive col-sm-offset-3 col-sm-5"style="height:45px;padding-right: 0px;overflow:hidden" >
+						<div class="table-responsive col-sm-offset-2 col-sm-5"style="height:45px;padding-right: 0px;overflow:hidden;" >
 						<table class="table  table-condensed" >
-							<tr><td class="tdclass" colspan="3" align="center"><button id="four" type="button" class="btn btn-info" style="width:100px;">Remove All</button></td></tr>
+							<tr><td class="tdclass" colspan="3" align="center"><button id="four" type="button" class="btn btn-info" style="width:100px;"ng-disabled="{{machkerf}}">Remove All</button></td></tr>
 						</table>
 						</div>
 					</div>
@@ -674,7 +683,7 @@
 		</div> 		
 </div>	
 
-<div class="col-sm-12" ><!-- style="position:fixed;bottom:5%" -->
+<div class="col-sm-12" style="position:fixed;bottom:5%"><!--  -->
 
 	<ol class="breadcrumb" style="margin:0 auto">
 	  	<li><a style="text-decoration:none">Back to</a></li>
