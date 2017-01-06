@@ -95,7 +95,7 @@
 					<div class="form-group" id="basic">
 					    <label for="StockCode" class="col-sm-5 control-label">Stock Code</label>
 					    <div class="col-sm-5">
-					      <input type="text" class="form-control" id="StockCode" placeholder="(Required)" ng-disabled="{{machkerf}}"ng-blur="padLeft('12',5)" >
+					      <input type="text" class="form-control" id="StockCode" placeholder="(Required)" ng-disabled="{{machkerf}}"ng-blur="stockCodeFormat()" ng-model="sc">
 					    </div>					    
 					</div>
 					<div class="form-group">
@@ -347,66 +347,13 @@
 						</div>
 						<div class="table-responsive col-sm-offset-2 col-sm-5"style="height:300px;padding-right: 0px;" >
 						    <table class="table table-hover table-condensed" >						    	
-						    	<tbody>
-						    		<tr >
-						    			<td class="tdclass" style="width:40%">0 < quantity <= 10000</td>
-						    			<td class="tdclass" style="width:25%">2000</td>
-						    			<td class="tdclass" style="width:25%">2000</td>
-						    			<td class="tdclass" style="width:10%"><span class="glyphicon glyphicon-remove tds"></span></td>
-						    		</tr>
-						    		<tr >
-						    			<td class="tdclass"></td>
-						    			<td class="tdclass">4000</td>
-						    			<td class="tdclass">4000</td>
-						    			<td class="tdclass"><span class="glyphicon glyphicon-remove tds"></span></td>
-						    		</tr>
-						    		<tr>
-						    			<td class="tdclass"></td>
-						    			<td class="tdclass">6000</td>
-						    			<td class="tdclass">6000</td>
-						    			<td class="tdclass"><span class="glyphicon glyphicon-remove tds"></span></td>
-						    		</tr>
-						    		<tr>
-						    			<td class="tdclass"></td>
-						    			<td class="tdclass">8000</td>
-						    			<td class="tdclass">8000</td>
-						    			<td class="tdclass"><span class="glyphicon glyphicon-remove tds"></span></td>
-						    		</tr>
-						    		<tr>
-						    			<td class="tdclass"></td>
-						    			<td class="tdclass">10000</td>
-						    			<td class="tdclass">10000</td>
-						    			<td class="tdclass"><span class="glyphicon glyphicon-remove tds"></span></td>
-						    		</tr>
-						    		<tr>
-						    			<td class="tdclass">10000 < quantity <= 30000</td>
-						    			<td class="tdclass">14000</td>
-						    			<td class="tdclass">14000</td>
-						    			<td class="tdclass"><span class="glyphicon glyphicon-remove tds"></span></td>
-						    		</tr>
-						    		<tr>
-						    			<td class="tdclass"></td>
-						    			<td class="tdclass">18000</td>
-						    			<td class="tdclass">18000</td>
-						    			<td class="tdclass"><span class="glyphicon glyphicon-remove tds"></span></td>
-						    		</tr>
-						    		<tr>
-						    			<td class="tdclass"></td>
-						    			<td class="tdclass">22000</td>
-						    			<td class="tdclass">22000</td>
-						    			<td class="tdclass"><span class="glyphicon glyphicon-remove tds"></span></td>
-						    		</tr>
-						    		<tr>
-						    			<td class="tdclass"></td>
-						    			<td class="tdclass">26000</td>
-						    			<td class="tdclass">26000</td>
-						    			<td class="tdclass"><span class="glyphicon glyphicon-remove tds"></span></td>
-						    		</tr>
-						    		<tr>
-						    			<td class="tdclass"></td>
-						    			<td class="tdclass">30000</td>
-						    			<td class="tdclass">30000</td>
-						    			<td class="tdclass"><span class="glyphicon glyphicon-remove tds"></span></td>
+						    	<tbody>						    		
+						    		<tr ng-repeat="x in nosvapTable">
+						    			<td class="tdclass" style="width:40%" ng-if="x.del">{{x.range}}</td>
+						    			<td class="tdclass" style="width:40%" ng-if="x.del==false"></td>
+						    			<td class="tdclass" style="width:25%">{{x.qty}}</td>
+						    			<td class="tdclass" style="width:25%">{{x.amt}}</td>
+						    			<td class="tdclass" style="width:10%"ng-if="x.del"><span class="glyphicon glyphicon-remove tds"></span></td>
 						    		</tr>
 						    	</tbody>
 						    </table>
@@ -437,20 +384,25 @@
 						    <div class="row">	
 						    	<label for="CalculationMethod" class="col-sm-offset-1 col-sm-8 control-label" style="
 								text-align: left; padding-left:15px">Calculation Method</label>
-								<div class="col-sm-offset-1 col-sm-10">					    							    
-							    <input type="text" class="form-control" id="CalculationMethod" placeholder="Round Lump Sum Amount">					    
+								<div class="col-sm-offset-1 col-sm-10">		    		
+							    <select class="form-control selectdown"id="CalculationMethod">
+								<option value="RLSUA"  style="text-align:center">Round Lump Sum Amount</option>
+								<option value="RBIC"  style="text-align:center">Round By Individual Charge</option>
+								<option value="BOUCARLSUA"  style="text-align:center">Base On Unit Cost and Round Lump Sum Amount</option>
+								<option value="BOUCARBIC"  style="text-align:center">Base On Unit Cost and Round by Individual Charge</option>  
+								</select>		    
 							    </div>
 						    </div>
 							<div style="height:60px;"></div>
 						    <div class="row">	
 						    	<label  class="col-sm-offset-1 col-sm-8 control-label" style="
-								text-align: left; padding-left:15px"><button id="addcm" type="button" class="btn btn-info" style="width:80px;">Add</button></label>								
+								text-align: left; padding-left:15px"><button id="addcm" type="button" class="btn btn-info" style="width:80px;"ng-click="rqAmountAdd()">Add</button></label>								
 						    </div>
 
 						</div>
 						<div class="table-responsive col-sm-offset-2 col-sm-5"style="height:45px;padding-right: 0px;overflow:hidden" >
 						<table class="table  table-condensed" >
-							<tr><td class="tdclass" colspan="3" align="center"><button id="three" type="button" class="btn btn-info" style="width:100px;"ng-disabled="{{machkerf}}">Remove All</button></td></tr>
+							<tr><td class="tdclass" colspan="3" align="center"><button id="three" type="button" class="btn btn-info" style="width:100px;"ng-disabled="{{machkerf}}"ng-click="remrqAmountAll()">Remove All</button></td></tr>
 						</table>
 						</div>
 					</div>						

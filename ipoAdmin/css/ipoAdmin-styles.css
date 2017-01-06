@@ -128,14 +128,7 @@ hr {
  #abasic{
 	background-color: #ddd;
 	display: inline-block;  	
-  	transform:skew(-45deg); 	
-  	/* margin-left:20px; 
-  	     transform:skew(-45deg,0deg); 
-  	     -ms-transform:skew(-45deg,0deg); IE 9 
-  	     -moz-transform:skew(-45deg,0deg); Firefox 
-  	     -webkit-transform:skew(-45deg,0deg); Safari and Chrome 
-  	     -o-transform:skew(-45deg,0deg); Opera 
-  	     overflow:hidden; */ 
+  	transform:skew(-45deg);
 
 } 
 #afee,#aquantity,#afinancing {
@@ -146,20 +139,12 @@ hr {
   	border-style:none solid;	
 }
 #abasicdiv{
-	transform: skew(45deg);
-	/* margin-left:-180px; 
-	    transform:skew(45deg,0deg); 
-	    -ms-transform:skew(45deg,0deg); IE 9 
-	    -moz-transform:skew(45deg,0deg); Firefox 
-	    -webkit-transform:skew(45deg,0deg); Safari and Chrome 
-	    -o-transform:skew(45deg,0deg); Opera  */
+	transform: skew(45deg);	
 }
 #afeediv,#aquantitydiv,#afinancingdiv{
 	transform: skew(45deg);
 }
-/* .breadcrumb{
-	padding: 8px 400px;	
-} */
+
 @-moz-document url-prefix() {
   fieldset { display: table-cell; }
 }
@@ -177,12 +162,14 @@ hr {
 .tds{
 	color:#ddd;
 }
-/*::-webkit-scrollbar{
-	display:none;
-}*/
+
 
 .popover.right>.arrow:after{
 	left: 3px;/*右三角宽度*/
+}
+
+.selectdown{
+	color: #12d6f6;
 }
 
 

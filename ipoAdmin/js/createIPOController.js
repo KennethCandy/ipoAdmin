@@ -140,21 +140,35 @@ angular.module('ipoAdminApp.createIPOController', [])
     $scope.machkerf = false;
     $scope.machkert = true;
   
- 	/*字段校验*/
- 	function padLeft(str, lenght) {
-    if (str.length >= lenght)
-        return str;
-    else
-        return padLeft("0" + str, lenght);
-	}
- 	$scope.padLeft = function(str, lenght) {
-    if (str.length >= lenght)
-        return str;
-    else
-        return padLeft("0" + str, lenght);
+ 	/*字段校验format*/ 	
+ 	$scope.stockCodeFormat = function(value) {
+		value = $scope.sc;
+    	$scope.sc = stockCodeFormat(value);
 	}
 
+	/*table one 四个方法*/
+	$scope.rlsAmount = function(value) {		
+    	$scope.nosvapTable = [];
+	}
 
+	$scope.rbiCharge = function(value) {		
+    	$scope.nosvapTable = rbiCharge(value);
+	}
+
+	$scope.bousarlsAmount = function(value) {		
+    	$scope.nosvapTable = bousarlsAmount(value);
+	}
+
+	$scope.boucarbiCharge = function(value) {		
+    	$scope.nosvapTable = boucarbiCharge(value);
+	}
+	
+	$scope.rqAmountAdd = function(value) {    	
+    	$scope.nosvapTable = rqAmountAdd(value);
+	}
+	$scope.remrqAmountAll = function(value) {    	
+    	$scope.nosvapTable = [];
+	}
 
 
    
