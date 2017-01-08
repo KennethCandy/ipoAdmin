@@ -136,9 +136,12 @@ angular.module('ipoAdminApp.createIPOController', [])
     });
     /*datepicker end*/
 
-    /*权限控制*/
-    $scope.machkerf = false;
-    $scope.machkert = true;
+    /*权限控制*/    
+    $scope.machker = false;
+
+    $scope.vemode = false;
+
+    $scope.showLayoutbtn = true;
   
  	/*字段校验format*/ 	
  	$scope.stockCodeFormat = function(value) {
