@@ -12,6 +12,9 @@ function numFormatter(n) {
 }
 
 function padLeft(str, length) {
+	if(str==null||str==""){
+		return str;
+	}
 	if(str.toString().length >= length) {
 		return str; 
 	}

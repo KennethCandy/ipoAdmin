@@ -1,29 +1,30 @@
 $(document).ready(function() {
 
-     //alert(methods);
+	/*var h=0.07
+       var n=h.toFixed(1);
+     alert(n);*/
   
 })
 
-/*function validate(){
-       var reg = new RegExp("^[0-9]*$");
-       var obj = document.getElementById("name");
-    if(!reg.test(obj.value)){
-        alert("请输入数字!");
+function checkerNum(str){
+	if(str==null||str==""){
+		return false;
+	}
+	var reg = new RegExp("^\d{n}$");       
+    if(reg.test(str)){        
+        return false;
     }
-    if(!/^[0-9]*$/.test(obj.value)){
-        alert("请输入数字!");
-    }*/
-
-/*检验字段*/
-function stockCodeFormat(str) {
-    var newval = padLeft(str, 5);   
-	return newval;
+    return true ;
 }
 
-/*表单一*/
+/*检验字段*/
+function stockCodeFormat(str) {	 
+	    var newval = padLeft(str, 5);   
+		return newval;   
+}
 
-
-function rqAmountAdd(){
+/*表格一*/
+function quantityAmountTableAdd(){
 	var methods=$('#CalculationMethod option:selected').val();
 	if(methods == "RLSUA" ){
 		return rlsAmount();
@@ -91,11 +92,11 @@ function rbiCharge(){
 	var amount = new Array(qtyarrysum);
 
 	for(var i=0;i<amount.length;i++){
-	 	amount[i] = Math.round(price * qtyarry[i]) 
-	 	+ Math.round((price * qtyarry[i])*commissionRate/100)
-	 	+ Math.round((price * qtyarry[i])*levyRate/100) 
-	 	+ Math.round((price * qtyarry[i])*icLevyRate/100)
-	 	+ Math.round((price * qtyarry[i])*tradingFeeRate/100);
+	 	amount[i] = (parseFloat((price * qtyarry[i]).toFixed(2))
+	 	+ parseFloat(((price * qtyarry[i])*commissionRate/100).toFixed(2))
+	 	+ parseFloat(((price * qtyarry[i])*levyRate/100).toFixed(2))
+	 	+ parseFloat(((price * qtyarry[i])*icLevyRate/100).toFixed(2))
+	 	+ parseFloat(((price * qtyarry[i])*tradingFeeRate/100).toFixed(2))).toFixed(2);
 	 	var item = {};
 	 	item.range = quantityFrom+'<quantity <= '+quantityTo ;
 	 	item.qty = qtyarry[i];
@@ -127,7 +128,7 @@ function bousarlsAmount(){
 	var amount = new Array(qtyarrysum);
 
 	for(var i=0;i<amount.length;i++){
-	 	amount[i] =qtyarry[i]/1000 * Math.round((price *1000)*(1 + commissionRate/100 + levyRate/100 + icLevyRate/100 + tradingFeeRate/100));
+	 	amount[i] =qtyarry[i]/1000 * ((price *1000)*(1 + commissionRate/100 + levyRate/100 + icLevyRate/100 + tradingFeeRate/100)).toFixed(2);
 	 	var item = {};
 	 	item.range = quantityFrom+'<quantity <= '+quantityTo ;
 	 	item.qty = qtyarry[i];
@@ -159,11 +160,11 @@ function boucarbiCharge(){
 	var amount = new Array(qtyarrysum);
 
 	for(var i=0;i<amount.length;i++){
-	 	amount[i] =qtyarry[i]/1000 * Math.round(price * 1000) 
-	 	+ Math.round((price * 1000)*commissionRate/100)
-	 	+ Math.round((price * 1000)*levyRate/100) 
-	 	+ Math.round((price * 1000)*icLevyRate/100)
-	 	+ Math.round((price * 1000)*tradingFeeRate/100);
+	 	amount[i] =qtyarry[i]/1000 * (parseFloat((price * 1000).toFixed(2))
+	 	+ parseFloat(((price * 1000)*commissionRate/100).toFixed(2))
+	 	+ parseFloat(((price * 1000)*levyRate/100).toFixed(2))
+	 	+ parseFloat(((price * 1000)*icLevyRate/100).toFixed(2))
+	 	+ parseFloat(((price * 1000)*tradingFeeRate/100).toFixed(2))).toFixed(2);
 	 	var item = {};
 	 	item.range = quantityFrom+'<quantity <= '+quantityTo ;
 	 	item.qty = qtyarry[i];
@@ -173,3 +174,32 @@ function boucarbiCharge(){
 	}	
 	return obj;
 }
+
+/*表格二*/
+
+function specialInterestRateTableAdd(){
+
+}
+
+
+/*权限*/
+function showAccRej(machker,vemode){
+	return machker & vemode;
+}
+
+function showBack(machker,vemode){
+	return !(machker ^ vemode);
+}
+
+function showEdit(machker,vemode){
+	return (!machker) & (!vemode);
+}
+
+function showSSDPR(machker,vemode){
+	return (machker ^ vemode)&vemode;
+}
+
+function disableFields(machker,vemode){
+	return !((machker ^ vemode)&vemode);
+}
+

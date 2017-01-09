@@ -8,7 +8,34 @@
   "createIPO": {
     "IPO":"IPO",
     "IPOMaintenance":"IPO Maintenance",
-    "IPOMaster":"IPO Master"   
+    "IPOMaster":"IPO Master",
+    "NewIPOMasterRecord":"New IPO Master Record",
+    "ModifyIPOMaster":"Modify IPO Master",
+    "Draft":"Draft",
+    "Completeness":"Completeness",
+    "Lastmodifiedby":"Last modified by",
+    "on":"on",
+    "at":"at",
+    "Accept":"Accept",
+    "Reject":"Reject",
+    "Back":"Back",
+    "Edit":"Edit",
+    "SaveDraft":"Save Draft",
+    "Submit":"Submit",
+    "Delete":"Delete",
+    "Postpone":"Postpone",
+    "Resume":"Resume",
+    "BasicInformation":"Basic Information",
+    "FeeandCharges":"Fee and Charges",
+    "Quantity/AmountTable":"Quantity/Amount Table",    
+    "Financing":"Financing",    
+    "StockCode":"Stock Code",
+    "EnglishStockName":"English Stock Name",
+    "TranditionalChineseName":"Tranditional Chinese Name",
+    "Accept":"Accept",
+    "Accept":"Accept",
+    "Accept":"Accept",
+    "Accept":"Accept"
   }
   
 }

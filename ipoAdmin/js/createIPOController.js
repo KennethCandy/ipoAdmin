@@ -137,42 +137,75 @@ angular.module('ipoAdminApp.createIPOController', [])
     /*datepicker end*/
 
     /*权限控制*/    
-    $scope.machker = false;
+    $scope.machker = false;//maker:false     checker:true
 
-    $scope.vemode = false;
+    $scope.vemode = true;// view:false     edit:true
 
-    $scope.showLayoutbtn = true;
-  
- 	/*字段校验format*/ 	
- 	$scope.stockCodeFormat = function(value) {
-		value = $scope.sc;
-    	$scope.sc = stockCodeFormat(value);
+    
+    $scope.showAccRej = function(value,val){
+		return showAccRej(value,val);
+	}  
+
+	$scope.showBack = function(value,val){
+		return showBack(value,val);
+	}  
+    
+    $scope.showEdit = function(value,val){
+		return showEdit(value,val);
 	}
 
+	$scope.showSSDPR = function(value,val){
+		return showSSDPR(value,val);
+	}  
+
+	$scope.disableFields = function(value,val){
+		return disableFields(value,val);
+	}  
+  
+ 	/*字段校验format*/ 	
+ 	$scope.stockCodeFormat = function(value) {		 
+    	return stockCodeFormat(value);
+	}
+
+
+	$scope.checkerNum = function(value) {		
+    	return checkerNum(value);
+	}
+
+	$scope.caluMethodType = '';
+
 	/*table one 四个方法*/
-	$scope.rlsAmount = function(value) {		
-    	$scope.nosvapTable = [];
+	$scope.rlsAmount = function() {		
+    	//$scope.nosvapTable = [];
+    	var currentNosvapTable =  $scope.nosvapTable;	
+    	var newNosvapTable = rbiCharge();
+    	newNosvapTable.forEach(function(i){
+    		currentNosvapTable[currentNosvapTable.length] = newNosvapTable[i];
+    	 }
+    	);
+    	alert(111);
+    	$scope.nosvapTable = currentNosvapTable;
 	}
 
 	$scope.rbiCharge = function(value) {		
-    	$scope.nosvapTable = rbiCharge(value);
+    	$scope.nosvapTable = [];
+
 	}
 
 	$scope.bousarlsAmount = function(value) {		
-    	$scope.nosvapTable = bousarlsAmount(value);
-	}
-
-	$scope.boucarbiCharge = function(value) {		
-    	$scope.nosvapTable = boucarbiCharge(value);
-	}
-	
-	$scope.rqAmountAdd = function(value) {    	
-    	$scope.nosvapTable = rqAmountAdd(value);
-	}
-	$scope.remrqAmountAll = function(value) {    	
     	$scope.nosvapTable = [];
 	}
 
+	$scope.boucarbiCharge = function(value) {		
+    	$scope.nosvapTable = [];
+	}
+	
+	$scope.quantityAmountTableAdd = function(value) {    	
+    	$scope.nosvapTable = quantityAmountTableAdd(value);
+	}
+	$scope.removeqatableAll = function(value) {    	
+    	$scope.nosvapTable = [];
+	}
 
    
 	

@@ -15,22 +15,23 @@
 		<div class="row">
 			  <div class="col-sm-12" >
 			  <hr style="margin-top: 5px;">
-			  <h4 >New IPO Master Record</h4>
+			  <h4 ng-show="true">{{'createIPO.NewIPOMasterRecord'|translate}}</h4>
+			  <h4 ng-show="false">{{'createIPO.ModifyIPOMaster'|translate}}</h4>
 			  <hr style="margin-top: 10px;margin-bottom: 10px">
 			  </div>
 			 <div class="col-sm-12" style="padding-left: 0px">
 			  <div class="col-sm-1"style="margin:0px ;height:30px">
-					<h4  style="margin-top:0px; margin-bottom:0px">Draft</h4>					
+					<h4  style="margin-top:0px; margin-bottom:0px">{{'createIPO.Draft'|translate}}</h4>					
 			  </div>
 			  <div class="col-sm-7" style="height:30px">
 					<div class="progress" style="margin-bottom: 10px">
 					  <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-aluemax="100" style="width: 40% " min-width: 20px>
-					   40% Completeness 
+					   40% {{'createIPO.Completeness'|translate}}
 					  </div>
 					</div>		
 			  </div>
 			  <div class="col-sm-4"><span ng-class="getMinute(currentIPO.marginCloseTime)"></span>
-					<p class="text-center">Last modified by <strong>Aimer Chau</strong> on <strong>{{getCurrentDate()}}</strong> at <strong>{{theTime}}</strong></p>					
+					<p class="text-center">{{'createIPO.Lastmodifiedby'|translate}} <strong>Aimer Chau</strong> {{'createIPO.on'|translate}} <strong>{{getCurrentDate()}}</strong> {{'createIPO.at'|translate}} <strong>{{theTime}}</strong></p>					
 			  </div>
 			 </div>
 		</div><hr style="margin-top:0px">
@@ -41,32 +42,32 @@
 			<div class="col-sm-2" style="float:left;position:fixed;bottom:10%;">
 			  	<table class="table" >						
 				<tbody>					 
-				  	<tr ng-if = "machker&vemode">
-					<td style="border-top: 0px"><button type="button" class="btn btn-success" style="width:160px;text-align: left"><span class="glyphicon glyphicon-ok"></span>&nbsp;  Accept</button></td>				   
+				  	<tr ng-if = "showAccRej(machker,vemode)">
+					<td style="border-top: 0px"><button type="button" class="btn btn-success" style="width:160px;text-align: left"><span class="glyphicon glyphicon-ok"></span>&nbsp;  {{'createIPO.Accept'|translate}}</button></td>				   
 				  	</tr>
-				  <tr ng-if = "machker&vemode">
-					<td style="border-top: 0px"><button type="button" class="btn-ribbon" style="width:160px;text-align: left"><span class="glyphicon glyphicon-remove"></span>&nbsp;  Reject</button></td>					
+				  <tr ng-if = "showAccRej(machker,vemode)">
+					<td style="border-top: 0px"><button type="button" class="btn-ribbon" style="width:160px;text-align: left"><span class="glyphicon glyphicon-remove"></span>&nbsp;  {{'createIPO.Reject'|translate}}</button></td>					
 				  </tr>
-				  <tr ng-if = "!machker&vemode">
-					<td style="border-top: 0px"><button type="button" class="btn btn-ryellow" style="width:160px;text-align: left"><span class="glyphicon glyphicon-share-alt"></span>&nbsp;  Back</button></td>			
+				  <tr ng-if = "showBack(machker,vemode)">
+					<td style="border-top: 0px"><button type="button" class="btn btn-ryellow" style="width:160px;text-align: left"><span class="glyphicon glyphicon-share-alt"></span>&nbsp;  {{'createIPO.Back'|translate}}</button></td>			
 				  </tr>
-				  <tr ng-if = "showLayoutbtn">
-					<td style="border-top: 0px"><button type="button" class="btn btn-info" style="width:160px;text-align: left"><span class="glyphicon glyphicon-floppy-disk"></span>&nbsp;  Edit</button></td>			
+				  <tr ng-if = "showEdit(machker,vemode)">
+					<td style="border-top: 0px"><button type="button" class="btn btn-info" style="width:160px;text-align: left"><span class="glyphicon glyphicon-floppy-disk"></span>&nbsp;  {{'createIPO.Edit'|translate}}</button></td>			
 				  </tr>
-				  <tr ng-if = "showLayoutbtn">
-					<td style="border-top: 0px"><button type="button" class="btn btn-info" style="width:160px;text-align: left"><span class="glyphicon glyphicon-floppy-disk"></span>&nbsp;  Save Draft</button></td>			
+				  <tr ng-if = "showSSDPR(machker,vemode)">
+					<td style="border-top: 0px"><button type="button" class="btn btn-info" style="width:160px;text-align: left"><span class="glyphicon glyphicon-floppy-disk"></span>&nbsp;  {{'createIPO.SaveDraft'|translate}}</button></td>			
 				  </tr>
-				  <tr ng-if = "showLayoutbtn">
-					<td style="border-top: 0px"><button type="button" class="btn btn-primary" style="width:160px;text-align: left"><span class="glyphicon glyphicon-send"></span>&nbsp;  Submit</button></td>				
+				  <tr ng-if = "showSSDPR(machker,vemode)">
+					<td style="border-top: 0px"><button type="button" class="btn btn-primary" style="width:160px;text-align: left"><span class="glyphicon glyphicon-send"></span>&nbsp;  {{'createIPO.Submit'|translate}}</button></td>				
 				  </tr>
-				  <tr ng-if = "showLayoutbtn">
-					<td style="border-top: 0px"><button type="button" class="btn btn-danger" style="width:160px;text-align: left"><span class="glyphicon glyphicon-remove-circle"></span>&nbsp;  Delete</button></td>	
+				  <tr ng-if = "showSSDPR(machker,vemode)">
+					<td style="border-top: 0px"><button type="button" class="btn btn-danger" style="width:160px;text-align: left"><span class="glyphicon glyphicon-remove-circle"></span>&nbsp;  {{'createIPO.Delete'|translate}}</button></td>	
 				  </tr>
-				  <tr ng-if = "showLayoutbtn">
-					<td style="border-top: 0px"><button type="button" class="btn btn-warning" style="width:160px;text-align: left"><span class="glyphicon glyphicon-tower"></span>&nbsp;  Postpone</button></td>			
+				  <tr ng-if = "showSSDPR(machker,vemode)">
+					<td style="border-top: 0px"><button type="button" class="btn btn-warning" style="width:160px;text-align: left"><span class="glyphicon glyphicon-tower"></span>&nbsp;  {{'createIPO.Postpone'|translate}}</button></td>			
 				  </tr>
-				  <tr ng-if = "showLayoutbtn">
-					<td style="border-top: 0px"><button type="button" class="btn btn-warning" style="width:160px;text-align: left"><span class="glyphicon glyphicon-repeat"></span>&nbsp;  Resume</button></td>				
+				  <tr ng-if = "showSSDPR(machker,vemode)">
+					<td style="border-top: 0px"><button type="button" class="btn btn-warning" style="width:160px;text-align: left"><span class="glyphicon glyphicon-repeat"></span>&nbsp;  {{'createIPO.Resume'|translate}}</button></td>				
 				  </tr>		  
 				</tbody>
 				</table>	  
@@ -87,60 +88,60 @@
 		          <a class="navbar-brand" href="#"></a>
 		        </div>
 		        <div class="collapse navbar-collapse bs-example-js-navbar-scrollspy">
-		          <ul class="nav navbar-nav">	<!-- #basic -->	          	          	
-		            <li><a id="abasic" href="javascript:document.getElementById('basic').scrollIntoView()"><div id="abasicdiv"><span class="badge">1</span> Basic Information -0%</div></a></li>
-    				<li><a id="afee" href="javascript:document.getElementById('fee').scrollIntoView()" ><div id="afeediv"><span class="badge">2</span> Fee and Charges -0%</div></a></li>
-    				<li><a id="aquantity" href="javascript:document.getElementById('quantity').scrollIntoView()"><div id="aquantitydiv"><span class="badge">3</span> Quantity/Amount Table -0%</div></a></li>
-    				<li><a id="afinancing" href="javascript:document.getElementById('financing').scrollIntoView()"><div id="afinancingdiv"><span class="badge">4</span> Financing -0%</div></a></li>
+		          <ul class="nav navbar-nav">         	          	
+		            <li><a id="abasic" href="javascript:document.getElementById('basic').scrollIntoView()"><div id="abasicdiv"><span class="badge">1</span> {{'createIPO.BasicInformation'|translate}} -0%</div></a></li>
+    				<li><a id="afee" href="javascript:document.getElementById('fee').scrollIntoView()" ><div id="afeediv"><span class="badge">2</span> {{'createIPO.FeeandCharges'|translate}} -0%</div></a></li>
+    				<li><a id="aquantity" href="javascript:document.getElementById('quantity').scrollIntoView()"><div id="aquantitydiv"><span class="badge">3</span> {{'createIPO.Quantity/AmountTable'|translate}} -0%</div></a></li>
+    				<li><a id="afinancing" href="javascript:document.getElementById('financing').scrollIntoView()"><div id="afinancingdiv"><span class="badge">4</span> {{'createIPO.Financing'|translate}} -0%</div></a></li>
 		          </ul>
 		        </div>
 		      </div>
 		    </nav>			
 				<div id="scrollbody" class="scrollspy-example " data-spy="scroll" data-target="#navbar-example" data-offset="0"style="position: relative">							
-				<form class="form-horizontal" role="form" style="height:450px;overflow-x: hidden">			
+				<form class="form-horizontal" role="form" style="height:450px;overflow-x: hidden"name="createipoForm" novalidate>			
 					<div class="form-group" id="basic">
-					    <label for="StockCode" class="col-sm-5 control-label">Stock Code</label>
+					    <label for="StockCode" class="col-sm-5 control-label">{{'createIPO.StockCode'|translate}}</label>
 					    <div class="col-sm-5">
-					      <input type="text" class="form-control" id="StockCode" placeholder="(Required)" ng-disabled="{{machker}}"ng-blur="stockCodeFormat()" ng-model="sc">
+					      <input type="text" class="form-control" id="StockCode" name="StockCode" placeholder="(Required)" ng-blur="StockCode = stockCodeFormat(StockCode)" ng-model="StockCode"ng-disabled="disableFields(machker,vemode)" required>
+					    <span class="glyphicon glyphicon-warning-sign" style="color:red" ng-show="createipoForm.StockCode.$dirty && createipoForm.StockCode.$invalid">
+						<span ng-show="createipoForm.StockCode.$error.required">Stock Code is required</span>
+						<span ng-show="checkerNum(StockCode)">Stock Code is need digital</span></span>
 					    </div>					    
 					</div>
 					<div class="form-group">
-					    <label for="EnglishStockName" class="col-sm-5 control-label">English Stock Name</label>
+					    <label for="EnglishStockName" class="col-sm-5 control-label">{{'createIPO.EnglishStockName'|translate}}</label>
 					    <div class="col-sm-5">
-					      <input type="text" class="form-control " id="EnglishStockName" placeholder="(Required)" ng-disabled="{{machker}}">
+					      <input type="text" class="form-control " id="EnglishStockName" placeholder="(Required)" ng-disabled="disableFields(machker,vemode)">
 					    </div>
 					</div>
 					<div class="form-group">
-					    <label for="TranditionalChineseName" class="col-sm-5 control-label">Tranditional Chinese Name</label>
+					    <label for="TranditionalChineseName" class="col-sm-5 control-label">{{'createIPO.TranditionalChineseName'|translate}}</label>
 					    <div class="col-sm-5">
-					      <input type="text" class="form-control" id="TranditionalChineseName" placeholder="(Required)" ng-disabled="{{machker}}">
+					      <input type="text" class="form-control" id="TranditionalChineseName" placeholder="(Required)" ng-disabled="disableFields(machker,vemode)">
 					    </div>
 					</div>
 					<div class="form-group">
 					    <label for="SimplifiedChineseName" class="col-sm-5 control-label">Simplified Chinese Name</label>
 					    <div class="col-sm-5">
-					      <input type="text" class="form-control" id="SimplifiedChineseName" placeholder="(Required)" ng-disabled="{{machker}}">
+					      <input type="text" class="form-control" id="SimplifiedChineseName" placeholder="(Required)" ng-disabled="disableFields(machker,vemode)">
 					    </div>
 					</div>
 					<div class="form-group">
 					    <label for="NumberofOfferShares/UnitunderGlobalOffering" class="col-sm-5 control-label">Number of Offer Shares / Unit under Global Offering</label>
 					    <div class="col-sm-5">
-					      <input type="text" class="form-control" id="NumberofOfferShares/UnitunderGlobalOffering" ng-disabled="{{machker}}">
+					      <input type="text" class="form-control" id="NumberofOfferShares/UnitunderGlobalOffering" ng-disabled="disableFields(machker,vemode)">
+					    </div>
+					</div>
+					<div class="form-group">
+					    <label for="NumberofPublicOfferShares/Unit" class="col-sm-5 control-label">Number of Public Offer Shares/Unit</label>
+					    <div class="col-sm-5">
+					      <input type="text" class="form-control" id="NumberofPublicOfferShares/Unit" ng-disabled="disableFields(machker,vemode)">
 					    </div>
 					</div>
 					<div class="form-group" >
 					    <label for="StockCurrency" class="col-sm-5 control-label">Stock Currency</label>
-					    <div class="col-sm-2">
-							<!-- <div class="btn-group">
-							  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"style="width:160px;font-style:italic;color:#55bbde !important">(Requeried)
-							  <span class="caret" style="margin-left: 45px;"></span></button>
-							  <ul class="dropdown-menu" role="menu" id="StockCurrency">
-							    <li><a href="#" style="text-align:center">HKD</a></li>
-							    <li><a href="#" style="text-align:center">CHD</a></li>
-							    <li><a href="#" style="text-align:center">HSD</a></li>							    						    
-							  </ul>
-							</div> -->
-							<select class="form-control " ng-disabled="{{machker}}">
+					    <div class="col-sm-2">							
+							<select class="form-control " ng-disabled="disableFields(machker,vemode)" >
 								<option value=""  style="text-align:center">HKD</option>
 								<option value=""  style="text-align:center">CHD</option>
 								<option value=""  style="text-align:center">HSD</option> 
@@ -150,124 +151,130 @@
 					<div class="form-group">
 					    <label for="OfferPriceRangeStart" class="col-sm-5 control-label">Offer Price Range</label>
 					    <div class="col-sm-2">
-					      <input type="text" class="form-control col-sm-2" id="OfferPriceRangeStart" placeholder="(Required)" ng-disabled="{{machker}}">
+					      <input type="text" class="form-control col-sm-2" id="OfferPriceRangeStart" placeholder="(Required)" ng-disabled="disableFields(machker,vemode)">
 					    </div>
 					    <label for="OfferPriceRangeEnd" class="col-sm-1 control-label" style="text-align:center"> · </label>
 					    <div class="col-sm-2">
-					    <input type="text" class="form-control col-sm-2" id="OfferPriceRangeEnd" placeholder="(Required)" ng-disabled="{{machker}}">
+					    <input type="text" class="form-control col-sm-2" id="OfferPriceRangeEnd" placeholder="(Required)" ng-disabled="disableFields(machker,vemode)">
 					    </div>
 					</div>
 					<div class="form-group">
 					    <label for="BroadLot" class="col-sm-5 control-label">Broad Lot</label>
 					    <div class="col-sm-5">
-					      <input type="text" class="form-control" id="BroadLot" placeholder="(Required)" ng-disabled="{{machker}}">
+					      <input type="text" class="form-control" id="BroadLot" placeholder="(Required)" ng-disabled="disableFields(machker,vemode)">
 					    </div>
 					</div>
 					<div class="form-group">
 					    <label for="NominalValue" class="col-sm-5 control-label">Nominal Value</label>
 					    <div class="col-sm-5">
-					      <input type="text" class="form-control " id="NominalValue" ng-disabled="{{machker}}">
+					      <input type="text" class="form-control " id="NominalValue" ng-disabled="disableFields(machker,vemode)">
 					    </div>
 					</div>
 					<div class="form-group has-feedback">
 					    <label for="OnlineIPOStartDate" class="col-sm-5 control-label">Online IPO Start Date</label>
 					    <div class="col-sm-2">					      
 						    <span class="glyphicon glyphicon-calendar form-control-feedback"></span>
-						    <input type="text" class="form-control reqpad" id="OnlineIPOStartDate" placeholder="(Required)" ng-disabled="{{machker}}"> 
+						    <input type="text" class="form-control reqpad" id="OnlineIPOStartDate" placeholder="(Required)" ng-disabled="disableFields(machker,vemode)"> 
 					    </div>
 					    <label for="OnlineIPOStartTime" class="col-sm-1" style="text-align:center">Time</label>
 					    <div class="col-sm-2">
 						  <span class="glyphicon glyphicon-time form-control-feedback"></span>
-					      <input type="text" class="form-control reqpad" id="OnlineIPOStartTime" placeholder="(Required)"ng-disabled="{{machker}}">
+					      <input type="text" class="form-control reqpad" id="OnlineIPOStartTime" placeholder="(Required)"ng-disabled="disableFields(machker,vemode)">
 					   </div>
 					</div>
 					<div class="form-group has-feedback">
 					    <label for="OnlineIPOEndDate" class="col-sm-5 control-label">Online IPO End Date</label>
 					    <div class="col-sm-2">
 						  <span class="glyphicon glyphicon-calendar form-control-feedback"></span>
-					      <input type="text" class="form-control reqpad" id="OnlineIPOEndDate" placeholder="(Required)"ng-disabled="{{machker}}">
+					      <input type="text" class="form-control reqpad" id="OnlineIPOEndDate" placeholder="(Required)"ng-disabled="disableFields(machker,vemode)">
 					    </div>
 					    <label for="OnlineIPOEndTime" class="col-sm-1" style="text-align:center">Time</label>
 					    <div class="col-sm-2">
 						  <span class="glyphicon glyphicon-time form-control-feedback"></span>
-					      <input type="text" class="form-control reqpad" id="OnlineIPOEndTime" placeholder="(Required)"ng-disabled="{{machker}}">
+					      <input type="text" class="form-control reqpad" id="OnlineIPOEndTime" placeholder="(Required)"ng-disabled="disableFields(machker,vemode)">
 					    </div>
 					</div>
 					<div class="form-group has-feedback">
 					    <label for="IPOClosingDate" class="col-sm-5 control-label">IPO Closing Date</label>
 					    <div class="col-sm-2" >
 						  <span class="glyphicon glyphicon-calendar form-control-feedback"></span>
-					      <input type="text" class="form-control reqpad" id="IPOClosingDate" placeholder="(Required)"ng-disabled="{{machker}}">
+					      <input type="text" class="form-control reqpad" id="IPOClosingDate" placeholder="(Required)"ng-disabled="disableFields(machker,vemode)">
 					    </div>					    
 					    <label for="IPOClosingTime" class="col-sm-1" style="text-align:center">Time</label>
 					    <div class="col-sm-2">
 						  <span class="glyphicon glyphicon-time form-control-feedback"></span>
-					      <input type="text" class="form-control reqpad" id="IPOClosingTime" placeholder="(Required)"ng-disabled="{{machker}}">
+					      <input type="text" class="form-control reqpad" id="IPOClosingTime" placeholder="(Required)"ng-disabled="disableFields(machker,vemode)">
 					    </div>
 					</div>
 					<div class="form-group has-feedback">
 					    <label for="PriceFixingDate" class="col-sm-5 control-label">Price Fixing Date</label>
 					    <div class="col-sm-5">
 					      <span class="glyphicon glyphicon-calendar form-control-feedback longadd"></span>
-					      <input type="text" class="form-control reqpadlong" id="PriceFixingDate" ng-disabled="{{machker}}">
+					      <input type="text" class="form-control reqpadlong" id="PriceFixingDate" ng-disabled="disableFields(machker,vemode)">
 					    </div>
 					</div>
 					<div class="form-group has-feedback">
 					   <label for="ResultAnnouncementDate" class="col-sm-5 control-label">Result Announcement Date</label>
 					    <div class="col-sm-5">
 						  <span class="glyphicon glyphicon-calendar form-control-feedback longadd"></span>
-					      <input type="text" class="form-control reqpadlong" id="ResultAnnouncementDate" ng-disabled="{{machker}}">
+					      <input type="text" class="form-control reqpadlong" id="ResultAnnouncementDate" ng-disabled="disableFields(machker,vemode)">
 					    </div>
 					</div>
 					<div class="form-group has-feedback">
 					    <label for="DispatchofSharesandRefundDate" class="col-sm-5 control-label">Dispatch of Shares and Refund Date</label>
 					    <div class="col-sm-5">
 						  <span class="glyphicon glyphicon-calendar form-control-feedback longadd"></span>
-					      <input type="text" class="form-control reqpadlong" id="DispatchofSharesandRefundDate" ng-disabled="{{machker}}">
+					      <input type="text" class="form-control reqpadlong" id="DispatchofSharesandRefundDate" ng-disabled="disableFields(machker,vemode)">
 					    </div>
 					</div>
 					<div class="form-group has-feedback">
 					    <label for="ListingDate" class="col-sm-5 control-label">Listing Date</label>
 					    <div class="col-sm-5">
 						  <span class="glyphicon glyphicon-calendar form-control-feedback longadd"></span>
-					      <input type="text" class="form-control reqpadlong" id="ListingDate" placeholder="(Required)"ng-disabled="{{machker}}">
+					      <input type="text" class="form-control reqpadlong" id="ListingDate" placeholder="(Required)"ng-disabled="disableFields(machker,vemode)">
 					    </div>
 					</div>
 					<div class="form-group">
 					    <label for="FinalOfferPrice" class="col-sm-5 control-label">Final Offer Price</label>
 					    <div class="col-sm-5">
-					      <input type="text" class="form-control" id="FinalOfferPrice" ng-disabled="{{machker}}">
+					      <input type="text" class="form-control" id="FinalOfferPrice" ng-disabled="disableFields(machker,vemode)">
+					    </div>
+					</div>
+					<div class="form-group">
+					    <label for="Prospectuses(English)URL" class="col-sm-5 control-label">Prospectuses(English) URL</label>
+					    <div class="col-sm-5">
+					      <input type="url" class="form-control" id="Prospectuses(English)URL" ng-disabled="0">
 					    </div>
 					</div>
 					<div class="form-group">
 					    <label for="Prospectuses(TranditionalChinese)URL" class="col-sm-5 control-label">Prospectuses(Tranditional Chinese) URL</label>
 					    <div class="col-sm-5">
-					      <input type="url" class="form-control" id="Prospectuses(TranditionalChinese)URL" ng-disabled="{{machker}}">
+					      <input type="url" class="form-control" id="Prospectuses(TranditionalChinese)URL" ng-disabled="0">
 					    </div>
 					</div>
 					<div class="form-group" >
 					    <label for="Prospectuses(SimplifiedChinese)URL" class="col-sm-5 control-label">Prospectuses(Simplified Chinese) URL</label>
 					    <div class="col-sm-5">
-					      <input type="url" class="form-control" id="Prospectuses(SimplifiedChinese)URL" ng-disabled="{{machker}}">
+					      <input type="url" class="form-control" id="Prospectuses(SimplifiedChinese)URL" ng-disabled="0">
 					    </div>
 					</div>
 					<div class="form-group">
 					    <label for="RemarkforExternal" class="col-sm-5 control-label">Remark for External</label>	    
 					    <div class="col-sm-5 ">								      
-					      <textarea class="form-control" id="RemarkforExternal" rows="3"ng-disabled="{{machker}}"></textarea>
+					      <textarea class="form-control" id="RemarkforExternal" rows="3"ng-disabled="disableFields(machker,vemode)"></textarea>
 					    </div>
 					</div>
 					<div class="form-group">								  
 					    <label for="RemarkforInternal" class="col-sm-5 control-label">Remark for Internal</label>	   
 					    <div class="col-sm-5 ">								      
-					      <textarea class="form-control" id="RemarkforInternal" rows="3" ng-disabled="{{machker}}"></textarea>
+					      <textarea class="form-control" id="RemarkforInternal" rows="3" ng-disabled="{{!vemode}}"></textarea>
 					    </div>								    
 					</div>
 					<div class="form-group " id="fee" name = "fee">
 					    <label for="CommissionRate" class="col-sm-5 control-label">Commission Rate</label>  
 					    <div class="col-sm-2 ">	
 					    <div class="input-group">							    
-					    <input type="text" class="form-control" id="CommissionRate" placeholder="(Required)"ng-disabled="{{machker}}">
+					    <input type="text" class="form-control" id="CommissionRate" placeholder="(Required)"ng-disabled="disableFields(machker,vemode)">
 					    <span class="input-group-addon ">%</span>
 					    </div>
 					    </div>							    
@@ -276,7 +283,7 @@
 					    <label for="LevyRate" class="col-sm-5 control-label">Levy Rate</label>  
 					    <div class="col-sm-2 ">	
 					    <div class="input-group">							    
-					    <input type="text" class="form-control" id="LevyRate" placeholder="(Required)"ng-disabled="{{machker}}">
+					    <input type="text" class="form-control" id="LevyRate" placeholder="(Required)"ng-disabled="disableFields(machker,vemode)">
 					    <span class="input-group-addon">%</span>
 					    </div>
 					    </div>							    
@@ -285,7 +292,7 @@
 					    <label for="TradingFeeRate" class="col-sm-5 control-label">Trading Fee Rate</label>  
 					    <div class="col-sm-2 ">	
 					    <div class="input-group">							    
-					    <input type="text" class="form-control" id="TradingFeeRate" placeholder="(Required)"ng-disabled="{{machker}}">
+					    <input type="text" class="form-control" id="TradingFeeRate" placeholder="(Required)"ng-disabled="disableFields(machker,vemode)">
 					    <span class="input-group-addon">%</span>
 					    </div>
 					    </div>							    
@@ -294,7 +301,7 @@
 					    <label for="InvestorCompensationLevyRate" class="col-sm-5 control-label">Investor Compensation Levy Rate</label>  
 					    <div class="col-sm-2 ">	
 					    <div class="input-group">							    
-					    <input type="text" class="form-control" id="InvestorCompensationLevyRate" ng-disabled="{{machker}}">
+					    <input type="text" class="form-control" id="InvestorCompensationLevyRate" ng-disabled="disableFields(machker,vemode)">
 					    <span class="input-group-addon">%</span>
 					    </div>
 					    </div>							    
@@ -303,23 +310,15 @@
 					    <label for="ClientRebateRate" class="col-sm-5 control-label">Client Rebate Rate</label>  
 					    <div class="col-sm-2 ">	
 					    <div class="input-group">							    
-					    <input type="text" class="form-control" id="ClientRebateRate" ng-disabled="{{machker}}">
+					    <input type="text" class="form-control" id="ClientRebateRate" ng-disabled="disableFields(machker,vemode)">
 					    <span class="input-group-addon">%</span>
 					    </div>
 					    </div>							    
 					</div>
 					<div class="form-group">
 					    <label for="CurrencyofHandingFee" class="col-sm-5 control-label">Currency of Handing Fee</label>
-					    <div class="col-sm-2 ">	
-					    <!-- <div class="btn-group">
-						<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"style="width:160px;font-style:italic;color:#55bbde !important">(Requeried) <span class="caret" style="margin-left: 45px;"></span></button>
-							<ul class="dropdown-menu" role="menu" id="CurrencyofHandingFee">
-							    <li><a href="#" style="text-align:center">HKD</a></li>
-							    <li><a href="#" style="text-align:center">CHD</a></li>
-							    <li><a href="#" style="text-align:center">HSD</a></li>	    						    
-							</ul>
-						</div> -->
-						<select class="form-control "ng-disabled="{{machker}}">
+					    <div class="col-sm-2 ">					    
+						<select class="form-control "ng-disabled="disableFields(machker,vemode)">
 								<option value=""  style="text-align:center">HKD</option>
 								<option value=""  style="text-align:center">CHD</option>
 								<option value=""  style="text-align:center">HSD</option> 
@@ -329,13 +328,13 @@
 					<div class="form-group">
 					    <label for="HandingFee" class="col-sm-5 control-label">Handing Fee</label>  
 					    <div class="col-sm-2 ">					    						    
-					    <input type="text" class="form-control" id="HandingFee" placeholder="(Required)"ng-disabled="{{machker}}">				    
+					    <input type="text" class="form-control" id="HandingFee" placeholder="(Required)"ng-disabled="disableFields(machker,vemode)">				    
 					    </div>							    
 					</div>
 					<div class="form-group">
 					    <label for="FinancingHandingFee" class="col-sm-5 control-label">Financing Handing Fee</label>  
 					    <div class="col-sm-2 ">					    							    
-					    <input type="text" class="form-control" id="FinancingHandingFee" ng-disabled="{{machker}}">					    
+					    <input type="text" class="form-control" id="FinancingHandingFee" ng-disabled="disableFields(machker,vemode)">					    
 					    </div>							    
 					</div>
 
@@ -364,7 +363,7 @@
 						    	</tbody>
 						    </table>
 						</div>						
-				      	<div class="popover right "  style="display:block;border:2px solid #12d6f6;height:300px;width:32%; float:left;margin-left:30px;position:relative;max-width:none;"ng-show="{{!machker}}">
+				      	<div class="popover right "  style="display:block;border:2px solid #12d6f6;height:300px;width:32%; float:left;margin-left:30px;position:relative;max-width:none;"ng-show="showSSDPR(machker,vemode)">
 							<div class="arrow" style="border-right-color:#12d6f6;"></div>	      
 						    <div class="row">	
 						    	<label for="QuantityFrom" class="col-sm-offset-1 col-sm-5 control-label" style="
@@ -402,13 +401,13 @@
 							<div style="height:60px;"></div>
 						    <div class="row">	
 						    	<label  class="col-sm-offset-1 col-sm-8 control-label" style="
-								text-align: left; padding-left:15px"><button id="addcm" type="button" class="btn btn-info" style="width:80px;"ng-click="rqAmountAdd()">Add</button></label>								
+								text-align: left; padding-left:15px"><button id="addcm" type="button" class="btn btn-info" style="width:80px;"ng-click="quantityAmountTableAdd()">Add</button></label>								
 						    </div>
 
 						</div>
 						<div class="table-responsive col-sm-offset-2 col-sm-5"style="height:45px;padding-right: 0px;overflow:hidden" >
 						<table class="table  table-condensed" >
-							<tr><td class="tdclass" colspan="3" align="center"><button id="three" type="button" class="btn btn-info" style="width:100px;"ng-disabled="{{machker}}"ng-click="remrqAmountAll()">Remove All</button></td></tr>
+							<tr><td class="tdclass" colspan="3" align="center"><button id="three" type="button" class="btn btn-info" style="width:100px;"ng-click="removeqatableAll()"ng-show="showSSDPR(machker,vemode)">Remove All</button></td></tr>
 						</table>
 						</div>
 					</div>						
@@ -417,8 +416,8 @@
 					<div class="form-group" id="financing">
 						<div class="col-sm-offset-4 col-sm-1">
 					      	<div class="checkbox"style="float:right" id="ProvideIPOfinancing">
-					        <label>
-					          	<input type="checkbox"checked="checked"ng-disabled="{{machker}}">
+					        <label><!-- ng-disabled="disableFields(machker,vemode)" -->
+					          	<input type="checkbox"  ng-model="showbelow" ng-init="showbelow = false">
 					        </label>
 					     	</div>
 					    </div>				      
@@ -427,95 +426,95 @@
 							text-align: left; padding-left: 0">Provide IPO financing</label>
 					    </div>
 					</div>
-					<div class="form-group has-feedback">
+					<div class="form-group has-feedback" ng-if="showbelow">
 					    <label for="FinancingStartDate" class="col-sm-5 control-label">Financing Start Date</label>
 					    <div class="col-sm-2">
 						  <span class="glyphicon glyphicon-calendar form-control-feedback"></span>
-						  <input type="text" class="form-control reqpad" id="FinancingStartDate" placeholder="(Required)"ng-disabled="{{machker}}">
+						  <input type="text" class="form-control reqpad" id="FinancingStartDate" placeholder="(Required)"ng-disabled="disableFields(machker,vemode)">
 					    </div>
 					    <label for="FinancingStartTime" class="col-sm-1" style="text-align:center">Time</label>
 					    <div class="col-sm-2">
 						  <span class="glyphicon glyphicon-time form-control-feedback"></span>
-					      <input type="text" class="form-control reqpad" id="FinancingStartTime" placeholder="(Required)"ng-disabled="{{machker}}">
+					      <input type="text" class="form-control reqpad" id="FinancingStartTime" placeholder="(Required)"ng-disabled="disableFields(machker,vemode)">
 					    </div>
 					</div>
-					<div class="form-group has-feedback">
+					<div class="form-group has-feedback"ng-if="showbelow">
 					    <label for="FinancingEndDate" class="col-sm-5 control-label">Financing End Date</label>
 					    <div class="col-sm-2">
 						    <span class="glyphicon glyphicon-calendar form-control-feedback"></span>
-						    <input type="text" class="form-control reqpad" id="FinancingEndDate" placeholder="(Required)"ng-disabled="{{machker}}">
+						    <input type="text" class="form-control reqpad" id="FinancingEndDate" placeholder="(Required)"ng-disabled="disableFields(machker,vemode)">
 					    </div>
 					    <label for="FinancingEndTime" class="col-sm-1" style="text-align:center">Time</label>
 					    <div class="col-sm-2">
 						   <span class="glyphicon glyphicon-time form-control-feedback"></span>
-					       <input type="text" class="form-control reqpad" id="FinancingEndTime" placeholder="(Required)"ng-disabled="{{machker}}">
+					       <input type="text" class="form-control reqpad" id="FinancingEndTime" placeholder="(Required)"ng-disabled="disableFields(machker,vemode)">
 					    </div>
 					</div>
-					<div class="form-group">
+					<div class="form-group"ng-if="showbelow">
 					    <label for="InterestDay" class="col-sm-5 control-label">Interest Day</label>  
 					    <div class="col-sm-2 ">					    						    
-					    <input type="text" class="form-control" id="InterestDay" placeholder="0"ng-disabled="{{machker}}">					    
+					    <input type="text" class="form-control" id="InterestDay" placeholder="0"ng-disabled="disableFields(machker,vemode)">					    
 					    </div>							    
 					</div>
-					<div class="form-group">
+					<div class="form-group"ng-if="showbelow">
 					    <label for="MaxLoanAmountperApplication" class="col-sm-5 control-label">Max Loan Amount per Application</label>  
 					    <div class="col-sm-5 ">					    							    
-					    <input type="text" class="form-control" id="MaxLoanAmountperApplication" ng-disabled="{{machker}}">    
+					    <input type="text" class="form-control" id="MaxLoanAmountperApplication" ng-disabled="disableFields(machker,vemode)">    
 					    </div>							    
 					</div>
-					<div class="form-group">
+					<div class="form-group"ng-if="showbelow">
 					    <label for="MinLoanAmountperApplication" class="col-sm-5 control-label">Min Loan Amount per Application</label>  
 					    <div class="col-sm-5 ">					    							    
-					    <input type="text" class="form-control" id="MinLoanAmountperApplication" ng-disabled="{{machker}}">    
+					    <input type="text" class="form-control" id="MinLoanAmountperApplication" ng-disabled="disableFields(machker,vemode)">    
 					    </div>							    
 					</div>
-					<div class="form-group">
+					<div class="form-group"ng-if="showbelow">
 					    <label for="Minno.ofsharespapliedforIPOLoan" class="col-sm-5 control-label">Min no.of shares paplied for IPO Loan</label>  
 					    <div class="col-sm-5 ">					    							    
-					    <input type="text" class="form-control" id="Minno.ofsharespapliedforIPOLoan" ng-disabled="{{machker}}">    
+					    <input type="text" class="form-control" id="Minno.ofsharespapliedforIPOLoan" ng-disabled="disableFields(machker,vemode)">    
 					    </div>							    
 					</div>
-					<div class="form-group">
+					<div class="form-group"ng-if="showbelow">
 					    <label for="MaxLoanRatio" class="col-sm-5 control-label">Max Loan Ratio</label>  
 					    <div class="col-sm-2 ">	
 					    <div class="input-group">							    
-					    <input type="text" class="form-control" id="MaxLoanRatio" placeholder="(Required)"ng-disabled="{{machker}}">
+					    <input type="text" class="form-control" id="MaxLoanRatio" placeholder="(Required)"ng-disabled="disableFields(machker,vemode)">
 					    <span class="input-group-addon">%</span>
 					    </div>
 					    </div>							    
 					</div>
-					<div class="form-group">				    
-					    <label for="MustUseMaxLoan" class="col-sm-5 control-label" >Provide IPO financing</label>   
+					<div class="form-group"ng-if="showbelow">				    
+					    <label for="MustUseMaxLoan" class="col-sm-5 control-label" >Must Use Max Loan</label>   
 					    <div class="col-sm-3">
 					      <label class="radio-inline">
-							  <input type="radio" name="MustUseMaxLoanYes" id="MustUseMaxLoanYes" value="yes" ng-disabled="{{machker}}"> Yes
+							  <input type="radio" name="MustUseMaxLoanYes" id="MustUseMaxLoanYes" value="yes" ng-disabled="disableFields(machker,vemode)"> Yes
 						  </label>
 						 <label class="radio-inline">
-						     <input type="radio" name="MustUseMaxLoanNo" id="MustUseMaxLoanNo" value="no"ng-disabled="{{machker}}"> No
+						     <input type="radio" name="MustUseMaxLoanNo" id="MustUseMaxLoanNo" value="no"ng-disabled="disableFields(machker,vemode)"> No
 						 </label>
 					    </div>
 					</div>
-					<div class="form-group">
+					<div class="form-group"ng-if="showbelow">
 					    <label for="AllowedLoanRatioSelectedby" class="col-sm-5 control-label">Allowed Loan Ratio (Selected by ".")</label>  
 					    <div class="col-sm-5 ">					    							    
-					    <input type="text" class="form-control" id="AllowedLoanRatioSelectedby" placeholder="(eg.10.20.30.40.50.60.70.80.90)"ng-disabled="{{machker}}">    
+					    <input type="text" class="form-control" id="AllowedLoanRatioSelectedby" placeholder="(eg.10.20.30.40.50.60.70.80.90)"ng-disabled="disableFields(machker,vemode)">    
 					    </div>							    
 					</div>
-					<div class="form-group">
+					<div class="form-group"ng-if="showbelow">
 					    <label for="BasicInterestRate" class="col-sm-5 control-label">Basic Interest Rate</label>  
 					    <div class="col-sm-2 ">	
 					    <div class="input-group">							    
-					    <input type="text" class="form-control" id="BasicInterestRate" placeholder="(Required)"ng-disabled="{{machker}}">
+					    <input type="text" class="form-control" id="BasicInterestRate" placeholder="(Required)"ng-disabled="disableFields(machker,vemode)">
 					    <span class="input-group-addon">%</span>
 					    </div>
 					    </div>							    
 					</div>
 
 					<!-- 4.2.5.5	Quantity/Amount Table -->
-					<div class="form-group">
+					<div class="form-group"ng-if="showbelow">
 					    <label for="SpecialInterestRateTable" class="col-sm-offset-2 col-sm-5 control-label"style="text-align:left;">Special Interest Rate Table<span style="color:#55bbde !important;font-style:italic;">(Required)</span></label>							    
 					</div>
-					<div class="form-group">
+					<div class="form-group"ng-if="showbelow">
 						<div class="table-responsive col-sm-offset-2 col-sm-5"style="height:32px;padding-right: 0px;overflow:hidden" >
 						<table class="table table-hover table-condensed" >
 							<thead>
@@ -581,15 +580,20 @@
 						    	</tbody>
 						    </table>
 						</div>												
-				      	<div class="popover right " style="display:block;border:2px solid #12d6f6;height:300px;width:32%; float:left;margin-left:30px;position:relative;max-width: none;"ng-show="{{!machker}}">
+				      	<div class="popover right " style="display:block;border:2px solid #12d6f6;height:300px;width:32%; float:left;margin-left:30px;position:relative;max-width: none;"ng-show="showSSDPR(machker,vemode)">
 							<div class="arrow" style="border-right-color:#12d6f6;"></div>	
 						    <div class="row">	
 						    	<label for="Loadfromtemplates" class="col-sm-offset-1 col-sm-8 control-label" style="
 								text-align: left; padding-left:15px">Load from templates</label>			
 						    </div>
 						    <div class="row">	
-						    	<div class="col-sm-offset-1  col-sm-7 ">	    							    
-							    <input type="text" class="form-control" id="Loadfromtemplates" >					    
+						    	<div class="col-sm-offset-1  col-sm-7 ">						    
+							    <select class="form-control selectdown"id="Loadfromtemplates">
+								<option value="RLSUA"  style="text-align:center">Round Lump Sum Amount</option>
+								<option value="RBIC"  style="text-align:center">Round By Individual Charge</option>
+								<option value="BOUCARLSUA"  style="text-align:center">Base On Unit Cost and </option>
+								<option value="BOUCARBIC"  style="text-align:center">Base On Unit Cost and</option>  
+								</select>					    
 							    </div>
 								<div class="col-sm-3 ">					    							    
 							    <button id="loadt" type="button" class="btn btn-info" style="width:80px;">Load</button>					    
@@ -645,9 +649,9 @@
 
 	<ol class="breadcrumb" style="margin:0 auto">
 	  	<li><a style="text-decoration:none">Back to</a></li>
-	  	<li><a href="javascript:document.getElementById('basic').scrollIntoView()">Basic Information</a></li>
-	  	<li><a href="javascript:document.getElementById('fee').scrollIntoView()">Fee and Charges</a></li>
-	  	<li><a href="javascript:document.getElementById('quantity').scrollIntoView()">Quantity/Amount Table</a></li>  	
-	  	<li class="active"><a href="javascript:document.getElementById('financing').scrollIntoView()">Financing</a></li>
+	  	<li><a href="javascript:document.getElementById('basic').scrollIntoView()">{{'createIPO.BasicInformation'|translate}}</a></li>
+	  	<li><a href="javascript:document.getElementById('fee').scrollIntoView()">{{'createIPO.FeeandCharges'|translate}}</a></li>
+	  	<li><a href="javascript:document.getElementById('quantity').scrollIntoView()">{{'createIPO.Quantity/AmountTable'|translate}}</a></li>  	
+	  	<li class="active"><a href="javascript:document.getElementById('financing').scrollIntoView()">{{'createIPO.Financing'|translate}}</a></li>
 	</ol>
 </div>
