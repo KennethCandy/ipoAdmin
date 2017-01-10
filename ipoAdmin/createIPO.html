@@ -104,44 +104,43 @@
 					    <div class="col-sm-5">
 					      <input type="text" class="form-control" id="StockCode" name="StockCode" placeholder="(Required)" ng-blur="StockCode = stockCodeFormat(StockCode)" ng-model="StockCode"ng-disabled="disableFields(machker,vemode)" required>
 					    <span class="glyphicon glyphicon-warning-sign" style="color:red" ng-show="createipoForm.StockCode.$dirty && createipoForm.StockCode.$invalid">
-						<span ng-show="createipoForm.StockCode.$error.required">Stock Code is required</span>
-						<span ng-show="checkerNum(StockCode)">Stock Code is need digital</span></span>
+						<span ng-show="createipoForm.StockCode.$error.required">Stock Code is required</span>						
 					    </div>					    
 					</div>
 					<div class="form-group">
 					    <label for="EnglishStockName" class="col-sm-5 control-label">{{'createIPO.EnglishStockName'|translate}}</label>
 					    <div class="col-sm-5">
-					      <input type="text" class="form-control " id="EnglishStockName" placeholder="(Required)" ng-disabled="disableFields(machker,vemode)">
+					      <input type="text" class="form-control " id="EnglishStockName" placeholder="(Required)" ng-disabled="disableFields(machker,vemode)"ng-model="EnglishStockName">
 					    </div>
 					</div>
 					<div class="form-group">
 					    <label for="TranditionalChineseName" class="col-sm-5 control-label">{{'createIPO.TranditionalChineseName'|translate}}</label>
 					    <div class="col-sm-5">
-					      <input type="text" class="form-control" id="TranditionalChineseName" placeholder="(Required)" ng-disabled="disableFields(machker,vemode)">
+					      <input type="text" class="form-control" id="TranditionalChineseName" placeholder="(Required)" ng-disabled="disableFields(machker,vemode)"ng-model="TranditionalChineseName">
 					    </div>
 					</div>
 					<div class="form-group">
-					    <label for="SimplifiedChineseName" class="col-sm-5 control-label">Simplified Chinese Name</label>
+					    <label for="SimplifiedChineseName" class="col-sm-5 control-label">{{'createIPO.SimplifiedChineseName'|translate}}</label>
 					    <div class="col-sm-5">
-					      <input type="text" class="form-control" id="SimplifiedChineseName" placeholder="(Required)" ng-disabled="disableFields(machker,vemode)">
+					      <input type="text" class="form-control" id="SimplifiedChineseName" placeholder="(Required)" ng-disabled="disableFields(machker,vemode)"ng-model="SimplifiedChineseName">
 					    </div>
 					</div>
 					<div class="form-group">
-					    <label for="NumberofOfferShares/UnitunderGlobalOffering" class="col-sm-5 control-label">Number of Offer Shares / Unit under Global Offering</label>
+					    <label for="NumberofOfferSharesUnitunderGlobalOffering" class="col-sm-5 control-label">{{'createIPO.NOSUUGO'|translate}}</label>
 					    <div class="col-sm-5">
-					      <input type="text" class="form-control" id="NumberofOfferShares/UnitunderGlobalOffering" ng-disabled="disableFields(machker,vemode)">
+					      <input type="text" class="form-control" id="NumberofOfferSharesUnitunderGlobalOffering" ng-disabled="disableFields(machker,vemode)"ng-model="NumberofOfferSharesUnitunderGlobalOffering">
 					    </div>
 					</div>
 					<div class="form-group">
-					    <label for="NumberofPublicOfferShares/Unit" class="col-sm-5 control-label">Number of Public Offer Shares/Unit</label>
+					    <label for="NumberofPublicOfferSharesUnit" class="col-sm-5 control-label">{{'createIPO.NOPOSU'|translate}}</label>
 					    <div class="col-sm-5">
-					      <input type="text" class="form-control" id="NumberofPublicOfferShares/Unit" ng-disabled="disableFields(machker,vemode)">
+					      <input type="text" class="form-control" id="NumberofPublicOfferSharesUnit" ng-disabled="disableFields(machker,vemode)"ng-model="NumberofPublicOfferSharesUnit">
 					    </div>
 					</div>
 					<div class="form-group" >
-					    <label for="StockCurrency" class="col-sm-5 control-label">Stock Currency</label>
+					    <label for="StockCurrency" class="col-sm-5 control-label">{{'createIPO.StockCurrency'|translate}}</label>
 					    <div class="col-sm-2">							
-							<select class="form-control " ng-disabled="disableFields(machker,vemode)" >
+							<select class="form-control " ng-disabled="disableFields(machker,vemode)" ng-model="StockCurrency">
 								<option value=""  style="text-align:center">HKD</option>
 								<option value=""  style="text-align:center">CHD</option>
 								<option value=""  style="text-align:center">HSD</option> 
@@ -149,68 +148,68 @@
 					    </div>
 					</div>
 					<div class="form-group">
-					    <label for="OfferPriceRangeStart" class="col-sm-5 control-label">Offer Price Range</label>
+					    <label for="OfferPriceRangeStart" class="col-sm-5 control-label">{{'createIPO.OfferPriceRange'|translate}}</label>
 					    <div class="col-sm-2">
-					      <input type="text" class="form-control col-sm-2" id="OfferPriceRangeStart" placeholder="(Required)" ng-disabled="disableFields(machker,vemode)">
+					      <input type="text" class="form-control col-sm-2" id="OfferPriceRangeStart" placeholder="(Required)" ng-disabled="disableFields(machker,vemode)"ng-model="OfferPriceRangeStart">
 					    </div>
 					    <label for="OfferPriceRangeEnd" class="col-sm-1 control-label" style="text-align:center"> · </label>
 					    <div class="col-sm-2">
-					    <input type="text" class="form-control col-sm-2" id="OfferPriceRangeEnd" placeholder="(Required)" ng-disabled="disableFields(machker,vemode)">
+					    <input type="text" class="form-control col-sm-2" id="OfferPriceRangeEnd" placeholder="(Required)" ng-disabled="disableFields(machker,vemode)"ng-model="OfferPriceRangeEnd">
 					    </div>
 					</div>
 					<div class="form-group">
-					    <label for="BroadLot" class="col-sm-5 control-label">Broad Lot</label>
+					    <label for="BroadLot" class="col-sm-5 control-label">{{'createIPO.BroadLot'|translate}}</label>
 					    <div class="col-sm-5">
-					      <input type="text" class="form-control" id="BroadLot" placeholder="(Required)" ng-disabled="disableFields(machker,vemode)">
+					      <input type="text" class="form-control" id="BroadLot" placeholder="(Required)" ng-disabled="disableFields(machker,vemode)"ng-model="BroadLot">
 					    </div>
 					</div>
 					<div class="form-group">
-					    <label for="NominalValue" class="col-sm-5 control-label">Nominal Value</label>
+					    <label for="NominalValue" class="col-sm-5 control-label">{{'createIPO.NominalValue'|translate}}</label>
 					    <div class="col-sm-5">
-					      <input type="text" class="form-control " id="NominalValue" ng-disabled="disableFields(machker,vemode)">
+					      <input type="text" class="form-control " id="NominalValue" ng-disabled="disableFields(machker,vemode)"ng-model="NominalValue">
 					    </div>
 					</div>
 					<div class="form-group has-feedback">
-					    <label for="OnlineIPOStartDate" class="col-sm-5 control-label">Online IPO Start Date</label>
+					    <label for="OnlineIPOStartDate" class="col-sm-5 control-label">{{'createIPO.OnlineIPOStartDate'|translate}}</label>
 					    <div class="col-sm-2">					      
 						    <span class="glyphicon glyphicon-calendar form-control-feedback"></span>
-						    <input type="text" class="form-control reqpad" id="OnlineIPOStartDate" placeholder="(Required)" ng-disabled="disableFields(machker,vemode)"> 
+						    <input type="text" class="form-control reqpad" id="OnlineIPOStartDate" placeholder="(Required)" ng-disabled="disableFields(machker,vemode)"ng-model="OnlineIPOStartDate"> 
 					    </div>
-					    <label for="OnlineIPOStartTime" class="col-sm-1" style="text-align:center">Time</label>
+					    <label for="OnlineIPOStartTime" class="col-sm-1" style="text-align:center">{{'createIPO.Time'|translate}}</label>
 					    <div class="col-sm-2">
 						  <span class="glyphicon glyphicon-time form-control-feedback"></span>
-					      <input type="text" class="form-control reqpad" id="OnlineIPOStartTime" placeholder="(Required)"ng-disabled="disableFields(machker,vemode)">
+					      <input type="text" class="form-control reqpad" id="OnlineIPOStartTime" placeholder="(Required)"ng-disabled="disableFields(machker,vemode)"ng-model="OnlineIPOStartTime">
 					   </div>
 					</div>
 					<div class="form-group has-feedback">
-					    <label for="OnlineIPOEndDate" class="col-sm-5 control-label">Online IPO End Date</label>
+					    <label for="OnlineIPOEndDate" class="col-sm-5 control-label">{{'createIPO.OnlineIPOEndDate'|translate}}</label>
 					    <div class="col-sm-2">
 						  <span class="glyphicon glyphicon-calendar form-control-feedback"></span>
-					      <input type="text" class="form-control reqpad" id="OnlineIPOEndDate" placeholder="(Required)"ng-disabled="disableFields(machker,vemode)">
+					      <input type="text" class="form-control reqpad" id="OnlineIPOEndDate" placeholder="(Required)"ng-disabled="disableFields(machker,vemode)"ng-model="OnlineIPOEndDate">
 					    </div>
-					    <label for="OnlineIPOEndTime" class="col-sm-1" style="text-align:center">Time</label>
+					    <label for="OnlineIPOEndTime" class="col-sm-1" style="text-align:center">{{'createIPO.Time'|translate}}</label>
 					    <div class="col-sm-2">
 						  <span class="glyphicon glyphicon-time form-control-feedback"></span>
-					      <input type="text" class="form-control reqpad" id="OnlineIPOEndTime" placeholder="(Required)"ng-disabled="disableFields(machker,vemode)">
+					      <input type="text" class="form-control reqpad" id="OnlineIPOEndTime" placeholder="(Required)"ng-disabled="disableFields(machker,vemode)"ng-model="OnlineIPOEndTime">
 					    </div>
 					</div>
 					<div class="form-group has-feedback">
-					    <label for="IPOClosingDate" class="col-sm-5 control-label">IPO Closing Date</label>
+					    <label for="IPOClosingDate" class="col-sm-5 control-label">{{'createIPO.IPOClosingDate'|translate}}</label>
 					    <div class="col-sm-2" >
 						  <span class="glyphicon glyphicon-calendar form-control-feedback"></span>
-					      <input type="text" class="form-control reqpad" id="IPOClosingDate" placeholder="(Required)"ng-disabled="disableFields(machker,vemode)">
+					      <input type="text" class="form-control reqpad" id="IPOClosingDate" placeholder="(Required)"ng-disabled="disableFields(machker,vemode)"ng-model="IPOClosingDate">
 					    </div>					    
-					    <label for="IPOClosingTime" class="col-sm-1" style="text-align:center">Time</label>
+					    <label for="IPOClosingTime" class="col-sm-1" style="text-align:center">{{'createIPO.Time'|translate}}</label>
 					    <div class="col-sm-2">
 						  <span class="glyphicon glyphicon-time form-control-feedback"></span>
-					      <input type="text" class="form-control reqpad" id="IPOClosingTime" placeholder="(Required)"ng-disabled="disableFields(machker,vemode)">
+					      <input type="text" class="form-control reqpad" id="IPOClosingTime" placeholder="(Required)"ng-disabled="disableFields(machker,vemode)"ng-model="IPOClosingTime">
 					    </div>
 					</div>
 					<div class="form-group has-feedback">
-					    <label for="PriceFixingDate" class="col-sm-5 control-label">Price Fixing Date</label>
+					    <label for="PriceFixingDate" class="col-sm-5 control-label">{{'createIPO.PriceFixingDate'|translate}}</label>
 					    <div class="col-sm-5">
 					      <span class="glyphicon glyphicon-calendar form-control-feedback longadd"></span>
-					      <input type="text" class="form-control reqpadlong" id="PriceFixingDate" ng-disabled="disableFields(machker,vemode)">
+					      <input type="text" class="form-control reqpadlong" id="PriceFixingDate" ng-disabled="disableFields(machker,vemode)"ng-model="PriceFixingDate">
 					    </div>
 					</div>
 					<div class="form-group has-feedback">
@@ -274,7 +273,7 @@
 					    <label for="CommissionRate" class="col-sm-5 control-label">Commission Rate</label>  
 					    <div class="col-sm-2 ">	
 					    <div class="input-group">							    
-					    <input type="text" class="form-control" id="CommissionRate" placeholder="(Required)"ng-disabled="disableFields(machker,vemode)">
+					    <input type="text" class="form-control" id="CommissionRate" placeholder="(Required)"ng-disabled="disableFields(machker,vemode)"ng-model="CommissionRate">
 					    <span class="input-group-addon ">%</span>
 					    </div>
 					    </div>							    
@@ -283,7 +282,7 @@
 					    <label for="LevyRate" class="col-sm-5 control-label">Levy Rate</label>  
 					    <div class="col-sm-2 ">	
 					    <div class="input-group">							    
-					    <input type="text" class="form-control" id="LevyRate" placeholder="(Required)"ng-disabled="disableFields(machker,vemode)">
+					    <input type="text" class="form-control" id="LevyRate" placeholder="(Required)"ng-disabled="disableFields(machker,vemode)"ng-model="LevyRate">
 					    <span class="input-group-addon">%</span>
 					    </div>
 					    </div>							    
@@ -292,7 +291,7 @@
 					    <label for="TradingFeeRate" class="col-sm-5 control-label">Trading Fee Rate</label>  
 					    <div class="col-sm-2 ">	
 					    <div class="input-group">							    
-					    <input type="text" class="form-control" id="TradingFeeRate" placeholder="(Required)"ng-disabled="disableFields(machker,vemode)">
+					    <input type="text" class="form-control" id="TradingFeeRate" placeholder="(Required)"ng-disabled="disableFields(machker,vemode)"ng-model="TradingFeeRate">
 					    <span class="input-group-addon">%</span>
 					    </div>
 					    </div>							    
@@ -301,7 +300,7 @@
 					    <label for="InvestorCompensationLevyRate" class="col-sm-5 control-label">Investor Compensation Levy Rate</label>  
 					    <div class="col-sm-2 ">	
 					    <div class="input-group">							    
-					    <input type="text" class="form-control" id="InvestorCompensationLevyRate" ng-disabled="disableFields(machker,vemode)">
+					    <input type="text" class="form-control" id="InvestorCompensationLevyRate" ng-disabled="disableFields(machker,vemode)"ng-model="InvestorCompensationLevyRate">
 					    <span class="input-group-addon">%</span>
 					    </div>
 					    </div>							    
@@ -353,12 +352,12 @@
 						<div class="table-responsive col-sm-offset-2 col-sm-5"style="height:300px;padding-right: 0px;" >
 						    <table class="table table-hover table-condensed" >						    	
 						    	<tbody>						    		
-						    		<tr ng-repeat="x in nosvapTable">
-						    			<td class="tdclass" style="width:40%" ng-if="x.del">{{x.range}}</td>
-						    			<td class="tdclass" style="width:40%" ng-if="x.del==false"></td>
-						    			<td class="tdclass" style="width:25%">{{x.qty}}</td>
-						    			<td class="tdclass" style="width:25%">{{x.amt}}</td>
-						    			<td class="tdclass" style="width:10%"ng-if="x.del"><span class="glyphicon glyphicon-remove tds"></span></td>
+						    		<tr ng-repeat="qat in quantityAmountTable">
+						    			<td class="tdclass" style="width:40%" ng-if="qat.del">{{qat.range}}</td>
+						    			<td class="tdclass" style="width:40%" ng-if="qat.del==false"></td>
+						    			<td class="tdclass" style="width:25%">{{qat.qty}}</td>
+						    			<td class="tdclass" style="width:25%">{{qat.amt}}</td>
+						    			<td class="tdclass" style="width:10%"ng-if="qat.del"><span class="glyphicon glyphicon-remove tds"ng-click="delsingelqat(qat)" style="cursor:pointer"></span></td><td class="tdclass" style="width:10%"ng-if="qat.del==false"></td>
 						    		</tr>
 						    	</tbody>
 						    </table>
@@ -373,24 +372,24 @@
 						    </div>
 						    <div class="row">	
 						    	<div class=" col-sm-offset-1 col-sm-5 ">					    							    
-							    <input type="text" class="form-control" id="QuantityFrom" placeholder="(Required)">					    
+							    <input type="text" class="form-control" id="QuantityFrom" placeholder="(Required)"ng-model="QuantityFrom">					    
 							    </div>
 								<div class="col-sm-5 ">					    							    
-							    <input type="text" class="form-control" id="QuantityTo" placeholder="(Required)">					    
+							    <input type="text" class="form-control" id="QuantityTo" placeholder="(Required)"ng-model="QuantityTo">					    
 							    </div>
 						    </div>
 						    <div class="row">	
 						    	<label for="Interval" class="col-sm-offset-1 col-sm-8 control-label" style="
 								text-align: left; padding-left:15px">Interval</label>
 								<div class="col-sm-offset-1 col-sm-5">					    							    
-							    <input type="text" class="form-control" id="Interval" placeholder="(Required)">					    
+							    <input type="text" class="form-control" id="Interval" placeholder="(Required)"ng-model="Interval">					    
 							    </div>
 						    </div>
 						    <div class="row">	
 						    	<label for="CalculationMethod" class="col-sm-offset-1 col-sm-8 control-label" style="
 								text-align: left; padding-left:15px">Calculation Method</label>
 								<div class="col-sm-offset-1 col-sm-10">		    		
-							    <select class="form-control selectdown"id="CalculationMethod">
+							    <select class="form-control selectdown"id="CalculationMethod"ng-model="CalculationMethod">
 								<option value="RLSUA"  style="text-align:center">Round Lump Sum Amount</option>
 								<option value="RBIC"  style="text-align:center">Round By Individual Charge</option>
 								<option value="BOUCARLSUA"  style="text-align:center">Base On Unit Cost and Round Lump Sum Amount</option>
@@ -504,7 +503,7 @@
 					    <label for="BasicInterestRate" class="col-sm-5 control-label">Basic Interest Rate</label>  
 					    <div class="col-sm-2 ">	
 					    <div class="input-group">							    
-					    <input type="text" class="form-control" id="BasicInterestRate" placeholder="(Required)"ng-disabled="disableFields(machker,vemode)">
+					    <input type="text" class="form-control" id="BasicInterestRate" placeholder="(Required)"ng-disabled="disableFields(machker,vemode)"ng-model="123">
 					    <span class="input-group-addon">%</span>
 					    </div>
 					    </div>							    
@@ -527,56 +526,11 @@
 						<div class="table-responsive col-sm-offset-2 col-sm-5"style="height:300px;padding-right: 0px;" >
 						    <table class="table table-hover table-condensed" >						    	
 						    	<tbody>
-						    		<tr >
-						    			<td class="tdclass">> 10000</td>
-						    			<td class="tdclass">2000</td>						    			
-						    			<td class="tdclass"><span class="glyphicon glyphicon-remove tds"></span></td>
-						    		</tr>
-						    		<tr >
-						    			<td class="tdclass">> 10000</td>
-						    			<td class="tdclass">4000</td>
-						    			<td class="tdclass"><span class="glyphicon glyphicon-remove tds"></span></td>
-						    		</tr>
-						    		<tr>
-						    			<td class="tdclass">> 10000</td>
-						    			<td class="tdclass">6000</td>
-						    			<td class="tdclass"><span class="glyphicon glyphicon-remove tds"></span></td>
-						    		</tr>
-						    		<tr>
-						    			<td class="tdclass">> 10000</td>
-						    			<td class="tdclass">8000</td>
-						    			<td class="tdclass"><span class="glyphicon glyphicon-remove tds"></span></td>
-						    		</tr>
-						    		<tr>
-						    			<td class="tdclass">> 10000</td>
-						    			<td class="tdclass">8000</td>
-						    			<td class="tdclass"><span class="glyphicon glyphicon-remove tds"></span></td>
-						    		</tr>
-						    		<tr>
-						    			<td class="tdclass">> 10000</td>
-						    			<td class="tdclass">8000</td>
-						    			<td class="tdclass"><span class="glyphicon glyphicon-remove tds"></span></td>
-						    		</tr>
-						    		<tr>
-						    			<td class="tdclass">> 10000</td>
-						    			<td class="tdclass">8000</td>
-						    			<td class="tdclass"><span class="glyphicon glyphicon-remove tds"></span></td>
-						    		</tr>
-						    		<tr>
-						    			<td class="tdclass">> 10000</td>
-						    			<td class="tdclass">26000</td>
-						    			<td class="tdclass"><span class="glyphicon glyphicon-remove tds"></span></td>
-						    		</tr>
-						    		<tr>
-						    			<td class="tdclass">> 10000</td>
-						    			<td class="tdclass">26000</td>
-						    			<td class="tdclass"><span class="glyphicon glyphicon-remove tds"></span></td>
-						    		</tr>
-						    		<tr>
-						    			<td class="tdclass">> 10000</td>
-						    			<td class="tdclass">26000</td>
-						    			<td class="tdclass"><span class="glyphicon glyphicon-remove tds"></span></td>
-						    		</tr>						    		
+						    		<tr ng-repeat="sirt in specialInterestRateTable">
+						    			<td class="tdclass">{{sirt.laabove}}</td>
+						    			<td class="tdclass">{{sirt.sirate}}</td>						    			
+						    			<td class="tdclass"><span class="glyphicon glyphicon-remove tds"ng-click="sirTableDelsingel(sirt)" style="cursor:pointer"></span></td>
+						    		</tr>   							    								    		
 						    	</tbody>
 						    </table>
 						</div>												
@@ -596,7 +550,7 @@
 								</select>					    
 							    </div>
 								<div class="col-sm-3 ">					    							    
-							    <button id="loadt" type="button" class="btn btn-info" style="width:80px;">Load</button>					    
+							    <button id="loadt" type="button" class="btn btn-info" style="width:80px;"ng-click="sirTableLoad()">Load</button>					    
 							    </div>
 						    </div>
 						    <div class="row">	
@@ -606,33 +560,33 @@
 								text-align: left; padding-left:15px">Specical Interest Rate(p.a)</label>
 						    </div>
 						    <div class="row">	
-						    	<div class="col-sm-offset-1 col-sm-5 ">					    							    
-							    <input type="text" class="form-control" id="LoadAmountAbove" placeholder="(Required)">					    
+						    	<div class="col-sm-offset-1 col-sm-5 ">				    							    
+								<input type="text" class="form-control" id="LoadAmountAbove" placeholder="(Required)"ng-model="$parent.LoadAmountAbove">					    
 							    </div>
 								<div class="col-sm-5 ">					    							    
-							    <input type="text" class="form-control" id="SpecicalInterestRate" placeholder="(Required)">					    
+								<input type="text" class="form-control" id="SpecicalInterestRate" placeholder="(Required)"ng-model="$parent.SpecicalInterestRate">					    
 							    </div>
 						    </div>
 						    <div class="row">	
 						    	<label  class="col-sm-offset-1 col-sm-8 control-label" style="
-								text-align: left; padding-left:15px"><button id="addlaasir" type="button" class="btn btn-info" style="width:80px;">Add</button></label>								
+								text-align: left; padding-left:15px"><button id="addlaasir" type="button" class="btn btn-info" style="width:80px;"ng-click="sirTableAdd()">Add</button></label>								
 						    </div>
 						    <div class="row">	
 						    	<label for="Saveastemplatewithname" class="col-sm-offset-1 col-sm-8 control-label" style="
 								text-align: left; padding-left:15px">Save as template with name</label>
 								<div class="col-sm-offset-1 col-sm-10">					    							    
-							    <input type="text" class="form-control" id="Saveastemplatewithname" >					    
+							    <input type="text" class="form-control" id="Saveastemplatewithname" ng-model="savebtn">					    
 							    </div>
 						    </div>
 						    <div style="height:20px;"></div>							
 						    <div class="row">	
 						    	<label  class="col-sm-offset-1 col-sm-8 control-label" style="
-								text-align: left; padding-left:15px"><button id="savetn" type="button" class="btn btn-info" style="width:80px;">Save</button></label>								
+								text-align: left; padding-left:15px"><button id="savetn" type="button" class="btn btn-info" style="width:80px;"ng-click="sirTableSave()">Save</button></label>								
 						    </div>
 						</div>
 						<div class="table-responsive col-sm-offset-2 col-sm-5"style="height:45px;padding-right: 0px;overflow:hidden;" >
 						<table class="table  table-condensed" >
-							<tr><td class="tdclass" colspan="3" align="center"><button id="four" type="button" class="btn btn-info" style="width:100px;"ng-disabled="{{machker}}">Remove All</button></td></tr>
+							<tr><td class="tdclass" colspan="3" align="center"><button id="four" type="button" class="btn btn-info" style="width:100px;"ng-click="sirTableRemove()">Remove All</button></td></tr>
 						</table>
 						</div>
 					</div>

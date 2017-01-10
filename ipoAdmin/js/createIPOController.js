@@ -8,11 +8,7 @@ angular.module('ipoAdminApp.createIPOController', [])
 
 	$scope.getCurrentDateTime = function(value){
 		return getCurrentDateTime(value).substring(8,10) +":"+ getCurrentDateTime().substring(10,12);
-	}
-
-	$scope.getTime = function(value){
-		return getTime(value);
-	}
+	}	
 
 	$scope.theTime = new Date().toLocaleTimeString();
 
@@ -141,6 +137,26 @@ angular.module('ipoAdminApp.createIPOController', [])
 
     $scope.vemode = true;// view:false     edit:true
 
+    /*权限*/
+	function showAccRej(machker,vemode){
+		return machker & vemode;
+	}
+
+	function showBack(machker,vemode){
+		return !(machker ^ vemode);
+	}
+
+	function showEdit(machker,vemode){
+		return (!machker) & (!vemode);
+	}
+
+	function showSSDPR(machker,vemode){
+		return (machker ^ vemode)&vemode;
+	}
+
+	function disableFields(machker,vemode){
+		return !((machker ^ vemode)&vemode);
+	}
     
     $scope.showAccRej = function(value,val){
 		return showAccRej(value,val);
@@ -162,51 +178,313 @@ angular.module('ipoAdminApp.createIPOController', [])
 		return disableFields(value,val);
 	}  
   
+
+  
  	/*字段校验format*/ 	
  	$scope.stockCodeFormat = function(value) {		 
     	return stockCodeFormat(value);
 	}
 
-
 	$scope.checkerNum = function(value) {		
     	return checkerNum(value);
+	}	
+
+	/*Quantity Amount Table */
+	/*表格一*/	
+	function rlsAmount(){
+		var commissionRate =$scope.CommissionRate;
+		var levyRate = $scope.LevyRate;
+		var tradingFeeRate = $scope.TradingFeeRate ;
+		var icLevyRate =$scope.InvestorCompensationLevyRate ;	
+		var price = $scope.OfferPriceRangeEnd;
+		var quantityFrom =$scope.QuantityFrom;
+		var quantityTo =$scope.QuantityTo;
+		var interval = $scope.Interval;
+		var qtyarrysumtemp = (quantityTo - quantityFrom)/interval;
+		var qtyarrysum = Math.ceil(qtyarrysumtemp);
+		var obj = [];
+		var qtyarry = new Array(qtyarrysum);
+
+		for(var i=0;i<qtyarry.length-1;i++){
+		 	qtyarry[i] = parseInt(quantityFrom, 10) + interval*(i+1);	 	
+		}
+		qtyarry[qtyarrysum-1] = quantityTo;
+		var amount = new Array(qtyarrysum);
+
+		for(var i=0;i<amount.length;i++){
+		 	amount[i] = ((price * qtyarry[i])*(1 + commissionRate/100 + levyRate/100 + icLevyRate/100 + tradingFeeRate/100)).toFixed(2);	 	
+		 	var item = {};
+		 	item.key = quantityFrom+'-'+quantityTo ;
+		 	item.range = quantityFrom+'< quantity <= '+quantityTo ;
+		 	item.qty = qtyarry[i];
+		 	item.amt = amount[i];
+		 	item.del = (i== 0 ? true : false);
+		 	obj[obj.length] = item;	 	
+		}
+		return obj;
 	}
 
-	$scope.caluMethodType = '';
+	function rbiCharge(){
+		var commissionRate = $scope.CommissionRate;
+		var levyRate = $scope.LevyRate ;
+		var tradingFeeRate = $scope.TradingFeeRate;
+		var icLevyRate = $scope.InvestorCompensationLevyRate;	
+		var price = $scope.OfferPriceRangeEnd;
+		var quantityFrom =$scope.QuantityFrom ;
+		var quantityTo =$scope.QuantityTo;
+		var interval = $scope.Interval;
+		var qtyarrysumtemp = (quantityTo - quantityFrom)/interval;
+		var qtyarrysum = Math.ceil(qtyarrysumtemp);
+		var obj = [];
+		var qtyarry = new Array(qtyarrysum);
 
-	/*table one 四个方法*/
-	$scope.rlsAmount = function() {		
-    	//$scope.nosvapTable = [];
-    	var currentNosvapTable =  $scope.nosvapTable;	
-    	var newNosvapTable = rbiCharge();
-    	newNosvapTable.forEach(function(i){
-    		currentNosvapTable[currentNosvapTable.length] = newNosvapTable[i];
-    	 }
-    	);
-    	alert(111);
-    	$scope.nosvapTable = currentNosvapTable;
-	}
+		for(var i=0;i<qtyarry.length-1;i++){
+		 	qtyarry[i] = parseInt(quantityFrom, 10) + interval*(i+1);	 	
+		}
+		qtyarry[qtyarrysum-1] = quantityTo;
+		var amount = new Array(qtyarrysum);
 
-	$scope.rbiCharge = function(value) {		
-    	$scope.nosvapTable = [];
-
-	}
-
-	$scope.bousarlsAmount = function(value) {		
-    	$scope.nosvapTable = [];
-	}
-
-	$scope.boucarbiCharge = function(value) {		
-    	$scope.nosvapTable = [];
+		for(var i=0;i<amount.length;i++){
+		 	amount[i] = (parseFloat((price * qtyarry[i]).toFixed(2))
+		 	+ parseFloat(((price * qtyarry[i])*commissionRate/100).toFixed(2))
+		 	+ parseFloat(((price * qtyarry[i])*levyRate/100).toFixed(2))
+		 	+ parseFloat(((price * qtyarry[i])*icLevyRate/100).toFixed(2))
+		 	+ parseFloat(((price * qtyarry[i])*tradingFeeRate/100).toFixed(2))).toFixed(2);
+		 	var item = {};
+		 	item.key = quantityFrom+'-'+quantityTo ;
+		 	item.range = quantityFrom+'< quantity <= '+quantityTo ;
+		 	item.qty = qtyarry[i];
+		 	item.amt = amount[i];
+		 	item.del = (i== 0 ? true : false);
+		 	obj[obj.length] = item;	 	
+		}	
+		return obj;
 	}
 	
-	$scope.quantityAmountTableAdd = function(value) {    	
-    	$scope.nosvapTable = quantityAmountTableAdd(value);
-	}
-	$scope.removeqatableAll = function(value) {    	
-    	$scope.nosvapTable = [];
+	function bousarlsAmount(){
+		var commissionRate =$scope.CommissionRate;
+		var levyRate = $scope.LevyRate;
+		var tradingFeeRate =$scope.TradingFeeRate ;
+		var icLevyRate = $scope.InvestorCompensationLevyRate;	
+		var price =$scope.OfferPriceRangeEnd;
+		var quantityFrom = $scope.QuantityFrom;
+		var quantityTo = $scope.QuantityTo ;
+		var interval =$scope.Interval;
+		var qtyarrysumtemp = (quantityTo - quantityFrom)/interval;
+		var qtyarrysum = Math.ceil(qtyarrysumtemp);
+		var obj = [];
+		var qtyarry = new Array(qtyarrysum);
+
+		for(var i=0;i<qtyarry.length-1;i++){
+		 	qtyarry[i] = parseInt(quantityFrom, 10) + interval*(i+1);	 	
+		}
+		qtyarry[qtyarrysum-1] = quantityTo;
+		var amount = new Array(qtyarrysum);
+
+		for(var i=0;i<amount.length;i++){
+		 	amount[i] =qtyarry[i]/1000 * ((price *1000)*(1 + commissionRate/100 + levyRate/100 + icLevyRate/100 + tradingFeeRate/100)).toFixed(2);
+		 	var item = {};
+		 	item.key = quantityFrom+'-'+quantityTo ;
+		 	item.range = quantityFrom+'< quantity <= '+quantityTo ;
+		 	item.qty = qtyarry[i];
+		 	item.amt = amount[i];
+		 	item.del = (i== 0 ? true : false);
+		 	obj[obj.length] = item;	 	
+		}	
+		return obj;
 	}
 
+	function boucarbiCharge(){
+		var commissionRate = $scope.CommissionRate ;
+		var levyRate =$scope.LevyRate;
+		var tradingFeeRate =$scope.TradingFeeRate;
+		var icLevyRate = $scope.InvestorCompensationLevyRate;	
+		var price = $scope.OfferPriceRangeEnd;
+		var quantityFrom =$scope.QuantityFrom;
+		var quantityTo =$scope.QuantityTo;
+		var interval = $scope.Interval;
+		var qtyarrysumtemp = (quantityTo - quantityFrom)/interval;
+		var qtyarrysum = Math.ceil(qtyarrysumtemp);
+		var obj = [];
+		var qtyarry = new Array(qtyarrysum);
+
+		for(var i=0;i<qtyarry.length-1;i++){
+		 	qtyarry[i] = parseInt(quantityFrom, 10) + interval*(i+1);	 	
+		}
+		qtyarry[qtyarrysum-1] = quantityTo;
+		var amount = new Array(qtyarrysum);
+
+		for(var i=0;i<amount.length;i++){
+		 	amount[i] =qtyarry[i]/1000 * (parseFloat((price * 1000).toFixed(2))
+		 	+ parseFloat(((price * 1000)*commissionRate/100).toFixed(2))
+		 	+ parseFloat(((price * 1000)*levyRate/100).toFixed(2))
+		 	+ parseFloat(((price * 1000)*icLevyRate/100).toFixed(2))
+		 	+ parseFloat(((price * 1000)*tradingFeeRate/100).toFixed(2))).toFixed(2);
+		 	var item = {};
+		 	item.key = quantityFrom+'-'+quantityTo ;
+		 	item.range = quantityFrom+'< quantity <= '+quantityTo ;
+		 	item.qty = qtyarry[i];
+		 	item.amt = amount[i];
+		 	item.del = (i== 0 ? true : false);
+		 	obj[obj.length] = item;	 	
+		}	
+		return obj;
+	}
+
+	$scope.CalculationMethod = "RLSUA";
+	function quantityAmountTableAdd(){	
+		var methods=$scope.CalculationMethod;		
+		if(methods == "RLSUA" ){
+			return rlsAmount();
+		}else if(methods == ("RBIC" )){
+			return rbiCharge();
+		}
+		else if(methods == ("BOUCARLSUA" )){
+			return bousarlsAmount();
+		}
+		else if(methods == ("BOUCARBIC" )){
+			return boucarbiCharge();
+		}
+	}
+	
+	$scope.quantityAmountTable = [];
+	$scope.tempObj = {};
+	$scope.methodTemp ="";		
+	$scope.quantityAmountTableAdd = function() {    	
+    	var newTable = quantityAmountTableAdd();
+    	if($scope.methodTemp!=$scope.CalculationMethod){
+			$scope.tempObj = {};
+    	} 
+    	var _key = newTable[0].key;    	
+        $scope.tempObj[_key] = newTable;    	
+    	//merge
+    	var totalData = [];
+    	for(var _key in $scope.tempObj){
+    		var temp = $scope.tempObj[_key];
+	    	temp.forEach(function(entry){
+	    		totalData[totalData.length] = entry;
+	    	 }
+	    	);    
+    	}
+    	$scope.quantityAmountTable = totalData;
+    	$scope.methodTemp = $scope.CalculationMethod;
+	}
+
+	$scope.removeqatableAll = function(value) {    	
+    	$scope.quantityAmountTable = [];
+	}
+	$scope.delsingelqat = function(qat) {  
+		 delete $scope.tempObj[qat.key]
+    	//merge
+    	var totalData = [];
+    	for(var _key in $scope.tempObj){
+    		var temp = $scope.tempObj[_key];
+	    	temp.forEach(function(entry){
+	    		totalData[totalData.length] = entry;
+	    	 }
+	    	);    
+    	}
+    	$scope.quantityAmountTable = totalData;
+	}/*Quantity Amount Table  End*/
+
+	/*Special Interest Rate Table*/
+	/*表格二*/	
+	function sirTableAdd(){		
+		var laabove = $scope.LoadAmountAbove ;
+		var sirate = $scope.SpecicalInterestRate ; 
+		if(laabove==null||laabove==""||sirate==null||sirate==""){
+			return;
+		}   	
+	 	var item = {};
+	 	var obj =[];
+	 	item.key = laabove+'-'+sirate ;
+	 	item.laabove ='> ' +laabove ;
+	 	item.sirate = sirate; 
+	 	obj[obj.length] = item;			 
+    	return obj;
+	}	
+
+
+	$scope.sirTableLoad = function(){
+		//...Load...
+	}
+
+	$scope.sirTableSave = function(){
+		var savebtn=$scope.savebtn;
+		var BasicInterestRate =$scope.BasicInterestRate;
+		alert(savebtn+'HHHHHHH'+BasicInterestRate)//...Save...
+	}
+
+	$scope.specialInterestRateTable = [];
+	$scope.tabletempObj = {};
+	$scope.sirTableAdd = function(){		
+		var newTable = sirTableAdd();    	 
+    	var _key = newTable[0].key;    	
+        $scope.tabletempObj[_key] = newTable;    	
+    	//merge
+    	var totalData = [];
+    	for(var _key in $scope.tabletempObj){
+    		var temp = $scope.tabletempObj[_key];
+	    	temp.forEach(function(entry){
+	    		totalData[totalData.length] = entry;
+	    	 }
+	    	);    
+    	}
+    	$scope.specialInterestRateTable = totalData;    	   	
+	}
+
+	$scope.sirTableRemove = function(){
+		$scope.specialInterestRateTable = {};
+	}
+
+	$scope.sirTableDelsingel = function(sirt){
+		 delete $scope.tabletempObj[sirt.key]
+    	//merge
+    	var totalData = [];
+    	for(var _key in $scope.tabletempObj){
+    		var temp = $scope.tabletempObj[_key];
+	    	temp.forEach(function(entry){
+	    		totalData[totalData.length] = entry;
+	    	 }
+	    	);    
+    	}
+    	$scope.specialInterestRateTable = totalData;
+	}/*Special Interest Rate Table End*/
+
+
+
+
+
+
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	
+
+	//....test value..
+	/*$scope.OfferPriceRangeEnd = 1.7;
+	$scope.CommissionRate = 1;
+	$scope.LevyRate = 0.005;
+	$scope.TradingFeeRate = 0.002;
+	$scope.InvestorCompensationLevyRate = 0.005;
+	$scope.QuantityFrom = 0;
+	$scope.QuantityTo = 5000;
+	$scope.Interval = 1000;*/
+
+	/*$scope.LoadAmountAbove = 10000;
+	$scope.SpecicalInterestRate =2000;*/
    
 	
 }]);
