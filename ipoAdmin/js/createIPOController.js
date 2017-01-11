@@ -137,6 +137,9 @@ angular.module('ipoAdminApp.createIPOController', [])
 
     $scope.vemode = true;// view:false     edit:true
 
+   $scope.showbelow = true;//Check box Checked if IPO financing is allowed;Unchecked if IPO financing is not allowed.
+
+
     /*权限*/
 	function showAccRej(machker,vemode){
 		return machker & vemode;
@@ -412,7 +415,11 @@ angular.module('ipoAdminApp.createIPOController', [])
 	$scope.sirTableSave = function(){
 		var savebtn=$scope.savebtn;
 		var BasicInterestRate =$scope.BasicInterestRate;
-		alert(savebtn+'HHHHHHH'+BasicInterestRate)//...Save...
+		var tt = $scope.FinancingStartDate;
+		var dd = $scope.MustUseMaxLoan;
+		var yesno =$scope.MustUseMaxLoan;
+		//var no =$scope.MustUseMaxLoanNo;
+		alert(yesno+'HHHHHHHHHHH');//...Save...
 	}
 
 	$scope.specialInterestRateTable = [];
