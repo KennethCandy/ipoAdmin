@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="Author" content="">
+  <meta name="Keywords" content="">
+  <meta name="Description" content="">
+  <title>Document</title>
+  <style type="text/css">
+	.tile_ul {
+		min-height: 40px;
+	}
+	.tile_ul ul {
+		list-style: none;
+		display: inline-table;
+		padding-top: 5px;
+		margin-left: -10px;
+	}
+	.tile_ul ul li {
+		display: inline;
+	}
+	.tile_ul ul li span {
+		display: block;
+		float: left;
+		min-height: 30px;
+		min-width: 250px;
+		background: #319ad6;
+		text-align: center;
+		padding: 10px 40px 0 40px;
+		position: relative;
+		margin: 0 50px 0 0; 
+		font-size: 15px;
+		text-decoration: none;
+		color: #fff;
+	}
+
+	.tile_ul ul li span:after {
+		content: "";
+		border-top: 20px solid #319ad6;
+		border-bottom: 20px solid transparent;
+		border-left: 20px solid #319ad6;
+		border-right: 20px solid transparent;
+		position: absolute; right: -40px; top: 0;
+		z-index: 1;
+	}
+
+	.tile_ul ul li span:before {
+		content: "";
+		border-top: 20px solid transparent;
+		border-left: 20px solid transparent;
+		border-bottom: 20px solid #319ad6;
+		border-right: 20px solid #319ad6;
+		position: absolute; left: -40px; top: 0;
+	} 
+	.tile_ul ul li:first-child span:before {
+		display: none; 
+	}
+  </style>
+ </head>
+ <body>
+ <div class="tile_ul">
+	<ul>
+		<li><span>Title</span>
+		</li>
+		<li><span>Title</span>
+		</li>
+		<li><span>Title</span>
+		</li>
+	</ul>
+</div>
+ </body>
+</html>

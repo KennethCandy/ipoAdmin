@@ -94,7 +94,8 @@
     "LoadAmountAbove":"Load Amount Above",
     "SpecicalInterestRate":"Specical Interest Rate(p.a)",
     "Saveastemplatewithname":"Save as template with name",
-    "Save":"Save"
+    "Save":"Save",
+    "isrequired":" is required"
   }
   
 }

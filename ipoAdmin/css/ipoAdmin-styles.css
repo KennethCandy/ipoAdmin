@@ -195,6 +195,15 @@ hr {
 .selectdown{
 	color: #12d6f6;
 }
+.warningfont::before{
+	font-family: Glyphicons Halflings; 
+}
+.warningfont{
+	color:red;
+	font-weight:bold;
+	font-style:italic; 
+	font-family: Helvetica Neue,Helvetica,Arial,sans-serif ; 
+} 
 
 
 

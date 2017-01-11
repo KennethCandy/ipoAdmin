@@ -184,13 +184,22 @@ angular.module('ipoAdminApp.createIPOController', [])
 
   
  	/*字段校验format*/ 	
- 	$scope.stockCodeFormat = function(value) {		 
+ 	$scope.stockCodeFormat = function(value) {
+ 		$scope.StockCode = stockCodeFormat(value);		 
     	return stockCodeFormat(value);
 	}
 
-	$scope.checkerNum = function(value) {		
-    	return checkerNum(value);
-	}	
+	$scope.onlyNumber = function(sName){
+		return onlyNumber(sName);
+	}
+
+	$scope.numberofdigits = function(value,sName){
+		return numberofdigits(value,sName);
+	}
+
+	$scope.digits = function(sName){
+		$scope.EnglishStockName = digits(sName);
+	}
 
 	/*Quantity Amount Table */
 	/*表格一*/	

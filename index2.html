@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<script src="http://cdn.static.runoob.com/libs/angular.js/1.4.6/angular.min.js"></script>
+</head>
+<body>
+<div ng-app="myApp" ng-controller="myCtrl">
+<input type="text" ng-Model = "stockCode" hkstockcode/>
+
+</div>
+<script>
+function padLeft(str, lenght) {
+    if (str.length >= lenght)
+        return str;
+    else
+        return padLeft("0" + str, lenght);
+}
+var app = angular.module('myApp', []);
+app.directive('hkstockcode', function() {
+  return {
+    require: 'ngModel',
+    link: function(scope, elm, attrs, ctrl) {
+      elm.bind('blur', function() {
+        elm.val(padLeft(elm.val(),5));
+       //  view -> model
+        scope.$apply(function() {
+          ctrl.$setViewValue(elm.val());
+        });
+      });
+      elm.bind('keydown', function() {
+            var keyCode = event.which;
+            //control char is ok
+            if (keyCode < 48) {
+                event.returnValue =  true;
+                return ;
+            }
+            //letter is not not allowed
+            if (keyCode > 57 && keyCode < 96) {
+                event.returnValue =  false;
+                return ;
+            }
+            if (keyCode > 105 && keyCode != 110 && keyCode != 190) {
+                event.returnValue =  false;
+                return ;
+            }
+            var curVal = elm.val();
+            if(curVal.length >= 5 ){
+                event.returnValue =  false;
+                return ;
+            }
+            event.returnValue = true;
+      });
+    }
+  };
+});
+app.controller('myCtrl', function($scope) {
+	$scope.stockCode = 2000;
+});
+</script>
+
+</body>
+</html>

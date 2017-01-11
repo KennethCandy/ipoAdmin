@@ -49,7 +49,7 @@
 					<td style="border-top: 0px"><button type="button" class="btn-ribbon" style="width:160px;text-align: left"><span class="glyphicon glyphicon-remove"></span>&nbsp;  {{'createIPO.Reject'|translate}}</button></td>					
 				  </tr>
 				  <tr ng-if = "showBack(machker,vemode)">
-					<td style="border-top: 0px"><button type="button" class="btn btn-ryellow" style="width:160px;text-align: left"><span class="glyphicon glyphicon-share-alt"></span>&nbsp;  {{'createIPO.Back'|translate}}</button></td>			
+					<td style="border-top: 0px"><button type="button" class="btn btn-ryellow" style="width:160px;text-align: left"><i class="fa fa-reply" aria-hidden="true"></i>&nbsp;  {{'createIPO.Back'|translate}}</button></td>			
 				  </tr>
 				  <tr ng-if = "showEdit(machker,vemode)">
 					<td style="border-top: 0px"><button type="button" class="btn btn-info" style="width:160px;text-align: left"><span class="glyphicon glyphicon-floppy-disk"></span>&nbsp;  {{'createIPO.Edit'|translate}}</button></td>			
@@ -64,7 +64,7 @@
 					<td style="border-top: 0px"><button type="button" class="btn btn-danger" style="width:160px;text-align: left"><span class="glyphicon glyphicon-remove-circle"></span>&nbsp;  {{'createIPO.Delete'|translate}}</button></td>	
 				  </tr>
 				  <tr ng-if = "showSSDPR(machker,vemode)">
-					<td style="border-top: 0px"><button type="button" class="btn btn-warning" style="width:160px;text-align: left"><span class="glyphicon glyphicon-tower"></span>&nbsp;  {{'createIPO.Postpone'|translate}}</button></td>			
+					<td style="border-top: 0px"><button type="button" class="btn btn-warning" style="width:160px;text-align: left"><i class="fa fa-hourglass-half" aria-hidden="true"></i>&nbsp;  {{'createIPO.Postpone'|translate}}</button></td>			
 				  </tr>
 				  <tr ng-if = "showSSDPR(machker,vemode)">
 					<td style="border-top: 0px"><button type="button" class="btn btn-warning" style="width:160px;text-align: left"><span class="glyphicon glyphicon-repeat"></span>&nbsp;  {{'createIPO.Resume'|translate}}</button></td>				
@@ -102,15 +102,21 @@
 					<div class="form-group" id="basic">
 					    <label for="StockCode" class="col-sm-5 control-label">{{'createIPO.StockCode'|translate}}</label>
 					    <div class="col-sm-5">
-					      <input type="text" class="form-control" id="StockCode" name="StockCode" placeholder="(Required)" ng-blur="StockCode = stockCodeFormat(StockCode)" ng-model="StockCode"ng-disabled="disableFields(machker,vemode)" required>
-					    <span class="glyphicon glyphicon-warning-sign" style="color:red" ng-show="createipoForm.StockCode.$dirty && createipoForm.StockCode.$invalid">
-						<span ng-show="createipoForm.StockCode.$error.required">Stock Code is required</span>						
+					      <input type="text" class="form-control" id="StockCode" name="StockCode" placeholder="{{'createIPO.Required'|translate}}" ng-blur="stockCodeFormat(StockCode)" ng-model="StockCode"ng-disabled="disableFields(machker,vemode)" required  ng-keydown=" onlyNumber(StockCode)">
+					    <span class=" warningfont" ng-show="createipoForm.StockCode.$dirty && createipoForm.StockCode.$invalid">
+					    <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+						<span ng-show="createipoForm.StockCode.$error.required" >{{'createIPO.StockCode'|translate}}{{'createIPO.isrequired'|translate}}</span>	
+						</span>					
 					    </div>					    
 					</div>
 					<div class="form-group">
 					    <label for="EnglishStockName" class="col-sm-5 control-label">{{'createIPO.EnglishStockName'|translate}}</label>
 					    <div class="col-sm-5">
-					      <input type="text" class="form-control " id="EnglishStockName" placeholder="(Required)" ng-disabled="disableFields(machker,vemode)"ng-model="EnglishStockName">
+					      <input type="text" class="form-control " id="EnglishStockName"name="EnglishStockName" placeholder="{{'createIPO.Required'|translate}}" ng-disabled="disableFields(machker,vemode)"ng-model="EnglishStockName"required ng-keydown=" numberofdigits(35,EnglishStockName)" ng-blur="digits(EnglishStockName)">
+					      <span class=" warningfont" ng-show="createipoForm.EnglishStockName.$dirty && createipoForm.EnglishStockName.$invalid">
+					    <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+						<span ng-show="createipoForm.EnglishStockName.$error.required" >English Stock Name is required</span>	
+						</span>
 					    </div>
 					</div>
 					<div class="form-group">
