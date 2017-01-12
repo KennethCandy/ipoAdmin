@@ -15,6 +15,10 @@ function padLeft(str, length) {
 	if(str==null||str==""){
 		return str;
 	}
+	var pattern=/\d/,pattern2=/(9[6-9])|(10[0-5])|3(7|9)/;
+    if(!pattern.test(str)){
+    	return "";
+    }
 	if(str.toString().length >= length) {
 		return str; 
 	}
@@ -24,48 +28,54 @@ function padLeft(str, length) {
 }
 
 
-/*检验字段*/
+/*字段校验*/
+/*填充*/
 function stockCodeFormat(str) {	
    	var newval = padLeft(str, 5);
 	return newval;   
 }
-
-function onlyNumber(sName) {
+/*数字输入位限制*/
+function onlyNumber(value,sName,event) {
 	var dotPos = ( sName || '' ).length;  
     var keyCode = event.which;
     //space is not allowed
     if (keyCode == 32) {
         event.returnValue = false;
+        event.preventDefault();
         return;   
     }
     //control char is ok
     if (keyCode < 48) {
-        event.returnValue = true;
+        event.returnValue = true;        
         return;   
     }
     //letter is not not allowed
     if (keyCode > 57 && keyCode < 96){ 
         event.returnValue = false;
+        event.preventDefault();
         return;   
     }
     if (keyCode > 105 && keyCode != 110 && keyCode != 190){ 
         event.returnValue = false;
+        event.preventDefault();
         return;   
     }          
     //more '.' is not allowed
     if (keyCode == 110 || keyCode == 190){
         event.returnValue = false;
+        event.preventDefault();
         return;   
  	}
- 	if (dotPos > 4) {    	
-        event.returnValue =false;          
+ 	if (dotPos >= value) {    	
+        event.returnValue =false;
+        event.preventDefault();          
         return ;   
-    }              
+    }   
  	event.returnValue =true;
 			 
  }
-
- function numberofdigits(value,sName){
+/*输入字符位数限制*/
+ function numberofdigits(value,sName,event){
  	var keyCode = event.which;
     var dotPos = ( sName || '' ).length;
      //control char is ok
@@ -74,20 +84,135 @@ function onlyNumber(sName) {
         return;   
     }    
     if (dotPos > value) {    	
-        event.returnValue =false;          
+        event.returnValue =false;
+        event.preventDefault();          
         return ;   
     }         
     event.returnValue =true;  
  }
-
- function digits(sName){
+/*字符位数限制*/
+ function digits(value,sName){
  	var dotPos = ( sName || '' ).length;
- 	if(dotPos <= 35){
+ 	if(dotPos <= value){
  		return sName;
  	}
- 	if (dotPos > 35) {    	
-       sName = sName.substring(0,35);   
+ 	if (dotPos > value) {    	
+       sName = sName.substring(0,value);   
         return sName;   
     }    
  }
+/*输入数字字符位数限制*/
+ function digitsfornum(value,sName){
+ 	var dotPos = ( sName || '' ).length;
+ 	var pattern=/\d/,pattern2=/(9[6-9])|(10[0-5])|3(7|9)/;
+ 	if(!pattern.test(sName)){
+    	return "";
+    } 
+ 	if(dotPos <= value){
+ 		return sName;
+ 	}
+ 	if (dotPos > value) {    	
+       sName = sName.substring(0,value);   
+        return sName;   
+    }     
+ }
+
+ /*输入带小数点的位数限制*/
+ function decimallimit(inte,deci,sName,id,event){ 	
+ 		sName = sName || ''; 		
+ 		/*var reg = /^(([1-9]\d{0,9}\.\d{0,2})|([0]\.\d{0,2}))$/;
+ 		if(sName.length>0){
+       	if(!reg.test(sName)){
+       	event.preventDefault();
+    	return ;
+    	}}*/	
+        var keyCode = event.which;
+        //space is not allowed
+        if (keyCode == 32) {
+        	event.returnValue = false;
+	        event.preventDefault();
+	        return;
+        }
+        //control char is ok
+        if (keyCode < 48) {
+            event.returnValue = true;        
+        	return;
+        }
+        //letter is not not allowed
+        if (keyCode > 57 && keyCode < 96){
+         	event.returnValue = false;
+	        event.preventDefault();
+	        return;
+        }
+        if (keyCode > 105 && keyCode != 110 && keyCode != 190){
+         	event.returnValue = false;
+	        event.preventDefault();
+	        return;
+        }  
+        	var ranagePos = document.getElementById(id);
+            var startPos = ranagePos.selectionStart;
+            var endPos = ranagePos.selectionEnd;
+
+            var curVal = sName;
+            var dotPos = curVal.indexOf(".");
+            //more '.' is not allowed
+            if (dotPos >= 0) {
+                if ((keyCode == 110 || keyCode == 190) && (dotPos > endPos || dotPos < startPos)) {
+                    event.returnValue = false;
+			        event.preventDefault();
+			        return;
+                }
+            }
+            var plusData = "";
+            var digitData = "";
+            if (dotPos < 0) {
+                plusData = curVal;
+                dotPos = curVal.length;
+            } else {
+                plusData = curVal.substring(0, dotPos);
+                digitData = curVal.substring(dotPos + 1, curVal.length);
+            }
+            if (endPos <= dotPos) {
+                if (endPos == startPos) {
+                    if (plusData.length >= inte) {
+                        //alert("Plus length is excceed:"+inte);
+                        if (keyCode == 110 || keyCode == 190) {
+                            event.returnValue = true;
+            			return ;
+                        }
+                        event.returnValue = false;
+				        event.preventDefault();
+				        return;
+                    } else {
+                        event.returnValue = true;
+            			return ;
+                    }
+                } else {
+                    event.returnValue = true;
+            			return ;
+                }
+            } else if (startPos > dotPos) {
+                if (endPos == startPos) {
+                    if (digitData.length >= deci) {
+                        //alert("digitData length is excceed:"+deci);
+                        if (keyCode == 110 || keyCode == 190) {
+                            event.returnValue = true;
+            				return ;
+                        }
+                        event.returnValue = false;
+				        event.preventDefault();
+				        return;
+                    } else {
+                        event.returnValue = true;
+            			return ;
+                    }
+                } else {
+                    event.returnValue = true;
+           	 		return ;
+                }
+            }
+            event.returnValue = true;
+            return ;
+ }
+
 

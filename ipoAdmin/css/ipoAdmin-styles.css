@@ -152,22 +152,22 @@ hr {
  #abasic{
 	background-color: #ddd;
 	display: inline-block;  	
-  	transform:skew(-45deg);
+ 	transform:skew(-45deg);
 
 } 
 #afee,#aquantity,#afinancing {
 	background-color: #ddd;
 	display: inline-block;  	
-  	transform: skew(-45deg);
-  	border: 2px solid white;
-  	border-style:none solid;	
+ 	transform: skew(-45deg);
+ 	border: 2px solid white;
+ 	border-style:none solid;	
 }
 #abasicdiv{
 	transform: skew(45deg);	
 }
 #afeediv,#aquantitydiv,#afinancingdiv{
 	transform: skew(45deg);
-}
+} 
 
 @-moz-document url-prefix() {
   fieldset { display: table-cell; }
@@ -205,6 +205,59 @@ hr {
 	font-family: Helvetica Neue,Helvetica,Arial,sans-serif ; 
 } 
 
+
+/* .navcss {
+		min-height: 40px;
+}
+.navcss ul {
+	list-style: none;
+	display: inline-table;
+	padding-top: 5px;
+	margin-left: -10px;
+}
+.navcss ul li {
+	display: inline;
+}
+.navcss ul li a {
+	display: block;
+	float: left;
+	min-height: 40px;
+	min-width: 250px;
+	background: #ddd;
+	text-align: center;
+	padding: 10px 40px 0 40px;
+	position: relative;
+	margin: 0 50px 0 0; 
+	font-size: 15px;
+	text-decoration: none;
+	color: #fff;
+}
+
+.navcss ul li a:after {
+	content: "";
+	border-top: 20px solid #ddd;
+	border-bottom: 20px solid transparent;
+	border-left: 20px solid #ddd;
+	border-right: 20px solid transparent;
+	position: absolute; right: -40px; top: 0;
+	z-index: 1;
+}
+
+.navcss ul li a:before {
+	content: "";
+	border-top: 20px solid transparent;
+	border-left: 20px solid transparent;
+	border-bottom: 20px solid #ddd;
+	border-right: 20px solid #ddd;
+	position: absolute; left: -40px; top: 0;
+} 
+.navcss ul li:first-child a:before {
+	display: none; 
+}
+.navbar-default .navbar-nav > li > a:focus, .navbar-default .navbar-nav > li > a:hover:after{
+	background-color: #12d6f6 !important;
+	color: #fff;
+} */
 
 
 

@@ -189,16 +189,26 @@ angular.module('ipoAdminApp.createIPOController', [])
     	return stockCodeFormat(value);
 	}
 
-	$scope.onlyNumber = function(sName){
-		return onlyNumber(sName);
+	$scope.IPOCode = "IPO20160513000000001";
+
+	$scope.onlyNumber = function(value,sName,event){
+		return onlyNumber(value,sName,event);
 	}
 
-	$scope.numberofdigits = function(value,sName){
-		return numberofdigits(value,sName);
+	$scope.numberofdigits = function(value,sName,event){
+		return numberofdigits(value,sName,event);
 	}
 
-	$scope.digits = function(sName){
-		$scope.EnglishStockName = digits(sName);
+	$scope.digits = function(value,sName){
+		return digits(value,sName);
+	}
+
+	$scope.digitsfornum = function(value,sName){
+		return digitsfornum(value,sName);
+	}
+
+	$scope.decimallimit = function(inte,deci,sName,id,event){
+		return decimallimit(inte,deci,sName,id,event);
 	}
 
 	/*Quantity Amount Table */
