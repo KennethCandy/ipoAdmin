@@ -15,7 +15,7 @@ function padLeft(str, length) {
 	if(str==null||str==""){
 		return str;
 	}
-	var pattern=/\d/,pattern2=/(9[6-9])|(10[0-5])|3(7|9)/;
+	var pattern=/\d/;
     if(!pattern.test(str)){
     	return "";
     }
@@ -27,6 +27,147 @@ function padLeft(str, length) {
 	}
 }
 
+/*Quantity Amount Table */
+    /*表格一*/ 
+    function rlsAmount(){
+        var commissionRate =$('#CommissionRate').val();
+        var levyRate = $('#LevyRate').val();
+        var tradingFeeRate = $('#TradingFeeRate').val() ;
+        var icLevyRate =$('#InvestorCompensationLevyRate').val() ;   
+        var price = $('#OfferPriceRangeEnd').val();
+        var quantityFrom =$('#QuantityFrom').val();
+        var quantityTo =$('#QuantityTo').val();
+        var interval = $('#Interval').val();
+        var qtyarrysumtemp = (quantityTo - quantityFrom)/interval;
+        var qtyarrysum = Math.ceil(qtyarrysumtemp);
+        var obj = [];
+        var qtyarry = new Array(qtyarrysum);
+
+        for(var i=0;i<qtyarry.length-1;i++){
+            qtyarry[i] = parseInt(quantityFrom, 10) + interval*(i+1);       
+        }
+        qtyarry[qtyarrysum-1] = quantityTo;
+        var amount = new Array(qtyarrysum);
+
+        for(var i=0;i<amount.length;i++){
+            amount[i] = ((price * qtyarry[i])*(1 + commissionRate/100 + levyRate/100 + icLevyRate/100 + tradingFeeRate/100)).toFixed(2);        
+            var item = {};
+            item.key = quantityFrom+'-'+quantityTo ;
+            item.range = quantityFrom+'< quantity <= '+quantityTo ;
+            item.qty = qtyarry[i];
+            item.amt = amount[i];
+            item.del = (i== 0 ? true : false);
+            obj[obj.length] = item;     
+        }
+        return obj;
+    }
+
+    function rbiCharge(){
+        var commissionRate =$('#CommissionRate').val();
+        var levyRate = $('#LevyRate').val();
+        var tradingFeeRate = $('#TradingFeeRate').val() ;
+        var icLevyRate =$('#InvestorCompensationLevyRate').val() ;   
+        var price = $('#OfferPriceRangeEnd').val();
+        var quantityFrom =$('#QuantityFrom').val();
+        var quantityTo =$('#QuantityTo').val();
+        var interval = $('#Interval').val();
+        var qtyarrysumtemp = (quantityTo - quantityFrom)/interval;
+        var qtyarrysum = Math.ceil(qtyarrysumtemp);
+        var obj = [];
+        var qtyarry = new Array(qtyarrysum);
+
+        for(var i=0;i<qtyarry.length-1;i++){
+            qtyarry[i] = parseInt(quantityFrom, 10) + interval*(i+1);       
+        }
+        qtyarry[qtyarrysum-1] = quantityTo;
+        var amount = new Array(qtyarrysum);
+
+        for(var i=0;i<amount.length;i++){
+            amount[i] = (parseFloat((price * qtyarry[i]).toFixed(2))
+            + parseFloat(((price * qtyarry[i])*commissionRate/100).toFixed(2))
+            + parseFloat(((price * qtyarry[i])*levyRate/100).toFixed(2))
+            + parseFloat(((price * qtyarry[i])*icLevyRate/100).toFixed(2))
+            + parseFloat(((price * qtyarry[i])*tradingFeeRate/100).toFixed(2))).toFixed(2);
+            var item = {};
+            item.key = quantityFrom+'-'+quantityTo ;
+            item.range = quantityFrom+'< quantity <= '+quantityTo ;
+            item.qty = qtyarry[i];
+            item.amt = amount[i];
+            item.del = (i== 0 ? true : false);
+            obj[obj.length] = item;     
+        }   
+        return obj;
+    }
+    
+    function bousarlsAmount(){
+        var commissionRate =$('#CommissionRate').val();
+        var levyRate = $('#LevyRate').val();
+        var tradingFeeRate = $('#TradingFeeRate').val() ;
+        var icLevyRate =$('#InvestorCompensationLevyRate').val() ;   
+        var price = $('#OfferPriceRangeEnd').val();
+        var quantityFrom =$('#QuantityFrom').val();
+        var quantityTo =$('#QuantityTo').val();
+        var interval = $('#Interval').val();
+        var qtyarrysumtemp = (quantityTo - quantityFrom)/interval;
+        var qtyarrysum = Math.ceil(qtyarrysumtemp);
+        var obj = [];
+        var qtyarry = new Array(qtyarrysum);
+
+        for(var i=0;i<qtyarry.length-1;i++){
+            qtyarry[i] = parseInt(quantityFrom, 10) + interval*(i+1);       
+        }
+        qtyarry[qtyarrysum-1] = quantityTo;
+        var amount = new Array(qtyarrysum);
+
+        for(var i=0;i<amount.length;i++){
+            amount[i] =qtyarry[i]/1000 * ((price *1000)*(1 + commissionRate/100 + levyRate/100 + icLevyRate/100 + tradingFeeRate/100)).toFixed(2);
+            var item = {};
+            item.key = quantityFrom+'-'+quantityTo ;
+            item.range = quantityFrom+'< quantity <= '+quantityTo ;
+            item.qty = qtyarry[i];
+            item.amt = amount[i];
+            item.del = (i== 0 ? true : false);
+            obj[obj.length] = item;     
+        }   
+        return obj;
+    }
+
+    function boucarbiCharge(){
+        var commissionRate =$('#CommissionRate').val();
+        var levyRate = $('#LevyRate').val();
+        var tradingFeeRate = $('#TradingFeeRate').val() ;
+        var icLevyRate =$('#InvestorCompensationLevyRate').val() ;   
+        var price = $('#OfferPriceRangeEnd').val();
+        var quantityFrom =$('#QuantityFrom').val();
+        var quantityTo =$('#QuantityTo').val();
+        var interval = $('#Interval').val();
+        var qtyarrysumtemp = (quantityTo - quantityFrom)/interval;
+        var qtyarrysum = Math.ceil(qtyarrysumtemp);
+        var obj = [];
+        var qtyarry = new Array(qtyarrysum);
+
+        for(var i=0;i<qtyarry.length-1;i++){
+            qtyarry[i] = parseInt(quantityFrom, 10) + interval*(i+1);       
+        }
+        qtyarry[qtyarrysum-1] = quantityTo;
+        var amount = new Array(qtyarrysum);
+
+        for(var i=0;i<amount.length;i++){
+            amount[i] =qtyarry[i]/1000 * (parseFloat((price * 1000).toFixed(2))
+            + parseFloat(((price * 1000)*commissionRate/100).toFixed(2))
+            + parseFloat(((price * 1000)*levyRate/100).toFixed(2))
+            + parseFloat(((price * 1000)*icLevyRate/100).toFixed(2))
+            + parseFloat(((price * 1000)*tradingFeeRate/100).toFixed(2))).toFixed(2);
+            var item = {};
+            item.key = quantityFrom+'-'+quantityTo ;
+            item.range = quantityFrom+'< quantity <= '+quantityTo ;
+            item.qty = qtyarry[i];
+            item.amt = amount[i];
+            item.del = (i== 0 ? true : false);
+            obj[obj.length] = item;     
+        }   
+        return obj;
+    }
 
 /*字段校验*/
 /*填充*/
@@ -34,7 +175,7 @@ function stockCodeFormat(str) {
    	var newval = padLeft(str, 5);
 	return newval;   
 }
-/*数字输入位限制*/
+/*数字输入位数限制*/
 function onlyNumber(value,sName,event) {
 	var dotPos = ( sName || '' ).length;  
     var keyCode = event.which;
@@ -75,7 +216,7 @@ function onlyNumber(value,sName,event) {
 			 
  }
 /*输入字符位数限制*/
- function numberofdigits(value,sName,event){
+ function numberofchar(value,sName,event){
  	var keyCode = event.which;
     var dotPos = ( sName || '' ).length;
      //control char is ok
@@ -90,8 +231,8 @@ function onlyNumber(value,sName,event) {
     }         
     event.returnValue =true;  
  }
-/*字符位数限制*/
- function digits(value,sName){
+/*字符位数限制用于blur*/
+ function digitsofchar(value,sName){
  	var dotPos = ( sName || '' ).length;
  	if(dotPos <= value){
  		return sName;
@@ -101,10 +242,10 @@ function onlyNumber(value,sName,event) {
         return sName;   
     }    
  }
-/*输入数字字符位数限制*/
- function digitsfornum(value,sName){
+/*输入数字位数限制用于blur*/
+ function digitsofnum(value,sName){
  	var dotPos = ( sName || '' ).length;
- 	var pattern=/\d/,pattern2=/(9[6-9])|(10[0-5])|3(7|9)/;
+ 	var pattern=/\d/;
  	if(!pattern.test(sName)){
     	return "";
     } 
@@ -116,11 +257,20 @@ function onlyNumber(value,sName,event) {
         return sName;   
     }     
  }
+ /*数字限制*/
+ function digitlimt(sName){
+    var pattern=/\d/;
+    if(!pattern.test(sName)){
+        sName = "";
+        return sName ;
+    }
+    return sName;
+ }
 
  /*输入带小数点的位数限制*/
  function decimallimit(inte,deci,sName,id,event){ 	
  		sName = sName || ''; 		
- 		/*var reg = /^(([1-9]\d{0,9}\.\d{0,2})|([0]\.\d{0,2}))$/;
+ 		/*var reg = /^(([1-9]\d{0,9}\.\d{0,2})|([0]\.\d{0,2})|([1-9]\d{0,9}))$/;
  		if(sName.length>0){
        	if(!reg.test(sName)){
        	event.preventDefault();
@@ -214,5 +364,27 @@ function onlyNumber(value,sName,event) {
             event.returnValue = true;
             return ;
  }
+
+
+  /*权限*/
+    function showAccRej(machker,vemode){
+        return machker & vemode;
+    }
+
+    function showBack(machker,vemode){
+        return !(machker ^ vemode);
+    }
+
+    function showEdit(machker,vemode){
+        return (!machker) & (!vemode);
+    }
+
+    function showSSDPR(machker,vemode){
+        return (machker ^ vemode)&vemode;
+    }
+
+    function disableFields(machker,vemode){
+        return !((machker ^ vemode)&vemode);
+    }
 
 

@@ -140,27 +140,8 @@ angular.module('ipoAdminApp.createIPOController', [])
    $scope.showbelow = true;//Check box Checked if IPO financing is allowed;Unchecked if IPO financing is not allowed.
 
 
-    /*权限*/
-	function showAccRej(machker,vemode){
-		return machker & vemode;
-	}
-
-	function showBack(machker,vemode){
-		return !(machker ^ vemode);
-	}
-
-	function showEdit(machker,vemode){
-		return (!machker) & (!vemode);
-	}
-
-	function showSSDPR(machker,vemode){
-		return (machker ^ vemode)&vemode;
-	}
-
-	function disableFields(machker,vemode){
-		return !((machker ^ vemode)&vemode);
-	}
-    
+   
+     /*权限*/
     $scope.showAccRej = function(value,val){
 		return showAccRej(value,val);
 	}  
@@ -195,163 +176,30 @@ angular.module('ipoAdminApp.createIPOController', [])
 		return onlyNumber(value,sName,event);
 	}
 
-	$scope.numberofdigits = function(value,sName,event){
-		return numberofdigits(value,sName,event);
+	$scope.numberofchar = function(value,sName,event){
+		return numberofchar(value,sName,event);
 	}
 
-	$scope.digits = function(value,sName){
-		return digits(value,sName);
+	$scope.digitsofchar = function(value,sName){
+		return digitsofchar(value,sName);
 	}
 
-	$scope.digitsfornum = function(value,sName){
-		return digitsfornum(value,sName);
+	$scope.digitsofnum = function(value,sName){
+		return digitsofnum(value,sName);
+	}
+
+	$scope.digitlimt = function(sName){
+		return digitlimt(sName);
 	}
 
 	$scope.decimallimit = function(inte,deci,sName,id,event){
 		return decimallimit(inte,deci,sName,id,event);
 	}
 
-	/*Quantity Amount Table */
-	/*表格一*/	
-	function rlsAmount(){
-		var commissionRate =$scope.CommissionRate;
-		var levyRate = $scope.LevyRate;
-		var tradingFeeRate = $scope.TradingFeeRate ;
-		var icLevyRate =$scope.InvestorCompensationLevyRate ;	
-		var price = $scope.OfferPriceRangeEnd;
-		var quantityFrom =$scope.QuantityFrom;
-		var quantityTo =$scope.QuantityTo;
-		var interval = $scope.Interval;
-		var qtyarrysumtemp = (quantityTo - quantityFrom)/interval;
-		var qtyarrysum = Math.ceil(qtyarrysumtemp);
-		var obj = [];
-		var qtyarry = new Array(qtyarrysum);
-
-		for(var i=0;i<qtyarry.length-1;i++){
-		 	qtyarry[i] = parseInt(quantityFrom, 10) + interval*(i+1);	 	
-		}
-		qtyarry[qtyarrysum-1] = quantityTo;
-		var amount = new Array(qtyarrysum);
-
-		for(var i=0;i<amount.length;i++){
-		 	amount[i] = ((price * qtyarry[i])*(1 + commissionRate/100 + levyRate/100 + icLevyRate/100 + tradingFeeRate/100)).toFixed(2);	 	
-		 	var item = {};
-		 	item.key = quantityFrom+'-'+quantityTo ;
-		 	item.range = quantityFrom+'< quantity <= '+quantityTo ;
-		 	item.qty = qtyarry[i];
-		 	item.amt = amount[i];
-		 	item.del = (i== 0 ? true : false);
-		 	obj[obj.length] = item;	 	
-		}
-		return obj;
-	}
-
-	function rbiCharge(){
-		var commissionRate = $scope.CommissionRate;
-		var levyRate = $scope.LevyRate ;
-		var tradingFeeRate = $scope.TradingFeeRate;
-		var icLevyRate = $scope.InvestorCompensationLevyRate;	
-		var price = $scope.OfferPriceRangeEnd;
-		var quantityFrom =$scope.QuantityFrom ;
-		var quantityTo =$scope.QuantityTo;
-		var interval = $scope.Interval;
-		var qtyarrysumtemp = (quantityTo - quantityFrom)/interval;
-		var qtyarrysum = Math.ceil(qtyarrysumtemp);
-		var obj = [];
-		var qtyarry = new Array(qtyarrysum);
-
-		for(var i=0;i<qtyarry.length-1;i++){
-		 	qtyarry[i] = parseInt(quantityFrom, 10) + interval*(i+1);	 	
-		}
-		qtyarry[qtyarrysum-1] = quantityTo;
-		var amount = new Array(qtyarrysum);
-
-		for(var i=0;i<amount.length;i++){
-		 	amount[i] = (parseFloat((price * qtyarry[i]).toFixed(2))
-		 	+ parseFloat(((price * qtyarry[i])*commissionRate/100).toFixed(2))
-		 	+ parseFloat(((price * qtyarry[i])*levyRate/100).toFixed(2))
-		 	+ parseFloat(((price * qtyarry[i])*icLevyRate/100).toFixed(2))
-		 	+ parseFloat(((price * qtyarry[i])*tradingFeeRate/100).toFixed(2))).toFixed(2);
-		 	var item = {};
-		 	item.key = quantityFrom+'-'+quantityTo ;
-		 	item.range = quantityFrom+'< quantity <= '+quantityTo ;
-		 	item.qty = qtyarry[i];
-		 	item.amt = amount[i];
-		 	item.del = (i== 0 ? true : false);
-		 	obj[obj.length] = item;	 	
-		}	
-		return obj;
-	}
+	$scope.zero =/^![0]{1,3}$/;
 	
-	function bousarlsAmount(){
-		var commissionRate =$scope.CommissionRate;
-		var levyRate = $scope.LevyRate;
-		var tradingFeeRate =$scope.TradingFeeRate ;
-		var icLevyRate = $scope.InvestorCompensationLevyRate;	
-		var price =$scope.OfferPriceRangeEnd;
-		var quantityFrom = $scope.QuantityFrom;
-		var quantityTo = $scope.QuantityTo ;
-		var interval =$scope.Interval;
-		var qtyarrysumtemp = (quantityTo - quantityFrom)/interval;
-		var qtyarrysum = Math.ceil(qtyarrysumtemp);
-		var obj = [];
-		var qtyarry = new Array(qtyarrysum);
 
-		for(var i=0;i<qtyarry.length-1;i++){
-		 	qtyarry[i] = parseInt(quantityFrom, 10) + interval*(i+1);	 	
-		}
-		qtyarry[qtyarrysum-1] = quantityTo;
-		var amount = new Array(qtyarrysum);
-
-		for(var i=0;i<amount.length;i++){
-		 	amount[i] =qtyarry[i]/1000 * ((price *1000)*(1 + commissionRate/100 + levyRate/100 + icLevyRate/100 + tradingFeeRate/100)).toFixed(2);
-		 	var item = {};
-		 	item.key = quantityFrom+'-'+quantityTo ;
-		 	item.range = quantityFrom+'< quantity <= '+quantityTo ;
-		 	item.qty = qtyarry[i];
-		 	item.amt = amount[i];
-		 	item.del = (i== 0 ? true : false);
-		 	obj[obj.length] = item;	 	
-		}	
-		return obj;
-	}
-
-	function boucarbiCharge(){
-		var commissionRate = $scope.CommissionRate ;
-		var levyRate =$scope.LevyRate;
-		var tradingFeeRate =$scope.TradingFeeRate;
-		var icLevyRate = $scope.InvestorCompensationLevyRate;	
-		var price = $scope.OfferPriceRangeEnd;
-		var quantityFrom =$scope.QuantityFrom;
-		var quantityTo =$scope.QuantityTo;
-		var interval = $scope.Interval;
-		var qtyarrysumtemp = (quantityTo - quantityFrom)/interval;
-		var qtyarrysum = Math.ceil(qtyarrysumtemp);
-		var obj = [];
-		var qtyarry = new Array(qtyarrysum);
-
-		for(var i=0;i<qtyarry.length-1;i++){
-		 	qtyarry[i] = parseInt(quantityFrom, 10) + interval*(i+1);	 	
-		}
-		qtyarry[qtyarrysum-1] = quantityTo;
-		var amount = new Array(qtyarrysum);
-
-		for(var i=0;i<amount.length;i++){
-		 	amount[i] =qtyarry[i]/1000 * (parseFloat((price * 1000).toFixed(2))
-		 	+ parseFloat(((price * 1000)*commissionRate/100).toFixed(2))
-		 	+ parseFloat(((price * 1000)*levyRate/100).toFixed(2))
-		 	+ parseFloat(((price * 1000)*icLevyRate/100).toFixed(2))
-		 	+ parseFloat(((price * 1000)*tradingFeeRate/100).toFixed(2))).toFixed(2);
-		 	var item = {};
-		 	item.key = quantityFrom+'-'+quantityTo ;
-		 	item.range = quantityFrom+'< quantity <= '+quantityTo ;
-		 	item.qty = qtyarry[i];
-		 	item.amt = amount[i];
-		 	item.del = (i== 0 ? true : false);
-		 	obj[obj.length] = item;	 	
-		}	
-		return obj;
-	}
+	
 
 	$scope.CalculationMethod = "RLSUA";
 	function quantityAmountTableAdd(){	
@@ -500,14 +348,14 @@ angular.module('ipoAdminApp.createIPOController', [])
 	
 
 	//....test value..
-	/*$scope.OfferPriceRangeEnd = 1.7;
+	$scope.OfferPriceRangeEnd = 1.7;
 	$scope.CommissionRate = 1;
 	$scope.LevyRate = 0.005;
 	$scope.TradingFeeRate = 0.002;
 	$scope.InvestorCompensationLevyRate = 0.005;
 	$scope.QuantityFrom = 0;
 	$scope.QuantityTo = 5000;
-	$scope.Interval = 1000;*/
+	$scope.Interval = 1000;
 
 	/*$scope.LoadAmountAbove = 10000;
 	$scope.SpecicalInterestRate =2000;*/
