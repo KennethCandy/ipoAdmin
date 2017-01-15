@@ -102,8 +102,8 @@
 					<div class="form-group" id="basic">
 					    <label for="StockCode" class="col-sm-5 control-label">{{'createIPO.StockCode'|translate}}</label>
 					    <div class="col-sm-5">
-					      <input type="text" class="form-control" id="StockCode" name="StockCode" placeholder="{{'createIPO.Required'|translate}}" ng-blur="stockCodeFormat(StockCode)" ng-model="StockCode"ng-show="disableFields(machker,vemode)" required  ng-keydown=" onlyNumber(5,StockCode,$event)" >
-					       <label  class="col-sm-5 control-label resetfcolor">{{StockCode || "---"}}</label>
+					      <input type="text" class="form-control" id="StockCode" name="StockCode" placeholder="{{'createIPO.Required'|translate}}" ng-blur="stockCodeFormat(StockCode)" ng-model="StockCode"ng-show="showSSDPR(machker,vemode)" required  ng-keydown=" onlyNumber(5,StockCode,$event)" >
+					    <label  class=" control-label resetfcolor"ng-show="!showSSDPR(machker,vemode)">{{StockCode || "---"}}</label>
 					    <span class=" warningfont" ng-show="createipoForm.StockCode.$dirty && createipoForm.StockCode.$invalid">
 					    <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
 						<span ng-show="createipoForm.StockCode.$error.required" >{{'createIPO.StockCode'|translate}}{{'createIPO.isrequired'|translate}}</span>	
@@ -119,7 +119,8 @@
 					<div class="form-group">
 					    <label for="EnglishStockName" class="col-sm-5 control-label">{{'createIPO.EnglishStockName'|translate}}</label>
 					    <div class="col-sm-5">
-					      <input type="text" class="form-control " id="EnglishStockName"name="EnglishStockName" placeholder="{{'createIPO.Required'|translate}}" ng-disabled="disableFields(machker,vemode)"ng-model="EnglishStockName"required ng-keydown=" numberofchar(34,EnglishStockName,$event)" ng-blur="EnglishStockName = digitsofchar(35,EnglishStockName)">
+					      <input type="text" class="form-control " id="EnglishStockName"name="EnglishStockName" placeholder="{{'createIPO.Required'|translate}}" ng-show="showSSDPR(machker,vemode)"ng-model="EnglishStockName"required ng-keydown=" numberofchar(34,EnglishStockName,$event)" ng-blur="EnglishStockName = digitsofchar(35,EnglishStockName)">
+					    <label  class=" control-label resetfcolor"ng-show="!showSSDPR(machker,vemode)">{{EnglishStockName|| "---"}}</label>
 					      <span class=" warningfont" ng-show="createipoForm.EnglishStockName.$dirty && createipoForm.EnglishStockName.$invalid">
 					    <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
 						<span ng-show="createipoForm.EnglishStockName.$error.required" >{{'createIPO.EnglishStockName'|translate}}{{'createIPO.isrequired'|translate}}</span>	
@@ -129,7 +130,8 @@
 					<div class="form-group">
 					    <label for="TranditionalChineseName" class="col-sm-5 control-label">{{'createIPO.TranditionalChineseName'|translate}}</label>
 					    <div class="col-sm-5">
-					      <input type="text" class="form-control" id="TranditionalChineseName" name="TranditionalChineseName" placeholder="{{'createIPO.Required'|translate}}" ng-disabled="disableFields(machker,vemode)"ng-model="TranditionalChineseName"required ng-keydown=" numberofchar(34,TranditionalChineseName,$event)" ng-blur="TranditionalChineseName = digitsofchar(35,TranditionalChineseName)">
+					      <input type="text" class="form-control" id="TranditionalChineseName" name="TranditionalChineseName" placeholder="{{'createIPO.Required'|translate}}" ng-show="showSSDPR(machker,vemode)"ng-model="TranditionalChineseName"required ng-keydown=" numberofchar(34,TranditionalChineseName,$event)" ng-blur="TranditionalChineseName = digitsofchar(35,TranditionalChineseName)">
+					    <label  class=" control-label resetfcolor"ng-show="!showSSDPR(machker,vemode)">{{TranditionalChineseName|| "---"}}</label>
 						<span class=" warningfont" ng-show="createipoForm.TranditionalChineseName.$dirty && createipoForm.TranditionalChineseName.$invalid">
 					    <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
 						<span ng-show="createipoForm.TranditionalChineseName.$error.required" >{{'createIPO.TranditionalChineseName'|translate}}{{'createIPO.isrequired'|translate}}</span>	
@@ -139,7 +141,8 @@
 					<div class="form-group">
 					    <label for="SimplifiedChineseName" class="col-sm-5 control-label">{{'createIPO.SimplifiedChineseName'|translate}}</label>
 					    <div class="col-sm-5">
-					      <input type="text" class="form-control" id="SimplifiedChineseName" name="SimplifiedChineseName" placeholder="{{'createIPO.Required'|translate}}" ng-disabled="disableFields(machker,vemode)"ng-model="SimplifiedChineseName" required ng-keydown=" numberofchar(34,SimplifiedChineseName,$event)" ng-blur="SimplifiedChineseName = digitsofchar(35,SimplifiedChineseName)">
+					      <input type="text" class="form-control" id="SimplifiedChineseName" name="SimplifiedChineseName" placeholder="{{'createIPO.Required'|translate}}" ng-show="showSSDPR(machker,vemode)"ng-model="SimplifiedChineseName" required ng-keydown=" numberofchar(34,SimplifiedChineseName,$event)" ng-blur="SimplifiedChineseName = digitsofchar(35,SimplifiedChineseName)">
+					    <label  class=" control-label resetfcolor"ng-show="!showSSDPR(machker,vemode)">{{TranditionalChineseName|| "---"}}</label>
 					      <span class=" warningfont" ng-show="createipoForm.SimplifiedChineseName.$dirty && createipoForm.SimplifiedChineseName.$invalid">
 					    <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
 						<span ng-show="createipoForm.SimplifiedChineseName.$error.required" >{{'createIPO.SimplifiedChineseName'|translate}}{{'createIPO.isrequired'|translate}}</span>	
@@ -149,48 +152,53 @@
 					<div class="form-group">
 					    <label for="NumberofOfferSharesUnitunderGlobalOffering" class="col-sm-5 control-label">{{'createIPO.NOSUUGO'|translate}}</label>
 					    <div class="col-sm-5">
-					      <input type="text" class="form-control" id="NumberofOfferSharesUnitunderGlobalOffering" ng-disabled="disableFields(machker,vemode)"ng-model="NumberofOfferSharesUnitunderGlobalOffering" ng-keydown=" onlyNumber(15,NumberofOfferSharesUnitunderGlobalOffering,$event)" ng-blur="NumberofOfferSharesUnitunderGlobalOffering = digitsofnum(15,NumberofOfferSharesUnitunderGlobalOffering)">
+					      <input type="text" class="form-control" id="NumberofOfferSharesUnitunderGlobalOffering" ng-show="showSSDPR(machker,vemode)"ng-model="NumberofOfferSharesUnitunderGlobalOffering" ng-keydown=" onlyNumber(15,NumberofOfferSharesUnitunderGlobalOffering,$event)" ng-blur="NumberofOfferSharesUnitunderGlobalOffering = digitsofnum(15,NumberofOfferSharesUnitunderGlobalOffering)">
+					      <label  class=" control-label resetfcolor"ng-show="!showSSDPR(machker,vemode)">{{NumberofOfferSharesUnitunderGlobalOffering|| "---"}}</label>
 					    </div>
 					</div>
 					<div class="form-group">
 					    <label for="NumberofPublicOfferSharesUnit" class="col-sm-5 control-label">{{'createIPO.NOPOSU'|translate}}</label>
 					    <div class="col-sm-5">
-					      <input type="text" class="form-control" id="NumberofPublicOfferSharesUnit" ng-disabled="disableFields(machker,vemode)"ng-model="NumberofPublicOfferSharesUnit" ng-keydown=" onlyNumber(15,NumberofPublicOfferSharesUnit,$event)" ng-blur="NumberofPublicOfferSharesUnit = digitsofnum(15,NumberofPublicOfferSharesUnit)">
+					      <input type="text" class="form-control" id="NumberofPublicOfferSharesUnit" ng-show="showSSDPR(machker,vemode)"ng-model="NumberofPublicOfferSharesUnit" ng-keydown=" onlyNumber(15,NumberofPublicOfferSharesUnit,$event)" ng-blur="NumberofPublicOfferSharesUnit = digitsofnum(15,NumberofPublicOfferSharesUnit)">
+					      <label  class=" control-label resetfcolor"ng-show="!showSSDPR(machker,vemode)">{{NumberofPublicOfferSharesUnit|| "---"}}</label>
 					    </div>
 					</div>
 					<div class="form-group" >
 					    <label for="StockCurrency" class="col-sm-5 control-label">{{'createIPO.StockCurrency'|translate}}</label>
 					    <div class="col-sm-2">							
-							<select class="form-control " ng-disabled="disableFields(machker,vemode)" ng-model="StockCurrency" style="text-align:center">
+							<select class="form-control " ng-show="showSSDPR(machker,vemode)" ng-model="StockCurrency" style="text-align:center">
 								<option value="" ><span style="color:#55bbde !important;font-style:italic;">{{'createIPO.Required'|translate}}</span></option>
 								<option value="HKD"  >HKD</option>
 								<option value="CNY"  style="text-align:center">CNY</option>
 								<option value="HSD"  style="text-align:center">HSD</option> 
-							</select>		  		
+							</select>
+							<label  class=" control-label resetfcolor"ng-show="!showSSDPR(machker,vemode)">{{StockCurrency|| "---"}}</label>		  		
 					    </div>
 					</div>
 					<div class="form-group">
 					    <label for="OfferPriceRangeStart" class="col-sm-5 control-label">{{'createIPO.OfferPriceRange'|translate}}</label>
 					    <div class="col-sm-2">
-					      <input type="text" class="form-control col-sm-8" id="OfferPriceRangeStart" name ="OfferPriceRangeStart" placeholder="{{'createIPO.Required'|translate}}" ng-disabled="disableFields(machker,vemode)"ng-model="OfferPriceRangeStart" required ng-keydown="decimallimit(10,2,OfferPriceRangeStart,'OfferPriceRangeStart',$event)" ng-blur="OfferPriceRangeStart = digitlimt(OfferPriceRangeStart)">
+					      <input type="text" class="form-control col-sm-8" id="OfferPriceRangeStart" name ="OfferPriceRangeStart" placeholder="{{'createIPO.Required'|translate}}" ng-show="showSSDPR(machker,vemode)"ng-model="OfferPriceRangeStart" required ng-keydown="decimallimit(10,2,OfferPriceRangeStart,'OfferPriceRangeStart',$event)" ng-blur="OfferPriceRangeStart = digitlimt(OfferPriceRangeStart)">
 					      <span class=" warningfont" ng-show="createipoForm.OfferPriceRangeStart.$dirty && createipoForm.OfferPriceRangeStart.$invalid">
 					    <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
 						<span  ng-show="createipoForm.OfferPriceRangeStart.$error.required" >{{'createIPO.OfferPriceRange'|translate}}{{'createIPO.isrequired'|translate}}</span>	
 						</span>						 
 					    </div>
-					   <label for="OfferPriceRangeEnd" class="col-sm-1 control-label" style="text-align:center"> · </label>
+					   <label for="OfferPriceRangeEnd"ng-show="showSSDPR(machker,vemode)" class="col-sm-1 control-label" style="text-align:center"> · </label>
 					    <div class="col-sm-2">
-					    <input type="text" class="form-control col-sm-2" id="OfferPriceRangeEnd" name ="OfferPriceRangeEnd"placeholder="{{'createIPO.Required'|translate}}" ng-disabled="disableFields(machker,vemode)"ng-model="OfferPriceRangeEnd" required ng-keydown="decimallimit(10,2,OfferPriceRangeEnd,'OfferPriceRangeEnd',$event)" ng-blur="OfferPriceRangeEnd= digitlimt(OfferPriceRangeEnd)">
+					    <input type="text" class="form-control col-sm-2" id="OfferPriceRangeEnd" name ="OfferPriceRangeEnd"placeholder="{{'createIPO.Required'|translate}}" ng-show="showSSDPR(machker,vemode)"ng-model="OfferPriceRangeEnd" required ng-keydown="decimallimit(10,2,OfferPriceRangeEnd,'OfferPriceRangeEnd',$event)" ng-blur="OfferPriceRangeEnd= digitlimt(OfferPriceRangeEnd)">
 					    <span class=" warningfont" ng-show="createipoForm.OfferPriceRangeEnd.$dirty && createipoForm.OfferPriceRangeEnd.$invalid">
 					    <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
 						<span  ng-show="createipoForm.OfferPriceRangeEnd.$error.required" >{{'createIPO.OfferPriceRange'|translate}}{{'createIPO.isrequired'|translate}}</span>	
 						</span>
 					    </div>
+					    <label style="padding-left: 15px;" class="col-sm-5 control-label resetfcolor"ng-show="!showSSDPR(machker,vemode)">{{OfferPriceRangeStart|| "---"}}~{{OfferPriceRangeEnd|| "---"}}</label>
 					</div>					
 					<div class="form-group">
 					    <label for="BroadLot" class="col-sm-5 control-label">{{'createIPO.BroadLot'|translate}}</label>
 					    <div class="col-sm-5">
-					      <input type="text" class="form-control" id="BroadLot"name="BroadLot" placeholder="{{'createIPO.Required'|translate}}" ng-disabled="disableFields(machker,vemode)"ng-model="BroadLot" required ng-keydown="onlyNumber(10,BroadLot,$event)" ng-blur="BroadLot= digitsofnum(10,BroadLot)">
+					      <input type="text" class="form-control" id="BroadLot"name="BroadLot" placeholder="{{'createIPO.Required'|translate}}" ng-show="showSSDPR(machker,vemode)"ng-model="BroadLot" required ng-keydown="onlyNumber(10,BroadLot,$event)" ng-blur="BroadLot= digitsofnum(10,BroadLot)">
+					      <label  class="control-label resetfcolor"ng-show="!showSSDPR(machker,vemode)">{{BroadLot|| "---"}}</label>
 					      <span class=" warningfont" ng-show="createipoForm.BroadLot.$dirty && createipoForm.BroadLot.$invalid">
 					    <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
 						<span  ng-show="createipoForm.BroadLot.$error.required" >{{'createIPO.BroadLot'|translate}}{{'createIPO.isrequired'|translate}}</span>	
@@ -199,14 +207,15 @@
 					</div>
 					<div class="form-group" >
 					    <label for="NominalValueCurrency" class="col-sm-5 control-label">{{'createIPO.NominalValueCurrency'|translate}}</label>
-					    <div class="col-sm-2">						
-							<input type="text" class="form-control" id="BroadLot" placeholder="{{'createIPO.Required'|translate}}" ng-disabled="true"ng-model="StockCurrency">				  		
+					    <div class="col-sm-2">							
+							<label class="col-sm-5 control-label resetfcolor">{{StockCurrency|| "---"}}</label>	
 					    </div>
 					</div>
 					<div class="form-group">
 					    <label for="NominalValue" class="col-sm-5 control-label">{{'createIPO.NominalValue'|translate}}</label>
 					    <div class="col-sm-5">
-					      <input type="text" class="form-control " id="NominalValue" ng-disabled="disableFields(machker,vemode)"ng-model="NominalValue"ng-keydown="decimallimit(10,2,NominalValue,'NominalValue',$event)" ng-blur="NominalValue= digitlimt(NominalValue)">
+					      <input type="text" class="form-control " id="NominalValue" ng-show="showSSDPR(machker,vemode)"ng-model="NominalValue"ng-keydown="decimallimit(10,2,NominalValue,'NominalValue',$event)" ng-blur="NominalValue= digitlimt(NominalValue)">
+					      <label  class=" control-label resetfcolor"ng-show="!showSSDPR(machker,vemode)">{{NominalValue|| "---"}}</label>
 					    </div>
 					</div>
 					<div class="form-group has-feedback">
@@ -310,8 +319,9 @@
 					<div class="form-group">
 					    <label for="ProspectusesEnglishURL" class="col-sm-5 control-label">{{'createIPO.ProspectusesEnglishURL'|translate}}</label>
 					    <div class="col-sm-5">
-					      <input type="url" class="form-control" id="ProspectusesEnglishURL"name="ProspectusesEnglishURL" ng-disabled="0"ng-model="ProspectusesEnglishURL" ng-keydown="numberofchar(254,ProspectusesEnglishURL,$event)">
-					      <span class=" warningfont" ng-show="createipoForm.ProspectusesEnglishURL.$dirty && createipoForm.ProspectusesEnglishURL.$invalid">
+					      <input type="url" class="form-control" id="ProspectusesEnglishURL"name="ProspectusesEnglishURL" ng-show="showSSDPR(machker,vemode)"ng-model="ProspectusesEnglishURL" ng-keydown="numberofchar(254,ProspectusesEnglishURL,$event)">
+					      <label  class="control-label resetfcolor"ng-show="!showSSDPR(machker,vemode)"><a href="{{ProspectusesEnglishURL}}">{{ProspectusesEnglishURL|| "---"}}</a></label>
+					      <span class=" warningfont" ng-show="createipoForm.ProspectusesEnglishURL.$dirty && createipoForm.ProspectusesEnglishURL.$invalid">					    
 					    <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>						
 						<span ng-show="createipoForm.ProspectusesEnglishURL.$error.url">{{'createIPO.ProspectusesEnglishURL'|translate}}{{'createIPO.isinvalid'|translate}}</span>							
 						</span>
@@ -320,7 +330,8 @@
 					<div class="form-group">
 					    <label for="ProspectusesTranditionalChineseURL" class="col-sm-5 control-label">{{'createIPO.ProspectusesTranditionalChineseURL'|translate}}</label>
 					    <div class="col-sm-5">
-					      <input type="url" class="form-control" id="ProspectusesTranditionalChineseURL"name="ProspectusesTranditionalChineseURL" ng-disabled="0"ng-model="ProspectusesTranditionalChineseURL"ng-keydown="numberofchar(254,ProspectusesTranditionalChineseURL,$event)">
+					      <input type="url" class="form-control" id="ProspectusesTranditionalChineseURL"name="ProspectusesTranditionalChineseURL" ng-show="showSSDPR(machker,vemode)"ng-model="ProspectusesTranditionalChineseURL"ng-keydown="numberofchar(254,ProspectusesTranditionalChineseURL,$event)">
+					      <label  class=" control-label resetfcolor"ng-show="!showSSDPR(machker,vemode)"><a href="{{ProspectusesTranditionalChineseURL}}">{{ProspectusesTranditionalChineseURL|| "---"}}</a></label>
 					      <span class=" warningfont" ng-show="createipoForm.ProspectusesTranditionalChineseURL.$dirty && createipoForm.ProspectusesTranditionalChineseURL.$invalid">
 					    <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>						
 						<span ng-show="createipoForm.ProspectusesTranditionalChineseURL.$error.url">{{'createIPO.ProspectusesTranditionalChineseURL'|translate}}{{'createIPO.isinvalid'|translate}}</span>						
@@ -330,7 +341,8 @@
 					<div class="form-group" >
 					    <label for="ProspectusesSimplifiedChineseURL" class="col-sm-5 control-label">{{'createIPO.ProspectusesSimplifiedChineseURL'|translate}}</label>
 					    <div class="col-sm-5">
-					      <input type="url" class="form-control" id="ProspectusesSimplifiedChineseURL"name="ProspectusesSimplifiedChineseURL" ng-disabled="0"ng-model="ProspectusesSimplifiedChineseURL"ng-keydown="numberofchar(254,ProspectusesSimplifiedChineseURL,$event)">
+					      <input type="url" class="form-control" id="ProspectusesSimplifiedChineseURL"name="ProspectusesSimplifiedChineseURL" ng-show="showSSDPR(machker,vemode)"ng-model="ProspectusesSimplifiedChineseURL"ng-keydown="numberofchar(254,ProspectusesSimplifiedChineseURL,$event)">
+					      <label  class=" control-label resetfcolor"ng-show="!showSSDPR(machker,vemode)"><a href="{{ProspectusesSimplifiedChineseURL}}">{{ProspectusesSimplifiedChineseURL|| "---"}}</a></label>
 					      <span class=" warningfont" ng-show="createipoForm.ProspectusesSimplifiedChineseURL.$dirty && createipoForm.ProspectusesSimplifiedChineseURL.$invalid">
 					    <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>						
 						<span ng-show="createipoForm.ProspectusesSimplifiedChineseURL.$error.url">{{'createIPO.ProspectusesSimplifiedChineseURL'|translate}}{{'createIPO.isinvalid'|translate}}</span>						
@@ -340,13 +352,15 @@
 					<div class="form-group">
 					    <label for="RemarkforExternal" class="col-sm-5 control-label">{{'createIPO.RemarkforExternal'|translate}}</label>	    
 					    <div class="col-sm-5 ">								      
-					      <textarea class="form-control" id="RemarkforExternal" rows="3"ng-disabled="disableFields(machker,vemode)"ng-model="RemarkforExternal"ng-keydown="numberofchar(254,RemarkforExternal,$event)"ng-blur="RemarkforExternal=digitsofchar(255,RemarkforExternal)"></textarea>
+					      <textarea class="form-control" id="RemarkforExternal" rows="3"ng-show="showSSDPR(machker,vemode)"ng-model="RemarkforExternal"ng-keydown="numberofchar(254,RemarkforExternal,$event)"ng-blur="RemarkforExternal=digitsofchar(255,RemarkforExternal)"></textarea>
+					      <label style="word-break:break-all;word-wrap:break-word;" class=" control-label resetfcolor"ng-show="!showSSDPR(machker,vemode)">{{RemarkforExternal|| "---"}}</label>
 					    </div>
 					</div>
 					<div class="form-group">								  
 					    <label for="RemarkforInternal" class="col-sm-5 control-label">{{'createIPO.RemarkforInternal'|translate}}</label>	   
 					    <div class="col-sm-5 ">								      
-					      <textarea class="form-control" id="RemarkforInternal" rows="3" ng-disabled="{{!vemode}}"ng-model="RemarkforInternal"ng-keydown="numberofchar(254,RemarkforInternal,$event)"ng-blur="RemarkforInternal=digitsofchar(255,RemarkforInternal)"></textarea>
+					      <textarea class="form-control" id="RemarkforInternal" rows="3" ng-show="{{vemode}}"ng-model="RemarkforInternal"ng-keydown="numberofchar(254,RemarkforInternal,$event)"ng-blur="RemarkforInternal=digitsofchar(255,RemarkforInternal)"></textarea>
+					       <label style="word-break:break-all;word-wrap:break-word;" class=" control-label resetfcolor"ng-show="{{!vemode}}">{{RemarkforInternal|| "---"}}</label>
 					    </div>								    
 					</div>					
 					<div class="form-group">
@@ -364,8 +378,9 @@
 					    <label for="CommissionRate" class="col-sm-5 control-label">{{'createIPO.CommissionRate'|translate}}</label>  
 					    <div class="col-sm-2 ">	
 					    <div class="input-group">							    
-					    <input type="text" class="form-control" id="CommissionRate"name="CommissionRate" placeholder="{{'createIPO.Required'|translate}}"ng-disabled="disableFields(machker,vemode)"ng-model="CommissionRate"required ng-keydown="decimallimit(4,4,CommissionRate,'CommissionRate',$event)" ng-blur="CommissionRate= digitlimt(CommissionRate)">
-					    <span class="input-group-addon ">%</span>					    
+					    <input type="text" class="form-control" id="CommissionRate"name="CommissionRate" placeholder="{{'createIPO.Required'|translate}}"ng-show="showSSDPR(machker,vemode)"ng-model="CommissionRate"required ng-keydown="decimallimit(4,4,CommissionRate,'CommissionRate',$event)" ng-blur="CommissionRate= digitlimt(CommissionRate)">
+					    <label class=" control-label resetfcolor"ng-show="!showSSDPR(machker,vemode)">{{CommissionRate|| "---"}}%</label>
+					    <span class="input-group-addon "ng-show="showSSDPR(machker,vemode)">%</span>					    
 					    </div>					    
 					    </div>						    
 					</div>

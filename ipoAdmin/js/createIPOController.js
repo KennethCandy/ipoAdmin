@@ -135,7 +135,7 @@ angular.module('ipoAdminApp.createIPOController', [])
     /*权限控制*/    
     $scope.machker = false;//maker:false     checker:true
 
-    $scope.vemode = true;// view:false     edit:true
+    $scope.vemode = false;// view:false     edit:true
 
    $scope.showbelow = true;//Check box Checked if IPO financing is allowed;Unchecked if IPO financing is not allowed.
 
@@ -348,6 +348,7 @@ angular.module('ipoAdminApp.createIPOController', [])
 	
 
 	//....test value..
+	$scope.OfferPriceRangeStart= 1.0;
 	$scope.OfferPriceRangeEnd = 1.7;
 	$scope.CommissionRate = 1;
 	$scope.LevyRate = 0.005;
@@ -356,6 +357,8 @@ angular.module('ipoAdminApp.createIPOController', [])
 	$scope.QuantityFrom = 0;
 	$scope.QuantityTo = 5000;
 	$scope.Interval = 1000;
+
+	 $scope.ProspectusesEnglishURL ;
 
 	/*$scope.LoadAmountAbove = 10000;
 	$scope.SpecicalInterestRate =2000;*/
