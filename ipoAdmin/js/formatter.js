@@ -244,7 +244,7 @@ function onlyNumber(value,sName,event) {
  }
 /*输入数字位数限制用于blur*/
  function digitsofnum(value,sName){
- 	var dotPos = ( sName || '' ).length;
+ 	var dotPos = (( sName || '' ) + '').length;
  	var pattern=/\d/;
  	if(!pattern.test(sName)){
     	return "";

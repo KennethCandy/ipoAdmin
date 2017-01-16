@@ -135,7 +135,7 @@ angular.module('ipoAdminApp.createIPOController', [])
     /*权限控制*/    
     $scope.machker = false;//maker:false     checker:true
 
-    $scope.vemode = false;// view:false     edit:true
+    $scope.vemode = true;// view:false     edit:true
 
    $scope.showbelow = true;//Check box Checked if IPO financing is allowed;Unchecked if IPO financing is not allowed.
 
@@ -200,7 +200,7 @@ angular.module('ipoAdminApp.createIPOController', [])
 	
 
 	
-
+	/*Quantity Amount Table  Start*/
 	$scope.CalculationMethod = "RLSUA";
 	function quantityAmountTableAdd(){	
 		var methods=$scope.CalculationMethod;		
@@ -325,9 +325,206 @@ angular.module('ipoAdminApp.createIPOController', [])
     	$scope.specialInterestRateTable = totalData;
 	}/*Special Interest Rate Table End*/
 
+	/*progress*/	
+	function basicPro(){		
+		var basicfillField = 0;
+		if(angular.isDefined($scope.StockCode) && ( $scope.StockCode!=null||$scope.StockCode!='' )) {
+			basicfillField++;			
+		}
+		if(angular.isDefined($scope.IPOCode) && ($scope.IPOCode!=null||$scope.IPOCode!='')){
+			basicfillField++;
+		}
+		if(angular.isDefined($scope.EnglishStockName)&&($scope.EnglishStockName!=null||$scope.EnglishStockName!='')){
+			basicfillField++;
+		}
+		if(angular.isDefined($scope.TranditionalChineseName) && ($scope.TranditionalChineseName!=null||$scope.TranditionalChineseName!='')){
+			basicfillField++;
+		}
+		if(angular.isDefined($scope.SimplifiedChineseName) &&($scope.SimplifiedChineseName!=null||$scope.SimplifiedChineseName!='')){
+			basicfillField++;
+		}
+		if($scope.StockCurrency &&($scope.StockCurrency!=null||$scope.StockCurrency!='')){
+			basicfillField++;
+		}
+		if(angular.isDefined($scope.OfferPriceRangeStart) && ( $scope.OfferPriceRangeStart!=null||$scope.OfferPriceRangeStart!='' )) {
+			basicfillField++;			
+		}
+		if(angular.isDefined($scope.OfferPriceRangeEnd) && ( $scope.OfferPriceRangeEnd!=null||$scope.OfferPriceRangeEnd!='' )) {
+			basicfillField++;			
+		}
+		if(angular.isDefined($scope.BroadLot) && ( $scope.BroadLot!=null||$scope.BroadLot!='' )) {
+			basicfillField++;			
+		}
+		if($scope.StockCurrency && ( $scope.StockCurrency!=null||$scope.StockCurrency!='' )) {
+			basicfillField++;			
+		}
+		if(angular.isDefined($scope.OnlineIPOStartDate) && ( $scope.OnlineIPOStartDate!=null||$scope.OnlineIPOStartDate!='' )) {
+			basicfillField++;			
+		}
+		if(angular.isDefined($scope.OnlineIPOStartTime) && ( $scope.OnlineIPOStartTime!=null||$scope.OnlineIPOStartTime!='' )) {
+			basicfillField++;			
+		}
+		if(angular.isDefined($scope.OnlineIPOEndDate)&& ( $scope.OnlineIPOEndDate!=null||$scope.OnlineIPOEndDate!='' )) {
+			basicfillField++;			
+		}
+		if(angular.isDefined($scope.OnlineIPOEndTime) && ( $scope.OnlineIPOEndTime!=null||$scope.OnlineIPOEndTime!='' )) {
+			basicfillField++;			
+		}
+		if(angular.isDefined($scope.IPOClosingDate) && ( $scope.IPOClosingDate!=null||$scope.IPOClosingDate!='' )) {
+			basicfillField++;			
+		}
+		if(angular.isDefined($scope.IPOClosingTime) && ( $scope.IPOClosingTime!=null||$scope.IPOClosingTime!='' )) {
+			basicfillField++;			
+		}
+		if(angular.isDefined($scope.ListingDate) && ( $scope.ListingDate!=null||$scope.ListingDate!='' )) {
+			basicfillField++;			
+		}
+		if(angular.isDefined($scope.AcceptSubscription) && ( $scope.AcceptSubscription!=null||$scope.AcceptSubscription!='' )) {
+			basicfillField++;			
+		}			
+		
+		return basicfillField;
+	}
+	
+
+    function feePro(){
+    	var feefillField = 0;
+    	if(angular.isDefined($scope.CommissionRate) && ( $scope.CommissionRate!=null||$scope.CommissionRate!='' )) {
+			feefillField++;			
+		}
+		if(angular.isDefined($scope.LevyRate) && ( $scope.LevyRate!=null||$scope.LevyRate!='' )) {
+			feefillField++;			
+		}
+		if(angular.isDefined($scope.TradingFeeRate) && ( $scope.TradingFeeRate!=null||$scope.TradingFeeRate!='' )) {
+			feefillField++;			
+		}
+		if(angular.isDefined($scope.InvestorCompensationLevyRate) && ( $scope.InvestorCompensationLevyRate!=null||$scope.InvestorCompensationLevyRate!='' )) {
+			feefillField++;			
+		}
+		if($scope.CurrencyofHandingFee && ( $scope.CurrencyofHandingFee!=null||$scope.CurrencyofHandingFee!='' )) {
+			feefillField++;			
+		}
+		if(angular.isDefined($scope.HandingFee) && ( $scope.HandingFee!=null||$scope.HandingFee!='' )) {
+			feefillField++;			
+		}
+		if(angular.isDefined($scope.FinancingHandingFee) && ( $scope.FinancingHandingFee!=null||$scope.FinancingHandingFee!='' )) {
+			feefillField++;			
+		}
+
+    	return feefillField;
+    } 
+   
+
+    function quantityPro(){
+    	var quantityfillField = 0;
+    	if(angular.isDefined($scope.QuantityFrom) && ( $scope.QuantityFrom !=null && $scope.QuantityFrom !=='')) {
+			quantityfillField++;			
+		}
+		if(angular.isDefined($scope.QuantityTo) && ( $scope.QuantityTo!=null && $scope.QuantityTo!='' )) {
+			quantityfillField++;			
+		}
+		if(angular.isDefined($scope.Interval) && ( $scope.Interval!=null && $scope.Interval!='' )) {
+			quantityfillField++;			
+		}
+		if(angular.isDefined($scope.CalculationMethod) && ( $scope.CalculationMethod!=null && $scope.CalculationMethod!='' )) {
+			quantityfillField++;			
+		}
+		if(angular.isDefined($scope.quantityAmountTable) && ( $scope.quantityAmountTable!=null && $scope.quantityAmountTable.length!=0 )) {
+			quantityfillField++;			
+		}
+		
+    	return quantityfillField;
+    } 
+   
+
+    function financingPro(){
+    	var financingfillField = 0;
+    	if($scope.showbelow && ( $scope.showbelow !=null && $scope.showbelow !=='')) {
+			financingfillField++;			
+		}		
+		if(angular.isDefined($scope.FinancingStartDate) && ( $scope.FinancingStartDate!=null && $scope.FinancingStartDate!='' )) {
+			financingfillField++;			
+		}
+		if(angular.isDefined($scope.FinancingStartTime) && ( $scope.FinancingStartTime!=null && $scope.FinancingStartTime!='' )) {
+			financingfillField++;			
+		}
+		if(angular.isDefined($scope.FinancingEndDate) && ( $scope.FinancingEndDate!=null && $scope.FinancingEndDate!='' )) {
+			financingfillField++;			
+		}
+		if(angular.isDefined($scope.FinancingEndTime) && ( $scope.FinancingEndTime!=null && $scope.FinancingEndTime!='' )) {
+			financingfillField++;			
+		}
+		if(angular.isDefined($scope.InterestDay) && ( $scope.InterestDay!=null && $scope.InterestDay!=='')) {
+			financingfillField++;			
+		}
+		if(angular.isDefined($scope.MaxLoanRatio) && ( $scope.MaxLoanRatio!=null && $scope.MaxLoanRatio!=='' )) {
+			financingfillField++;			
+		}
+		if(angular.isDefined($scope.MustUseMaxLoan) && ( $scope.MustUseMaxLoan!=null && $scope.MustUseMaxLoan!='')) {
+			financingfillField++;			
+		}
+		if(angular.isDefined($scope.AllowedLoanRatioSelectedby) && ( $scope.AllowedLoanRatioSelectedby!=null && $scope.AllowedLoanRatioSelectedby!=='' )) {
+			financingfillField++;			
+		}
+		if(angular.isDefined($scope.BasicInterestRate) && ( $scope.BasicInterestRate!=null && $scope.BasicInterestRate!=='' )) {
+			financingfillField++;			
+		}
+		if(angular.isDefined($scope.specialInterestRateTable) && ( $scope.specialInterestRateTable!=null && $scope.specialInterestRateTable.length!=0 )) {
+			financingfillField++;			
+		}
+		
+    	return financingfillField;
+    } 
+
+    $scope.basictotal = 18;
+    $scope.feetotal = 7;
+    $scope.quantitytotal = 5;
+    $scope.financingtotal = 11;
+    $scope.totalMandatorField = 41;
+
+	 function totalFieldPro(){
+    	var fp= $scope.financingProgress;
+    	var qp= $scope.quantityProgress;
+    	var fep= $scope.feeProgress;
+    	var bp= $scope.basicProgress;
+    	var totalp =fp +qp +fep +bp;
+    	return totalp;
+	}
+
+	$interval(function () {
+		$scope.basicProgress = basicPro();
+		$scope.feeProgress = feePro();
+		$scope.quantityProgress = quantityPro();
+        $scope.financingProgress = financingPro();
+        $scope.filledFields =totalFieldPro();
+        var tof =$scope.filledFields;
+        $scope.totalFieldProgress =Math.floor((tof/41)*100) ;
+    }, 500);
+
+
+	$('#scrollbody').scrollspy({ target: '#navbar-example' })
+   
+
+	
 
 
 
+
+
+
+
+
+
+
+
+
+
+	/*$scope.name = 'hello';
+
+	var watch = $scope.$watch('StockCode',function(newValue,oldValue, scope){
+			console.log('1111111');
+	});
+*/
 
 
 	
@@ -348,17 +545,17 @@ angular.module('ipoAdminApp.createIPOController', [])
 	
 
 	//....test value..
-	$scope.OfferPriceRangeStart= 1.0;
-	$scope.OfferPriceRangeEnd = 1.7;
-	$scope.CommissionRate = 1;
-	$scope.LevyRate = 0.005;
-	$scope.TradingFeeRate = 0.002;
-	$scope.InvestorCompensationLevyRate = 0.005;
-	$scope.QuantityFrom = 0;
-	$scope.QuantityTo = 5000;
-	$scope.Interval = 1000;
+	// $scope.OfferPriceRangeStart= 1.0;
+	// $scope.OfferPriceRangeEnd = 1.7;
+	// $scope.CommissionRate = 1;
+	// $scope.LevyRate = 0.005;
+	// $scope.TradingFeeRate = 0.002;
+	// $scope.InvestorCompensationLevyRate = 0.005;
+	// $scope.QuantityFrom = 0;
+	// $scope.QuantityTo = 5000;
+	// $scope.Interval = 1000;
 
-	 $scope.ProspectusesEnglishURL ;
+	//  $scope.ProspectusesEnglishURL ;
 
 	/*$scope.LoadAmountAbove = 10000;
 	$scope.SpecicalInterestRate =2000;*/
