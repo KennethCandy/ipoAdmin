@@ -131,14 +131,18 @@ app.service('sharedProperties', ['$rootScope', function ($rootScope) {
 			this.removeCurrentIPOFinancingRatio();
 			this.removeCurrentIPOReqId();
 		},
-		setBypassLoginData: function(lang, clientId, clientIds, baseURL,ipoMakerCheckerRole) {
-			$rootScope.baseURL = baseURL;
+		setBypassLoginData: function(data) {
+			var obj = JSON.parse(data);
 			getSessionStorage().setItem('deviceType', DEVICE_CLIENT);
 			getSessionStorage().setItem('agreed', AGREED);
-			getSessionStorage().setItem('language', lang);
-			getSessionStorage().setItem('clientId', clientId);
-			getSessionStorage().setItem('clientIds', clientIds);
-			getSessionStorage().setItem('ipoMakerCheckerRole', ipoMakerCheckerRole);			
+			angular.forEach(obj, function(value, key) {
+				if (key == 'baseURL') {
+					$rootScope.baseURL = value;
+				}
+				else {
+					getSessionStorage().setItem(key, value);
+				}
+			})
 		}
 	}
 }]);

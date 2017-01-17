@@ -14,10 +14,8 @@ angular.module('ipoAdminApp', ['ng', 'ngRoute', 'ui.router', 'ipoAdminApp.mainte
 		url: '/createIPO',
 		templateUrl: 'createIPO.html',
 		controller: 'createIPOCtrl'
-	})
-	
-	
-
+	})  ;
+		
 	// if none of the above states are matched, use this as the fallback
 	$urlRouterProvider.otherwise('/maintenance');
 

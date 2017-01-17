@@ -1,183 +1,309 @@
-<div id="header" class="container">
-	<nav class="navbar">
-		<div class="container-fluid">		
+<nav class="navbar navbar-default">
+	<div id="header" class="container-fluid">	
 			<h1 class="admin-header">
 				<span>{{'maintenance.IPO'|translate}} > <span class="admin-header-selected">{{'maintenance.IPOMaintenance'|translate}}</span>
-			</h1>		
-		</div>
-	</nav>
-</div>
-<br><br>
+			</h1>					
+	</div>
+</nav>
 
-<div class="container-fluid page-margin">
+<div class="container-fluid">
 	<div>			
 		<!-- Major Filter Panel -->		
-		<div class="row">
-			  <div class="col-sm-1">
-			  <h4>Status: </h4>
+		<div id="major-filter-panel" class="row major-filter-panel">
+			  <div class="col-sm-1" style="text-align:center">
+			  <h4>{{'maintenance.status'|translate}} :</h4>
 			  </div>
-			  <div class="col-sm-11">
-					<button type="button" class="btn btn-default" style="width:140px">All <span class="badge">7</span></button>
-					<button type="button" class="btn btn-info" style="width:140px">Pending <span class="badge">3</span></button>    
-					<button type="button" class="btn btn-success" style="width:140px">Coming <span class="badge">5</span></button>
-					<button type="button" class="btn btn-warning" style="width:140px">Opening <span class="badge">5</span></button>        
-					<button type="button" class="btn btn-danger" style="width:140px">Ended <span class="badge">5</span></button>        
-					<button type="button" class="btn btn-primary" style="width:140px">Closed <span class="badge">5</span></button>  
-			  </div>
-		</div>
-		<br>	
+			  <div class="col-sm-11">				
+					<a href="#" class="button grey {{greyBtn}}" ng-click="statusBtnActive('greyBtn');"><span ng-bind="adminIPOCount"></span>{{'maintenance.all'|translate}}</a>
+					<a href="#" class="button blue {{blueBtn}}" ng-click="statusBtnActive('blueBtn');"><span ng-bind="pendingCount"></span>{{'maintenance.pending'|translate}}</a>
+					<a href="#" class="button red {{redBtn}}" ng-click="statusBtnActive('redBtn');"><span ng-bind="rejectCount"></span>{{'maintenance.rejected'|translate}}</a>
+					<a href="#" class="button green {{greenBtn}}" ng-click="statusBtnActive('greenBtn');"><span ng-bind="comingCount"></span>{{'maintenance.coming'|translate}}</a>
+					<a href="#" class="button yellow {{yellowBtn}}" ng-click="statusBtnActive('yellowBtn');"><span ng-bind="openingCount"></span>{{'maintenance.opening'|translate}}</a>
+					<a href="#" class="button orange {{orangeBtn}}" ng-click="statusBtnActive('orangeBtn');"><span ng-bind="endedCount"></span>{{'maintenance.ending'|translate}}</a>
+					<a href="#" class="button purple {{purpleBtn}}" ng-click="statusBtnActive('purpleBtn');"><span ng-bind="closedCount"></span>{{'maintenance.closed'|translate}}</a>
+			  </div>			  
+		</div>		
 		<!--Filter Detail Panel -->	
-		<ul class="nav navbar-nav navbar-left" >
-					<li>
-						<a class="nav-menu-item">modify by myself</a>
-					</li>
-					<li class="dropdown" dropdown="">
-						<a dropdown-toggle="collapse" class="dropdown-toggle nav-menu-item" data-toggle="dropdown"><span>Show options</span><b class="caret"></b></a>
-						<ul class="dropdown-menu" >
-							<li ng-repeat="client in clients"><a class="nav-menu-item" ng-click="clientIdOnChange(client)">{{client.clientId}}</a></li>
-						</ul>
-					</li>
-		</ul>
-		<br><br><br>
+		<div id="filter-detail-panel" style="{{optionStyle}}" class="row filter-detail-panel">
+			<ul class="nav navbar-nav" >
+						<li style="height:50px;">
+							<!-- either one case -->
+							<p id="filterChosen" ng-show="descOption == 'Mod'">{{'maintenance.modifiedWithin'|translate}} <span ng-bind="descDay"></span> {{'maintenance.days'|translate}} <span ng-show="descMyself == 'Y'">(<span class="glyphicon glyphicon-ok" style="padding-left:15px;"></span>{{'maintenance.byMyself'|translate}})</span></p>
+							<p id="filterChosen" ng-show="descOption == 'SubStart'">{{'maintenance.subStartDateWithin'|translate}} <span ng-bind="descDayFrom"></span> {{'maintenance.and'|translate}} <span ng-bind="descDayTo"></span>  <span ng-show="descMyself == 'Y'">(<span class="glyphicon glyphicon-ok" style="padding-left:15px;"></span>{{'maintenance.byMyself'|translate}})</span></p>
+							<p id="filterChosen" ng-show="descOption == 'SubClose'">{{'maintenance.subEndDateWithin'|translate}} <span ng-bind="descDayFrom"></span> {{'maintenance.and'|translate}} <span ng-bind="descDayTo"></span>  <span ng-show="descMyself == 'Y'">(<span class="glyphicon glyphicon-ok" style="padding-left:15px;"></span>{{'maintenance.byMyself'|translate}})</span></p>
+							<p id="filterChosen" ng-show="descOption == 'OfferClose'">{{'maintenance.closeDateWithin'|translate}} <span ng-bind="descDayFrom"></span> {{'maintenance.and'|translate}} <span ng-bind="descDayTo"></span>  <span ng-show="descMyself == 'Y'">(<span class="glyphicon glyphicon-ok" style="padding-left:15px;"></span>{{'maintenance.byMyself'|translate}})</span></p>
+							<!-- either one case end-->
+						</li>
+						<li>
+							<a ng-click="onClickShowOptions()" data-toggle="collapse" data-target="#options"><span>{{'maintenance.showOptions'|translate}}</span>	
+							<span ng-show="showOptions == 'N'" class="fa fa-caret-down"></span>
+							<span ng-show="showOptions == 'Y'" class="fa fa-caret-up"></span></a>						
+						</li>
+			</ul>
+		</div>				
+	</div>
+</div>
+	<div id="options" class="collapse container-fluid" ">
+		<table>
+			<tr>
+				<td width="200px" height="50px">
+					<select name="option" ng-model="option" style="padding:2px">
+						<option value="Mod">{{'maintenance.modified'|translate}}</option>
+						<option value="SubStart">{{'maintenance.subStartDate'|translate}}</option>
+						<option value="SubClose">{{'maintenance.subEndDate'|translate}}</option>
+						<option value="OfferClose">{{'maintenance.subCloseDate'|translate}}</option>
+					</select>
+				</td>
+				<td width="80px" ng-show="option == 'Mod'">
+					<span>{{'maintenance.withinLast'|translate}}</span>
+				</td>
+				<td width="50px" ng-show ="option == 'Mod'">
+					<select name="day" ng-model="day" style="font-size:16px">
+						<option ng-repeat="day in numberOfDay" value="{{day}}" ng-bind="day"></option>
+					</select>
+				</td>
+				<td width="50px" ng-show="option == 'Mod'">
+					<span>{{'maintenance.days'|translate}}, </span>
+				</td>
+				<td width="60px" ng-show="option == 'SubStart' || option == 'SubClose' || option == 'OfferClose'">
+					<span>{{'maintenance.within'|translate}}</span>
+				</td>
+				<td width="15px" ng-show="option == 'SubStart' || option == 'SubClose' || option == 'OfferClose'">
+					<span class="glyphicon glyphicon-calendar"></span>
+				</td>				
+				<td width="280px" ng-show="option == 'SubStart' || option == 'SubClose' || option == 'OfferClose'">
+					<input type="text" ng-model="dayRange" value="{{dayRange}}" name="dateRange" ng-show="calendar()" style="width:250px"/>
+				</td>				
+				<td>
+					<input type="checkbox" ng-click="onClockMyselfBox();"> {{'maintenance.onlyMyself'|translate}}</input>
+				</td>
+			</tr>
+			<tr>
+				<!-- either one case-->
+				<td ng-show="option == 'Mod'"><button type="button" class="btn-primary" style="margin-bottom:5px" ng-click="onclickOptionFilter(option,day);onClickShowOptions()" data-toggle="collapse" data-target="#options">{{'maintenance.search'|translate}}</button></td>
+				<td ng-show="option == 'SubStart' || option == 'SubClose' || option == 'OfferClose'"><button type="button" class="btn-primary" style="margin-bottom:5px" ng-click="onclickOptionRangeFilter(dayRange,option);onClickShowOptions()" data-toggle="collapse" data-target="#options">search</button></td>
+				<!-- either one case end-->
+			</tr>
+		</table>
+	</div>
 		<!--Floating Panel -->	
-		<div class="row">
+		<div style="height:705px"id="floating-panel" class="row main-body" >
 			  <div class="col-sm-2">
-				  <button type="button" class="btn btn-primary" ui-sref="createIPO" style="width:140px">{{'maintenance.newIPO'|translate}}</button>
-					<table class="table">
-						<thead>
-						  <tr>
-							<th>Filter</th>       
-						  </tr>
-						</thead>
-						<tbody>					 
-						  <tr class="success">
-							<td>Status</td>				   
-						  </tr>
-						  <tr class="danger">
-							<td>IPO Name</td>						
-						  </tr>
-						  <tr class="info">
-							<td>Subscription Status</td>						
-						  </tr>
-						  <tr class="warning">
-							<td>Modified by</td>						
-						  </tr>
-						  <tr class="active">
-							<td>Active</td>						
-						  </tr>
-						</tbody>
-				  </table>			  
+				<div class="float" id="floatingFilter">
+					  <button type="button" class="btn btn-primary" ui-sref="createIPO" style="width:140px;margin-bottom:35px"><span class="glyphicon glyphicon-plus"></span>{{'maintenance.newIPO'|translate}}</button>
+						<table class="floating-panel-table" >
+							<thead>
+							  <tr>
+								<th style="color:black;">{{'maintenance.filter'|translate}}</th>       
+							  </tr>
+							</thead>
+										<tbody>					 
+										  <tr>
+											<td>
+												 <table ng-show="statusFiltered.length > 1"> 
+													<tr>
+														<th>{{'maintenance.status'|translate}}</th>       
+													</tr>
+													<tr ng-repeat="adminIPO in statusFiltered = (adminIPOs | orderBy : 'status' | filter:searchStatus | unique:'status')">
+														<td><input type="checkbox" ng-click="onClickFilterStatus(adminIPO.status)">
+														<span ng-show="adminIPO.status == 'Pending'">{{'maintenance.pending'|translate}}</span>
+														<span ng-show="adminIPO.status == 'Waiting'">{{'maintenance.waiting'|translate}}</span>
+														<span ng-show="adminIPO.status == 'Rejected'">{{'maintenance.rejected'|translate}}</span>
+														<span ng-show="adminIPO.status == 'Deleted'">{{'maintenance.deleted'|translate}}</span>
+														<span ng-show="adminIPO.status == 'Coming'">{{'maintenance.coming'|translate}}</span>
+														<span ng-show="adminIPO.status == 'Opening'">{{'maintenance.opening'|translate}}</span>
+														<span ng-show="adminIPO.status == 'Ended'">{{'maintenance.ended'|translate}}</span>
+														<span ng-show="adminIPO.status == 'Closed'">{{'maintenance.closed'|translate}}</span>
+														<span ng-show="adminIPO.status == 'Postponed'">{{'maintenance.postponed'|translate}}</span>
+														</td>   
+													</tr>												
+												</table>
+											 </td>				   
+										  </tr>
+										  <tr>
+											<td>
+											
+												 <table ng-show="userFiltered.length > 1"> 
+													<tr>
+														<th>{{'maintenance.modifiedBy'|translate}}</th>       
+													</tr>												
+													<tr ng-repeat="adminIPO in userFiltered = (adminIPOs | orderBy : 'lastModifiedUser' | filter:searchStatus | unique:'lastModifiedUser')">
+														<td><input type="checkbox" ng-click="onClickFilterUser(adminIPO.lastModifiedUser)"><span ng-bind="adminIPO.lastModifiedUser"></span></td>   
+													</tr>																								
+												</table>
+											 </td>								
+										  </tr>
+										  <tr>
+											<td>
+												 <table ng-show="finModeFiltered.length > 1"> 
+													<tr>
+														<th>{{'maintenance.fiancingMode'|translate}}</th>       
+													</tr>
+													<tr ng-repeat="adminIPO in finModeFiltered = (adminIPOs | orderBy : !'marginStatus' |  filter:searchStatus | unique:'marginStatus')">
+														<td><input type="checkbox" ng-click="onClickFilterFinMode(adminIPO.marginStatus)"><span ng-show="adminIPO.marginStatus == 'Y'">{{'maintenance.yes'|translate}}</span><span ng-show="adminIPO.marginStatus == 'N'">{{'maintenance.no'|translate}}</span></td> 
+													</tr>																					
+												</table>
+											 </td>								
+										  </tr>
+										  
+										</tbody>
+					  </table>
+				  </div>
 			  </div>
 			  <!--Record List Panel -->	
-			  <div class="col-sm-10">
-				  <div class="row">
+			  <div class="col-sm-10" style="margin:auto">
+				  <div id="moveRecord" class="row record-list-panel">
 					  <ul class="nav navbar-nav navbar-left" >
+							<li style="height:50px;">
+								<p id="sort-by">{{'maintenance.sortBy'|translate}} :</p>
+							</li>						
 							<li>
-								<a class="nav-menu-item">Sort by:</a>
+								<a href="#" style="border-bottom:{{lastModTimeBtn}}" ng-click="sortBtnActive('lastModTimeBtn');">{{'maintenance.lastModTime'|translate}}
+									<span ng-show="sortType == 'lastModifiedDate' && !sortReverse" class="fa fa-caret-down"></span>
+									<span ng-show="sortType == 'lastModifiedDate' && sortReverse" class="fa fa-caret-up"></span>									
+								</a>
 							</li>
-							<li class="dropdown" dropdown="">
-								<a dropdown-toggle="collapse" class="dropdown-toggle nav-menu-item" data-toggle="dropdown"><span>Last Modified Time</span><b class="caret"></b></a>
-								<ul class="dropdown-menu" >
-									<li ng-repeat="client in clients"><a class="nav-menu-item" ng-click="clientIdOnChange(client)">{{client.clientId}}</a></li>
-								</ul>
+							<li>
+								<a href="#" style="border-bottom:{{lastModByBtn}}" ng-click="sortBtnActive('lastModByBtn');">{{'maintenance.modifiedBy'|translate}}
+									<span ng-show="sortType == 'lastModifiedUser' && !sortReverse" class="fa fa-caret-down"></span>
+									<span ng-show="sortType == 'lastModifiedUser' && sortReverse" class="fa fa-caret-up"></span>
+								</a>
 							</li>
-							<li class="dropdown" dropdown="">
-								<a dropdown-toggle="collapse" class="dropdown-toggle nav-menu-item" data-toggle="dropdown"><span>Modified By</span><b class="caret"></b></a>
-								<ul class="dropdown-menu" >
-									<li ng-repeat="client in clients"><a class="nav-menu-item" ng-click="clientIdOnChange(client)">{{client.clientId}}</a></li>
-								</ul>
+							<li>
+								<a href="#" style="border-bottom:{{IPONameBtn}}" ng-click="sortBtnActive('IPONameBtn');">{{'maintenance.IPOName'|translate}}
+									<span ng-show="sortType == 'enName' && !sortReverse" class="fa fa-caret-down"></span>
+									<span ng-show="sortType == 'enName' && sortReverse" class="fa fa-caret-up"></span>
+								</a>
 							</li>
-							<li class="dropdown" dropdown="">
-								<a dropdown-toggle="collapse" class="dropdown-toggle nav-menu-item" data-toggle="dropdown"><span>IPO Name</span><b class="caret"></b></a>
-								<ul class="dropdown-menu" >
-									<li ng-repeat="client in clients"><a class="nav-menu-item" ng-click="clientIdOnChange(client)">{{client.clientId}}</a></li>
-								</ul>
+							<li>
+								<a href="#" style="border-bottom:{{subStartBtn}}" ng-click="sortBtnActive('subStartBtn');">{{'maintenance.subStart'|translate}} 
+									<span ng-show="sortType == 'subStartTime' && !sortReverse" class="fa fa-caret-down"></span>
+									<span ng-show="sortType == 'subStartTime' && sortReverse" class="fa fa-caret-up"></span>
+								</a>
 							</li>
-							<li class="dropdown" dropdown="">
-								<a dropdown-toggle="collapse" class="dropdown-toggle nav-menu-item" data-toggle="dropdown"><span>Subscription Start</span><b class="caret"></b></a>
-								<ul class="dropdown-menu" >
-									<li ng-repeat="client in clients"><a class="nav-menu-item" ng-click="clientIdOnChange(client)">{{client.clientId}}</a></li>
-								</ul>
+							<li>
+								<a href="#" style="border-bottom:{{subEndBtn}}" ng-click="sortBtnActive('subEndBtn');">{{'maintenance.subEnd'|translate}} 
+									<span ng-show="sortType == 'subCloseTime' && !sortReverse" class="fa fa-caret-down"></span>
+									<span ng-show="sortType == 'subCloseTime' && sortReverse" class="fa fa-caret-up"></span>
+								</a>
 							</li>
-							<li class="dropdown" dropdown="">
-								<a dropdown-toggle="collapse" class="dropdown-toggle nav-menu-item" data-toggle="dropdown"><span>Subscription End</span><b class="caret"></b></a>
-								<ul class="dropdown-menu" >
-									<li ng-repeat="client in clients"><a class="nav-menu-item" ng-click="clientIdOnChange(client)">{{client.clientId}}</a></li>
-								</ul>
-							</li>
-							<li class="dropdown" dropdown="">
-								<a dropdown-toggle="collapse" class="dropdown-toggle nav-menu-item" data-toggle="dropdown"><span>Closing Date</span><b class="caret"></b></a>
-								<ul class="dropdown-menu" >
-									<li ng-repeat="client in clients"><a class="nav-menu-item" ng-click="clientIdOnChange(client)">{{client.clientId}}</a></li>
-								</ul>
-							</li>
+							<li>
+								<a href="#" style="border-bottom:{{subCloseBtn}}" ng-click="sortBtnActive('subCloseBtn');">{{'maintenance.closingDate'|translate}} 
+									<span ng-show="sortType == 'offerCloseTime' && !sortReverse" class="fa fa-caret-down"></span>
+									<span ng-show="sortType == 'offerCloseTime' && sortReverse" class="fa fa-caret-up"></span>
+								</a>
+							</li>												
 					  </ul>
 				 </div>  
+				 
+				 <!--record-->
 					<div class="row">							  						  
-						<div style="height:500px;overflow-y:scroll">
-							<div class="panel-group">
-								<div class="panel panel-default">
-								  <div class="panel-heading">Panel with panel-default class</div>
-								  <div class="panel-body">Panel Content</div>
-								</div>
-
-								<div class="panel panel-primary">
-								  <div class="panel-heading">Panel with panel-primary class</div>
-								  <div class="panel-body">Panel Content</div>
-								</div>
-
-								<div class="panel panel-success">
-								  <div class="panel-heading">Panel with panel-success class</div>
-								  <div class="panel-body">Panel Content</div>
-								</div>
-
-								<div class="panel panel-info">
-								  <div class="panel-heading">Panel with panel-info class</div>
-								  <div class="panel-body">Panel Content</div>
-								</div>
-
-								<div class="panel panel-warning">
-								  <div class="panel-heading">Panel with panel-warning class</div>
-								  <div class="panel-body">Panel Content</div>
-								</div>
-
-								<div class="panel panel-danger">
-								  <div class="panel-heading">Panel with panel-danger class</div>
-								  <div class="panel-body">Panel Content</div>
-								</div>
-								<div class="panel panel-default">
-								  <div class="panel-heading">Panel with panel-default class</div>
-								  <div class="panel-body">Panel Content</div>
-								</div>
-
-								<div class="panel panel-primary">
-								  <div class="panel-heading">Panel with panel-primary class</div>
-								  <div class="panel-body">Panel Content</div>
-								</div>
-
-								<div class="panel panel-success">
-								  <div class="panel-heading">Panel with panel-success class</div>
-								  <div class="panel-body">Panel Content</div>
-								</div>
-
-								<div class="panel panel-info">
-								  <div class="panel-heading">Panel with panel-info class</div>
-								  <div class="panel-body">Panel Content</div>
-								</div>
-
-								<div class="panel panel-warning">
-								  <div class="panel-heading">Panel with panel-warning class</div>
-								  <div class="panel-body">Panel Content</div>
-								</div>
-								
-								<div class="panel panel-danger">
-								  <div class="panel-heading">Panel with panel-danger class</div>
-								  <div class="panel-body">Panel Content</div>
-								</div>
-						  </div>			  			  			  
+							<div class="panel-group" ng-repeat="adminIPO in adminIPOs | orderBy:sortType:sortReverse | filter:searchStatus | filter:showFinMode | filter:showUser | filter:showStatus ">
+						<div style="max-width:1600px;min-width:740px;margin-right:50px">
+								<div id="record-format" class="panel panel-default">
+								  <table id="record-table" ng-style="recordTheme(adminIPO.theme)">
+									<tr>
+										<td style="width:33%">
+											<table>
+												<tr>
+													<td id="name" ng-bind="adminIPO.enName"></td>
+												</tr>
+												<tr>
+													<td id="ipoId" ng-bind="adminIPO.ipoId"></td>
+												</tr>
+											</table>
+										</td>
+										<td style="width:33%;padding-left:50px">
+											<table id="mode-table">
+												<tr>
+													<td id="financing-mode" ng-if="isFinancing(adminIPO.marginStatus)">{{'maintenance.financing'|translate}} </td>
+													<td ng-if="isFinancing(adminIPO.marginStatus)" width="20px"></td>
+													<!-- either one case -->
+													<td id="ipo-status" ng-if="isIPOComing(adminIPO.subStartTime,adminIPO.approveStatus) && isNotDeletedOrClosed(adminIPO.status)" ng-style="getStatusTheme();">{{'maintenance.comingIn'|translate}}  <span ng-bind="adminIPO.IPOComingDay"></span></td>													
+													<td id="ipo-status" ng-if="isIPOSubEndIn(adminIPO.subStartTime,adminIPO.subCloseTime,adminIPO.approveStatus) && isNotDeletedOrClosed(adminIPO.status)" style="background-color: #DAA520;">{{'maintenance.subEndIn'|translate}}  <span ng-bind="adminIPO.IPORemainDay"></span></td>
+													<td id="ipo-status" ng-if="isIPOSubEnd(adminIPO.subStartTime,adminIPO.subCloseTime,adminIPO.offerCloseTime,adminIPO.approveStatus) && isNotDeletedOrClosed(adminIPO.status)" style="background-color: #FF6347;">{{'maintenance.ended'|translate}}  <span ng-bind="adminIPO.IPOEndedDay"></span></td>
+													<td id="ipo-status" ng-if="isIPOClosed(adminIPO.subCloseTime,adminIPO.offerCloseTime,adminIPO.approveStatus) && isNotDeletedOrClosed(adminIPO.status)" style="background-color: #6A5ACD;">{{'maintenance.closed'|translate}}  <span ng-bind="adminIPO.IPOClosedDay"></span></td>
+													<!-- either one case end-->
+													<td ng-if="isApprovel(adminIPO.approveStatus) && isNotDeletedOrClosed(adminIPO.status)" id="ipo-status-unit" ng-style="getStatusTheme();">
+													<!-- either one case -->
+													<span ng-show="adminIPO.dayUnit == 'years'">{{'maintenance.years'|translate}} </span>
+													<span ng-show="adminIPO.dayUnit == 'year'">{{'maintenance.year'|translate}} </span>
+													<span ng-show="adminIPO.dayUnit == 'months'">{{'maintenance.months'|translate}} </span>
+													<span ng-show="adminIPO.dayUnit == 'month'">{{'maintenance.month'|translate}} </span>
+													<span ng-show="adminIPO.dayUnit == 'days'">{{'maintenance.days'|translate}} </span>
+													<span ng-show="adminIPO.dayUnit == 'day'">{{'maintenance.day'|translate}} </span>													
+													<!-- either one case end-->
+													<span ng-show="isIPOSubEnd(adminIPO.subStartTime,adminIPO.subCloseTime,adminIPO.offerCloseTime) || isIPOClosed(adminIPO.subCloseTime,adminIPO.offerCloseTime)">{{'maintenance.ago'|translate}}<span>
+													</td>
+												</tr>
+											</table>										
+										</td>
+										<td style="width:33%;padding-left:100px">
+											<table style="text-align:right">
+												<tr>
+													<!-- either one case -->
+													<td id="offer-price" ng-if="!usePrice(adminIPO.finalOfferPrice, adminIPO.status)" ng-bind="adminIPO.offerPrice"></td>
+													<td id="offer-price" ng-if="usePrice(adminIPO.finalOfferPrice, adminIPO.status)" ng-bind="adminIPO.finalOfferPrice"></td>
+													<!-- either one case end-->
+												</tr>
+												<tr>
+													<!-- either one case -->
+													<td id="offer-price-range" ng-if="!usePrice(adminIPO.finalOfferPrice, adminIPO.status)">{{'maintenance.offerPriceRange'|translate}}</td>
+													<td id="offer-price-range" ng-if="usePrice(adminIPO.finalOfferPrice, adminIPO.status)">{{'maintenance.offerPrice'|translate}}</td>
+													<!-- either one case end-->
+												</tr>
+											</table>												
+										</td>
+									</tr>
+									<tr>
+									    <!-- either one case -->
+										<td  ng-style="statusTheme(adminIPO.theme);" ng-if="isStatusWaiting(adminIPO.status)" id="admin-status">{{'maintenance.draft'|translate}}</td>
+										<td  ng-style="statusTheme(adminIPO.theme);" ng-if="isStatusPending(adminIPO.status)" id="admin-status">{{'maintenance.pending'|translate}}</td>
+										<td  ng-style="statusTheme(adminIPO.theme);" ng-if="isStatusRejected(adminIPO.status)" id="admin-status">{{'maintenance.rejected'|translate}}</td>
+										<td  ng-style="statusTheme(adminIPO.theme);" ng-if="isStatusComing(adminIPO.status)" id="admin-status">{{'maintenance.coming'|translate}}</td>
+										<td  ng-style="statusTheme(adminIPO.theme);" ng-if="isStatusOpening(adminIPO.status)" id="admin-status">{{'maintenance.opening'|translate}}</td>
+										<td  ng-style="statusTheme(adminIPO.theme);" ng-if="isStatusEnded(adminIPO.status)" id="admin-status">{{'maintenance.ended'|translate}}</td>
+										<td  ng-style="statusTheme(adminIPO.theme);" ng-if="isStatusClosed(adminIPO.status)" id="admin-status">{{'maintenance.closed'|translate}}</td>
+										<td  ng-style="statusTheme(adminIPO.theme);" ng-if="isStatusDeleted(adminIPO.status)" id="admin-status">{{'maintenance.deleted'|translate}}</td>
+										<td  ng-style="statusTheme(adminIPO.theme);" ng-if="isStatusPostponed(adminIPO.status)" id="admin-status">{{'maintenance.postponed'|translate}}</td>
+										<!-- either one case end-->
+										<td  style="width:33%">
+											<table style="margin-bottom:10px">
+												<tr>
+													<td id="period" ng-if="isFinancing(adminIPO.marginStatus)">{{'maintenance.financingPeriod'|translate}} :&nbsp</td>
+													<td id="period-time" ng-if="isFinancing(adminIPO.marginStatus)"><span ng-bind="adminIPO.finPeriod"></span> {{'maintenance.at'|translate}} <span ng-bind="adminIPO.finPeriodEndTime"></span></td>
+												</tr>
+												<tr>
+													<td id="period">{{'maintenance.subPeriod'|translate}} :&nbsp</td>
+													<td id="period-time"><span ng-bind="adminIPO.subSubPeriod"></span> {{'maintenance.at'|translate}} <span ng-bind="adminIPO.subSubPeriodEndTime"></span></td>
+												</tr>
+												<tr>
+													<td id="period">{{'maintenance.close'|translate}} :&nbsp</td>
+													<td id="period-time"><span ng-bind="adminIPO.fmtOfferCloseTime"></span> {{'maintenance.at'|translate}} <span ng-bind="adminIPO.offerCloseTimeInHour"></span></td>
+												</tr>
+											</table>		
+										</td>
+										<td  style="width:33%;padding-left:100px;padding-top:10px;">
+											<table style="text-align:right">
+												<tr>
+													<td id="last-modify-by">{{'maintenance.lastModBy'|translate}} : <span ng-bind="adminIPO.lastModifiedUser"></span></td>													
+												</tr>
+												<tr>
+													<td id="last-modify-time">{{'maintenance.on'|translate}} <span ng-bind="adminIPO.fmtLastModifiedDate"></span> {{'maintenance.at'|translate}} <span ng-bind="adminIPO.lastModifiedTime"></span></td>
+												</tr>
+											</table>															 
+										</td>
+									</tr>
+								  </table>
+								</div>			
+						  </div>
+						  
 					  </div>		  
-				  </div>		
+				  </div>
+						<div class="row">
+								<a id="topOfPage" ng-click="topOfPage()">{{'maintenance.topOfPage'|translate}}</a>        
+						</div>  				  
 		      </div>
-	   </div>
-  </div>
-</div>
+	   </div>	 
+							   
+	  

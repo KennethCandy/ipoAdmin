@@ -6,7 +6,7 @@ function getCurrentDate() {
 	return year + month + day;
 }
 
-function getCurrentDateTime(log) {
+function getCurrentDateTime() {
 	var currentDate = new Date();
 	var year = padLeft(currentDate.getFullYear(), 4); 
 	var month = padLeft(currentDate.getMonth() + 1, 2);

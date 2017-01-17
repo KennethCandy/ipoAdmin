@@ -346,13 +346,13 @@ angular.module('ipoAdminApp.createIPOController', [])
 		if($scope.StockCurrency &&($scope.StockCurrency!=null||$scope.StockCurrency!='')){
 			basicfillField++;
 		}
-		if(angular.isDefined($scope.OfferPriceRangeStart) && ( $scope.OfferPriceRangeStart!=null||$scope.OfferPriceRangeStart!='' )) {
+		if(angular.isDefined($scope.OfferPriceRangeStart) && ( $scope.OfferPriceRangeStart!=null||$scope.OfferPriceRangeStart!=='' )) {
 			basicfillField++;			
 		}
-		if(angular.isDefined($scope.OfferPriceRangeEnd) && ( $scope.OfferPriceRangeEnd!=null||$scope.OfferPriceRangeEnd!='' )) {
+		if(angular.isDefined($scope.OfferPriceRangeEnd) && ( $scope.OfferPriceRangeEnd!=null||$scope.OfferPriceRangeEnd!=='' )) {
 			basicfillField++;			
 		}
-		if(angular.isDefined($scope.BroadLot) && ( $scope.BroadLot!=null||$scope.BroadLot!='' )) {
+		if(angular.isDefined($scope.BroadLot) && ( $scope.BroadLot!=null||$scope.BroadLot!=='' )) {
 			basicfillField++;			
 		}
 		if($scope.StockCurrency && ( $scope.StockCurrency!=null||$scope.StockCurrency!='' )) {
@@ -503,28 +503,25 @@ angular.module('ipoAdminApp.createIPOController', [])
 
 
 	$('#scrollbody').scrollspy({ target: '#navbar-example' })
-   
 
-	
-
-
-
-
-
-
-
-
-
-
-
-
-
-	/*$scope.name = 'hello';
-
-	var watch = $scope.$watch('StockCode',function(newValue,oldValue, scope){
-			console.log('1111111');
+	$http({
+ 		method: 'GET',
+ 		url: 'adminIPOBook.json'
+	}).then(function successCallback(response) {
+		 console.log(response);
+		}, function errorCallback(response) {
+		 console.log('2');
 	});
-*/
+
+
+
+
+
+
+
+
+
+
 
 
 	
@@ -559,6 +556,22 @@ angular.module('ipoAdminApp.createIPOController', [])
 
 	/*$scope.LoadAmountAbove = 10000;
 	$scope.SpecicalInterestRate =2000;*/
+
+	/* guide */
+	$('ul li a').hover(function(){
+		var $t = $(this).parent();//.toggleClass('active');
+		if($t.hasClass('active2')){
+			$t.data('hoverAdd',false);
+		}else{
+			$t.toggleClass('active2');
+			$t.data('hoverAdd',true);
+		}
+	},function(){
+		var $t = $(this).parent();//.toggleClass('active');
+		if($t.data('hoverAdd')){
+			$t.removeClass('active2');
+		}
+	});
    
 	
 }]);

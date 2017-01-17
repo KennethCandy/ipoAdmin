@@ -1,7 +1,6 @@
 /* --- general start --- */
-
 h1 {
-	font-size: 24px !important;
+	font-size: 30px !important;
 	font-weight: bold !important;
 	line-height: 40px !important;
 }
@@ -14,25 +13,368 @@ h1 {
 	margin-left: 10px !important;
 }
 
-/* --- admin header start --- */
-.admin-header {
+.container {
+	position: absolute;
+	padding-right: 0px;
+	padding-left: 0px;
+}
 
-	padding-top: 3px;
-	padding-bottom: 2px;
-	padding-right: 3px;
-	padding-left: 3px;
-	color: #808080;
+body {
+background-color:#F0F0F0;
+}
+/* --- maintenance start --- */
+
+.float.affix{
+        top: 20px; /* Set the top position of pinned element */
+    }
+	
+@media screen and (max-width: 810px) {
+    #moveRecord  {
+      margin-left: 5px;	
+    }
+  }
+
+.navbar {
+margin-bottom: 0px;
+}
+
+.admin-header {
+	color: #808080;	
 }
 
 .admin-header-selected {
 	color: #404040;	
 }
 
-.container {
-	position: absolute;
-	padding-right: 0px;
-	padding-left: 0px;
+.major-filter-panel {
+	 border-bottom: solid #E0E0E0;
+	 padding-bottom: 10px;
+	 padding-top: 20px;
+	 background-color: white;
 }
+
+.filter-detail-panel {	
+	 padding-bottom: 1px;
+	 background-color: white;
+}
+
+.main-body {
+	background-color: #F0F0F0;
+	padding-top: 10px;
+	height: auto;
+}
+
+.record-list-panel {
+	background-color:white;
+	margin-bottom:20px;
+	margin-right:35px;
+	min-width:735px;
+}
+
+/*buttom
+
+*/
+
+
+.button {
+  display: inline-block;
+  height: 40px;
+  width: 175px;
+  line-height: 40px;
+  padding: 0px 45px 0px 55px;
+  position: relative;
+  color:white;
+  text-decoration: none;
+  letter-spacing: 1px;
+  font-weight:bold;
+}
+
+.button span {
+  position: absolute;
+  left: 0;
+  width: 50px ;
+  text-align: center;
+  font-size: 30px;
+}
+.button:link{
+text-decoration: none;
+}
+.button:visited {
+text-decoration: none;
+}
+.button:hover {
+text-decoration: none;
+}
+.button:active {
+text-decoration: none;
+}
+
+.button.grey {
+  background: white;
+  color:#A9A9A9;
+  border-bottom: solid #A9A9A9;
+}
+
+.button.grey.active {
+  color:white;
+  background: #DCDCDC;
+  border-bottom: solid #A9A9A9;
+}
+
+.button.grey.active span {
+  color:white;
+  background: #A9A9A9; 
+}
+
+.button.blue {
+  background: white;
+  color:#1E90FF;
+  border-bottom: solid #1E90FF;
+}
+
+.button.blue.active {
+  color:white;
+  background: #00008B;
+  border-bottom: solid #1E90FF;
+}
+
+.button.blue.active span {
+  color:white;
+  background: #1E90FF;
+}
+
+.button.red {
+  background: white;
+  color:#FFB6C1;
+  border-bottom: solid #FFB6C1;
+}
+
+.button.red.active {
+  color:white;
+  background: #FF4500;
+  border-bottom: solid #FFB6C1;
+}
+
+.button.red.active span {
+  color:white;
+  background: #FFB6C1;
+}
+
+.button.green {
+  background: white;
+  color:#32CD32;
+  border-bottom: solid #32CD32;
+}
+
+.button.green.active {
+   color:white;
+  background: #006400;
+  border-bottom: solid #32CD32;
+}
+.button.green.active span {
+   color:white;
+  background: #32CD32;
+}
+
+.button.yellow {
+  background: white;
+  color:#FFD700;
+  border-bottom: solid #FFD700;
+}
+
+
+.button.yellow.active {
+  color:white;
+  background: #DAA520;
+  border-bottom: solid #FFD700;
+}
+.button.yellow.active span{
+  color:white;
+  background: #FFD700;
+}
+
+.button.orange {
+  background: white;
+  color:#FF8C00;
+  border-bottom: solid #FF8C00;
+}
+
+
+.button.orange.active {
+  color:white;
+  background: #FF6347;
+  border-bottom: solid #FF8C00;
+}
+
+.button.orange.active span {
+  color:white;
+  background: #FF8C00;
+}
+
+.button.purple {
+  background: white;
+  color:#9370DB;
+  border-bottom: solid #9370DB;
+}
+
+
+.button.purple.active {
+  color:white;
+  background: #6A5ACD;
+  border-bottom: solid #9370DB;
+}
+
+.button.purple.active span {
+  color:white;
+  background: #9370DB;
+}
+
+/* new ipo icon*/
+.glyphicon {
+	right:12px;
+}
+
+
+#filter-detail-panel #filterChosen  {
+	position:relative;
+	display: block;
+	padding:15px 15px;
+}
+#filter-detail-panel #filterChosen span  {
+	font-weight:bold;
+}
+
+#floating-panel #sort-by {
+	position:relative;
+	display: block;
+	padding:15px 15px;
+	
+}
+
+#floating-panel .floating-panel-table th {
+ border: 1px solid #F0F0F0;
+ padding:0 0 0 10px;
+ color: #1E90FF;
+
+}
+#floating-panel .floating-panel-table td {
+ border: 1px solid #F0F0F0;
+ padding:0 0 0 10px;
+}
+
+/*record-panel*/
+#record-format #name {
+color: #4169E1;
+padding-left:20px;
+padding-top:10px;
+font-size:24px;
+font-weight: bold;
+}
+
+#record-format #ipoId {
+color: #A9A9A9;
+padding-left:20px;
+}
+
+#record-format #financing-mode {
+background-color: #FFD700;
+padding-left:20px;
+padding-right:20px;
+padding-top:5px;
+padding-bottom:5px;
+color: #6A5ACD;
+font-weight: bold;
+}
+
+#record-format #ipo-status {
+padding-left:20px;
+padding-right:5px;
+padding-top:5px;
+padding-bottom:5px;
+color: white;
+font-weight: bold;
+
+}
+
+#record-format #ipo-status-unit {
+padding-top:5px;
+padding-bottom:5px;
+padding-right:20px;
+color: white;
+font-weight: bold;
+
+}
+
+#record-format #mode-table {
+margin-bottom:10px
+}
+
+#record-format #offer-price {
+font-weight: bold;
+font-size:24px;
+}
+
+#record-format #offer-price-range {
+color: #A9A9A9;
+padding-left:20px;
+}
+
+#record-format #admin-status {
+font-weight: bold;
+vertical-align: bottom;
+padding-left:20px;
+font-size:20px;
+}
+#record-format #last-modify-by {
+color: #A9A9A9;
+}
+#record-format #last-modify-time {
+color: #A9A9A9;
+}
+
+#record-format #last-modify-by  span {
+color: black;
+font-weight: bold;
+font-size:18px;
+}
+#record-format #last-modify-time span {
+color: black;
+font-weight: bold;
+font-size:18px;
+}
+
+#record-format #period  {
+color: #A9A9A9;
+text-align: right;
+font-size:16px;
+}
+
+#record-format #period-time {
+color: #A9A9A9;
+}
+
+#record-format #period-time span {
+color: black;
+font-weight: bold;
+font-size:16px;
+}
+
+#options {
+background-color:white;
+}
+
+#topOfPage{
+color: #1E90FF;
+font-weight: bold;
+margin-left: 15px;
+position:absolute;
+bottom: -30px;
+}
+
+
+
+
+/* creatIPO  add css */
 .btn-ribbon{
 	color: #fff;
 	background-color:#FD9999;
@@ -123,15 +465,8 @@ h1 {
 	right:89% !important;
 }
 .input-group-addon{
-	background-color: #fff;
-    border: 1px solid #fff;
-}
-.navbar>.container .navbar-brand, .navbar>.container-fluid .navbar-brand{
-	/* margin-left:300px; */
-}
-.navbar-default .navbar-nav > li > a:focus, .navbar-default .navbar-nav > li > a:hover{
-	background-color: #12d6f6 !important;
-	color: #fff;
+	background-color: #F0F0F0;
+    border: 1px solid #F0F0F0;
 }
 .badge {
 	color: #999;
@@ -141,33 +476,18 @@ h1 {
 	/* a链接中字体颜色 */
 	color: #fff;
 }
+ul .active a,ul .active2 a{
+	background-color: #12d6f6 !important;
+	color: #fff;
+}
 .navbar-default{
-	background-color: #fff;
-    border-color: #fff;
+	background-color: #F0F0F0;
+    border-color: #F0F0F0;
 }
 hr {
     margin-top: 20px;
     margin-bottom: 0px;
 }
- #abasic{
-	background-color: #ddd;
-	display: inline-block;  	
- 	transform:skew(-45deg);
-
-} 
-#afee,#aquantity,#afinancing {
-	background-color: #ddd;
-	display: inline-block;  	
- 	transform: skew(-45deg);
- 	border: 2px solid white;
- 	border-style:none solid;	
-}
-#abasicdiv{
-	transform: skew(45deg);	
-}
-#afeediv,#aquantitydiv,#afinancingdiv{
-	transform: skew(45deg);
-} 
 
 @-moz-document url-prefix() {
   fieldset { display: table-cell; }
@@ -186,8 +506,6 @@ hr {
 .tds{
 	color:#ddd;
 }
-
-
 .popover.right>.arrow:after{
 	left: 3px;/*右三角宽度*/
 }
@@ -213,7 +531,7 @@ hr {
 }
 
 
-/* .navcss {
+.navcss {
 		min-height: 40px;
 }
 .navcss ul {
@@ -261,19 +579,11 @@ hr {
 .navcss ul li:first-child a:before {
 	display: none; 
 }
-.navbar-default .navbar-nav > li > a:focus, .navbar-default .navbar-nav > li > a:hover:after{
-	background-color: #12d6f6 !important;
-	color: #fff;
-} */
-
-
-
-
-
-
-
-
-
-
-
-
+.active a:before,.active2 a:before {
+	border-bottom: 20px solid #12d6f6 !important;
+	border-right: 20px solid #12d6f6 !important;
+} 
+.active a:after,.active2 a:after {
+	border-top: 20px solid #12d6f6 !important;
+	border-left: 20px solid #12d6f6 !important;
+} 
