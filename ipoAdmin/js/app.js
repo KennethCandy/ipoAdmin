@@ -14,11 +14,7 @@ angular.module('ipoAdminApp', ['ng', 'ngRoute', 'ui.router', 'ipoAdminApp.mainte
 		url: '/createIPO',
 		templateUrl: 'createIPO.html',
 		controller: 'createIPOCtrl'
-	}).state('createIPO#basic', {
-		url: '/createIPO',
-		templateUrl: 'createIPO.html#basic',
-		controller: 'createIPOCtrl'
-	})   ;
+	})
 	
 	
 

@@ -379,7 +379,7 @@ angular.module('ipoAdminApp.createIPOController', [])
 		if(angular.isDefined($scope.ListingDate) && ( $scope.ListingDate!=null||$scope.ListingDate!='' )) {
 			basicfillField++;			
 		}
-		if(angular.isDefined($scope.AcceptSubscription) && ( $scope.AcceptSubscription!=null||$scope.AcceptSubscription!='' )) {
+		if($scope.AcceptSubscription && ( $scope.AcceptSubscription!=null||$scope.AcceptSubscription!=='' )) {
 			basicfillField++;			
 		}			
 		
