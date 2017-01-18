@@ -19,161 +19,188 @@ function padLeft(str, length) {
     if(!pattern.test(str)){
     	return "";
     }
-	if(str.toString().length >= length) {
-		return str; 
-	}
-	else {
-		return padLeft("0" + str, length);
-	}
+    if(str.toString().length >= length) {
+      return str; 
+  }
+  else {
+      return padLeft("0" + str, length);
+  }
 }
 
 /*Quantity Amount Table */
-    /*表格一*/ 
-    function rlsAmount(){
-        var commissionRate =$('#CommissionRate').val();
-        var levyRate = $('#LevyRate').val();
-        var tradingFeeRate = $('#TradingFeeRate').val() ;
-        var icLevyRate =$('#InvestorCompensationLevyRate').val() ;   
-        var price = $('#OfferPriceRangeEnd').val();
-        var quantityFrom =$('#QuantityFrom').val();
-        var quantityTo =$('#QuantityTo').val();
-        var interval = $('#Interval').val();
-        var qtyarrysumtemp = (quantityTo - quantityFrom)/interval;
-        var qtyarrysum = Math.ceil(qtyarrysumtemp);
-        var obj = [];
-        var qtyarry = new Array(qtyarrysum);
+/*表格一*/
+function addQuantityAmountTableRange(){
+    var quantityFrom =$('#QuantityFrom').val();
+    var quantityTo =$('#QuantityTo').val();
+    var interval = $('#Interval').val();
+    var qtyarrysumtemp = (quantityTo - quantityFrom)/interval;
+    var qtyarrysum = Math.ceil(qtyarrysumtemp);
+    var obj = [];
+    var qtyarry = new Array(qtyarrysum);
 
-        for(var i=0;i<qtyarry.length-1;i++){
-            qtyarry[i] = parseInt(quantityFrom, 10) + interval*(i+1);       
-        }
-        qtyarry[qtyarrysum-1] = quantityTo;
-        var amount = new Array(qtyarrysum);
-
-        for(var i=0;i<amount.length;i++){
-            amount[i] = ((price * qtyarry[i])*(1 + commissionRate/100 + levyRate/100 + icLevyRate/100 + tradingFeeRate/100)).toFixed(2);        
-            var item = {};
-            item.key = quantityFrom+'-'+quantityTo ;
-            item.range = quantityFrom+'< quantity <= '+quantityTo ;
-            item.qty = qtyarry[i];
-            item.amt = amount[i];
-            item.del = (i== 0 ? true : false);
-            obj[obj.length] = item;     
-        }
-        return obj;
+    for(var i=0;i<qtyarry.length-1;i++){
+        qtyarry[i] = parseInt(quantityFrom, 10) + interval*(i+1);       
     }
+    qtyarry[qtyarrysum-1] = quantityTo;
+    var amount = new Array(qtyarrysum);
 
-    function rbiCharge(){
-        var commissionRate =$('#CommissionRate').val();
-        var levyRate = $('#LevyRate').val();
-        var tradingFeeRate = $('#TradingFeeRate').val() ;
-        var icLevyRate =$('#InvestorCompensationLevyRate').val() ;   
-        var price = $('#OfferPriceRangeEnd').val();
-        var quantityFrom =$('#QuantityFrom').val();
-        var quantityTo =$('#QuantityTo').val();
-        var interval = $('#Interval').val();
-        var qtyarrysumtemp = (quantityTo - quantityFrom)/interval;
-        var qtyarrysum = Math.ceil(qtyarrysumtemp);
-        var obj = [];
-        var qtyarry = new Array(qtyarrysum);
+    for(var i=0;i<amount.length;i++){                  
+        var item = {};
+        item.key = quantityFrom+'-'+quantityTo ;
+        item.range = quantityFrom+'< quantity <= '+quantityTo ;
+        item.qty = qtyarry[i];
+        item.amt = '';
+        item.del = (i== 0 ? true : false);
+        obj[obj.length] = item;     
+    }
+    return obj;
+} 
 
-        for(var i=0;i<qtyarry.length-1;i++){
-            qtyarry[i] = parseInt(quantityFrom, 10) + interval*(i+1);       
-        }
-        qtyarry[qtyarrysum-1] = quantityTo;
-        var amount = new Array(qtyarrysum);
+/*function rlsAmount(){
+    var commissionRate =$('#CommissionRate').val();
+    var levyRate = $('#LevyRate').val();
+    var tradingFeeRate = $('#TradingFeeRate').val() ;
+    var icLevyRate =$('#InvestorCompensationLevyRate').val() ;   
+    var price = $('#OfferPriceRangeEnd').val();
+    var quantityFrom =$('#QuantityFrom').val();
+    var quantityTo =$('#QuantityTo').val();
+    var interval = $('#Interval').val();
+    var qtyarrysumtemp = (quantityTo - quantityFrom)/interval;
+    var qtyarrysum = Math.ceil(qtyarrysumtemp);
+    var obj = [];
+    var qtyarry = new Array(qtyarrysum);
 
-        for(var i=0;i<amount.length;i++){
-            amount[i] = (parseFloat((price * qtyarry[i]).toFixed(2))
+    for(var i=0;i<qtyarry.length-1;i++){
+        qtyarry[i] = parseInt(quantityFrom, 10) + interval*(i+1);       
+    }
+    qtyarry[qtyarrysum-1] = quantityTo;
+    var amount = new Array(qtyarrysum);
+
+    for(var i=0;i<amount.length;i++){
+        amount[i] = ((price * qtyarry[i])*(1 + commissionRate/100 + levyRate/100 + icLevyRate/100 + tradingFeeRate/100)).toFixed(2);        
+        var item = {};
+        item.key = quantityFrom+'-'+quantityTo ;
+        item.range = quantityFrom+'< quantity <= '+quantityTo ;
+        item.qty = qtyarry[i];
+        item.amt = amount[i];
+        item.del = (i== 0 ? true : false);
+        obj[obj.length] = item;     
+    }
+    return obj;
+}       
+
+function rbiCharge(){
+    var commissionRate =$('#CommissionRate').val();
+    var levyRate = $('#LevyRate').val();
+    var tradingFeeRate = $('#TradingFeeRate').val() ;
+    var icLevyRate =$('#InvestorCompensationLevyRate').val() ;   
+    var price = $('#OfferPriceRangeEnd').val();
+    var quantityFrom =$('#QuantityFrom').val();
+    var quantityTo =$('#QuantityTo').val();
+    var interval = $('#Interval').val();
+    var qtyarrysumtemp = (quantityTo - quantityFrom)/interval;
+    var qtyarrysum = Math.ceil(qtyarrysumtemp);
+    var obj = [];
+    var qtyarry = new Array(qtyarrysum);
+
+    for(var i=0;i<qtyarry.length-1;i++){
+        qtyarry[i] = parseInt(quantityFrom, 10) + interval*(i+1);       
+    }
+    qtyarry[qtyarrysum-1] = quantityTo;
+    var amount = new Array(qtyarrysum);
+
+    for(var i=0;i<amount.length;i++){
+        amount[i] = (parseFloat((price * qtyarry[i]).toFixed(2))
             + parseFloat(((price * qtyarry[i])*commissionRate/100).toFixed(2))
             + parseFloat(((price * qtyarry[i])*levyRate/100).toFixed(2))
             + parseFloat(((price * qtyarry[i])*icLevyRate/100).toFixed(2))
             + parseFloat(((price * qtyarry[i])*tradingFeeRate/100).toFixed(2))).toFixed(2);
-            var item = {};
-            item.key = quantityFrom+'-'+quantityTo ;
-            item.range = quantityFrom+'< quantity <= '+quantityTo ;
-            item.qty = qtyarry[i];
-            item.amt = amount[i];
-            item.del = (i== 0 ? true : false);
-            obj[obj.length] = item;     
-        }   
-        return obj;
+        var item = {};
+        item.key = quantityFrom+'-'+quantityTo ;
+        item.range = quantityFrom+'< quantity <= '+quantityTo ;
+        item.qty = qtyarry[i];
+        item.amt = amount[i];
+        item.del = (i== 0 ? true : false);
+        obj[obj.length] = item;     
+    }   
+    return obj;
+}
+
+function bousarlsAmount(){
+    var commissionRate =$('#CommissionRate').val();
+    var levyRate = $('#LevyRate').val();
+    var tradingFeeRate = $('#TradingFeeRate').val() ;
+    var icLevyRate =$('#InvestorCompensationLevyRate').val() ;   
+    var price = $('#OfferPriceRangeEnd').val();
+    var quantityFrom =$('#QuantityFrom').val();
+    var quantityTo =$('#QuantityTo').val();
+    var interval = $('#Interval').val();
+    var qtyarrysumtemp = (quantityTo - quantityFrom)/interval;
+    var qtyarrysum = Math.ceil(qtyarrysumtemp);
+    var obj = [];
+    var qtyarry = new Array(qtyarrysum);
+
+    for(var i=0;i<qtyarry.length-1;i++){
+        qtyarry[i] = parseInt(quantityFrom, 10) + interval*(i+1);       
     }
-    
-    function bousarlsAmount(){
-        var commissionRate =$('#CommissionRate').val();
-        var levyRate = $('#LevyRate').val();
-        var tradingFeeRate = $('#TradingFeeRate').val() ;
-        var icLevyRate =$('#InvestorCompensationLevyRate').val() ;   
-        var price = $('#OfferPriceRangeEnd').val();
-        var quantityFrom =$('#QuantityFrom').val();
-        var quantityTo =$('#QuantityTo').val();
-        var interval = $('#Interval').val();
-        var qtyarrysumtemp = (quantityTo - quantityFrom)/interval;
-        var qtyarrysum = Math.ceil(qtyarrysumtemp);
-        var obj = [];
-        var qtyarry = new Array(qtyarrysum);
+    qtyarry[qtyarrysum-1] = quantityTo;
+    var amount = new Array(qtyarrysum);
 
-        for(var i=0;i<qtyarry.length-1;i++){
-            qtyarry[i] = parseInt(quantityFrom, 10) + interval*(i+1);       
-        }
-        qtyarry[qtyarrysum-1] = quantityTo;
-        var amount = new Array(qtyarrysum);
+    for(var i=0;i<amount.length;i++){
+        amount[i] =qtyarry[i]/1000 * ((price *1000)*(1 + commissionRate/100 + levyRate/100 + icLevyRate/100 + tradingFeeRate/100)).toFixed(2);
+        var item = {};
+        item.key = quantityFrom+'-'+quantityTo ;
+        item.range = quantityFrom+'< quantity <= '+quantityTo ;
+        item.qty = qtyarry[i];
+        item.amt = amount[i];
+        item.del = (i== 0 ? true : false);
+        obj[obj.length] = item;     
+    }   
+    return obj;
+}
 
-        for(var i=0;i<amount.length;i++){
-            amount[i] =qtyarry[i]/1000 * ((price *1000)*(1 + commissionRate/100 + levyRate/100 + icLevyRate/100 + tradingFeeRate/100)).toFixed(2);
-            var item = {};
-            item.key = quantityFrom+'-'+quantityTo ;
-            item.range = quantityFrom+'< quantity <= '+quantityTo ;
-            item.qty = qtyarry[i];
-            item.amt = amount[i];
-            item.del = (i== 0 ? true : false);
-            obj[obj.length] = item;     
-        }   
-        return obj;
+function boucarbiCharge(){
+    var commissionRate =$('#CommissionRate').val();
+    var levyRate = $('#LevyRate').val();
+    var tradingFeeRate = $('#TradingFeeRate').val() ;
+    var icLevyRate =$('#InvestorCompensationLevyRate').val() ;   
+    var price = $('#OfferPriceRangeEnd').val();
+    var quantityFrom =$('#QuantityFrom').val();
+    var quantityTo =$('#QuantityTo').val();
+    var interval = $('#Interval').val();
+    var qtyarrysumtemp = (quantityTo - quantityFrom)/interval;
+    var qtyarrysum = Math.ceil(qtyarrysumtemp);
+    var obj = [];
+    var qtyarry = new Array(qtyarrysum);
+
+    for(var i=0;i<qtyarry.length-1;i++){
+        qtyarry[i] = parseInt(quantityFrom, 10) + interval*(i+1);       
     }
+    qtyarry[qtyarrysum-1] = quantityTo;
+    var amount = new Array(qtyarrysum);
 
-    function boucarbiCharge(){
-        var commissionRate =$('#CommissionRate').val();
-        var levyRate = $('#LevyRate').val();
-        var tradingFeeRate = $('#TradingFeeRate').val() ;
-        var icLevyRate =$('#InvestorCompensationLevyRate').val() ;   
-        var price = $('#OfferPriceRangeEnd').val();
-        var quantityFrom =$('#QuantityFrom').val();
-        var quantityTo =$('#QuantityTo').val();
-        var interval = $('#Interval').val();
-        var qtyarrysumtemp = (quantityTo - quantityFrom)/interval;
-        var qtyarrysum = Math.ceil(qtyarrysumtemp);
-        var obj = [];
-        var qtyarry = new Array(qtyarrysum);
-
-        for(var i=0;i<qtyarry.length-1;i++){
-            qtyarry[i] = parseInt(quantityFrom, 10) + interval*(i+1);       
-        }
-        qtyarry[qtyarrysum-1] = quantityTo;
-        var amount = new Array(qtyarrysum);
-
-        for(var i=0;i<amount.length;i++){
-            amount[i] =qtyarry[i]/1000 * (parseFloat((price * 1000).toFixed(2))
+    for(var i=0;i<amount.length;i++){
+        amount[i] =qtyarry[i]/1000 * (parseFloat((price * 1000).toFixed(2))
             + parseFloat(((price * 1000)*commissionRate/100).toFixed(2))
             + parseFloat(((price * 1000)*levyRate/100).toFixed(2))
             + parseFloat(((price * 1000)*icLevyRate/100).toFixed(2))
             + parseFloat(((price * 1000)*tradingFeeRate/100).toFixed(2))).toFixed(2);
-            var item = {};
-            item.key = quantityFrom+'-'+quantityTo ;
-            item.range = quantityFrom+'< quantity <= '+quantityTo ;
-            item.qty = qtyarry[i];
-            item.amt = amount[i];
-            item.del = (i== 0 ? true : false);
-            obj[obj.length] = item;     
-        }   
-        return obj;
-    }
+        var item = {};
+        item.key = quantityFrom+'-'+quantityTo ;
+        item.range = quantityFrom+'< quantity <= '+quantityTo ;
+        item.qty = qtyarry[i];
+        item.amt = amount[i];
+        item.del = (i== 0 ? true : false);
+        obj[obj.length] = item;     
+    }   
+    return obj;
+}*/
 
 /*字段校验*/
 /*填充*/
 function stockCodeFormat(str) {	
-   	var newval = padLeft(str, 5);
-	return newval;   
+    var newval = padLeft(str, 5);
+    return newval;   
 }
 /*数字输入位数限制*/
 function onlyNumber(value,sName,event) {
@@ -206,21 +233,21 @@ function onlyNumber(value,sName,event) {
         event.returnValue = false;
         event.preventDefault();
         return;   
- 	}
- 	if (dotPos >= value) {    	
+    }
+    if (dotPos >= value) {    	
         event.returnValue =false;
         event.preventDefault();          
         return ;   
     }   
- 	event.returnValue =true;
-			 
- }
+    event.returnValue =true;
+    
+}
 /*输入字符位数限制*/
- function numberofchar(value,sName,event){
- 	var keyCode = event.which;
-    var dotPos = ( sName || '' ).length;
+function numberofchar(value,sName,event){
+  var keyCode = event.which;
+  var dotPos = ( sName || '' ).length;
      //control char is ok
-    if (keyCode < 48) {
+     if (keyCode < 48) {
         event.returnValue = true;
         return;   
     }    
@@ -230,87 +257,87 @@ function onlyNumber(value,sName,event) {
         return ;   
     }         
     event.returnValue =true;  
- }
+}
 /*字符位数限制用于blur*/
- function digitsofchar(value,sName){
- 	var dotPos = ( sName || '' ).length;
- 	if(dotPos <= value){
- 		return sName;
- 	}
- 	if (dotPos > value) {    	
-       sName = sName.substring(0,value);   
-        return sName;   
-    }    
+function digitsofchar(value,sName){
+  var dotPos = ( sName || '' ).length;
+  if(dotPos <= value){
+     return sName;
  }
+ if (dotPos > value) {    	
+     sName = sName.substring(0,value);   
+     return sName;   
+ }    
+}
 /*输入数字位数限制用于blur*/
- function digitsofnum(value,sName){
- 	var dotPos = (( sName || '' ) + '').length;
- 	var pattern=/\d/;
- 	if(!pattern.test(sName)){
-    	return "";
-    } 
- 	if(dotPos <= value){
- 		return sName;
- 	}
- 	if (dotPos > value) {    	
-       sName = sName.substring(0,value);   
-        return sName;   
-    }     
- }
- /*数字限制*/
- function digitlimt(sName){
+function digitsofnum(value,sName){
+  var dotPos = (( sName || '' ) + '').length;
+  var pattern=/\d/;
+  if(!pattern.test(sName)){
+   return "";
+} 
+if(dotPos <= value){
+ return sName;
+}
+if (dotPos > value) {    	
+ sName = sName.substring(0,value);   
+ return sName;   
+}     
+}
+/*数字限制*/
+function digitlimt(sName){
     var pattern=/\d/;
     if(!pattern.test(sName)){
         sName = "";
         return sName ;
     }
     return sName;
- }
+}
 
- /*输入带小数点的位数限制*/
- function decimallimit(inte,deci,sName,id,event){ 	
- 		sName = sName || ''; 		
+/*输入带小数点的位数限制*/
+function decimallimit(inte,deci,sName,id,event){ 	
+ sName = sName || ''; 		
  		/*var reg = /^(([1-9]\d{0,9}\.\d{0,2})|([0]\.\d{0,2})|([1-9]\d{0,9}))$/;
  		if(sName.length>0){
        	if(!reg.test(sName)){
        	event.preventDefault();
     	return ;
-    	}}*/	
-        var keyCode = event.which;
+    }}*/	
+    var keyCode = event.which;
         //space is not allowed
         if (keyCode == 32) {
         	event.returnValue = false;
-	        event.preventDefault();
-	        return;
-        }
+           event.preventDefault();
+           return;
+       }
         //control char is ok
         if (keyCode < 48) {
             event.returnValue = true;        
-        	return;
+            return;
         }
         //letter is not not allowed
         if (keyCode > 57 && keyCode < 96){
-         	event.returnValue = false;
-	        event.preventDefault();
-	        return;
-        }
-        if (keyCode > 105 && keyCode != 110 && keyCode != 190){
-         	event.returnValue = false;
-	        event.preventDefault();
-	        return;
-        }  
-        	var ranagePos = document.getElementById(id);
-            var startPos = ranagePos.selectionStart;
-            var endPos = ranagePos.selectionEnd;
+          event.returnValue = false;
+          event.preventDefault();
+          return;
+      }
+      if (keyCode > 105 && keyCode != 110 && keyCode != 190){
+          event.returnValue = false;
+          event.preventDefault();
+          return;
+      }  
+      var ranagePos = document.getElementById(id);
+      var startPos = ranagePos.selectionStart;
+      var endPos = ranagePos.selectionEnd;
 
-            var curVal = sName;
-            var dotPos = curVal.indexOf(".");
+      var curVal = sName;
+      var dotPos = curVal.indexOf(".");
             //more '.' is not allowed
             if (dotPos >= 0) {
                 if ((keyCode == 110 || keyCode == 190) && (dotPos > endPos || dotPos < startPos)) {
                     event.returnValue = false;
-			        event.preventDefault();
-			        return;
+                    event.preventDefault();
+                    return;
                 }
             }
             var plusData = "";
@@ -328,18 +355,18 @@ function onlyNumber(value,sName,event) {
                         //alert("Plus length is excceed:"+inte);
                         if (keyCode == 110 || keyCode == 190) {
                             event.returnValue = true;
-            			return ;
+                            return ;
                         }
                         event.returnValue = false;
-				        event.preventDefault();
-				        return;
+                        event.preventDefault();
+                        return;
                     } else {
                         event.returnValue = true;
-            			return ;
+                        return ;
                     }
                 } else {
                     event.returnValue = true;
-            			return ;
+                    return ;
                 }
             } else if (startPos > dotPos) {
                 if (endPos == startPos) {
@@ -347,44 +374,44 @@ function onlyNumber(value,sName,event) {
                         //alert("digitData length is excceed:"+deci);
                         if (keyCode == 110 || keyCode == 190) {
                             event.returnValue = true;
-            				return ;
+                            return ;
                         }
                         event.returnValue = false;
-				        event.preventDefault();
-				        return;
+                        event.preventDefault();
+                        return;
                     } else {
                         event.returnValue = true;
-            			return ;
+                        return ;
                     }
                 } else {
                     event.returnValue = true;
-           	 		return ;
+                    return ;
                 }
             }
             event.returnValue = true;
             return ;
- }
+        }
 
 
-  /*权限*/
-    function showAccRej(machker,vemode){
-        return machker & vemode;
-    }
+        /*权限*/
+        function showAccRej(machker,vemode){
+            return machker & vemode;
+        }
 
-    function showBack(machker,vemode){
-        return !(machker ^ vemode);
-    }
+        function showBack(machker,vemode){
+            return !(machker ^ vemode);
+        }
 
-    function showEdit(machker,vemode){
-        return (!machker) & (!vemode);
-    }
+        function showEdit(machker,vemode){
+            return (!machker) & (!vemode);
+        }
 
-    function showSSDPR(machker,vemode){
-        return (machker ^ vemode)&vemode;
-    }
+        function showSSDPR(machker,vemode){
+            return (machker ^ vemode)&vemode;
+        }
 
-    function disableFields(machker,vemode){
-        return !((machker ^ vemode)&vemode);
-    }
+        function disableFields(machker,vemode){
+            return !((machker ^ vemode)&vemode);
+        }
 
 

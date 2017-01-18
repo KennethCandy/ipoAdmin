@@ -375,6 +375,10 @@ bottom: -30px;
 
 
 /* creatIPO  add css */
+.fa-clock-o {
+   right: 150px;
+
+}
 .btn-ribbon{
 	color: #fff;
 	background-color:#FD9999;
@@ -512,6 +516,7 @@ hr {
 
 .selectdown{
 	color: #12d6f6;
+  font-style:italic;
 }
 .warningfont::before{
 	font-family: Glyphicons Halflings; 
