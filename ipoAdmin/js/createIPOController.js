@@ -370,86 +370,85 @@ angular.module('ipoAdminApp.createIPOController', [])
     /*progress*/	
     function basicPro(){		
     	var basicfillField = 0;
-    	if(angular.isDefined($scope.StockCode) && ( $scope.StockCode!=null||$scope.StockCode!='' )) {
+    	if(angular.isDefined($scope.StockCode) && ( $scope.StockCode!=null && $scope.StockCode!='' )) {
     		basicfillField++;			
     	}
-    	if(angular.isDefined($scope.IPOCode) && ($scope.IPOCode!=null||$scope.IPOCode!='')){
+    	if(angular.isDefined($scope.IPOCode) && ($scope.IPOCode!=null && $scope.IPOCode!='')){
     		basicfillField++;
     	}
-    	if(angular.isDefined($scope.EnglishStockName)&&($scope.EnglishStockName!=null||$scope.EnglishStockName!='')){
+    	if(angular.isDefined($scope.EnglishStockName)&&($scope.EnglishStockName!=null && $scope.EnglishStockName!='')){
     		basicfillField++;
     	}
-    	if(angular.isDefined($scope.TranditionalChineseName) && ($scope.TranditionalChineseName!=null||$scope.TranditionalChineseName!='')){
+    	if(angular.isDefined($scope.TranditionalChineseName) && ($scope.TranditionalChineseName!=null && $scope.TranditionalChineseName!='')){
     		basicfillField++;
     	}
-    	if(angular.isDefined($scope.SimplifiedChineseName) &&($scope.SimplifiedChineseName!=null||$scope.SimplifiedChineseName!='')){
+    	if(angular.isDefined($scope.SimplifiedChineseName) &&($scope.SimplifiedChineseName!=null && $scope.SimplifiedChineseName!='')){
     		basicfillField++;
     	}
-    	if($scope.StockCurrency &&($scope.StockCurrency!=null||$scope.StockCurrency!='')){
+    	if($scope.StockCurrency &&($scope.StockCurrency!=null && $scope.StockCurrency!='')){
     		basicfillField++;
     	}
-    	if(angular.isDefined($scope.OfferPriceRangeStart) && ( $scope.OfferPriceRangeStart!=null||$scope.OfferPriceRangeStart!=='' )) {
+    	if(angular.isDefined($scope.OfferPriceRangeStart) && ( $scope.OfferPriceRangeStart!=null && $scope.OfferPriceRangeStart!='' )) {
     		basicfillField++;			
     	}
-    	if(angular.isDefined($scope.OfferPriceRangeEnd) && ( $scope.OfferPriceRangeEnd!=null||$scope.OfferPriceRangeEnd!=='' )) {
+    	if(angular.isDefined($scope.OfferPriceRangeEnd) && ( $scope.OfferPriceRangeEnd!=null && $scope.OfferPriceRangeEnd!='' )) {
     		basicfillField++;			
     	}
-    	if(angular.isDefined($scope.BroadLot) && ( $scope.BroadLot!=null||$scope.BroadLot!=='' )) {
+    	if(angular.isDefined($scope.BroadLot) && ( $scope.BroadLot!=null && $scope.BroadLot!=='' )) {
     		basicfillField++;			
     	}
-    	if($scope.StockCurrency && ( $scope.StockCurrency!=null||$scope.StockCurrency!='' )) {
+    	if($scope.StockCurrency && ( $scope.StockCurrency!=null && $scope.StockCurrency!='' )) {
     		basicfillField++;			
     	}
-    	if(angular.isDefined($scope.OnlineIPOStartDate) && ( $scope.OnlineIPOStartDate!=null||$scope.OnlineIPOStartDate!='' )) {
+    	if(angular.isDefined($scope.OnlineIPOStartDate) && ( $scope.OnlineIPOStartDate!=null && $scope.OnlineIPOStartDate!='' )) {
     		basicfillField++;			
     	}
-    	if(angular.isDefined($scope.OnlineIPOStartTime) && ( $scope.OnlineIPOStartTime!=null||$scope.OnlineIPOStartTime!='' )) {
+    	if(angular.isDefined($scope.OnlineIPOStartTime) && ( $scope.OnlineIPOStartTime!=null && $scope.OnlineIPOStartTime!='' )) {
     		basicfillField++;			
     	}
-    	if(angular.isDefined($scope.OnlineIPOEndDate)&& ( $scope.OnlineIPOEndDate!=null||$scope.OnlineIPOEndDate!='' )) {
+    	if(angular.isDefined($scope.OnlineIPOEndDate)&& ( $scope.OnlineIPOEndDate!=null && $scope.OnlineIPOEndDate!='' )) {
     		basicfillField++;			
     	}
-    	if(angular.isDefined($scope.OnlineIPOEndTime) && ( $scope.OnlineIPOEndTime!=null||$scope.OnlineIPOEndTime!='' )) {
+    	if(angular.isDefined($scope.OnlineIPOEndTime) && ( $scope.OnlineIPOEndTime!=null && $scope.OnlineIPOEndTime!='' )) {
     		basicfillField++;			
     	}
-    	if(angular.isDefined($scope.IPOClosingDate) && ( $scope.IPOClosingDate!=null||$scope.IPOClosingDate!='' )) {
+    	if(angular.isDefined($scope.IPOClosingDate) && ( $scope.IPOClosingDate!=null && $scope.IPOClosingDate!='' )) {
     		basicfillField++;			
     	}
-    	if(angular.isDefined($scope.IPOClosingTime) && ( $scope.IPOClosingTime!=null||$scope.IPOClosingTime!='' )) {
+    	if(angular.isDefined($scope.IPOClosingTime) && ( $scope.IPOClosingTime!=null && $scope.IPOClosingTime!='' )) {
     		basicfillField++;			
     	}
-    	if(angular.isDefined($scope.ListingDate) && ( $scope.ListingDate!=null||$scope.ListingDate!='' )) {
+    	if(angular.isDefined($scope.ListingDate) && ( $scope.ListingDate!=null && $scope.ListingDate!='' )) {
     		basicfillField++;			
     	}
-    	if($scope.AcceptSubscription && ( $scope.AcceptSubscription!=null||$scope.AcceptSubscription!=='' )) {
+    	if($scope.AcceptSubscription && ( $scope.AcceptSubscription!=null && $scope.AcceptSubscription!=='' )) {
     		basicfillField++;			
-    	}			
-
+    	}    	
     	return basicfillField;
     }
 
 
     function feePro(){
     	var feefillField = 0;
-    	if(angular.isDefined($scope.CommissionRate) && ( $scope.CommissionRate!=null||$scope.CommissionRate!='' )) {
+    	if(angular.isDefined($scope.CommissionRate) && ( $scope.CommissionRate!=null && $scope.CommissionRate!='' )) {
     		feefillField++;			
     	}
-    	if(angular.isDefined($scope.LevyRate) && ( $scope.LevyRate!=null||$scope.LevyRate!='' )) {
+    	if(angular.isDefined($scope.LevyRate) && ( $scope.LevyRate!=null && $scope.LevyRate!='' )) {
     		feefillField++;			
     	}
-    	if(angular.isDefined($scope.TradingFeeRate) && ( $scope.TradingFeeRate!=null||$scope.TradingFeeRate!='' )) {
+    	if(angular.isDefined($scope.TradingFeeRate) && ( $scope.TradingFeeRate!=null && $scope.TradingFeeRate!='' )) {
     		feefillField++;			
     	}
-    	if(angular.isDefined($scope.InvestorCompensationLevyRate) && ( $scope.InvestorCompensationLevyRate!=null||$scope.InvestorCompensationLevyRate!='' )) {
+    	if(angular.isDefined($scope.InvestorCompensationLevyRate) && ( $scope.InvestorCompensationLevyRate!=null && $scope.InvestorCompensationLevyRate!='' )) {
     		feefillField++;			
     	}
-    	if($scope.CurrencyofHandingFee && ( $scope.CurrencyofHandingFee!=null||$scope.CurrencyofHandingFee!='' )) {
+    	if($scope.CurrencyofHandingFee && ( $scope.CurrencyofHandingFee!=null && $scope.CurrencyofHandingFee!='' )) {
     		feefillField++;			
     	}
-    	if(angular.isDefined($scope.HandingFee) && ( $scope.HandingFee!=null||$scope.HandingFee!='' )) {
+    	if(angular.isDefined($scope.HandingFee) && ( $scope.HandingFee!=null && $scope.HandingFee!='' )) {
     		feefillField++;			
     	}
-    	if(angular.isDefined($scope.FinancingHandingFee) && ( $scope.FinancingHandingFee!=null||$scope.FinancingHandingFee!='' )) {
+    	if(angular.isDefined($scope.FinancingHandingFee) && ( $scope.FinancingHandingFee!=null && $scope.FinancingHandingFee!='' )) {
     		feefillField++;			
     	}
 
@@ -555,6 +554,24 @@ angular.module('ipoAdminApp.createIPOController', [])
     	console.log('2');
     });
 
+    $scope.createIPOsubmit = function(ipoData){
+
+    	t.ssss = ssss;
+    	t.xxxx = dg;
+    	$http({
+    		method: 'POST',
+    		url:'/i/createIPO',
+    		//sharedProperties.getBaseURL() + '/i/createIPO',
+    		data:t 
+    		//{clientId及所有createipo的data}
+    	}).then(function successCallback(response) {
+    		console.log(response);
+    	}, function errorCallback(response) {
+    		//$scope.displayDefaultError();
+    		console.log('Error -->' + response);
+    	});
+    }
+
 
 
 
@@ -584,7 +601,7 @@ angular.module('ipoAdminApp.createIPOController', [])
 
 
 	//....test value..
-	$scope.OfferPriceRangeStart= 1.0;
+	/*$scope.OfferPriceRangeStart= 1.0;
 	$scope.OfferPriceRangeEnd = 1.7;
 	$scope.CommissionRate = 1;
 	$scope.LevyRate = 0.005;
@@ -592,7 +609,7 @@ angular.module('ipoAdminApp.createIPOController', [])
 	$scope.InvestorCompensationLevyRate = 0.005;
 	$scope.QuantityFrom = 0;
 	$scope.QuantityTo = 5000;
-	$scope.Interval = 1000;
+	$scope.Interval = 1000;*/
 
 	//  $scope.ProspectusesEnglishURL ;
 

@@ -516,7 +516,7 @@ hr {
 
 .selectdown{
 	color: #12d6f6;
-  font-style:italic;
+	font-style:italic;
 }
 .warningfont::before{
 	font-family: Glyphicons Halflings; 

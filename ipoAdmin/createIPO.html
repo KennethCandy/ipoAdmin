@@ -39,7 +39,7 @@
 
 	<div class="row">
 		<!-- Floating Panel start-->			  
-		<div class="col-sm-2" style="float:left;position:fixed;bottom:10%;">
+		<div class="col-sm-2" style="float:left;position:fixed;bottom:10%;z-index:9999;">
 			<table class="table" >						
 				<tbody>					 
 					<tr ng-if = "showAccRej(machker,vemode)">
@@ -58,7 +58,7 @@
 						<td style="border-top: 0px"><button type="button" class="btn btn-info" style="width:160px;text-align: left"><i class="fa fa-floppy-o" aria-hidden="true"></i>&nbsp;  {{'createIPO.SaveDraft'|translate}}</button></td>			
 					</tr>
 					<tr ng-if = "showSSDPR(machker,vemode)">
-						<td style="border-top: 0px"><button type="button" class="btn btn-primary" style="width:160px;text-align: left"><i class="fa fa-paper-plane-o" aria-hidden="true"></i>&nbsp;  {{'createIPO.Submit'|translate}}</button></td>				
+						<td style="border-top: 0px"><button type="button" class="btn btn-primary" style="width:160px;text-align: left"ng-click="createIPOsubmit()"><i class="fa fa-paper-plane-o" aria-hidden="true"></i>&nbsp;  {{'createIPO.Submit'|translate}}</button></td>				
 					</tr>
 					<tr ng-if = "showSSDPR(machker,vemode)">
 						<td style="border-top: 0px"><button type="button" class="btn btn-danger" style="width:160px;text-align: left"><i class="fa fa-times-circle-o" aria-hidden="true"></i>&nbsp;  {{'createIPO.Delete'|translate}}</button></td>	
@@ -100,7 +100,7 @@
 			<div id="scrollbody" class="scrollspy-example " data-spy="scroll" data-target="#navbar-example" data-offset="0"style="position: relative;height:450px;overflow:scroll;overflow-x:hidden">							
 				<form class="form-horizontal" role="form" style=""name="createipoForm" novalidate>			
 					<div class="form-group" id="basic">
-						<label for="StockCode" class="col-sm-5 control-label">{{'createIPO.StockCode'|translate}}</label>
+						<label for="StockCode" class="col-sm-offset-2 col-sm-3 control-label">{{'createIPO.StockCode'|translate}}</label>
 						<div class="col-sm-5">
 							<input type="text" class="form-control" id="StockCode" name="StockCode" placeholder="{{'createIPO.Required'|translate}}" ng-blur="stockCodeFormat(StockCode)" ng-model="StockCode"ng-show="showSSDPR(machker,vemode)" required  ng-keydown=" onlyNumber(5,StockCode,$event)" >
 							<label  class=" control-label resetfcolor"ng-show="!showSSDPR(machker,vemode)">{{StockCode || "---"}}</label>
@@ -111,13 +111,13 @@
 						</div>					    
 					</div>
 					<div class="form-group" >
-						<label for="IPOCode" class="col-sm-5 control-label">{{'createIPO.IPOCode'|translate}}</label>
+						<label for="IPOCode" class="col-sm-offset-2 col-sm-3 control-label">{{'createIPO.IPOCode'|translate}}</label>
 						<div class="col-sm-5">					     
 							<label  class="col-sm-5 control-label resetfcolor">{{IPOCode}}</label>   				
 						</div>					    
 					</div>
 					<div class="form-group">
-						<label for="EnglishStockName" class="col-sm-5 control-label">{{'createIPO.EnglishStockName'|translate}}</label>
+						<label for="EnglishStockName" class="col-sm-offset-2 col-sm-3 control-label">{{'createIPO.EnglishStockName'|translate}}</label>
 						<div class="col-sm-5">
 							<input type="text" class="form-control " id="EnglishStockName"name="EnglishStockName" placeholder="{{'createIPO.Required'|translate}}" ng-show="showSSDPR(machker,vemode)"ng-model="EnglishStockName"required ng-keydown=" numberofchar(34,EnglishStockName,$event)" ng-blur="EnglishStockName = digitsofchar(35,EnglishStockName)">
 							<label  class=" control-label resetfcolor"ng-show="!showSSDPR(machker,vemode)">{{EnglishStockName|| "---"}}</label>
@@ -128,7 +128,7 @@
 						</div>
 					</div>
 					<div class="form-group">
-						<label for="TranditionalChineseName" class="col-sm-5 control-label">{{'createIPO.TranditionalChineseName'|translate}}</label>
+						<label for="TranditionalChineseName" class="col-sm-offset-2 col-sm-3 control-label">{{'createIPO.TranditionalChineseName'|translate}}</label>
 						<div class="col-sm-5">
 							<input type="text" class="form-control" id="TranditionalChineseName" name="TranditionalChineseName" placeholder="{{'createIPO.Required'|translate}}" ng-show="showSSDPR(machker,vemode)"ng-model="TranditionalChineseName"required ng-keydown=" numberofchar(34,TranditionalChineseName,$event)" ng-blur="TranditionalChineseName = digitsofchar(35,TranditionalChineseName)">
 							<label  class=" control-label resetfcolor"ng-show="!showSSDPR(machker,vemode)">{{TranditionalChineseName|| "---"}}</label>
@@ -139,7 +139,7 @@
 						</div>
 					</div>
 					<div class="form-group">
-						<label for="SimplifiedChineseName" class="col-sm-5 control-label">{{'createIPO.SimplifiedChineseName'|translate}}</label>
+						<label for="SimplifiedChineseName" class="col-sm-offset-2 col-sm-3 control-label">{{'createIPO.SimplifiedChineseName'|translate}}</label>
 						<div class="col-sm-5">
 							<input type="text" class="form-control" id="SimplifiedChineseName" name="SimplifiedChineseName" placeholder="{{'createIPO.Required'|translate}}" ng-show="showSSDPR(machker,vemode)"ng-model="SimplifiedChineseName" required ng-keydown=" numberofchar(34,SimplifiedChineseName,$event)" ng-blur="SimplifiedChineseName = digitsofchar(35,SimplifiedChineseName)">
 							<label  class=" control-label resetfcolor"ng-show="!showSSDPR(machker,vemode)">{{TranditionalChineseName|| "---"}}</label>
@@ -150,7 +150,7 @@
 						</div>
 					</div>
 					<div class="form-group">
-						<label for="NumberofOfferSharesUnitunderGlobalOffering" class="col-sm-5 control-label">{{'createIPO.NOSUUGO'|translate}}</label>
+						<label for="NumberofOfferSharesUnitunderGlobalOffering" class="col-sm-offset-2 col-sm-3 control-label">{{'createIPO.NOSUUGO'|translate}}</label>
 						<div class="col-sm-5">
 							<input type="text" class="form-control" id="NumberofOfferSharesUnitunderGlobalOffering" ng-show="showSSDPR(machker,vemode)"ng-model="NumberofOfferSharesUnitunderGlobalOffering" ng-keydown=" onlyNumber(15,NumberofOfferSharesUnitunderGlobalOffering,$event)" ng-blur="NumberofOfferSharesUnitunderGlobalOffering = digitsofnum(15,NumberofOfferSharesUnitunderGlobalOffering)">
 							<label  class=" control-label resetfcolor"ng-show="!showSSDPR(machker,vemode)">{{NumberofOfferSharesUnitunderGlobalOffering|| "---"}}</label>
@@ -169,8 +169,8 @@
 							<select class="form-control selectdown" ng-disabled="disableFields(machker,vemode)" ng-model="StockCurrency" style="text-align:center">
 								<option value="" ><span style="color:#55bbde !important;font-style:italic;">{{'createIPO.Required'|translate}}</span></option>
 								<option value="HKD"  >HKD</option>
-								<option value="CNY"  style="text-align:center">CNY</option>
-								<option value="HSD"  style="text-align:center">HSD</option> 
+								<option value="CNY"  >CNY</option>
+								<option value="HSD"  >HSD</option> 
 							</select>									  		
 						</div>
 					</div>
@@ -183,7 +183,7 @@
 								<span  ng-show="createipoForm.OfferPriceRangeStart.$error.required" >{{'createIPO.OfferPriceRange'|translate}}{{'createIPO.isrequired'|translate}}</span>	
 							</span>						 
 						</div>
-						<label for="OfferPriceRangeEnd"ng-show="showSSDPR(machker,vemode)" class="col-sm-1 control-label" style="text-align:center"> · </label>
+						<label for="OfferPriceRangeEnd"ng-show="showSSDPR(machker,vemode)" class="col-sm-1 control-label" style="text-align:center">~</label>
 						<div class="col-sm-2">
 							<input type="text" class="form-control col-sm-2" id="OfferPriceRangeEnd" name ="OfferPriceRangeEnd"placeholder="{{'createIPO.Required'|translate}}" ng-show="showSSDPR(machker,vemode)"ng-model="OfferPriceRangeEnd" required ng-keydown="decimallimit(10,2,OfferPriceRangeEnd,'OfferPriceRangeEnd',$event)" ng-blur="OfferPriceRangeEnd= digitlimt(OfferPriceRangeEnd)">
 							<span class=" warningfont" ng-show="createipoForm.OfferPriceRangeEnd.$dirty && createipoForm.OfferPriceRangeEnd.$invalid">
@@ -493,17 +493,17 @@
 
 				<!--  4.2.5.5	Quantity/Amount Table -->
 				<div class="form-group" id="quantity" >
-					<div class="table-responsive col-sm-offset-2 col-sm-5"style="height:32px;padding-right: 0px;overflow:hidden" >
+					<div class="table-responsive col-sm-offset-2 col-sm-5"style="height:32px;border:1px solid #ddd;padding-right: 0px;overflow:hidden;background-color:#338db0;" >
 						<table class="table table-hover table-condensed" >
 							<thead>
-								<th class="thclass" style="width:40%">{{'createIPO.Range'|translate}} </th>
+								<th class="thclass" style="width:40%;">{{'createIPO.Range'|translate}} </th>
 								<th class="thclass" style="width:25%">{{'createIPO.Quantity'|translate}} </th>
 								<th class="thclass" style="width:25%">{{'createIPO.Amount'|translate}} </th>
 								<th class="thclass" style="width:10%"></th>						    		
 							</thead>
 						</table>
 					</div>
-					<div class="table-responsive col-sm-offset-2 col-sm-5"style="height:300px;padding-right: 0px;" >
+					<div class="table-responsive col-sm-offset-2 col-sm-5"style="height:300px;border:1px solid #ddd;border-radius:5px;padding-right: 0px;" >
 						<table class="table table-hover table-condensed" >						    	
 							<tbody>						    		
 								<tr ng-repeat="qat in quantityAmountTable">
@@ -736,7 +736,7 @@
 					<label for="SpecialInterestRateTable" class="col-sm-offset-2 col-sm-5 control-label"style="text-align:left;">{{'createIPO.SpecialInterestRateTable'|translate}}<span style="color:#55bbde !important;font-style:italic;">{{'createIPO.Required'|translate}}</span></label>							    
 				</div>
 				<div class="form-group"ng-show="showbelow">
-					<div class="table-responsive col-sm-offset-2 col-sm-5"style="height:32px;padding-right: 0px;overflow:hidden" >
+					<div class="table-responsive col-sm-offset-2 col-sm-5"style="height:30px;padding-right: 0px;overflow:hidden;background-color:#338db0;" >
 						<table class="table table-hover table-condensed" >
 							<thead>
 								<th class="thclass" >{{'createIPO.LoanAmountAbove'|translate}}</th>
@@ -745,7 +745,7 @@
 							</thead>
 						</table>
 					</div>
-					<div class="table-responsive col-sm-offset-2 col-sm-5"style="height:330px;padding-right: 0px;" >
+					<div class="table-responsive col-sm-offset-2 col-sm-5"style="height:330px;padding-right: 0px;border:1px solid #ddd;border-radius:5px;" >
 						<table class="table table-hover table-condensed" >						    	
 							<tbody>
 								<tr ng-repeat="sirt in specialInterestRateTable">

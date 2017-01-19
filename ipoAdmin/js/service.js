@@ -14,6 +14,15 @@ app.service('sharedProperties', ['$rootScope', function ($rootScope) {
 		setBaseURL: function(value) {
 			$rootScope.baseURL = value;
 		},
+		getBaseURLFromJava: function() {
+			if ($rootScope.baseURLFromJava == undefined) {
+				return "";
+			}
+			return $rootScope.baseURLFromJava ;
+		},
+		setBaseURLFromJava: function(value) {
+			$rootScope.baseURLFromJava = value;
+		},
 		getDeviceType: function() {
 			if (getSessionStorage().getItem('deviceType') == null) {
 				getSessionStorage().setItem('deviceType', DEVICE_ITRADE);
@@ -138,6 +147,9 @@ app.service('sharedProperties', ['$rootScope', function ($rootScope) {
 			angular.forEach(obj, function(value, key) {
 				if (key == 'baseURL') {
 					$rootScope.baseURL = value;
+				}
+				if (key == 'baseURLFromJava') {
+					$rootScope.baseURLFromJava = value;
 				}
 				else {
 					getSessionStorage().setItem(key, value);
