@@ -28,7 +28,7 @@ function padLeft(str, length) {
 }
 
 /*Quantity Amount Table */
-/*表格一*/
+/*table one*/
 function addQuantityAmountTableRange(){
     var quantityFrom =$('#QuantityFrom').val();
     var quantityTo =$('#QuantityTo').val();
@@ -56,13 +56,13 @@ function addQuantityAmountTableRange(){
     return obj;
 } 
 
-/*字段校验*/
-/*填充*/
+/*Field calibration*/
+/*fill*/
 function stockCodeFormat(str) {	
     var newval = padLeft(str, 5);
     return newval;   
 }
-/*数字输入位数限制*/
+/*Digital input limit of digits*/
 function onlyNumber(value,sName,event) {
 	var dotPos = ( sName || '' ).length;  
     var keyCode = event.which;
@@ -102,7 +102,7 @@ function onlyNumber(value,sName,event) {
     event.returnValue =true;
     
 }
-/*输入字符位数限制*/
+/*Enter the number of characters to limit*/
 function numberofchar(value,sName,event){
   var keyCode = event.which;
   var dotPos = ( sName || '' ).length;
@@ -118,7 +118,7 @@ function numberofchar(value,sName,event){
     }         
     event.returnValue =true;  
 }
-/*字符位数限制用于blur*/
+/*The character bit limit is used for blur()*/
 function digitsofchar(value,sName){
   var dotPos = ( sName || '' ).length;
   if(dotPos <= value){
@@ -129,7 +129,7 @@ function digitsofchar(value,sName){
      return sName;   
  }    
 }
-/*输入数字位数限制用于blur*/
+/*Enter the number of digits to be used for blur()*/
 function digitsofnum(value,sName){
   var dotPos = (( sName || '' ) + '').length;
   var pattern=/\d/;
@@ -144,7 +144,7 @@ if (dotPos > value) {
  return sName;   
 }     
 }
-/*数字限制*/
+/*Digital limits*/
 function digitlimt(sName){
     var pattern=/\d/;
     if(!pattern.test(sName)){
@@ -154,7 +154,7 @@ function digitlimt(sName){
     return sName;
 }
 
-/*输入带小数点的位数限制*/
+/*Enter the number of digits with a decimal point*/
 function decimallimit(inte,deci,sName,id,event){ 	
  sName = sName || ''; 		
  		/*var reg = /^(([1-9]\d{0,9}\.\d{0,2})|([0]\.\d{0,2})|([1-9]\d{0,9}))$/;
@@ -253,7 +253,7 @@ function decimallimit(inte,deci,sName,id,event){
         }
 
 
-        /*权限*/
+        /*Permissions*/
         function showAccRej(machker,vemode){
             return machker & vemode;
         }

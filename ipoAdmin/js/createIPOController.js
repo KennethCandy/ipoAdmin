@@ -132,7 +132,7 @@ angular.module('ipoAdminApp.createIPOController', [])
 	});
 	/*datepicker end*/
 
-	/*权限控制*/    
+	/*Access Control*/    
     $scope.machker = false;//maker:false     checker:true
 
     $scope.vemode = true;// view:false     edit:true
@@ -141,7 +141,7 @@ angular.module('ipoAdminApp.createIPOController', [])
 
 
    
-   /*权限*/
+   /*Permissions*/
    $scope.showAccRej = function(value,val){
    	return showAccRej(value,val);
    }  
@@ -164,7 +164,7 @@ angular.module('ipoAdminApp.createIPOController', [])
 
 
 
-   /*字段校验format*/ 	
+   /*Field verification*/ 	
    $scope.stockCodeFormat = function(value) {
    	$scope.StockCode = stockCodeFormat(value);		 
    	return stockCodeFormat(value);
@@ -300,7 +300,7 @@ angular.module('ipoAdminApp.createIPOController', [])
     }/*Quantity Amount Table  End*/
 
     /*Special Interest Rate Table*/
-    /*表格二*/	
+    /*table two*/	
     function sirTableAdd(){		
     	var laabove = $scope.LoadAmountAbove ;
     	var sirate = $scope.SpecicalInterestRate ; 
@@ -545,27 +545,82 @@ angular.module('ipoAdminApp.createIPOController', [])
 
     $('#scrollbody').scrollspy({ target: '#navbar-example' })
 
-    $http({
-    	method: 'GET',
-    	url: 'adminIPOBook.json'
-    }).then(function successCallback(response) {
-    	console.log(response);
-    }, function errorCallback(response) {
-    	console.log('2');
-    });
 
-    $scope.createIPOsubmit = function(ipoData){
+    /*submit data*/ 
+    function getCreateIpoData(){ 
+    $scope.createIpoData ={};
+    $scope.createIpoData.StockCode =$scope.StockCode||"";
+    $scope.createIpoData.IPOCode=$scope.IPOCode||"";
+    $scope.createIpoData.EnglishStockName=$scope.EnglishStockName||"";
+    $scope.createIpoData.TranditionalChineseName=$scope.TranditionalChineseName||"";
+    $scope.createIpoData.SimplifiedChineseName=$scope.SimplifiedChineseName||"";
+    $scope.createIpoData.NumberofOfferSharesUnitunderGlobalOffering=$scope.NumberofOfferSharesUnitunderGlobalOffering||"";
+    $scope.createIpoData.NumberofPublicOfferSharesUnit=$scope.NumberofPublicOfferSharesUnit||"";
+    $scope.createIpoData.StockCurrency=$scope.StockCurrency||"";
+    $scope.createIpoData.OfferPriceRangeStart=$scope.OfferPriceRangeStart||"";
+    $scope.createIpoData.OfferPriceRangeEnd=$scope.OfferPriceRangeEnd||"";
+    $scope.createIpoData.BroadLot=$scope.BroadLot||"";
+    $scope.createIpoData.NominalValue=$scope.NominalValue||"";
+    $scope.createIpoData.OnlineIPOStartDate=$scope.OnlineIPOStartDate||"";
+    $scope.createIpoData.OnlineIPOStartTime=$scope.OnlineIPOStartTime||"";
+    $scope.createIpoData.OnlineIPOEndDate=$scope.OnlineIPOEndDate||"";
+    $scope.createIpoData.OnlineIPOEndTime=$scope.OnlineIPOEndTime||"";
+    $scope.createIpoData.IPOClosingDate=$scope.IPOClosingDate||"";
+    $scope.createIpoData.IPOClosingTime=$scope.IPOClosingTime||"";
+    $scope.createIpoData.PriceFixingDate=$scope.PriceFixingDate||"";
+    $scope.createIpoData.ResultAnnouncementDate=$scope.ResultAnnouncementDate||"";
+    $scope.createIpoData.DispatchofSharesandRefundDate=$scope.DispatchofSharesandRefundDate||"";
+    $scope.createIpoData.ListingDate=$scope.ListingDate||"";
+    $scope.createIpoData.FinalOfferPrice=$scope.FinalOfferPrice||"";
+    $scope.createIpoData.ProspectusesEnglishURL=$scope.ProspectusesEnglishURL||"";
+    $scope.createIpoData.ProspectusesSimplifiedChineseURL=$scope.ProspectusesSimplifiedChineseURL||"";
+    $scope.createIpoData.ProspectusesTranditionalChineseURL=$scope.ProspectusesTranditionalChineseURL||"";
+    $scope.createIpoData.RemarkforExternal=$scope.RemarkforExternal||"";
+    $scope.createIpoData.RemarkforInternal=$scope.RemarkforInternal||"";
+    $scope.createIpoData.AcceptSubscription=$scope.AcceptSubscription||"";
+    $scope.createIpoData.CommissionRate=$scope.CommissionRate||"";
+    $scope.createIpoData.LevyRate=$scope.LevyRate||"";
+    $scope.createIpoData.TradingFeeRate=$scope.TradingFeeRate||"";
+    $scope.createIpoData.InvestorCompensationLevyRate=$scope.InvestorCompensationLevyRate||"";
+    $scope.createIpoData.ClientRebateRate=$scope.ClientRebateRate||"";
+    $scope.createIpoData.CurrencyofHandingFee=$scope.CurrencyofHandingFee||"";
+    $scope.createIpoData.FinancingHandingFee=$scope.FinancingHandingFee||"";
 
-    	t.ssss = ssss;
-    	t.xxxx = dg;
+    $scope.createIpoData.quantityAmountTable=$scope.quantityAmountTable||"";
+    $scope.createIpoData.CalculationMethod=$scope.CalculationMethod||"";
+    $scope.createIpoData.QuantityFrom=$scope.QuantityFrom||"";
+    $scope.createIpoData.QuantityTo=$scope.QuantityTo||"";
+    $scope.createIpoData.interval=$scope.interval||"";
+    $scope.createIpoData.ProvideIPOfinancing=$scope.ProvideIPOfinancing||"";
+    $scope.createIpoData.FinancingStartDate=$scope.FinancingStartDate||"";
+    $scope.createIpoData.FinancingStartTime=$scope.FinancingStartTime||"";
+    $scope.createIpoData.FinancingEndDate=$scope.FinancingEndDate||"";
+    $scope.createIpoData.FinancingEndTime=$scope.FinancingEndTime||"";
+    $scope.createIpoData.InterestDay=$scope.InterestDay||"";
+    $scope.createIpoData.MaxLoanAmountperApplication=$scope.MaxLoanAmountperApplication||"";
+    $scope.createIpoData.MinLoanAmountperApplication=$scope.MinLoanAmountperApplication||"";
+    $scope.createIpoData.MinnoofsharespapliedforIPOLoan=$scope.MinnoofsharespapliedforIPOLoan||"";
+    $scope.createIpoData.MaxLoanRatio=$scope.MaxLoanRatio||"";
+    $scope.createIpoData.MustUseMaxLoan=$scope.MustUseMaxLoan||"";
+    $scope.createIpoData.AllowedLoanRatioSelectedby=$scope.AllowedLoanRatioSelectedby||"";
+    $scope.createIpoData.BasicInterestRate=$scope.BasicInterestRate||"";
+    $scope.createIpoData.specialInterestRateTable=$scope.specialInterestRateTable||"";
+    $scope.createIpoData.Loadfromtemplates=$scope.Loadfromtemplates||"";
+    $scope.createIpoData.LoadAmountAbove=$scope.LoadAmountAbove||"";
+    $scope.createIpoData.SpecicalInterestRate=$scope.SpecicalInterestRate||"";
+    return $scope.createIpoData;
+    }
+
+
+    $scope.createIPOsubmit = function(){    	
     	$http({
     		method: 'POST',
     		url:'/i/createIPO',
     		//sharedProperties.getBaseURL() + '/i/createIPO',
-    		data:t 
-    		//{clientId及所有createipo的data}
+    		data: getCreateIpoData() 
+    		//{clientId createipo?data}
     	}).then(function successCallback(response) {
-    		console.log(response);
+    		console.log('success -->' +response);
     	}, function errorCallback(response) {
     		//$scope.displayDefaultError();
     		console.log('Error -->' + response);

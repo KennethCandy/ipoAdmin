@@ -14,15 +14,6 @@ app.service('sharedProperties', ['$rootScope', function ($rootScope) {
 		setBaseURL: function(value) {
 			$rootScope.baseURL = value;
 		},
-		getBaseURLFromJava: function() {
-			if ($rootScope.baseURLFromJava == undefined) {
-				return "";
-			}
-			return $rootScope.baseURLFromJava ;
-		},
-		setBaseURLFromJava: function(value) {
-			$rootScope.baseURLFromJava = value;
-		},
 		getDeviceType: function() {
 			if (getSessionStorage().getItem('deviceType') == null) {
 				getSessionStorage().setItem('deviceType', DEVICE_ITRADE);

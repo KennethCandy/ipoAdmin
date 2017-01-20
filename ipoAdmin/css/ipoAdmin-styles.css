@@ -477,7 +477,7 @@ bottom: -30px;
 	background-color: #fff;
 }
 .navbar-default .navbar-nav>li>a{
-	/* a链接中字体颜色 */
+	/* a The font color in the link */
 	color: #fff;
 }
 ul .active a,ul .active2 a{
@@ -511,7 +511,7 @@ hr {
 	color:#ddd;
 }
 .popover.right>.arrow:after{
-	left: 3px;/*右三角宽度*/
+	left: 3px;/*Right triangle width*/
 }
 
 .selectdown{
@@ -552,7 +552,7 @@ hr {
 	display: block;
 	float: left;
 	min-height: 40px;
-	min-width: 250px;
+	min-width: 200px;
 	background: #ddd;
 	text-align: center;
 	padding: 10px 40px 0 40px;
