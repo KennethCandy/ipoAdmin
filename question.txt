@@ -1,0 +1,73 @@
+Stock Currency（下拉框）接口
+Currency of Handing Fee（下拉框）接口
+
+Special Interest Rate Table：
+	Load方法
+	Save方法
+
+左边按钮：
+	点击事件功能
+________________________________________________________________________________________________________________________
+(Accept)
+For checker to approve an IPO master record. Only being shown for checker the IPO master record is in Pending status. Once record was approved or rejected, maker can further modify the record and then save draft before re-submission.
+
+允许检查人员批准IPO主记录。只显示为检查器 IPO主记录处于待处理状态。
+一旦记录被批准或拒绝，制造商可以进一步修改记录，然后在重新提交之前保存草稿。
+________________________________________________________________________________________________________________________
+(Reject)
+For checker to approve an IPO master record. Only being shown for checker the IPO master record is in Pending status.
+Once record was approved or rejected,maker can further modify the record and then save draft before re-submission.
+
+允许检查人员批准IPO主记录。只显示为检查器 IPO主记录处于待处理状态。
+一旦记录被批准或拒绝，制造商可以进一步修改记录，然后在重新提交之前保存草稿。
+________________________________________________________________________________________________________________________
+(Back)
+For going back to the record list view without performing any action on the record.
+
+用于返回到记录列表视图，而不对记录执行任何操作。							
+																			(okokokokokokokokokokokokokokokokokokokokok)
+________________________________________________________________________________________________________________________
+(Edit)
+IPO master record will be opened in view only mode by default for maker.
+It will turn into editable mode after pressed the “Edit” button.
+
+IPO主记录将在默认情况下仅在查看模式下打开。 按“编辑”按钮后，它将变为可编辑模式。
+																			(okokokokokokokokokokokokokokokokokokokokok)
+________________________________________________________________________________________________________________________
+(Save Draft)
+For maker to save an IPO master record as draft without submitting it for approval. 
+Once an IPO master record was submitted and pending for approval, “Save Draft” action will be hidden. 
+
+制造商将IPO主记录保存为草案，而不提交批准。一旦IPO主记录提交并待审批，“保存草稿”操作将被隐藏。
+________________________________________________________________________________________________________________________
+(Submit)
+For maker to submit an IPO master record for approval. It will save the changes before submission.
+Maker can modify the records and submit again. Once record was submitted and pending for approval,
+maker can perform “Save draft” action.
+
+制造商提交IPO主记录以供审批。 它将在提交之前保存更改。制造商可以修改记录并重新提交。
+ 一旦记录提交并等待批准，制造商可以执行“保存草稿”操作。
+________________________________________________________________________________________________________________________
+(Delete)
+For maker to mark an IPO master record to be deleted and submit for approval.It will save the changes before submission. Once record was submitted and pending for approval, maker can perform “Save draft” action.
+
+制造商将IPO主记录标记为要删除并提交审批。它将在提交前保存更改。一旦记录提交并待审批，制造商可以执行“保存草稿”操作。
+________________________________________________________________________________________________________________________
+(Postpone)
+For maker to mark an IPO master record to be postponed and submit for approval.It will save the changes before submission.
+Once record was submitted and pending for approval, maker can perform “Save draft” action.
+
+制造商将IPO主记录标记为推迟并提交批准。它将在提交前保存更改。一旦记录提交并待审批，制造商可以执行“保存草稿”操作。
+
+________________________________________________________________________________________________________________________
+(Resume)
+For maker to mark an IPO master record to resume and submit for approval. It will save the changes before submission. Once record was submitted and pending for approval, maker can perform “Save draft” action.
+
+制造商标记IPO主记录以恢复并提交批准。 它将在提交之前保存更改。 一旦记录提交并待审批，制造商可以执行“保存草稿”操作。
+
+
+
+
+
+
+

@@ -21,20 +21,22 @@
 		</div>
 		<div class="col-sm-12" style="padding-left: 0px">
 			<div class="col-sm-1"style="margin:0px ;height:30px">
-				<h4  style="margin-top:0px; margin-bottom:0px">{{'createIPO.Draft'|translate}}</h4>					
+				<h4 ng-show="true" style="margin-top:0px; margin-bottom:0px;text-align:center;">{{'createIPO.Draft'|translate}}</h4>
+				<h4 ng-show="false" style="margin-top:0px; margin-bottom:0px;text-align:center;">{{'createIPO.Pending'|translate}}</h4>	
 			</div>
 			<div class="col-sm-7" style="height:30px">
 				<div class="progress" style="margin-bottom: 10px">
-					<div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="{{totalFieldProgress}}" aria-valuemin="24" aria-aluemax="100" style="width:{{totalFieldProgress}}% " min-width:24%;>
-						{{filledFields}}/{{totalMandatorField}} mandatory fields filled({{totalFieldProgress}}%)
+					<div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="{{totalFieldProgress}}" aria-valuemin="24" aria-aluemax="100" style="width:{{totalFieldProgress>23?totalFieldProgress:23}}% " min-width:23%;>
+					<span ng-show="totalFieldProgress>0">{{filledFields}}/{{totalMandatorField}}{{'createIPO.Mandatory'|translate}}({{totalFieldProgress}}%)</span>
+					<span ng-show="totalFieldProgress==0">0%{{'createIPO.Completeness'|translate}}</span>
 					</div>
 				</div>		
 			</div>
-			<div class="col-sm-4"><span ng-class="getMinute(currentIPO.marginCloseTime)"></span>
-				<p class="text-center">{{'createIPO.Lastmodifiedby'|translate}} <strong>Aimer Chau</strong> {{'createIPO.on'|translate}} <strong>{{getCurrentDate()}}</strong> {{'createIPO.at'|translate}} <strong>{{theTime}}</strong></p>					
+			<div class="col-sm-4">
+				<p class="text-center">{{'createIPO.Lastmodifiedby'|translate}} <strong>Aimer Chau</strong> {{'createIPO.on'|translate}} <strong>{{getCurrentDate()}}</strong> {{'createIPO.at'|translate}} <strong>{{theTime}}</strong>{{'createIPO.change'|translate}}</p>					
 			</div>
 		</div>
-	</div><hr style="margin-top:0px">
+	</div><hr style="margin-top:0px;">
 
 
 	<div class="row">
@@ -49,10 +51,10 @@
 						<td style="border-top: 0px"><button type="button" class="btn-ribbon" style="width:160px;text-align: left"><i class="fa fa-times" aria-hidden="true"></i>&nbsp;  {{'createIPO.Reject'|translate}}</button></td>					
 					</tr>
 					<tr ng-if = "showBack(machker,vemode)">
-						<td style="border-top: 0px"><button type="button" class="btn btn-ryellow" style="width:160px;text-align: left"><i class="fa fa-reply" aria-hidden="true"></i>&nbsp;  {{'createIPO.Back'|translate}}</button></td>			
+						<td style="border-top: 0px"><button type="button" class="btn btn-ryellow" style="width:160px;text-align: left"ng-click="createIPOback()"><i class="fa fa-reply" aria-hidden="true"></i>&nbsp;  {{'createIPO.Back'|translate}}</button></td>			
 					</tr>
 					<tr ng-if = "showEdit(machker,vemode)">
-						<td style="border-top: 0px"><button type="button" class="btn btn-info" style="width:160px;text-align: left"><i class="fa fa-pencil" aria-hidden="true"></i>&nbsp;  {{'createIPO.Edit'|translate}}</button></td>			
+						<td style="border-top: 0px"><button type="button" class="btn btn-info" style="width:160px;text-align: left"ng-click="createIPOedit()"><i class="fa fa-pencil" aria-hidden="true"></i>&nbsp;  {{'createIPO.Edit'|translate}}</button></td>			
 					</tr>
 					<tr ng-if = "showSSDPR(machker,vemode)">
 						<td style="border-top: 0px"><button type="button" class="btn btn-info" style="width:160px;text-align: left"ng-click="createIPOtestSave()"><i class="fa fa-floppy-o" aria-hidden="true"></i>&nbsp;  {{'createIPO.SaveDraft'|translate}}</button></td>			
@@ -76,7 +78,7 @@
 		<!--Record details panel start-->
 		<div class="col-sm-12">
 			<nav id="navbar-example" class="navbar navbar-default navbar-static" role="navigation">
-				<div class="container-fluid">
+				<div class="container-fluid"style="padding-left: 0px;">
 					<div class="navbar-header">
 						<button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target=".bs-example-js-navbar-scrollspy">
 							<span class="sr-only">Toggle navigation</span>
@@ -85,10 +87,10 @@
 							<span class="icon-bar"></span>
 							<span class="icon-bar"></span>
 						</button>
-						<a class="navbar-brand" ></a>
+						<a class="navbar-brand"></a>
 					</div>
 					<div class="collapse navbar-collapse bs-example-js-navbar-scrollspy navcss">
-						<ul class="navM"style="padding-left: 0px;">        	          	
+						<ul class="navM"style="padding-left: 0px;padding-top: 0px;">        	          	
 							<li><a id="abasic" ng-href="#/createIPO#basic"><div id="abasicdiv"><span class="badge">1</span> {{'createIPO.BasicInformation'|translate}} - {{basicProgress}}/{{basictotal}}</div></a></li>
 							<li><a id="afee" ng-href="#/createIPO#fee" ><div id="afeediv"><span class="badge">2</span> {{'createIPO.FeeandCharges'|translate}} - {{feeProgress}}/{{feetotal}}</div></a></li>
 							<li><a id="aquantity" ng-href="#/createIPO#quantity"><div id="aquantitydiv"><span class="badge">3</span> {{'createIPO.Quantity/AmountTable'|translate}} - {{quantityProgress}}/{{quantitytotal}}</div></a></li>
@@ -687,7 +689,7 @@
 					</span>
 				</label>
 				<div class="form-group"ng-show="showbelow">				    
-					<label for="MustUseMaxLoan" class="col-sm-5 control-label" >Must Use Max Loan</label>   
+					<label for="MustUseMaxLoan" class="col-sm-5 control-label" >{{'createIPO.MustUseMaxLoan'|translate}}</label>   
 					<div class="col-sm-3"ng-model="MustUseMaxLoan" required>
 						<label class="radio-inline">
 							<input type="radio" name="MustUseMaxLoan" id="MustUseMaxLoanYes" value="yes" ng-show="showSSDPR(machker,vemode)"ng-model="MustUseMaxLoan"><span ng-show="showSSDPR(machker,vemode)">{{'createIPO.MustUseMaxLoanYes'|translate}}</span>
@@ -831,7 +833,7 @@
 <div class="col-sm-12" style="position:fixed;bottom:5%"><!--  -->
 
 	<ol class="breadcrumb" style="margin:0 auto">
-		<li><a style="text-decoration:none">Back to</a></li>
+		<li><a style="text-decoration:none">{{'createIPO.backTo'|translate}}</a></li>
 		<li><a ng-href="#/createIPO#basic">{{'createIPO.BasicInformation'|translate}}</a></li>
 		<li><a ng-href="#/createIPO#fee">{{'createIPO.FeeandCharges'|translate}}</a></li>
 		<li><a ng-href="#/createIPO#quantity">{{'createIPO.Quantity/AmountTable'|translate}}</a></li>  	

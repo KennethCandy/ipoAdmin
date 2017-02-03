@@ -1,6 +1,6 @@
 angular.module('ipoAdminApp.createIPOController', [])
 
-.controller('createIPOCtrl', [ '$scope', '$rootScope', '$sce', '$http', '$interval', '$translate', 'sharedProperties', 'redirectService', 'applicationStatusService', 'timelineService', function($scope, $rootScope, $sce, $http, $interval, $translate, sharedProperties, redirectService, applicationStatusService, timelineService) {
+.controller('createIPOCtrl', [ '$scope', '$rootScope', '$sce', '$http', '$interval', '$translate','$location', 'sharedProperties', 'redirectService', 'applicationStatusService', 'timelineService', function($scope, $rootScope, $sce, $http, $interval, $translate,$location, sharedProperties, redirectService, applicationStatusService, timelineService) {
 
 	$scope.getCurrentDate = function(value){
 		return getCurrentDate().substring(0, 4) +"/"+ getCurrentDate().substring(4, 6) +"/"+ getCurrentDate().substring(6);
@@ -135,9 +135,21 @@ angular.module('ipoAdminApp.createIPOController', [])
 	/*Access Control*/    
     $scope.machker = false;//maker:false     checker:true
 
-    $scope.vemode = true;// view:false     edit:true
+  $scope.vemode = false;// view:false     edit:true
 
-   $scope.showbelow = true;//Check box Checked if IPO financing is allowed;Unchecked if IPO financing is not allowed.
+  $scope.showbelow = true;//Check box Checked if IPO financing is allowed;Unchecked if IPO financing is not allowed.
+
+  /*Edit*/
+  $scope.createIPOedit = function(){     
+    $scope.machker = false;
+    $scope.vemode = true;    
+  }
+  
+  /*Back*/
+  $scope.createIPOback = function(){     
+    $location.path('/maintenance');    
+  }
+
 
 
    
@@ -350,7 +362,7 @@ angular.module('ipoAdminApp.createIPOController', [])
     }
 
     $scope.sirTableRemove = function(){
-    	$scope.specialInterestRateTable = {};
+    	$scope.specialInterestRateTable = [];
     }
 
     $scope.sirTableDelsingel = function(sirt){
@@ -621,6 +633,7 @@ angular.module('ipoAdminApp.createIPOController', [])
     		//{clientId createipo?data}
     	}).then(function successCallback(response) {
     		console.log('success -->' +response);
+       	 	alert("success");
     	}, function errorCallback(response) {
     		//$scope.displayDefaultError();
     		console.log('Error -->' + response);
