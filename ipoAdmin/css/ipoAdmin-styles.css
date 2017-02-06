@@ -593,3 +593,8 @@ hr {
 	border-top: 20px solid #12d6f6 !important;
 	border-left: 20px solid #12d6f6 !important;
 } 
+.spanStyle{
+  color: black;
+  font-weight: bold;
+  font-size: 18px;
+}

@@ -10,10 +10,11 @@ angular.module('ipoAdminApp.createIPOController', [])
 		return getCurrentDateTime(value).substring(8,10) +":"+ getCurrentDateTime().substring(10,12);
 	}	
 
-	$scope.theTime = new Date().toLocaleTimeString();
+	//$scope.theTime = new Date().toLocaleTimeString();
 
 	$interval(function () {
-		$scope.theTime = new Date().toLocaleTimeString();
+		//$scope.theTime = new Date().toLocaleTimeString();
+    $scope.theTime = $scope.getCurrentDateTime();
 	}, 1000);    
 
 	/*datepicker start*/
@@ -138,7 +139,101 @@ angular.module('ipoAdminApp.createIPOController', [])
   $scope.vemode = false;// view:false     edit:true
 
   $scope.showbelow = true;//Check box Checked if IPO financing is allowed;Unchecked if IPO financing is not allowed.
+  
+  $scope.createIPOgetSysSetting = function(){      
+      $http({
+        method: 'POST',
+        url:'/i/getSysSetting',
+        //sharedProperties.getBaseURL() + '/i/createIPO',        
+      }).then(function successCallback(response) {
+          console.log(response);
+          if (response['data']['returnCode'] == SUCCESS) {
+          $scope.convertToCreateIPOList(response['data']['currencyMaster']);
+            //data.currencyMaster
+                   
+          }
+          else {
+          
+          }
+      }, function errorCallback(response) {
+        //$scope.displayDefaultError();
+        console.log('Error -->' + response);
+      });
+    }
+    $scope.StockCurrency="";
+    $scope.CurrencyofHandingFee=""
+    $scope.StockCurrency = {model: "", getStockCurrency:[]};
+    $scope.CurrencyofHandingFee ={model: "", getCurrencyofHandingFee:[]};
+    $scope.convertToCreateIPOList = function(sysSetting){
+      $scope.StockCode ='00001';
+      $scope.IPOCode ='IPO20160513000000001';      
+      angular.forEach(sysSetting, function(item) {
+        $scope.StockCurrency.getStockCurrency.push(item.currency);
+        $scope.CurrencyofHandingFee.getCurrencyofHandingFee.push(item.currency);
+      })      
+      $scope.EnglishStockName ='GetServer';
+    }
 
+    $scope.createIPOtest = function(){      
+      $http({
+        method: 'GET',
+        url:'adminIPOBook.json',
+        //sharedProperties.getBaseURL() + '/i/createIPO',        
+      }).then(function successCallback(response) {
+          console.log(response);
+      }, function errorCallback(response) {
+        //$scope.displayDefaultError();
+        console.log('Error -->' + response);
+      });
+      $http({
+        method: 'GET',
+        url:'sysSetting.json',
+        //sharedProperties.getBaseURL() + '/i/createIPO',        
+      }).then(function successCallback(response) {
+          console.log(response);
+          if (response['data']['returnCode'] == SUCCESS) {
+          $scope.convertToCreateIPOList(response['data']);
+            //test
+                   
+          }
+          else {
+          
+          }
+      }, function errorCallback(response) {
+        //$scope.displayDefaultError();
+        console.log('Error -->' + response);
+      });
+    }
+  /*Accept*/
+  $scope.createIPOaccept = function(){     
+     $http({
+        method: 'POST',
+        url:'/i/xxxxxx',
+        //sharedProperties.getBaseURL() + '/i/createIPO',
+        data:"test"        
+      }).then(function successCallback(response) {
+        console.log('success -->' +response);
+          alert("success");
+      }, function errorCallback(response) {
+        //$scope.displayDefaultError();
+        console.log('Error -->' + response);
+      });   
+  }
+  /*Reject*/
+  $scope.createIPOreject = function(){     
+     $http({
+        method: 'POST',
+        url:'/i/rejectIPOReq',
+        //sharedProperties.getBaseURL() + '/i/createIPO',
+        data:"test"        
+      }).then(function successCallback(response) {
+        console.log('success -->' +response);
+          alert("success");
+      }, function errorCallback(response) {
+        //$scope.displayDefaultError();
+        console.log('Error -->' + response);
+      });   
+  }
   /*Edit*/
   $scope.createIPOedit = function(){     
     $scope.machker = false;
@@ -150,7 +245,69 @@ angular.module('ipoAdminApp.createIPOController', [])
     $location.path('/maintenance');    
   }
 
+  /*SavaDraft*/
+  $scope.createIPOsavaDraft = function(){     
+     $http({
+        method: 'POST',
+        url:'/i/xxxxxx',
+        //sharedProperties.getBaseURL() + '/i/createIPO',
+        data:"test"        
+      }).then(function successCallback(response) {
+        console.log('success -->' +response);
+          alert("success");
+      }, function errorCallback(response) {
+        //$scope.displayDefaultError();
+        console.log('Error -->' + response);
+      });   
+  }
 
+  /*Delete*/
+  $scope.createIPOdelete = function(){     
+     $http({
+        method: 'POST',
+        url:'/i/deleteIPO',
+        //sharedProperties.getBaseURL() + '/i/createIPO',
+        data:"test"        
+      }).then(function successCallback(response) {
+        console.log('success -->' +response);
+          alert("success");
+      }, function errorCallback(response) {
+        //$scope.displayDefaultError();
+        console.log('Error -->' + response);
+      });   
+  }
+
+  /*Postpone*/
+  $scope.createIPOpostpone = function(){     
+     $http({
+        method: 'POST',
+        url:'/i/postpone IPO',
+        //sharedProperties.getBaseURL() + '/i/createIPO',
+        data:"test"        
+      }).then(function successCallback(response) {
+        console.log('success -->' +response);
+          alert("success");
+      }, function errorCallback(response) {
+        //$scope.displayDefaultError();
+        console.log('Error -->' + response);
+      });   
+  }
+
+   /*Remuse*/
+  $scope.createIPOresume = function(){     
+     $http({
+        method: 'POST',
+        url:'/i/xxxxxx',
+        //sharedProperties.getBaseURL() + '/i/createIPO',
+        data:"test"        
+      }).then(function successCallback(response) {
+        console.log('success -->' +response);
+          alert("success");
+      }, function errorCallback(response) {
+        //$scope.displayDefaultError();
+        console.log('Error -->' + response);
+      });   
+  }
 
    
    /*Permissions*/
@@ -182,7 +339,7 @@ angular.module('ipoAdminApp.createIPOController', [])
    	return stockCodeFormat(value);
    }
 
-   $scope.IPOCode = "IPO20160513000000001";
+   /*$scope.IPOCode = "IPO20160513000000001";*/
 
    $scope.onlyNumber = function(value,sName,event){
    	return onlyNumber(value,sName,event);
@@ -397,7 +554,7 @@ angular.module('ipoAdminApp.createIPOController', [])
     	if(angular.isDefined($scope.SimplifiedChineseName) &&($scope.SimplifiedChineseName!=null && $scope.SimplifiedChineseName!='')){
     		basicfillField++;
     	}
-    	if($scope.StockCurrency &&($scope.StockCurrency!=null && $scope.StockCurrency!='')){
+    	if($scope.StockCurrency.model &&($scope.StockCurrency.model!=null && $scope.StockCurrency.model!='')){
     		basicfillField++;
     	}
     	if(angular.isDefined($scope.OfferPriceRangeStart) && ( $scope.OfferPriceRangeStart!=null && $scope.OfferPriceRangeStart!='' )) {
@@ -409,7 +566,7 @@ angular.module('ipoAdminApp.createIPOController', [])
     	if(angular.isDefined($scope.BroadLot) && ( $scope.BroadLot!=null && $scope.BroadLot!=='' )) {
     		basicfillField++;			
     	}
-    	if($scope.StockCurrency && ( $scope.StockCurrency!=null && $scope.StockCurrency!='' )) {
+    	if($scope.StockCurrency.model && ( $scope.StockCurrency.model!=null && $scope.StockCurrency.model!='' )) {
     		basicfillField++;			
     	}
     	if(angular.isDefined($scope.OnlineIPOStartDate) && ( $scope.OnlineIPOStartDate!=null && $scope.OnlineIPOStartDate!='' )) {
@@ -454,7 +611,7 @@ angular.module('ipoAdminApp.createIPOController', [])
     	if(angular.isDefined($scope.InvestorCompensationLevyRate) && ( $scope.InvestorCompensationLevyRate!=null && $scope.InvestorCompensationLevyRate!='' )) {
     		feefillField++;			
     	}
-    	if($scope.CurrencyofHandingFee && ( $scope.CurrencyofHandingFee!=null && $scope.CurrencyofHandingFee!='' )) {
+    	if($scope.CurrencyofHandingFee.model && ( $scope.CurrencyofHandingFee.model!=null && $scope.CurrencyofHandingFee.model!='' )) {
     		feefillField++;			
     	}
     	if(angular.isDefined($scope.HandingFee) && ( $scope.HandingFee!=null && $scope.HandingFee!='' )) {
@@ -568,7 +725,7 @@ angular.module('ipoAdminApp.createIPOController', [])
     $scope.createIpoData.SimplifiedChineseName=$scope.SimplifiedChineseName||"";
     $scope.createIpoData.NumberofOfferSharesUnitunderGlobalOffering=$scope.NumberofOfferSharesUnitunderGlobalOffering||"";
     $scope.createIpoData.NumberofPublicOfferSharesUnit=$scope.NumberofPublicOfferSharesUnit||"";
-    $scope.createIpoData.StockCurrency=$scope.StockCurrency||"";
+    $scope.createIpoData.StockCurrencyModel=$scope.StockCurrency.model||"";
     $scope.createIpoData.OfferPriceRangeStart=$scope.OfferPriceRangeStart||"";
     $scope.createIpoData.OfferPriceRangeEnd=$scope.OfferPriceRangeEnd||"";
     $scope.createIpoData.BroadLot=$scope.BroadLot||"";
@@ -595,7 +752,7 @@ angular.module('ipoAdminApp.createIPOController', [])
     $scope.createIpoData.TradingFeeRate=$scope.TradingFeeRate||"";
     $scope.createIpoData.InvestorCompensationLevyRate=$scope.InvestorCompensationLevyRate||"";
     $scope.createIpoData.ClientRebateRate=$scope.ClientRebateRate||"";
-    $scope.createIpoData.CurrencyofHandingFee=$scope.CurrencyofHandingFee||"";
+    $scope.createIpoData.CurrencyofHandingFeeModel=$scope.CurrencyofHandingFee.model||"";
     $scope.createIpoData.FinancingHandingFee=$scope.FinancingHandingFee||"";
 
     $scope.createIpoData.quantityAmountTable=$scope.quantityAmountTable||"";
@@ -665,9 +822,6 @@ angular.module('ipoAdminApp.createIPOController', [])
 
 
 
-
-
-
 	//....test value..
 	/*$scope.OfferPriceRangeStart= 1.0;
 	$scope.OfferPriceRangeEnd = 1.7;
@@ -699,6 +853,15 @@ angular.module('ipoAdminApp.createIPOController', [])
 			$t.removeClass('active2');
 		}
 	});
+
+  //init
+  $scope.init = function() {    
+    //$scope.createIPOtest();
+    $scope.createIPOgetSysSetting();
+       
+      
+  }   
+  $scope.init();
 
 	
 }]);

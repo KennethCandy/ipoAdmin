@@ -1,0 +1,4 @@
+{"IPOCode":"IPO20160513000000001",
+"StockCurrency":[{"val":"CNY","opt":"CNY"},{"val":"GBP","opt":"GBP"},{"val":"EUR","opt":"EUR"},{"val":"HKD","opt":"HKD"}],
+"CurrencyofHandingFee":[{"val":"CNY","opt":"CNY"},{"val":"GBP","opt":"GBP"},{"val":"EUR","opt":"EUR"},{"val":"HKD","opt":"HKD"}],
+"StockCode":"00001","EnglishStockName":"Test","returnCode":"0"}

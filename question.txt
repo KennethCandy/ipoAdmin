@@ -24,15 +24,15 @@ ________________________________________________________________________________
 (Back)
 For going back to the record list view without performing any action on the record.
 
-用于返回到记录列表视图，而不对记录执行任何操作。							
-																			(okokokokokokokokokokokokokokokokokokokokok)
+用于返回到记录列表视图，而不对记录执行任何操作。								
+																												(ok)
 ________________________________________________________________________________________________________________________
 (Edit)
 IPO master record will be opened in view only mode by default for maker.
 It will turn into editable mode after pressed the “Edit” button.
 
 IPO主记录将在默认情况下仅在查看模式下打开。 按“编辑”按钮后，它将变为可编辑模式。
-																			(okokokokokokokokokokokokokokokokokokokokok)
+																												(ok)
 ________________________________________________________________________________________________________________________
 (Save Draft)
 For maker to save an IPO master record as draft without submitting it for approval. 
