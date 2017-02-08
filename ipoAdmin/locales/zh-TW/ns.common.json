@@ -51,6 +51,8 @@
     "OnlineIPOEndTime":"網上新股認購結束時間",
     "IPOClosingDate":"新股認購截止日期",
     "IPOClosingTime":"新股認購截止時間",
+    "ApplicationPeriodStartDate":"申請期開始日期",
+    "ApplicationPeriodEndDate":"申請期開始日期",
     "PriceFixingDate":"定價日期",
     "ResultAnnouncementDate":"結果公告日期",
     "DispatchofSharesandRefundDate":"派發股票和退款日期",

@@ -112,6 +112,8 @@
     "IPOClosingDate":"IPO Closing Date",
     "IPOClosingTime":"IPO Closing Time",
     "PriceFixingDate":"Price Fixing Date",
+    "ApplicationPeriodStartDate":"Application Period Start Date",
+    "ApplicationPeriodEndDate":"Application Period End Date",
     "ResultAnnouncementDate":"Result Announcement Date",
     "DispatchofSharesandRefundDate":"Dispatch of Shares and Refund Date",
     "ListingDate":"Listing Date",
