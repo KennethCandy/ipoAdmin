@@ -4,15 +4,15 @@ angular.module('ipoAdminApp.maintenanceController', [])
 	
 		$scope.getAdminIPO = function() {			
 		$http({
-			method: 'GET',
-			url: 'adminIPOBook.json'
-			/* method: 'POST',//REMENBER ROLLBACKsysSetting
+			//method: 'GET',
+			//url: 'adminIPOBook.json'
+			 method: 'POST',
 			url: sharedProperties.getBaseURL() + '/i/adminIPOBook',			
 			data: {dateType : $scope.option,     
 				   dayRange : $scope.day,
 				   dateFrom : $scope.dateFrom,
 				   dateTo : $scope.dateTo,
-				   modMyself: $scope.myselfCheckbox}*/
+				   modMyself: $scope.myselfCheckbox}
 		}).then(function successCallback(response) {			
 			if (response['data']['returnCode'] == SUCCESS) {
 				$scope.convertToAdminIPOsList(response['data']['adminIPOs']);
@@ -20,12 +20,12 @@ angular.module('ipoAdminApp.maintenanceController', [])
 				//if (sharedProperties.getClientId() != null) {
 				//	$scope.getCurrentIPOClientData();
 				//}	
-				console.log(response['data']['returnCode']);
+				/*console.log(response['data']['returnCode']);
 				console.log(response);
 				console.log(response['data']);				
 				console.log(response['data']['adminIPOs']);
 				console.log(response['data']['adminIPOs'][0]);
-				console.log(response['data']['adminIPOs'][0]['ipoId']);			
+				console.log(response['data']['adminIPOs'][0]['ipoId']);*/			
 			}
 			else {
 			//	$scope.displayError(response['data']['returnCode']);

@@ -598,3 +598,7 @@ hr {
   font-weight: bold;
   font-size: 18px;
 }
+.timestyle{
+    padding-top: 0px !important;
+}
+

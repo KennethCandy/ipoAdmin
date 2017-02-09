@@ -46,7 +46,7 @@ Maker can modify the records and submit again. Once record was submitted and pen
 maker can perform “Save draft” action.
 
 制造商提交IPO主记录以供审批。 它将在提交之前保存更改。制造商可以修改记录并重新提交。
- 一旦记录提交并等待批准，制造商可以执行“保存草稿”操作。
+ 一旦记录提交并等待批准，制造商可以执行“保存草稿”操作。															(ok)
 ________________________________________________________________________________________________________________________
 (Delete)
 For maker to mark an IPO master record to be deleted and submit for approval.It will save the changes before submission. Once record was submitted and pending for approval, maker can perform “Save draft” action.
@@ -64,6 +64,44 @@ ________________________________________________________________________________
 For maker to mark an IPO master record to resume and submit for approval. It will save the changes before submission. Once record was submitted and pending for approval, maker can perform “Save draft” action.
 
 制造商标记IPO主记录以恢复并提交批准。 它将在提交之前保存更改。 一旦记录提交并待审批，制造商可以执行“保存草稿”操作。
+
+
+
+1、save draft 
+
+2、然后通过ipo master界面， 点击某个链接，调用adminIPODetail去拿相应的IPO数据，这个你可以在submit成功之后，通过 adminIPOBook去查看你那条记录的ipo id ，然后在ipo master界面写死这个id 去发adminIPODetail请求
+
+3、实现Delete 按钮的功能
+
+4、用checker 的身份去接着完成accept & reject这两个按钮
+________________________________________________________________________________________________________________________
+通过 IPO Master界面进入之后，如果是new 就默认是edit model
+
+如果是修改，那默认会是view only 
+
+之后点击 edit 变成可edit model 
+
+new ipo 在submit or  save draft 后变成view model 
+
+modify 在submit or save draft or back的情况下，变成view model
+对于checker 
+
+在 打开IPO Record的时候，如果 record 是pending 状态，那么仅 一个remark 字段是 edit model ，其它是view 
+
+如果是approved or rejected 就是view mode
+
+而在做完accept or reject 就是view mode
+
+marker  & checker 你现在是按这样的逻辑去处理的吗
+
+
+last modify 那里需要通过  adminIPODetail来拿
+这个是要做modify的时候才一并拿的
+今天香港会上线一个版本
+在submit之后
+会返回  ipoId
+
+
 
 
 
