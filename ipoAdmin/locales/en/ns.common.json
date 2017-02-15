@@ -171,6 +171,11 @@
     "SpecicalInterestRate":"Specical Interest Rate(p.a)",
     "Saveastemplatewithname":"Save as template with name",
     "Save":"Save",
+    "Operational":"Operational",
+    "requireHoldFundCash":"Hold fund for cash subscription",
+    "allowCancelCash":"Allow cancellation of IPO cash subscription",
+    "requireHoldFundMargin":"Hold fund for financing subscription",
+    "allowCancelMargin":"Allow cancellation of IPO financing subscription",
     "backTo":"Back to",
     "isrequired":" is required",
     "isinvalid":"is invalid"

@@ -38,7 +38,7 @@ ________________________________________________________________________________
 For maker to save an IPO master record as draft without submitting it for approval. 
 Once an IPO master record was submitted and pending for approval, “Save Draft” action will be hidden. 
 
-制造商将IPO主记录保存为草案，而不提交批准。一旦IPO主记录提交并待审批，“保存草稿”操作将被隐藏。
+制造商将IPO主记录保存为草案，而不提交批准。一旦IPO主记录提交并待审批，“保存草稿”操作将被隐藏。					(ok)
 ________________________________________________________________________________________________________________________
 (Submit)
 For maker to submit an IPO master record for approval. It will save the changes before submission.
@@ -64,7 +64,7 @@ ________________________________________________________________________________
 For maker to mark an IPO master record to resume and submit for approval. It will save the changes before submission. Once record was submitted and pending for approval, maker can perform “Save draft” action.
 
 制造商标记IPO主记录以恢复并提交批准。 它将在提交之前保存更改。 一旦记录提交并待审批，制造商可以执行“保存草稿”操作。
-
+________________________________________________________________________________________________________________________
 
 
 1、save draft 

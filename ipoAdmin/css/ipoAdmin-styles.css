@@ -553,12 +553,12 @@ hr {
 	display: block;
 	float: left;
 	min-height: 40px;
-	min-width: 200px;
+	min-width: 120px;
 	background: #ddd;
 	text-align: center;
-	padding: 10px 40px 0 40px;
+	padding: 10px 10px 0 10px;
 	position: relative;
-	margin: 0 50px 0 0; 
+	margin: 0 45px 0 0; 
 	font-size: 15px;
 	text-decoration: none;
 	color: #fff;

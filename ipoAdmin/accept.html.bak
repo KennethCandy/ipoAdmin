@@ -1,0 +1,9 @@
+!DOCTYPE html
+htmlheadheadbody
+form action="/i/ipoApproval" method=post target=_blank
+  ipoId     input type=text name=ipoId value=10001001br
+  version     input type=text name=version value=1br
+  approvalStatus   input type=text name=approvalStatus value=Ybr
+input type=submit name=submit value=Submit
+form
+bodyhtml

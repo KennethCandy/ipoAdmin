@@ -54,7 +54,7 @@
     this.scrollHeight = this.getScrollHeight()
 
     var self     = this
-    var hrefArr = ['#basic','#fee','#quantity','#financing'], _index = 0;
+    var hrefArr = ['#basic','#fee','#quantity','#financing','#operational'], _index = 0;
 
     this.$body
       .find(this.selector)
@@ -111,7 +111,8 @@
       '#basic':'#abasic',
       '#fee':'#afee',
       '#quantity':'#aquantity',
-      '#financing':'#afinancing'
+      '#financing':'#afinancing',
+      '#operational':'#aoperational'
     }
     this.activeTarget = target
 

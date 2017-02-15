@@ -15,7 +15,7 @@
 	<div class="row">
 		<div class="col-sm-12" >
 			<hr style="margin-top: 5px;">
-			<h4 ng-show="true">{{'createIPO.NewIPOMasterRecord'|translate}}</h4>
+			<h4 ng-show="true">{{'createIPO.NewIPOMasterRecord'|translate}}</h4> > <span ng-click="createIPOadminIPODetail()">adminIPODetail</span> > <span ng-click="createIPOadminIPOBook()">adminIPOBook</span>
 			<h4 ng-show="false">{{'createIPO.ModifyIPOMaster'|translate}}</h4>
 			<hr style="margin-top: 10px;margin-bottom: 10px">
 		</div>
@@ -32,8 +32,8 @@
 					</div>
 				</div>		
 			</div>
-			<div class="col-sm-4">
-				<p class="text-center">{{'createIPO.Lastmodifiedby'|translate}} <span class="spanStyle">Aimer Chau</span> {{'createIPO.on'|translate}} <span class="spanStyle">{{getCurrentDate()}}</span> {{'createIPO.at'|translate}} <span class="spanStyle">{{theTime}}</span>{{'createIPO.change'|translate}}</p>			
+			<div class="col-sm-4" ng-show="modify">
+				<p class="text-center">{{'createIPO.Lastmodifiedby'|translate}} <span class="spanStyle">{{modifyUserId}}</span> {{'createIPO.on'|translate}} <span class="spanStyle">{{modifyDate}}</span> {{'createIPO.at'|translate}} <span class="spanStyle">{{modifyTime}}</span>{{'createIPO.change'|translate}}</p>			
 			</div>
 		</div>
 	</div><hr style="margin-top:0px;">
@@ -86,15 +86,17 @@
 							<span class="icon-bar"></span>
 							<span class="icon-bar"></span>
 							<span class="icon-bar"></span>
+							<span class="icon-bar"></span>
 						</button>
 						<a class="navbar-brand" ></a>
 					</div>
 					<div class="collapse navbar-collapse bs-example-js-navbar-scrollspy navcss">
 						<ul class="navM"style="padding-left: 0px;padding-top: 0px;">        	          	
-							<li><a id="abasic" ng-href="#/createIPO#basic"><div id="abasicdiv"><span class="badge">1</span> {{'createIPO.BasicInformation'|translate}} - {{basicProgress}}/{{basictotal}}</div></a></li>
-							<li><a id="afee" ng-href="#/createIPO#fee" ><div id="afeediv"><span class="badge">2</span> {{'createIPO.FeeandCharges'|translate}} - {{feeProgress}}/{{feetotal}}</div></a></li>
-							<li><a id="aquantity" ng-href="#/createIPO#quantity"><div id="aquantitydiv"><span class="badge">3</span> {{'createIPO.Quantity/AmountTable'|translate}} - {{quantityProgress}}/{{quantitytotal}}</div></a></li>
-							<li><a id="afinancing" ng-href="#/createIPO#financing"><div id="afinancingdiv"><span class="badge">4</span> {{'createIPO.Financing'|translate}} - {{financingProgress}}/{{financingtotal}}</div></a></li>
+							<li><a id="abasic" ng-href="#/createIPO#basic"><span class="badge">1</span> {{'createIPO.BasicInformation'|translate}} - {{basicProgress}}/{{basictotal}}</a></li>
+							<li><a id="afee" ng-href="#/createIPO#fee" ><span class="badge">2</span> {{'createIPO.FeeandCharges'|translate}} - {{feeProgress}}/{{feetotal}}</a></li>
+							<li><a id="aquantity" ng-href="#/createIPO#quantity"><span class="badge">3</span> {{'createIPO.Quantity/AmountTable'|translate}} - {{quantityProgress}}/{{quantitytotal}}</a></li>
+							<li><a id="afinancing" ng-href="#/createIPO#financing"><span class="badge">4</span> {{'createIPO.Financing'|translate}} - {{financingProgress}}/{{financingtotal}}</a></li>
+							<li><a id="aoperational" ng-href="#/createIPO#operational"><span class="badge">5</span>{{'createIPO.Operational'|translate}} - {{operationalProgress}}/{{operationaltotal}}</a></li>
 						</ul>
 					</div>
 				</div>
@@ -720,24 +722,21 @@
 						<span ng-show="createipoForm.MaxLoanRatio.$error.required" >{{'createIPO.MaxLoanRatio'|translate}}{{'createIPO.isrequired'|translate}}</span>							
 					</span>
 				</label>
-				<div class="form-group"ng-show="showbelow">				    
-					<label for="MustUseMaxLoan" class="col-sm-5 control-label" >{{'createIPO.MustUseMaxLoan'|translate}}</label>   
-					<div class="col-sm-3"ng-model="MustUseMaxLoan" required>
-						<label class="radio-inline">
-							<input type="radio" name="MustUseMaxLoan" id="MustUseMaxLoanYes" value="yes" ng-show="showSSDPR(machker,vemode)"ng-model="MustUseMaxLoan"><span ng-show="showSSDPR(machker,vemode)">{{'createIPO.MustUseMaxLoanYes'|translate}}</span>
-						</label>
-						<label class="radio-inline">
-							<input type="radio" name="MustUseMaxLoan" id="MustUseMaxLoanNo" value="no"ng-show="showSSDPR(machker,vemode)"ng-model="MustUseMaxLoan"><span ng-show="showSSDPR(machker,vemode)">{{'createIPO.MustUseMaxLoanNo'|translate}}</span>
-						</label>
-						<label class=" control-label resetfcolor"ng-show="!showSSDPR(machker,vemode)"style="margin-left: -58px;">{{MustUseMaxLoan|| "---"}}</label>
-					</div>
-				</div>
-				<label class="col-sm-offset-5 col-sm-6 control-label" style="text-align:left;margin-top:-20px;margin-bottom:15px;">
-					<span class="warningfont"ng-show="createipoForm.MustUseMaxLoan.$dirty && createipoForm.MustUseMaxLoan.$invalid">
-						<i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
-						<span ng-show="createipoForm.MustUseMaxLoan.$error.required" >{{'createIPO.MustUseMaxLoan'|translate}}{{'createIPO.isrequired'|translate}}</span>							
-					</span>
-				</label>
+				<div class="form-group" ng-show="showbelow">
+						<div class="col-sm-offset-4 col-sm-1">
+							<div class="checkbox"style="float:right" id="MustUseMaxLoan">
+								<label><input type="checkbox"  ng-model="MustUseMaxLoan" ng-disabled="disableFields(machker,vemode)"></label>
+							</div>
+						</div>				      
+						<div class="col-sm-5 ">	
+							<label for="MustUseMaxLoan" class="col-sm-5 control-label" style="
+							text-align: left; padding-left: 0">{{'createIPO.MustUseMaxLoan'|translate}}</label>
+							<span class=" warningfont" ng-show="createipoForm.AcceptSubscription.$dirty && createipoForm.MustUseMaxLoan.$invalid">
+								<i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+								<span  ng-show="createipoForm.MustUseMaxLoan.$error.required" >{{'createIPO.MustUseMaxLoan'|translate}}{{'createIPO.isrequired'|translate}}</span>							
+							</span>
+						</div>
+				</div>				
 				<div class="form-group"ng-show="showbelow">
 					<label for="AllowedLoanRatioSelectedby" class="col-sm-5 control-label">{{'createIPO.AllowedLoanRatioSelectedby'|translate}}</label>  
 					<div class="col-sm-5 ">					    							    
@@ -754,7 +753,7 @@
 					<div class="col-sm-2 ">	
 						<div class="input-group">							    
 							<input type="text" class="form-control" id="BasicInterestRate"name="BasicInterestRate" placeholder="{{'createIPO.Required'|translate}}"ng-show="showSSDPR(machker,vemode)"ng-model="BasicInterestRate"required ng-keydown="decimallimit(4,4,BasicInterestRate,'BasicInterestRate',$event)" ng-blur="BasicInterestRate= digitlimt(BasicInterestRate)">
-							<label class=" control-label resetfcolor"ng-show="!showSSDPR(machker,vemode)">{{AllowedLoanRatioSelectedby|| "---"}}%</label>
+							<label class=" control-label resetfcolor"ng-show="!showSSDPR(machker,vemode)">{{BasicInterestRate|| "---"}}%</label>
 							<span class="input-group-addon"ng-show="showSSDPR(machker,vemode)">%</span>
 						</div>
 					</div>							    
@@ -852,9 +851,69 @@
 							<tr><td class="tdclass" colspan="3" align="center"><button id="four" type="button" class="btn btn-info" style="width:100px;"ng-click="sirTableRemove()"ng-show="showSSDPR(machker,vemode)">{{'createIPO.RemoveAll'|translate}}</button></td></tr>
 						</table>
 					</div>
+				</div>				
+				<div class="form-group" id="operational">
+						<div class="col-sm-offset-4 col-sm-1">
+							<div class="checkbox"style="float:right" id="requireHoldFundCash">
+								<label><input type="checkbox"  ng-model="requireHoldFundCash" ng-disabled="disableFields(machker,vemode)"></label>
+							</div>
+						</div>				      
+						<div class="col-sm-5 ">	
+							<label for="requireHoldFundCash" class="control-label" style="
+							text-align: left; padding-left: 0">{{'createIPO.requireHoldFundCash'|translate}}<span class='selectdown'>{{'createIPO.Required'|translate}}</span></label>
+							<span class=" warningfont" ng-show="createipoForm.AcceptSubscription.$dirty && createipoForm.requireHoldFundCash.$invalid">
+								<i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+								<span  ng-show="createipoForm.requireHoldFundCash.$error.required" >{{'createIPO.requireHoldFundCash'|translate}}{{'createIPO.isrequired'|translate}}</span>		
+							</span>
+						</div>
+				</div>
+				<div class="form-group">
+						<div class="col-sm-offset-4 col-sm-1">
+							<div class="checkbox"style="float:right" id="allowCancelCash">
+								<label><input type="checkbox"  ng-model="allowCancelCash" ng-disabled="disableFields(machker,vemode)"></label>
+							</div>
+						</div>				      
+						<div class="col-sm-5 ">	
+							<label for="allowCancelCash" class=" control-label" style="
+							text-align: left; padding-left: 0">{{'createIPO.allowCancelCash'|translate}}<span class='selectdown'>{{'createIPO.Required'|translate}}</span></label>
+							<span class=" warningfont" ng-show="createipoForm.AcceptSubscription.$dirty && createipoForm.allowCancelCash.$invalid">
+								<i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+								<span  ng-show="createipoForm.allowCancelCash.$error.required" >{{'createIPO.allowCancelCash'|translate}}{{'createIPO.isrequired'|translate}}</span>							
+							</span>
+						</div>
+				</div>
+				<div class="form-group"ng-show="showbelow">
+						<div class="col-sm-offset-4 col-sm-1">
+							<div class="checkbox"style="float:right" id="requireHoldFundMargin">
+								<label><input type="checkbox"  ng-model="requireHoldFundMargin" ng-disabled="disableFields(machker,vemode)"></label>
+							</div>
+						</div>				      
+						<div class="col-sm-5 ">	
+							<label for="requireHoldFundMargin" class=" control-label" style="
+							text-align: left; padding-left: 0">{{'createIPO.requireHoldFundMargin'|translate}}<span class='selectdown'>{{'createIPO.Required'|translate}}</span></label>
+							<span class=" warningfont" ng-show="createipoForm.AcceptSubscription.$dirty && createipoForm.requireHoldFundMargin.$invalid">
+								<i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+								<span  ng-show="createipoForm.requireHoldFundMargin.$error.required" >{{'createIPO.requireHoldFundMargin'|translate}}{{'createIPO.isrequired'|translate}}</span>							
+							</span>
+						</div>
+				</div>
+				<div class="form-group"ng-show="showbelow">
+						<div class="col-sm-offset-4 col-sm-1">
+							<div class="checkbox"style="float:right" id="allowCancelMargin">
+								<label><input type="checkbox"  ng-model="allowCancelMargin" ng-disabled="disableFields(machker,vemode)"></label>
+							</div>
+						</div>				      
+						<div class="col-sm-5 ">	
+							<label for="allowCancelMargin" class="control-label" style="
+							text-align: left; padding-left: 0">{{'createIPO.allowCancelMargin'|translate}}<span class='selectdown'>{{'createIPO.Required'|translate}}</span></label>
+							<span class=" warningfont" ng-show="createipoForm.AcceptSubscription.$dirty && createipoForm.allowCancelMargin.$invalid">
+								<i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+								<span  ng-show="createipoForm.allowCancelMargin.$error.required" >{{'createIPO.allowCancelMargin'|translate}}{{'createIPO.isrequired'|translate}}</span>							
+							</span>
+						</div>
 				</div>
 
-				<div class="form-group"style="height:60px;"></div>
+				<div class="form-group"style="height:250px;"></div>
 
 			</form>								  
 		</div>			
@@ -869,6 +928,7 @@
 		<li><a ng-href="#/createIPO#basic">{{'createIPO.BasicInformation'|translate}}</a></li>
 		<li><a ng-href="#/createIPO#fee">{{'createIPO.FeeandCharges'|translate}}</a></li>
 		<li><a ng-href="#/createIPO#quantity">{{'createIPO.Quantity/AmountTable'|translate}}</a></li>  	
-		<li class="active"><a ng-href="#/createIPO#financing">{{'createIPO.Financing'|translate}}</a></li>
+		<li><a ng-href="#/createIPO#financing">{{'createIPO.Financing'|translate}}</a></li>
+		<li><a ng-href="#/createIPO#operational">{{'createIPO.Operational'|translate}}</a></li>
 	</ol>
 </div>

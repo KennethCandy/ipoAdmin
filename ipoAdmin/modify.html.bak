@@ -1,0 +1,62 @@
+
+<!DOCTYPE html>
+<html>
+<body>
+<form method="post" target="_blank">
+  ipoId:     <input type="text" name="ipoId" value="00001-2016062800001"><br>
+  version:     <input type="text" name="version" value="1"><br>
+  ccy:   <input type="text" name="ccy" value="HKD"><br>
+  exRate:  <input type="text" name="exRate" value="1"><br>
+  requireHoldFundCash: <input type="text" name="requireHoldFundCash" value="Y"><br>
+  requireHoldFundMargin: <input type="text" name="requireHoldFundMargin" value="Y"><br>
+  allowCancelCash: <input type="text" name="allowCancelCash" value="Y"><br>
+  allowCancelMargin: <input type="text" name="allowCancelMargin" value="Y"><br>
+  subStatus: <input type="text" name="subStatus" value="Y"><br>
+  subStartTime:   <input type="text" name="subStartTime" value="201612200800"><br>
+  subCloseTime:    <input type="text" name="subCloseTime" value="201712200800"><br>
+  name:   <input type="text" name="name" value="00001 Eng"><br>
+  tcName:  <input type="text" name="tcName" value="00001 TC"><br>
+  scName:     <input type="text" name="scName" value="00001 SC"><br>
+  totalShare:   <input type="text" name="totalShare" value="150000000"><br>
+  publicShare:  <input type="text" name="publicShare" value="140000000"><br>
+  nominalCcy: <input type="text" name="nominalCcy" value="HKD"><br>
+  nominalValue:   <input type="text" name="nominalValue" value="0.1"><br>
+  offerPriceFrom:    <input type="text" name="offerPriceFrom" value="1"><br>
+  offerPriceTo:   <input type="text" name="offerPriceTo" value="1.2"><br>
+  offerStartTime:  <input type="text" name="offerStartTime" value="201612200800"><br>
+  offerCloseTime:     <input type="text" name="offerCloseTime" value="201712200800"><br>
+  lotSize:   <input type="text" name="lotSize" value="1000"><br>
+  priceFixDate:  <input type="text" name="priceFixDate" value="201712200800"><br>
+  announceDate: <input type="text" name="announceDate" value="201712200800"><br>
+  estRefundDate:   <input type="text" name="estRefundDate" value="201712200800"><br>
+  listingDate:    <input type="text" name="listingDate" value="201712250800"><br>
+  marginStatus:   <input type="text" name="marginStatus" value="Y"><br>
+  marginStartTime:  <input type="text" name="marginStartTime" value="201612200800"><br>
+  marginCloseTime:     <input type="text" name="marginCloseTime" value="201712200800"><br>
+  maxMarginRate:   <input type="text" name="maxMarginRate" value="0.9"><br>
+  marginRateFilter:  <input type="text" name="marginRateFilter" value="0.9,0.2,0.1"><br>
+  useMaxMargin: <input type="text" name="useMaxMargin" value="Y"><br>
+  calcMethod:   <input type="text" name="calcMethod" value="1"><br>
+  commRate:    <input type="text" name="commRate" value="0.01"><br>
+  icLevyRate:   <input type="text" name="icLevyRate" value="0.001"><br>
+  levyRate:  <input type="text" name="levyRate" value="0.01"><br>
+  tradeFeeRate:  <input type="text" name="tradeFeeRate" value="0.01"><br>
+  handlingFeeCcy: <input type="text" name="handlingFeeCcy" value="HKD"><br>
+  handingFee:   <input type="text" name="handingFee" value="401"><br>
+  finHandingFee:    <input type="text" name="finHandingFee" value="101"><br>
+  clientIntDay:   <input type="text" name="clientIntDay" value="1"><br>
+  clientRebateRate:  <input type="text" name="clientRebateRate" value="0.01"><br>
+  basicIntRate:     <input type="text" name="basicIntRate" value="0.01"><br>
+  propspectusUrl:   <input type="text" name="propspectusUrl" value="www.propspectusUrl.com"><br>
+  tcPropspectusUrl:  <input type="text" name="tcPropspectusUrl" value="www.tcPropspectusUrl.com"><br>
+  scPropspectusUrl: <input type="text" name="scPropspectusUrl" value="www.scPropspectusUrl.com"><br>
+  internalRemark:   <input type="text" name="internalRemark" value="no"><br>
+  externalRemark:    <input type="text" name="externalRemark" value="no"><br>
+  appQtyAmtRange:    <input type="text" name="appQtyAmtRange" value='[{"appQtyFrom":0,"appQtyTo":10000,"rangeId":"00002-R1"},{"appQtyFrom":10000,"appQtyTo":20000,"rangeId":"00002-R2"}]'><br>
+  appQtyAmt:    <input type="text" name="appQtyAmt" value='[{"appQty":10000,"appAmt":10000.0,"rangeId":"00002-R1"},{"appQty":20000,"appAmt":20000.0,"rangeId":"00002-R2"}]'><br>
+  amtIntRate:    <input type="text" name="amtIntRate" value='[{"loanAmt":1000.0,"intRate":0.1},{"loanAmt":2000.0,"intRate":0.2}]'><br>
+  SubmitType:    <input type="text" name="submitType" value="Submit"><br>
+  <input type="submit" name="submit" value="Submit">
+</form>
+</body>
+</html>

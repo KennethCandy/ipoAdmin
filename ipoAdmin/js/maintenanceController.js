@@ -4,15 +4,15 @@ angular.module('ipoAdminApp.maintenanceController', [])
 	
 		$scope.getAdminIPO = function() {			
 		$http({
-			//method: 'GET',
-			//url: 'adminIPOBook.json'
-			 method: 'POST',
+			method: 'GET',
+			url: 'adminIPOBook.json'
+			/* method: 'POST',
 			url: sharedProperties.getBaseURL() + '/i/adminIPOBook',			
 			data: {dateType : $scope.option,     
 				   dayRange : $scope.day,
 				   dateFrom : $scope.dateFrom,
 				   dateTo : $scope.dateTo,
-				   modMyself: $scope.myselfCheckbox}
+				   modMyself: $scope.myselfCheckbox}*/
 		}).then(function successCallback(response) {			
 			if (response['data']['returnCode'] == SUCCESS) {
 				$scope.convertToAdminIPOsList(response['data']['adminIPOs']);

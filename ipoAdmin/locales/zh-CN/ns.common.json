@@ -111,6 +111,11 @@
     "SpecicalInterestRate":"特別年利率（％ p.a.）",
     "Saveastemplatewithname":"另存为带名称的模板",
     "Save":"保存",
+    "Operational":"Operational",
+    "requireHoldFundCash":"Hold fund for cash subscription",
+    "allowCancelCash":"Allow cancellation of IPO cash subscription",
+    "requireHoldFundMargin":"Hold fund for financing subscription",
+    "allowCancelMargin":"Allow cancellation of IPO financing subscription",
     "backTo":"回到",
     "isrequired":"是必须的",
     "isinvalid":"是无效的"	
