@@ -122,7 +122,7 @@
         '[data-target="' + target + '"],' +
         this.selector + '[href="' + target + '"]'
 
-        selector = tempObj[target];
+        selector = tempObj[target];        
 
     var active = $(selector)
       .parents('li')

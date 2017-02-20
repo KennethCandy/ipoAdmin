@@ -75,7 +75,7 @@
 					<input type="text" ng-model="dayRange" value="{{dayRange}}" name="dateRange" ng-show="calendar()" style="width:250px"/>
 				</td>				
 				<td>
-					<input type="checkbox" ng-click="onClockMyselfBox();"> {{'maintenance.onlyMyself'|translate}}</input>
+					<input type="checkbox" ng-click="onclickMyselfBox();"> {{'maintenance.onlyMyself'|translate}}</input>
 				</td>
 			</tr>
 			<tr>
@@ -127,8 +127,8 @@
 													<tr>
 														<th>{{'maintenance.modifiedBy'|translate}}</th>       
 													</tr>												
-													<tr ng-repeat="adminIPO in userFiltered = (adminIPOs | orderBy : 'lastModifiedUser' | filter:searchStatus | unique:'lastModifiedUser')">
-														<td><input type="checkbox" ng-click="onClickFilterUser(adminIPO.lastModifiedUser)"><span ng-bind="adminIPO.lastModifiedUser"></span></td>   
+													<tr ng-repeat="adminIPO in userFiltered = (adminIPOs | orderBy : 'lastModUserId' | filter:searchStatus | unique:'lastModUserId')">
+														<td><input type="checkbox" ng-click="onClickFilterUser(adminIPO.lastModUserId)"><span ng-bind="adminIPO.lastModUserId"></span></td>   
 													</tr>																								
 												</table>
 											 </td>								
@@ -159,14 +159,14 @@
 							</li>						
 							<li>
 								<a href="#" style="border-bottom:{{lastModTimeBtn}}" ng-click="sortBtnActive('lastModTimeBtn');">{{'maintenance.lastModTime'|translate}}
-									<span ng-show="sortType == 'lastModifiedDate' && !sortReverse" class="fa fa-caret-down"></span>
-									<span ng-show="sortType == 'lastModifiedDate' && sortReverse" class="fa fa-caret-up"></span>									
+									<span ng-show="sortType == 'lastModTime' && !sortReverse" class="fa fa-caret-down"></span>
+									<span ng-show="sortType == 'lastModTime' && sortReverse" class="fa fa-caret-up"></span>									
 								</a>
 							</li>
 							<li>
 								<a href="#" style="border-bottom:{{lastModByBtn}}" ng-click="sortBtnActive('lastModByBtn');">{{'maintenance.modifiedBy'|translate}}
-									<span ng-show="sortType == 'lastModifiedUser' && !sortReverse" class="fa fa-caret-down"></span>
-									<span ng-show="sortType == 'lastModifiedUser' && sortReverse" class="fa fa-caret-up"></span>
+									<span ng-show="sortType == 'lastModUserId' && !sortReverse" class="fa fa-caret-down"></span>
+									<span ng-show="sortType == 'lastModUserId' && sortReverse" class="fa fa-caret-up"></span>
 								</a>
 							</li>
 							<li>
@@ -242,14 +242,14 @@
 											<table style="text-align:right">
 												<tr>
 													<!-- either one case -->
-													<td id="offer-price" ng-if="!usePrice(adminIPO.finalOfferPrice, adminIPO.status)" ng-bind="adminIPO.offerPrice"></td>
-													<td id="offer-price" ng-if="usePrice(adminIPO.finalOfferPrice, adminIPO.status)" ng-bind="adminIPO.finalOfferPrice"></td>
+													<td id="offer-price" ng-if="!usePrice(adminIPO.finalOfferPrice)" ng-bind="adminIPO.offerPrice"></td>
+													<td id="offer-price" ng-if="usePrice(adminIPO.finalOfferPrice)" ng-bind="adminIPO.finalOfferPrice"></td>
 													<!-- either one case end-->
 												</tr>
 												<tr>
 													<!-- either one case -->
-													<td id="offer-price-range" ng-if="!usePrice(adminIPO.finalOfferPrice, adminIPO.status)">{{'maintenance.offerPriceRange'|translate}}</td>
-													<td id="offer-price-range" ng-if="usePrice(adminIPO.finalOfferPrice, adminIPO.status)">{{'maintenance.offerPrice'|translate}}</td>
+													<td id="offer-price-range" ng-if="!usePrice(adminIPO.finalOfferPrice)">{{'maintenance.offerPriceRange'|translate}}</td>
+													<td id="offer-price-range" ng-if="usePrice(adminIPO.finalOfferPrice)">{{'maintenance.offerPrice'|translate}}</td>
 													<!-- either one case end-->
 												</tr>
 											</table>												
@@ -286,10 +286,10 @@
 										<td  style="width:33%;padding-left:100px;padding-top:10px;">
 											<table style="text-align:right">
 												<tr>
-													<td id="last-modify-by">{{'maintenance.lastModBy'|translate}} : <span ng-bind="adminIPO.lastModifiedUser"></span></td>													
+													<td id="last-modify-by">{{'maintenance.lastModBy'|translate}} : <span ng-bind="adminIPO.lastModUserId"></span></td>													
 												</tr>
 												<tr>
-													<td id="last-modify-time">{{'maintenance.on'|translate}} <span ng-bind="adminIPO.fmtLastModifiedDate"></span> {{'maintenance.at'|translate}} <span ng-bind="adminIPO.lastModifiedTime"></span></td>
+													<td id="last-modify-time">{{'maintenance.on'|translate}} <span ng-bind="adminIPO.fmtLastModDate"></span> {{'maintenance.at'|translate}} <span ng-bind="adminIPO.fmtLastModTime"></span></td>
 												</tr>
 											</table>															 
 										</td>

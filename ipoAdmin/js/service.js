@@ -139,9 +139,6 @@ app.service('sharedProperties', ['$rootScope', function ($rootScope) {
 				if (key == 'baseURL') {
 					$rootScope.baseURL = value;
 				}
-				if (key == 'baseURLFromJava') {
-					$rootScope.baseURLFromJava = value;
-				}
 				else {
 					getSessionStorage().setItem(key, value);
 				}

@@ -21,7 +21,7 @@ h1 {
 
 body {
 background-color:#F0F0F0;
-}
+} 
 /* --- maintenance start --- */
 
 .float.affix{
@@ -469,8 +469,8 @@ bottom: -30px;
 	right:89% !important;
 }
 .input-group-addon{
-	background-color: #F0F0F0;
-    border: 1px solid #F0F0F0;
+	background-color: #FFF;
+    border: 1px solid #FFF;
 }
 .badge {
 	color: #999;
@@ -481,12 +481,12 @@ bottom: -30px;
 	color: #fff;
 }
 ul .active a,ul .active2 a{
-	background-color: #12d6f6 !important;
+	background-color: #55bbde !important;
 	color: #fff;
 }
 .navbar-default{
-	background-color: #F0F0F0;
-    border-color: #F0F0F0;
+	background-color: #FFF;
+    border-color: #FFF;
 }
 hr {
     margin-top: 20px;
@@ -586,12 +586,12 @@ hr {
 	display: none; 
 }
 .active a:before,.active2 a:before {
-	border-bottom: 20px solid #12d6f6 !important;
-	border-right: 20px solid #12d6f6 !important;
+	border-bottom: 20px solid #55bbde !important;
+	border-right: 20px solid #55bbde !important;
 } 
 .active a:after,.active2 a:after {
-	border-top: 20px solid #12d6f6 !important;
-	border-left: 20px solid #12d6f6 !important;
+	border-top: 20px solid #55bbde !important;
+	border-left: 20px solid #55bbde !important;
 } 
 .spanStyle{
   color: black;
@@ -600,5 +600,54 @@ hr {
 }
 .timestyle{
     padding-top: 0px !important;
+}
+.hcss{
+    margin-top:0px;
+    margin-bottom:0px;
+    text-align:center;
+}
+.ctrBtn{
+    width:160px;
+    text-align:left;
+}
+.floattd{
+    border-top: 0px !important;
+}
+.textpad{
+    text-align: left !important;
+    padding-left: 0;
+}
+.fieldlab{
+    text-align: left !important;
+    padding-left:15px;
+}
+.textcte{
+    text-align:center !important;
+}
+.labhint{
+    text-align:left !important;
+    margin-top:-20px;
+    margin-bottom:15px;
+}
+.bodyresetcolor{
+  background-color:#fff !important;
+  height: 100%;
+  width: 100%;
+  bottom: 0;
+  position: absolute;
+}
+.guidet{
+  min-width: 1200px;
+}
+.breadcrumb {
+    padding: 8px 15px;    
+    list-style: none;
+    background-color: #fff;
+    border-radius: 4px;
+}
+.footers{
+   position:fixed;
+   bottom:20px;
+   height:35px;
 }
 

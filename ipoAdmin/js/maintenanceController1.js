@@ -12,12 +12,25 @@ angular.module('ipoAdminApp.maintenanceController', [])
 			//method: 'GET',
 			//url: 'adminIPOBook.json'			
 			method: 'POST',
-			url: sharedProperties.getBaseURL() + '/i/adminIPOBook',			
-			data: {dateType : $scope.option,     
+			//url: sharedProperties.getBaseURL() + '/i/adminIPOBook',
+			url: '/i/adminIPOBook',			
+			/*data: {dateType : $scope.option,     
 				   dayRange : $scope.day,
 				   dateFrom : $scope.dateFrom,
 				   dateTo : $scope.dateTo,
+<<<<<<< .mine
+				   modMyself: $scope.myselfCheckbox}*/
+				data: {dateType : 'Mod',     
+		           dayRange : '30',
+		           dateFrom : '201612010000',
+		           dateTo : '201712280000',
+		           submit:"Submit",
+		           selfModify: 'Y'}
+||||||| .r15438
+				   modMyself: $scope.myselfCheckbox}
+=======
 				   selfModify: $scope.myselfCheckbox}				  
+>>>>>>> .r15494
 		}).then(function successCallback(response) {
 			if (response['data']['returnCode'] == SUCCESS) {
 				$scope.convertToAdminIPOsList(response['data']['IPOs']);

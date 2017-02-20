@@ -1,4 +1,5 @@
-<div id="header" class="container">
+<div class="bodyresetcolor">
+<div id="header" class="container" >
 	<nav class="navbar">
 		<div class="container-fluid">
 
@@ -15,18 +16,19 @@
 	<div class="row">
 		<div class="col-sm-12" >
 			<hr style="margin-top: 5px;">
-			<h4 ng-show="true">{{'createIPO.NewIPOMasterRecord'|translate}}</h4> > <span ng-click="createIPOadminIPODetail()">adminIPODetail</span> > <span ng-click="createIPOadminIPOBook()">adminIPOBook</span>
-			<h4 ng-show="false">{{'createIPO.ModifyIPOMaster'|translate}}</h4>
+			<h4 ng-show="!isModify">{{'createIPO.NewIPOMasterRecord'|translate}}</h4>			
+			<h4 ng-show="isModify">{{'createIPO.ModifyIPOMaster'|translate}}</h4>
+			<button type="button" class="btn btn-info" style="width:160px;text-align: left"ng-click="createIPOadminIPODetail()">adminIPODetail</button><button type="button" class="btn btn-info" style="width:160px;text-align: left"ng-click="createIPOadminIPOBook()">adminIPOBook</button><button type="button" class="btn btn-info" style="width:160px;text-align: left"ng-click="testChangeMakerCheck()">{{mc}}</button><button type="button" class="btn btn-info" style="width:160px;text-align: left"ng-click="testChangeViewEdit()">{{ev}}</button><!-- temp -->
 			<hr style="margin-top: 10px;margin-bottom: 10px">
 		</div>
 		<div class="col-sm-12" style="padding-left: 0px">
 			<div class="col-sm-1"style="margin:0px ;height:30px">
-				<h4 ng-show="true" style="margin-top:0px; margin-bottom:0px;text-align:center;">{{'createIPO.Draft'|translate}}</h4>
-				<h4 ng-show="false" style="margin-top:0px; margin-bottom:0px;text-align:center;">{{'createIPO.Pending'|translate}}</h4>	
+				<h4 ng-show="approveStatus=='W'" class="hcss">{{'createIPO.Draft'|translate}}</h4>
+				<h4 ng-show="approveStatus=='P'"class="hcss">{{'createIPO.Pending'|translate}}</h4>	
 			</div>
 			<div class="col-sm-7" style="height:30px">
 				<div class="progress" style="margin-bottom: 10px">
-					<div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="{{totalFieldProgress}}" aria-valuemin="24" aria-aluemax="100" style="width:{{totalFieldProgress>23?totalFieldProgress:23}}% " min-width:23%;>
+					<div class="progress-bar progress-bar-primary" role="progressbar" aria-valuenow="{{totalFieldProgress}}" aria-valuemin="24" aria-aluemax="100" style="width:{{widthGui}}%" min-width:23%;>
 					<span ng-show="totalFieldProgress>0">{{filledFields}}/{{totalMandatorField}}{{'createIPO.Mandatory'|translate}}({{totalFieldProgress}}%)</span>
 					<span ng-show="totalFieldProgress==0">0%{{'createIPO.Completeness'|translate}}</span>
 					</div>
@@ -45,31 +47,31 @@
 			<table class="table" >						
 				<tbody>					 
 					<tr ng-if = "showAccRej(machker,vemode)">
-						<td style="border-top: 0px"><button type="button" class="btn btn-success" style="width:160px;text-align: left"ng-click="createIPOaccept()"><i class="fa fa-check" aria-hidden="true"></i>&nbsp;  {{'createIPO.Accept'|translate}}</button></td>				   
+						<td class="floattd"><button type="button" class="btn btn-success ctrBtn" ng-click="createIPOaccept()"><i class="fa fa-check" aria-hidden="true"></i>&nbsp;  {{'createIPO.Accept'|translate}}</button></td>				   
 					</tr>
 					<tr ng-if = "showAccRej(machker,vemode)">
-						<td style="border-top: 0px"><button type="button" class="btn-ribbon" style="width:160px;text-align: left"ng-click="createIPOreject()"><i class="fa fa-times" aria-hidden="true"></i>&nbsp;  {{'createIPO.Reject'|translate}}</button></td>					
+						<td class="floattd"><button type="button" class="btn-ribbon ctrBtn" ng-click="createIPOreject()"><i class="fa fa-times" aria-hidden="true"></i>&nbsp;  {{'createIPO.Reject'|translate}}</button></td>					
 					</tr>					
 					<tr ng-if = "showBack(machker,vemode)">
-						<td style="border-top: 0px"><button type="button" class="btn btn-ryellow" style="width:160px;text-align: left"ng-click="createIPOback()"><i class="fa fa-reply" aria-hidden="true"></i>&nbsp;  {{'createIPO.Back'|translate}}</button></td>			
+						<td class="floattd"><button type="button" class="btn btn-ryellow ctrBtn" ng-click="createIPOback()"><i class="fa fa-reply" aria-hidden="true"></i>&nbsp;  {{'createIPO.Back'|translate}}</button></td>			
 					</tr>
 					<tr ng-if = "showEdit(machker,vemode)">
-						<td style="border-top: 0px"><button type="button" class="btn btn-info" style="width:160px;text-align: left"ng-click="createIPOedit()"><i class="fa fa-pencil" aria-hidden="true"></i>&nbsp;  {{'createIPO.Edit'|translate}}</button></td>			
+						<td class="floattd"><button type="button" class="btn btn-info ctrBtn" ng-click="createIPOedit()"><i class="fa fa-pencil" aria-hidden="true"></i>&nbsp;  {{'createIPO.Edit'|translate}}</button></td>			
 					</tr>
 					<tr ng-if = "showSSDPR(machker,vemode)">
-						<td style="border-top: 0px"><button type="button" class="btn btn-info" style="width:160px;text-align: left"ng-click="createIPOsavaDraft()"><i class="fa fa-floppy-o" aria-hidden="true"></i>&nbsp;  {{'createIPO.SaveDraft'|translate}}</button></td>			
+						<td class="floattd"><button type="button" class="btn btn-info ctrBtn" ng-click="createIPOsavaDraft()"><i class="fa fa-floppy-o" aria-hidden="true"></i>&nbsp;  {{'createIPO.SaveDraft'|translate}}</button></td> <!-- ng-disabled="createipoForm.StockCode.$error.required||createipoForm.EnglishStockName.$error.required||createipoForm.TranditionalChineseName.$error.required||createipoForm.SimplifiedChineseName.$error.required||!StockCurrency.model||createipoForm.OfferPriceRangeStart.$error.required||createipoForm.OfferPriceRangeEnd.$error.required||createipoForm.BroadLot.$error.required||createipoForm.OnlineIPOStartDate.$error.required||createipoForm.OnlineIPOStartTime.$error.required||createipoForm.OnlineIPOEndDate.$error.required||createipoForm.OnlineIPOEndTime.$error.required||createipoForm.IPOClosingDate.$error.required||createipoForm.IPOClosingTime.$error.required||createipoForm.ListingDate.$error.required||createipoForm.AcceptSubscription.$error.required||createipoForm.CommissionRate.$error.required||createipoForm.LevyRate.$error.required||createipoForm.TradingFeeRate.$error.required||createipoForm.InvestorCompensationLevyRate.$error.required||!CurrencyofHandingFee||createipoForm.HandingFee.$error.required||createipoForm.FinancingHandingFee.$error.required||!CalculationMethod||createipoForm.QuantityFrom.$error.required||createipoForm.QuantityTo.$error.required||createipoForm.Interval.$error.required||createipoForm.ProvideIPOfinancing.$error.required||createipoForm.FinancingStartDate.$error.required||createipoForm.FinancingStartTime.$error.required||createipoForm.FinancingEndDate.$error.required||createipoForm.FinancingEndTime.$error.required||createipoForm.InterestDay.$error.required||createipoForm.MaxLoanRatio.$error.required||createipoForm.AllowedLoanRatioSelectedby.$error.required||createipoForm.BasicInterestRate.$error.required||specialInterestRateTable.length==0||quantityAmountTable.length==0||createipoForm.ApplicationPeriodStartDate.$error.required||createipoForm.ApplicationPeriodEndDate.$error.required" -->
 					</tr>
 					<tr ng-if = "showSSDPR(machker,vemode)">
-						<td style="border-top: 0px"><button type="button" class="btn btn-primary" style="width:160px;text-align: left"ng-click="createIPOsubmit()"><i class="fa fa-paper-plane-o" aria-hidden="true"></i>&nbsp;  {{'createIPO.Submit'|translate}}</button></td>	<!-- ng-disabled="createipoForm.StockCode.$error.required||createipoForm.IPOCode.$error.required||createipoForm.EnglishStockName.$error.required||createipoForm.TranditionalChineseName.$error.required||createipoForm.SimplifiedChineseName.$error.required||!StockCurrency.model||createipoForm.OfferPriceRangeStart.$error.required||createipoForm.OfferPriceRangeEnd.$error.required||createipoForm.BroadLot.$error.required||createipoForm.OnlineIPOStartDate.$error.required||createipoForm.OnlineIPOStartTime.$error.required||createipoForm.OnlineIPOEndDate.$error.required||createipoForm.OnlineIPOEndTime.$error.required||createipoForm.IPOClosingDate.$error.required||createipoForm.IPOClosingTime.$error.required||createipoForm.ListingDate.$error.required||createipoForm.AcceptSubscription.$error.required||createipoForm.CommissionRate.$error.required||createipoForm.LevyRate.$error.required||createipoForm.TradingFeeRate.$error.required||createipoForm.InvestorCompensationLevyRate.$error.required||!CurrencyofHandingFee||createipoForm.HandingFee.$error.required||createipoForm.FinancingHandingFee.$error.required||!CalculationMethod||createipoForm.QuantityFrom.$error.required||createipoForm.QuantityTo.$error.required||createipoForm.Interval.$error.required||createipoForm.ProvideIPOfinancing.$error.required||createipoForm.FinancingStartDate.$error.required||createipoForm.FinancingStartTime.$error.required||createipoForm.FinancingEndDate.$error.required||createipoForm.FinancingEndTime.$error.required||createipoForm.InterestDay.$error.required||createipoForm.MaxLoanRatio.$error.required||createipoForm.MustUseMaxLoan.$error.requiredcreateipoForm.AllowedLoanRatioSelectedby.$error.required||createipoForm.BasicInterestRate.$error.required||specialInterestRateTable.length==0||quantityAmountTable.length==0||createipoForm.ApplicationPeriodStartDate.$error.required||createipoForm.ApplicationPeriodEndDate.$error.required" -->			
+						<td class="floattd"><button type="button" class="btn btn-primary ctrBtn" ng-click="createIPOsubmit()"><i class="fa fa-paper-plane-o" aria-hidden="true"></i>&nbsp;  {{'createIPO.Submit'|translate}}</button></td>	<!-- ng-disabled="createipoForm.StockCode.$error.required||createipoForm.EnglishStockName.$error.required||createipoForm.TranditionalChineseName.$error.required||createipoForm.SimplifiedChineseName.$error.required||!StockCurrency.model||createipoForm.OfferPriceRangeStart.$error.required||createipoForm.OfferPriceRangeEnd.$error.required||createipoForm.BroadLot.$error.required||createipoForm.OnlineIPOStartDate.$error.required||createipoForm.OnlineIPOStartTime.$error.required||createipoForm.OnlineIPOEndDate.$error.required||createipoForm.OnlineIPOEndTime.$error.required||createipoForm.IPOClosingDate.$error.required||createipoForm.IPOClosingTime.$error.required||createipoForm.ListingDate.$error.required||createipoForm.AcceptSubscription.$error.required||createipoForm.CommissionRate.$error.required||createipoForm.LevyRate.$error.required||createipoForm.TradingFeeRate.$error.required||createipoForm.InvestorCompensationLevyRate.$error.required||!CurrencyofHandingFee||createipoForm.HandingFee.$error.required||createipoForm.FinancingHandingFee.$error.required||!CalculationMethod||createipoForm.QuantityFrom.$error.required||createipoForm.QuantityTo.$error.required||createipoForm.Interval.$error.required||createipoForm.ProvideIPOfinancing.$error.required||createipoForm.FinancingStartDate.$error.required||createipoForm.FinancingStartTime.$error.required||createipoForm.FinancingEndDate.$error.required||createipoForm.FinancingEndTime.$error.required||createipoForm.InterestDay.$error.required||createipoForm.MaxLoanRatio.$error.required||createipoForm.AllowedLoanRatioSelectedby.$error.required||createipoForm.BasicInterestRate.$error.required||specialInterestRateTable.length==0||quantityAmountTable.length==0||createipoForm.ApplicationPeriodStartDate.$error.required||createipoForm.ApplicationPeriodEndDate.$error.required" -->			
 					</tr>
 					<tr ng-if = "showSSDPR(machker,vemode)">
-						<td style="border-top: 0px"><button type="button" class="btn btn-danger" style="width:160px;text-align: left"ng-click="createIPOdelete()"><i class="fa fa-times-circle-o" aria-hidden="true"></i>&nbsp;  {{'createIPO.Delete'|translate}}</button></td>	
+						<td class="floattd"><button type="button" class="btn btn-danger ctrBtn" ng-click="createIPOdelete()"><i class="fa fa-times-circle-o" aria-hidden="true"></i>&nbsp;  {{'createIPO.Delete'|translate}}</button></td>	
 					</tr>
 					<tr ng-if = "showSSDPR(machker,vemode)">
-						<td style="border-top: 0px"><button type="button" class="btn btn-warning" style="width:160px;text-align: left"ng-click="createIPOpostpone()"><i class="fa fa-hourglass-half" aria-hidden="true"></i>&nbsp;  {{'createIPO.Postpone'|translate}}</button></td>			
+						<td class="floattd"><button type="button" class="btn btn-warning ctrBtn" ng-click="createIPOpostpone()"><i class="fa fa-hourglass-half" aria-hidden="true"></i>&nbsp;  {{'createIPO.Postpone'|translate}}</button></td>			
 					</tr>
 					<tr ng-if = "showSSDPR(machker,vemode)">
-						<td style="border-top: 0px"><button type="button" class="btn btn-warning" style="width:160px;text-align: left"ng-click="createIPOresume()"><i class="fa fa-repeat" aria-hidden="true"></i>&nbsp;  {{'createIPO.Resume'|translate}}</button></td>				
+						<td class="floattd"><button type="button" class="btn btn-warning ctrBtn" ng-click="createIPOresume()"><i class="fa fa-repeat" aria-hidden="true"></i>&nbsp;  {{'createIPO.Resume'|translate}}</button></td>				
 					</tr>		  
 				</tbody>
 			</table>	  
@@ -90,23 +92,23 @@
 						</button>
 						<a class="navbar-brand" ></a>
 					</div>
-					<div class="collapse navbar-collapse bs-example-js-navbar-scrollspy navcss">
+					<div class="collapse navbar-collapse bs-example-js-navbar-scrollspy navcss guidet">
 						<ul class="navM"style="padding-left: 0px;padding-top: 0px;">        	          	
-							<li><a id="abasic" ng-href="#/createIPO#basic"><span class="badge">1</span> {{'createIPO.BasicInformation'|translate}} - {{basicProgress}}/{{basictotal}}</a></li>
-							<li><a id="afee" ng-href="#/createIPO#fee" ><span class="badge">2</span> {{'createIPO.FeeandCharges'|translate}} - {{feeProgress}}/{{feetotal}}</a></li>
-							<li><a id="aquantity" ng-href="#/createIPO#quantity"><span class="badge">3</span> {{'createIPO.Quantity/AmountTable'|translate}} - {{quantityProgress}}/{{quantitytotal}}</a></li>
-							<li><a id="afinancing" ng-href="#/createIPO#financing"><span class="badge">4</span> {{'createIPO.Financing'|translate}} - {{financingProgress}}/{{financingtotal}}</a></li>
-							<li><a id="aoperational" ng-href="#/createIPO#operational"><span class="badge">5</span>{{'createIPO.Operational'|translate}} - {{operationalProgress}}/{{operationaltotal}}</a></li>
+							<li><a id="abasic" href="javascript:document.getElementById('basic').scrollIntoView();"><span class="badge">1</span> {{'createIPO.BasicInformation'|translate}} - {{basicProgress}}/{{basictotal}}</a></li>
+							<li><a id="afee" href="javascript:document.getElementById('fee').scrollIntoView();" ><span class="badge">2</span> {{'createIPO.FeeandCharges'|translate}} - {{feeProgress}}/{{feetotal}}</a></li>
+							<li><a id="aquantity" href="javascript:document.getElementById('quantity').scrollIntoView();"><span class="badge">3</span> {{'createIPO.Quantity/AmountTable'|translate}} - {{quantityProgress}}/{{quantitytotal}}</a></li>
+							<li><a id="afinancing" href="javascript:document.getElementById('financing').scrollIntoView();"><span class="badge">4</span> {{'createIPO.Financing'|translate}} - {{financingProgress}}/{{financingtotal}}</a></li>
+							<li><a id="aoperational" href="javascript:document.getElementById('operational').scrollIntoView();"><span class="badge">5</span>{{'createIPO.Operational'|translate}} - {{operationalProgress}}/{{operationaltotal}}</a></li>
 						</ul>
 					</div>
 				</div>
 			</nav>			
-			<div id="scrollbody" class="scrollspy-example " data-spy="scroll" data-target="#navbar-example" data-offset="0"style="position: relative;height:450px;overflow:scroll;overflow-x:hidden">							
+			<div id="scrollbody" class="scrollspy-example " data-spy="scroll" data-target="#navbar-example" data-offset="0"style="position: relative;height:500px;overflow:scroll;overflow-x:hidden">							
 				<form class="form-horizontal" role="form" style=""name="createipoForm" novalidate>			
 					<div class="form-group" id="basic">
 						<label for="StockCode" class="col-sm-offset-2 col-sm-3 control-label">{{'createIPO.StockCode'|translate}}</label>
 						<div class="col-sm-5">
-							<input type="text" class="form-control" id="StockCode" name="StockCode" placeholder="{{'createIPO.Required'|translate}}" ng-blur="stockCodeFormat(StockCode)" ng-model="StockCode"ng-show="showSSDPR(machker,vemode)" required  ng-keydown=" onlyNumber(5,StockCode,$event)" >
+							<input type="text" class="form-control" id="StockCode" name="StockCode" placeholder="{{'createIPO.Required'|translate}}" ng-blur="stockCodeFormat(StockCode)" ng-model="StockCode"ng-show="showSSDPR(machker,vemode)" required  ng-keydown=" onlyNumber(5,StockCode,$event)" ng-disabled='isModify'>
 							<label  class=" control-label resetfcolor"ng-show="!showSSDPR(machker,vemode)">{{StockCode || "---"}}</label>
 							<span class=" warningfont" ng-show="createipoForm.StockCode.$dirty && createipoForm.StockCode.$invalid">
 								<i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
@@ -114,9 +116,9 @@
 							</span>					
 						</div>					    
 					</div>
-					<div class="form-group" >
+					<div class="form-group" ng-show="!showSSDPR(machker,vemode)">
 						<label for="IPOCode" class="col-sm-offset-2 col-sm-3 control-label">{{'createIPO.IPOCode'|translate}}</label>
-						<div class="col-sm-5">					     
+						<div class="col-sm-5">							   
 							<label  class="col-sm-5 control-label resetfcolor">{{IPOCode|| "---"}}</label>   				
 						</div>					    
 					</div>
@@ -170,7 +172,7 @@
 					<div class="form-group" >
 						<label for="StockCurrency" class="col-sm-5 control-label">{{'createIPO.StockCurrency'|translate}}</label>
 						<div class="col-sm-2">							
-							<select class="form-control selectdown" ng-disabled="disableFields(machker,vemode)" ng-model="StockCurrency.model" style="text-align:center" >
+							<select class="form-control selectdown textcte" ng-disabled="disableFields(machker,vemode)" ng-model="StockCurrency.model">
 								<option value="" ><span style="color:#55bbde !important;font-style:italic;">{{'createIPO.Required'|translate}}</span></option>
 								<option ng-repeat="option in StockCurrency.getStockCurrency" value="{{option}}">{{option}}</option>								
 							</select>															  		
@@ -185,7 +187,7 @@
 								<span  ng-show="createipoForm.OfferPriceRangeStart.$error.required" >{{'createIPO.OfferPriceRange'|translate}}{{'createIPO.isrequired'|translate}}</span>	
 							</span>						 
 						</div>
-						<label for="OfferPriceRangeEnd"ng-show="showSSDPR(machker,vemode)" class="col-sm-1 control-label" style="text-align:center">~</label>
+						<label for="OfferPriceRangeEnd"ng-show="showSSDPR(machker,vemode)" class="col-sm-1 control-label textcte">~</label>
 						<div class="col-sm-2">
 							<input type="text" class="form-control col-sm-2" id="OfferPriceRangeEnd" name ="OfferPriceRangeEnd"placeholder="{{'createIPO.Required'|translate}}" ng-show="showSSDPR(machker,vemode)"ng-model="OfferPriceRangeEnd" required ng-keydown="decimallimit(10,2,OfferPriceRangeEnd,'OfferPriceRangeEnd',$event)" ng-blur="OfferPriceRangeEnd= digitlimt(OfferPriceRangeEnd)">
 							<span class=" warningfont" ng-show="createipoForm.OfferPriceRangeEnd.$dirty && createipoForm.OfferPriceRangeEnd.$invalid">
@@ -230,7 +232,7 @@
 								<span  ng-show="createipoForm.OnlineIPOStartDate.$error.required" >{{'createIPO.OnlineIPOStartDate'|translate}}{{'createIPO.isrequired'|translate}}</span>				
 							</span> 
 						</div>
-						<label for="OnlineIPOStartTime" class="col-sm-1" style="text-align:center">{{'createIPO.Time'|translate}}</label>
+						<label for="OnlineIPOStartTime" class="col-sm-1 textcte">{{'createIPO.Time'|translate}}</label>
 						<div class="col-sm-2">
 							<span class="glyphicon glyphicon-time form-control-feedback"ng-show="showSSDPR(machker,vemode)"></span>
 							<input type="text" class="form-control reqpad" id="OnlineIPOStartTime"name="OnlineIPOStartTime" placeholder="{{'createIPO.Required'|translate}}"ng-show="showSSDPR(machker,vemode)"ng-model="OnlineIPOStartTime"required>
@@ -252,7 +254,7 @@
 								<span  ng-show="createipoForm.OnlineIPOEndDate.$error.required" >{{'createIPO.OnlineIPOEndDate'|translate}}{{'createIPO.isrequired'|translate}}</span>							
 							</span>
 						</div>
-						<label for="OnlineIPOEndTime" class="col-sm-1" style="text-align:center">{{'createIPO.Time'|translate}}</label>
+						<label for="OnlineIPOEndTime" class="col-sm-1 textcte">{{'createIPO.Time'|translate}}</label>
 						<div class="col-sm-2">
 							<span class="glyphicon glyphicon-time form-control-feedback"ng-show="showSSDPR(machker,vemode)"></span>
 							<input type="text" class="form-control reqpad" id="OnlineIPOEndTime" name="OnlineIPOEndTime"placeholder="{{'createIPO.Required'|translate}}"ng-show="showSSDPR(machker,vemode)"ng-model="OnlineIPOEndTime"required>
@@ -274,7 +276,7 @@
 								<span  ng-show="createipoForm.IPOClosingDate.$error.required" >{{'createIPO.IPOClosingDate'|translate}}{{'createIPO.isrequired'|translate}}</span>							
 							</span>
 						</div>					    
-						<label for="IPOClosingTime" class="col-sm-1" style="text-align:center">{{'createIPO.Time'|translate}}</label>
+						<label for="IPOClosingTime" class="col-sm-1 textcte">{{'createIPO.Time'|translate}}</label>
 						<div class="col-sm-2">
 							<span class="glyphicon glyphicon-time form-control-feedback"ng-show="showSSDPR(machker,vemode)"></span>
 							<input type="text" class="form-control reqpad" id="IPOClosingTime" name="IPOClosingTime"placeholder="{{'createIPO.Required'|translate}}"ng-show="showSSDPR(machker,vemode)"ng-model="IPOClosingTime"required>
@@ -406,8 +408,7 @@
 							</div>
 						</div>				      
 						<div class="col-sm-5 ">	
-							<label for="AcceptSubscription" class="col-sm-5 control-label" style="
-							text-align: left; padding-left: 0">{{'createIPO.AcceptSubscription'|translate}}</label>
+							<label for="AcceptSubscription" class="col-sm-5 control-label textpad">{{'createIPO.AcceptSubscription'|translate}}</label>
 							<span class=" warningfont" ng-show="createipoForm.AcceptSubscription.$dirty && createipoForm.AcceptSubscription.$invalid">
 								<i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
 								<span  ng-show="createipoForm.AcceptSubscription.$error.required" >{{'createIPO.AcceptSubscription'|translate}}{{'createIPO.isrequired'|translate}}</span>							
@@ -424,7 +425,7 @@
 							</div>					    
 						</div>						    
 					</div>
-					<label class="col-sm-offset-5 col-sm-6 control-label" style="text-align:left;margin-top:-20px;margin-bottom:15px;"> <span class=" warningfont" ng-show="createipoForm.CommissionRate.$dirty && createipoForm.CommissionRate.$invalid">
+					<label class="col-sm-offset-5 col-sm-6 control-label labhint"> <span class=" warningfont" ng-show="createipoForm.CommissionRate.$dirty && createipoForm.CommissionRate.$invalid">
 						<i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
 						<span  ng-show="createipoForm.CommissionRate.$error.required" >{{'createIPO.CommissionRate'|translate}}{{'createIPO.isrequired'|translate}}</span>							
 					</span>
@@ -453,7 +454,7 @@
 						</div>
 					</div>							    
 				</div>
-				<label class="col-sm-offset-5 col-sm-6 control-label" style="text-align:left;margin-top:-20px;margin-bottom:15px;">
+				<label class="col-sm-offset-5 col-sm-6 control-label labhint">
 					<span class=" warningfont" ng-show="createipoForm.TradingFeeRate.$dirty && createipoForm.TradingFeeRate.$invalid">
 						<i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
 						<span  ng-show="createipoForm.TradingFeeRate.$error.required" >{{'createIPO.TradingFeeRate'|translate}}{{'createIPO.isrequired'|translate}}</span>							
@@ -469,7 +470,7 @@
 						</div>
 					</div>
 				</div>
-				<label class="col-sm-offset-5 col-sm-6 control-label" style="text-align:left;margin-top:-20px;margin-bottom:15px;">
+				<label class="col-sm-offset-5 col-sm-6 control-label labhint">
 					<span class=" warningfont" ng-show="createipoForm.InvestorCompensationLevyRate.$dirty && createipoForm.InvestorCompensationLevyRate.$invalid">
 						<i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
 						<span  ng-show="createipoForm.InvestorCompensationLevyRate.$error.required" >{{'createIPO.InvestorCompensationLevyRate'|translate}}{{'createIPO.isrequired'|translate}}</span>			
@@ -516,7 +517,7 @@
 						<label class=" control-label resetfcolor"ng-show="!showSSDPR(machker,vemode)">{{FinancingHandingFee|| "---"}}</label>  
 					</div>							    
 				</div>
-				<label class="col-sm-offset-5 col-sm-6 control-label" style="text-align:left;margin-top:-20px;margin-bottom:15px;">
+				<label class="col-sm-offset-5 col-sm-6 control-label labhint">
 					<span class=" warningfont" ng-show="createipoForm.FinancingHandingFee.$dirty && createipoForm.FinancingHandingFee.$invalid">
 						<i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
 						<span  ng-show="createipoForm.FinancingHandingFee.$error.required" >{{'createIPO.FinancingHandingFee'|translate}}{{'createIPO.isrequired'|translate}}</span>							
@@ -549,8 +550,7 @@
 						</table>
 					</div>
 					<div class="row"style="display:block;height:80px;width:32%; float:left;margin-left:30px;position:relative;max-width:none;"ng-show="showSSDPR(machker,vemode)">	
-						<label for="CalculationMethod" class=" col-sm-8 control-label" style="
-						text-align: left; padding-left:0px">{{'createIPO.CalculationMethod'|translate}}</label>
+						<label for="CalculationMethod" class=" col-sm-8 control-label textpad">{{'createIPO.CalculationMethod'|translate}}</label>
 						<div class=" col-sm-12"style="padding-left: 0px;">		    		
 							<select class="form-control selectdown"name="CalculationMethod" id="CalculationMethod"ng-model="CalculationMethod" ng-Change="quantityAmountTableAdd()" required>
 								<option value=""  >{{'createIPO.Required'|translate}}</option>
@@ -568,10 +568,8 @@
 					<div class="popover right "  style="display:block;border:2px solid #12d6f6;height:240px;width:32%; float:left;margin-left:30px;position:relative;max-width:none;"ng-show="showSSDPR(machker,vemode)">
 						<div class="arrow" style="border-right-color:#12d6f6;"></div>	      
 						<div class="row">	
-							<label for="QuantityFrom" class="col-sm-offset-1 col-sm-5 control-label" style="
-							text-align: left; padding-left:15px">{{'createIPO.QuantityFrom'|translate}}</label>
-							<label for="QuantityTo" class="col-sm-6 control-label" style="
-							text-align: left; padding-left:15px">{{'createIPO.QuantityTo'|translate}}(inclusive)</label>
+							<label for="QuantityFrom" class="col-sm-offset-1 col-sm-5 control-label fieldlab">{{'createIPO.QuantityFrom'|translate}}</label>
+							<label for="QuantityTo" class="col-sm-6 control-label fieldlab">{{'createIPO.QuantityTo'|translate}}(inclusive)</label>
 						</div>
 						<div class="row">	
 							<div class=" col-sm-offset-1 col-sm-5 ">			    							    
@@ -590,8 +588,7 @@
 							</div>
 						</div>
 						<div class="row">	
-							<label for="Interval" class="col-sm-offset-1 col-sm-8 control-label" style="
-							text-align: left; padding-left:15px">{{'createIPO.Interval'|translate}}</label>
+							<label for="Interval" class="col-sm-offset-1 col-sm-8 control-label fieldlab">{{'createIPO.Interval'|translate}}</label>
 							<div class="col-sm-offset-1 col-sm-5">					    							    
 								<input type="text" class="form-control" id="Interval"name="Interval" placeholder="{{'createIPO.Required'|translate}}"ng-model="Interval" required ng-keydown="onlyNumber(10,Interval,$event)" ng-blur="Interval =digitsofnum(10,Interval)">
 								<span class=" warningfont" ng-show="createipoForm.Interval.$dirty && createipoForm.Interval.$invalid">
@@ -603,8 +600,7 @@
 
 
 						<div class="row" style="position:absolute; bottom:10px;left:30px ">	
-							<label  class="col-sm-offset-1 col-sm-8 control-label" style="
-							text-align: left; padding-left:15px"><button id="addcm" type="button" class="btn btn-info" style="width:80px;"ng-disabled="createipoForm.CommissionRate.$error.required ||createipoForm.LevyRate.$error.required ||createipoForm.TradingFeeRate.$error.required ||createipoForm.InvestorCompensationLevyRate.$error.required ||createipoForm.OfferPriceRangeEnd.$error.required||createipoForm.QuantityFrom.$error.required||createipoForm.QuantityTo.$error.required ||createipoForm.Interval.$error.required||createipoForm.CalculationMethod.$error.required"ng-click="addQuantityAmountTableRange()">{{'createIPO.Add'|translate}}</button></label>	
+							<label  class="col-sm-offset-1 col-sm-8 control-label fieldlab"><button id="addcm" type="button" class="btn btn-info" style="width:80px;"ng-disabled="createipoForm.CommissionRate.$error.required ||createipoForm.LevyRate.$error.required ||createipoForm.TradingFeeRate.$error.required ||createipoForm.InvestorCompensationLevyRate.$error.required ||createipoForm.OfferPriceRangeEnd.$error.required||createipoForm.QuantityFrom.$error.required||createipoForm.QuantityTo.$error.required ||createipoForm.Interval.$error.required||createipoForm.CalculationMethod.$error.required"ng-click="addQuantityAmountTableRange()">{{'createIPO.Add'|translate}}</button></label>	
 						</div>
 
 					</div>
@@ -625,8 +621,7 @@
 						</div>
 					</div>				      
 					<div class="col-sm-5 ">	
-						<label for="ProvideIPOfinancing" class="col-sm-5 control-label" style="
-						text-align: left; padding-left: 0">{{'createIPO.ProvideIPOfinancing'|translate}}</label>
+						<label for="ProvideIPOfinancing" class="col-sm-5 control-label textpad">{{'createIPO.ProvideIPOfinancing'|translate}}</label>
 					</div>
 				</div>
 				<div class="form-group has-feedback" ng-show="showbelow">
@@ -640,7 +635,7 @@
 							<span ng-show="createipoForm.FinancingStartDate.$error.required" >{{'createIPO.FinancingStartDate'|translate}}{{'createIPO.isrequired'|translate}}</span>	
 						</span>
 					</div>
-					<label for="FinancingStartTime" class="col-sm-1" style="text-align:center">{{'createIPO.Time'|translate}}</label>
+					<label for="FinancingStartTime" class="col-sm-1 textcte">{{'createIPO.Time'|translate}}</label>
 					<div class="col-sm-2">
 						<span class="glyphicon glyphicon-time form-control-feedback"ng-show="showSSDPR(machker,vemode)"></span>
 						<input type="text" class="form-control reqpad" id="FinancingStartTime"name="FinancingStartTime" placeholder="{{'createIPO.Required'|translate}}"ng-show="showSSDPR(machker,vemode)"ng-model="FinancingStartTime"required>
@@ -662,7 +657,7 @@
 							<span ng-show="createipoForm.FinancingEndDate.$error.required" >{{'createIPO.FinancingEndDate'|translate}}{{'createIPO.isrequired'|translate}}</span>	
 						</span>
 					</div>
-					<label for="FinancingEndTime" class="col-sm-1" style="text-align:center">{{'createIPO.Time'|translate}}</label>
+					<label for="FinancingEndTime" class="col-sm-1 textcte">{{'createIPO.Time'|translate}}</label>
 					<div class="col-sm-2">
 						<span class="glyphicon glyphicon-time form-control-feedback"ng-show="showSSDPR(machker,vemode)"></span>
 						<input type="text" class="form-control reqpad" id="FinancingEndTime"name="FinancingEndTime" placeholder="{{'createIPO.Required'|translate}}"ng-show="showSSDPR(machker,vemode)"ng-model="FinancingEndTime"required>
@@ -716,21 +711,20 @@
 						</div>
 					</div>					   
 				</div>
-				<label class="col-sm-offset-5 col-sm-6 control-label" style="text-align:left;margin-top:-20px;margin-bottom:15px;">
+				<label class="col-sm-offset-5 col-sm-6 control-label labhint">
 					<span class=" warningfont" ng-show="createipoForm.MaxLoanRatio.$dirty && createipoForm.MaxLoanRatio.$invalid">
 						<i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
 						<span ng-show="createipoForm.MaxLoanRatio.$error.required" >{{'createIPO.MaxLoanRatio'|translate}}{{'createIPO.isrequired'|translate}}</span>							
 					</span>
 				</label>
-				<div class="form-group" ng-show="showbelow">
+				<div class="form-group"ng-show="showbelow">
 						<div class="col-sm-offset-4 col-sm-1">
 							<div class="checkbox"style="float:right" id="MustUseMaxLoan">
 								<label><input type="checkbox"  ng-model="MustUseMaxLoan" ng-disabled="disableFields(machker,vemode)"></label>
 							</div>
 						</div>				      
 						<div class="col-sm-5 ">	
-							<label for="MustUseMaxLoan" class="col-sm-5 control-label" style="
-							text-align: left; padding-left: 0">{{'createIPO.MustUseMaxLoan'|translate}}</label>
+							<label for="MustUseMaxLoan" class="col-sm-5 control-label textpad">{{'createIPO.MustUseMaxLoan'|translate}}</label>
 							<span class=" warningfont" ng-show="createipoForm.AcceptSubscription.$dirty && createipoForm.MustUseMaxLoan.$invalid">
 								<i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
 								<span  ng-show="createipoForm.MustUseMaxLoan.$error.required" >{{'createIPO.MustUseMaxLoan'|translate}}{{'createIPO.isrequired'|translate}}</span>							
@@ -758,7 +752,7 @@
 						</div>
 					</div>							    
 				</div>
-				<label class="col-sm-offset-5 col-sm-6 control-label" style="text-align:left;margin-top:-20px;margin-bottom:15px;">
+				<label class="col-sm-offset-5 col-sm-6 control-label labhint">
 					<span class="warningfont"ng-show="createipoForm.BasicInterestRate.$dirty && createipoForm.BasicInterestRate.$invalid">
 						<i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
 						<span ng-show="createipoForm.BasicInterestRate.$error.required" >{{'createIPO.BasicInterestRate'|translate}}{{'createIPO.isrequired'|translate}}</span>							
@@ -792,16 +786,15 @@
 					<div class="popover right " style="display:block;border:2px solid #12d6f6;height:330px;width:32%; float:left;margin-left:30px;position:relative;max-width: none;"ng-show="showSSDPR(machker,vemode)">
 						<div class="arrow" style="border-right-color:#12d6f6;"></div>	
 						<div class="row">	
-							<label for="Loadfromtemplates" class="col-sm-offset-1 col-sm-8 control-label" style="
-							text-align: left; padding-left:15px">{{'createIPO.Loadfromtemplates'|translate}}</label>			
+							<label for="Loadfromtemplates" class="col-sm-offset-1 col-sm-8 control-label fieldlab">{{'createIPO.Loadfromtemplates'|translate}}</label>			
 						</div>
 						<div class="row">	
 							<div class="col-sm-offset-1  col-sm-7 ">						    
 								<select class="form-control selectdown"id="Loadfromtemplates"ng-model="Loadfromtemplates">
-									<option value="RLSUA"  style="text-align:center">Round Lump Sum Amount</option>
-									<option value="RBIC"  style="text-align:center">Round By Individual Charge</option>
-									<option value="BOUCARLSUA"  style="text-align:center">Base On Unit Cost and </option>
-									<option value="BOUCARBIC"  style="text-align:center">Base On Unit Cost and</option>  
+									<option value="RLSUA" class="textcte">Round Lump Sum Amount</option>
+									<option value="RBIC" class="textcte">Round By Individual Charge</option>
+									<option value="BOUCARLSUA" class="textcte">Base On Unit Cost and </option>
+									<option value="BOUCARBIC" class="textcte">Base On Unit Cost and</option>  
 								</select>					    
 							</div>
 							<div class="col-sm-3 ">					    							    
@@ -809,10 +802,8 @@
 							</div>
 						</div>
 						<div class="row">	
-							<label for="LoadAmountAbove" class="col-sm-offset-1 col-sm-5 control-label" style="
-							text-align: left; padding-left:15px">{{'createIPO.LoadAmountAbove'|translate}}</label>
-							<label for="SpecicalInterestRate" class="col-sm-6 control-label" style="
-							text-align: left; padding-left:15px">{{'createIPO.SpecicalInterestRate'|translate}}</label>
+							<label for="LoadAmountAbove" class="col-sm-offset-1 col-sm-5 control-label fieldlab">{{'createIPO.LoadAmountAbove'|translate}}</label>
+							<label for="SpecicalInterestRate" class="col-sm-6 control-label fieldlab">{{'createIPO.SpecicalInterestRate'|translate}}</label>
 						</div>
 						<div class="row">	
 							<div class="col-sm-offset-1 col-sm-5 ">				    							    
@@ -831,19 +822,16 @@
 							</div>
 						</div>
 						<div class="row">	
-							<label  class="col-sm-offset-1 col-sm-8 control-label" style="
-							text-align: left; padding-left:15px"><button id="addlaasir" type="button" class="btn btn-info" style="width:80px;"ng-click="sirTableAdd()" ng-disabled="createipoForm.SpecicalInterestRate.$error.required || createipoForm.LoadAmountAbove.$error.required">{{'createIPO.Add'|translate}}</button></label>					
+							<label  class="col-sm-offset-1 col-sm-8 control-label fieldlab"><button id="addlaasir" type="button" class="btn btn-info" style="width:80px;"ng-click="sirTableAdd()" ng-disabled="createipoForm.SpecicalInterestRate.$error.required || createipoForm.LoadAmountAbove.$error.required">{{'createIPO.Add'|translate}}</button></label>					
 						</div>
 						<div class="row">	
-							<label for="Saveastemplatewithname" class="col-sm-offset-1 col-sm-8 control-label" style="
-							text-align: left; padding-left:15px">{{'createIPO.Saveastemplatewithname'|translate}}</label>
+							<label for="Saveastemplatewithname" class="col-sm-offset-1 col-sm-8 control-label fieldlab">{{'createIPO.Saveastemplatewithname'|translate}}</label>
 							<div class="col-sm-offset-1 col-sm-10">					    							    
 								<input type="text" class="form-control" id="Saveastemplatewithname" ng-model="Saveastemplatewithname"ng-keydown=" numberofchar(29,Saveastemplatewithname,$event)" ng-blur="Saveastemplatewithname = digitsofchar(30,Saveastemplatewithname)"required>				    
 							</div>
 						</div>						    							
 						<div class="row" style="position:absolute; bottom:10px;left:30px ">	
-							<label  class="col-sm-offset-1 col-sm-8 control-label" style="
-							text-align: left; padding-left:15px"><button id="savetn" type="button" class="btn btn-info" style="width:80px;"ng-click="sirTableSave()">{{'createIPO.Save'|translate}}</button></label>								
+							<label  class="col-sm-offset-1 col-sm-8 control-label fieldlab"><button id="savetn" type="button" class="btn btn-info" style="width:80px;"ng-click="sirTableSave()">{{'createIPO.Save'|translate}}</button></label>								
 						</div>
 					</div>
 					<div class="table-responsive col-sm-offset-2 col-sm-5"style="height:45px;padding-right: 0px;overflow:hidden;" >
@@ -859,8 +847,7 @@
 							</div>
 						</div>				      
 						<div class="col-sm-5 ">	
-							<label for="requireHoldFundCash" class="control-label" style="
-							text-align: left; padding-left: 0">{{'createIPO.requireHoldFundCash'|translate}}<span class='selectdown'>{{'createIPO.Required'|translate}}</span></label>
+							<label for="requireHoldFundCash" class="control-label textpad">{{'createIPO.requireHoldFundCash'|translate}}<span class='selectdown'>{{'createIPO.Required'|translate}}</span></label>
 							<span class=" warningfont" ng-show="createipoForm.AcceptSubscription.$dirty && createipoForm.requireHoldFundCash.$invalid">
 								<i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
 								<span  ng-show="createipoForm.requireHoldFundCash.$error.required" >{{'createIPO.requireHoldFundCash'|translate}}{{'createIPO.isrequired'|translate}}</span>		
@@ -874,8 +861,7 @@
 							</div>
 						</div>				      
 						<div class="col-sm-5 ">	
-							<label for="allowCancelCash" class=" control-label" style="
-							text-align: left; padding-left: 0">{{'createIPO.allowCancelCash'|translate}}<span class='selectdown'>{{'createIPO.Required'|translate}}</span></label>
+							<label for="allowCancelCash" class=" control-label textpad">{{'createIPO.allowCancelCash'|translate}}<span class='selectdown'>{{'createIPO.Required'|translate}}</span></label>
 							<span class=" warningfont" ng-show="createipoForm.AcceptSubscription.$dirty && createipoForm.allowCancelCash.$invalid">
 								<i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
 								<span  ng-show="createipoForm.allowCancelCash.$error.required" >{{'createIPO.allowCancelCash'|translate}}{{'createIPO.isrequired'|translate}}</span>							
@@ -889,8 +875,7 @@
 							</div>
 						</div>				      
 						<div class="col-sm-5 ">	
-							<label for="requireHoldFundMargin" class=" control-label" style="
-							text-align: left; padding-left: 0">{{'createIPO.requireHoldFundMargin'|translate}}<span class='selectdown'>{{'createIPO.Required'|translate}}</span></label>
+							<label for="requireHoldFundMargin" class=" control-label textpad">{{'createIPO.requireHoldFundMargin'|translate}}<span class='selectdown'>{{'createIPO.Required'|translate}}</span></label>
 							<span class=" warningfont" ng-show="createipoForm.AcceptSubscription.$dirty && createipoForm.requireHoldFundMargin.$invalid">
 								<i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
 								<span  ng-show="createipoForm.requireHoldFundMargin.$error.required" >{{'createIPO.requireHoldFundMargin'|translate}}{{'createIPO.isrequired'|translate}}</span>							
@@ -904,8 +889,7 @@
 							</div>
 						</div>				      
 						<div class="col-sm-5 ">	
-							<label for="allowCancelMargin" class="control-label" style="
-							text-align: left; padding-left: 0">{{'createIPO.allowCancelMargin'|translate}}<span class='selectdown'>{{'createIPO.Required'|translate}}</span></label>
+							<label for="allowCancelMargin" class="control-label textpad">{{'createIPO.allowCancelMargin'|translate}}<span class='selectdown'>{{'createIPO.Required'|translate}}</span></label>
 							<span class=" warningfont" ng-show="createipoForm.AcceptSubscription.$dirty && createipoForm.allowCancelMargin.$invalid">
 								<i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
 								<span  ng-show="createipoForm.allowCancelMargin.$error.required" >{{'createIPO.allowCancelMargin'|translate}}{{'createIPO.isrequired'|translate}}</span>							
@@ -913,7 +897,7 @@
 						</div>
 				</div>
 
-				<div class="form-group"style="height:250px;"></div>
+				<div class="form-group"style="height:300px;"></div>
 
 			</form>								  
 		</div>			
@@ -921,8 +905,7 @@
 </div> 		
 </div>	
 
-<div class="col-sm-12" style="position:fixed;bottom:5%"><!--  -->
-
+<div class="col-sm-12 footers">
 	<ol class="breadcrumb" style="margin:0 auto">
 		<li><a style="text-decoration:none">{{'createIPO.backTo'|translate}}</a></li>
 		<li><a ng-href="#/createIPO#basic">{{'createIPO.BasicInformation'|translate}}</a></li>
@@ -931,4 +914,5 @@
 		<li><a ng-href="#/createIPO#financing">{{'createIPO.Financing'|translate}}</a></li>
 		<li><a ng-href="#/createIPO#operational">{{'createIPO.Operational'|translate}}</a></li>
 	</ol>
+</div>
 </div>
