@@ -2,11 +2,6 @@ angular.module('ipoAdminApp.createIPOController', [])
 
 .controller('createIPOCtrl', [ '$scope', '$rootScope', '$sce', '$http', '$interval', '$translate','$location', 'sharedProperties', 'redirectService', 'applicationStatusService', 'timelineService', function($scope, $rootScope, $sce, $http, $interval, $translate,$location, sharedProperties, redirectService, applicationStatusService, timelineService) {
 
-	/*$scope.getCurrentDate = function(value){
-		return getCurrentDate().substring(0, 4) +"/"+ getCurrentDate().substring(4, 6) +"/"+ getCurrentDate().substring(6);
-	}*/
-  $scope.widthGui = 60;//$scope.totalFieldProgress>23?$scope.totalFieldProgress:23;
-
 	/*datepicker start*/
 	$("#OnlineIPOStartDate").daterangepicker({    	
 		"singleDatePicker": true,
@@ -64,30 +59,54 @@ angular.module('ipoAdminApp.createIPOController', [])
 
 	$("#PriceFixingDate").daterangepicker({    	
 		"singleDatePicker": true,
-		"locale": {
-			"format": "YYYY/MM/DD"        
-		}
+		"timePicker": true,
+    "timePicker24Hour": true,
+    "applyLabel": "Apply",
+    "cancelLabel": "Cancel",
+    "fromLabel": "From",
+    "toLabel": "To",
+    "locale": {
+        "format": "YYYY/MM/DD HH:mm"          
+    }
 	});
 
 	$("#ResultAnnouncementDate").daterangepicker({    	
 		"singleDatePicker": true,
-		"locale": {
-			"format": "YYYY/MM/DD"        
-		}
+    "timePicker": true,
+    "timePicker24Hour": true,
+    "applyLabel": "Apply",
+    "cancelLabel": "Cancel",
+    "fromLabel": "From",
+    "toLabel": "To",
+    "locale": {
+        "format": "YYYY/MM/DD HH:mm"          
+    }
 	});
 
 	$("#DispatchofSharesandRefundDate").daterangepicker({    	
 		"singleDatePicker": true,
-		"locale": {
-			"format": "YYYY/MM/DD"        
-		}
+    "timePicker": true,
+    "timePicker24Hour": true,
+    "applyLabel": "Apply",
+    "cancelLabel": "Cancel",
+    "fromLabel": "From",
+    "toLabel": "To",
+    "locale": {
+        "format": "YYYY/MM/DD HH:mm"          
+    }
 	});
 
 	$("#ListingDate").daterangepicker({    	
 		"singleDatePicker": true,
-		"locale": {
-			"format": "YYYY/MM/DD"        
-		}
+    "timePicker": true,
+    "timePicker24Hour": true,
+    "applyLabel": "Apply",
+    "cancelLabel": "Cancel",
+    "fromLabel": "From",
+    "toLabel": "To",
+    "locale": {
+        "format": "YYYY/MM/DD HH:mm"          
+    }
 	});
 
 	$("#FinancingStartDate").daterangepicker({    	
@@ -124,60 +143,49 @@ angular.module('ipoAdminApp.createIPOController', [])
 
   $("#ApplicationPeriodStartDate").daterangepicker({      
     "singleDatePicker": true,
+    "timePicker": true,
+    "timePicker24Hour": true,
+    "applyLabel": "Apply",
+    "cancelLabel": "Cancel",
+    "fromLabel": "From",
+    "toLabel": "To",
     "locale": {
-      "format": "YYYY/MM/DD"        
+        "format": "YYYY/MM/DD HH:mm"          
     }
   });
 
   $("#ApplicationPeriodEndDate").daterangepicker({      
     "singleDatePicker": true,
+    "timePicker": true,
+    "timePicker24Hour": true,
+    "applyLabel": "Apply",
+    "cancelLabel": "Cancel",
+    "fromLabel": "From",
+    "toLabel": "To",
     "locale": {
-      "format": "YYYY/MM/DD"        
+        "format": "YYYY/MM/DD HH:mm"          
     }
   });
   /*datepicker end*/
 
   /*Access Control*/    
-    $scope.machker = false;//maker:false     checker:true
-
-    $scope.vemode = true;// view:false     edit:true
-
-   $scope.showbelow = false;//Check box Checked if IPO financing is allowed;Unchecked if IPO financing is not allowed.
-   
-   $scope.mc = 'Maker';
-   $scope.ev = 'Edit';
-   $scope.testChangeMakerCheck =function (){
-    if($scope.machker == false){
-      $scope.machker =true;
-      
+  $scope.makerCheckerChange=function(){
+    if(sharedProperties.isCheckerRole()){
+      $scope.machker = true;
     }else{
-     $scope.machker =false;
-     
-   }
-   if($scope.machker ==true){
-    $scope.mc = 'Checker';
-  }else{
-    $scope.mc = 'Maker';
+      $scope.machker = false;//maker:false     checker:true
+    }
   }
-
-}
-
-$scope.testChangeViewEdit =function (){
-  if($scope.vemode == false){
-    $scope.vemode =true;
-    
-  }else{
-   $scope.vemode =false;
-   
- }
-
- if($scope.vemode ==true){
-  $scope.ev = 'Edit';
-}else{
-  $scope.ev = 'View';
-}
-}
-
+  $scope.viewEditChange=function(){
+    if(sharedProperties.isEditMode()){
+      $scope.vemode = true;
+      sharedProperties.setEditMode(true);
+    }else{
+      $scope.vemode = false;//view:false     edit:true
+      sharedProperties.setEditMode(false);
+    }
+  }
+  $scope.showbelow = false;//Check box Checked if IPO financing is allowed;Unchecked if IPO financing is not allowed.
 
 /*Permissions*/
 $scope.showAccRej = function(value,val){
@@ -356,14 +364,104 @@ $scope.decimallimit = function(inte,deci,sName,id,event){
     	return obj;
     }	
 
+    /*amtIntRateTemplateName*/
+    $scope.Loadfromtemplates="";      
+    $scope.Loadfromtemplates = {model: "", getLoadfromtemplates:[]};    
+    $scope.sirTableLoadTemplateName = function(){
+      $scope.Loadfromtemplates="";      
+      $scope.Loadfromtemplates = {model: "", getLoadfromtemplates:[]};
+  		$http({
+  	        method: 'POST',	               
+  	        url:sharedProperties.getBaseURL() + '/i/amtIntRateTemplateName',
+  	        data: {submit:"Submit"}      
+          }).then(function successCallback(response) {
+            console.log(response);
+            if (response['data']['returnCode'] == SUCCESS) {            
+                var tempData = response['data']['templates'];
+                angular.forEach(tempData, function(item) {
+                    $scope.Loadfromtemplates.getLoadfromtemplates.push(item.template);                 
+                })               
+          }
+          else {          
+          } 
+        }, function errorCallback(response) {          
+            console.log(response);
+            console.log('Error -->' + response);
+          }); 
+	}  
+      
 
     $scope.sirTableLoad = function(){
-		//...Load...
+		$http({
+	        method: 'POST',	               
+	        url:sharedProperties.getBaseURL() + '/i/loadAmtIntRate',
+	        data: {template: $scope.Loadfromtemplates.model,	        
+		           submit:"Submit"}      
+        }).then(function successCallback(response) {
+          console.log(response);
+          if (response['data']['returnCode'] == SUCCESS) {        
+            $scope.AssignmentsirTable(response['data']);
+        }
+        else {          
+        } 
+      }, function errorCallback(response) {          
+          console.log(response);
+          console.log('Error -->' + response);
+        }); 
 	}
 
-	$scope.sirTableSave = function(){
-		
-		alert(yesno+'HHHHHHHHHHH');//...Save...
+  $scope.AssignmentsirTable=function(ipodata){
+        $scope.specialInterestRateTable=[];
+        $scope.tabletempObj = {};
+          var amtIntRateArr = [];
+          angular.forEach(ipodata.amtIntRate, function(item) {
+            var amtIntRate = {},obj=[];      
+            amtIntRate.laabove = '> '+item.loanAmt;
+            obj.laabove = '> '+item.loanAmt;
+            amtIntRate.sirate = item.intRate;
+            obj.sirate = item.intRate;
+            amtIntRate.key =item.loanAmt+'-'+item.intRate;
+            obj.key = item.loanAmt+'-'+item.intRate;            
+            var tempArr = $scope.tabletempObj[amtIntRate.key];
+            if(!$scope.tabletempObj[amtIntRate.key]){
+              tempArr=[];
+              $scope.tabletempObj[amtIntRate.key] = tempArr;
+            }
+            tempArr.push(obj);
+            amtIntRateArr.push(amtIntRate);            
+          });
+        $scope.specialInterestRateTable=amtIntRateArr;    
+    }
+
+	function getSaveTemplatewithname(){
+		var amtIntRateArr = [];
+	    angular.forEach($scope.specialInterestRateTable, function(item) {
+	        var amtIntRate = {};      
+	        amtIntRate.loanAmt = item.laabove.substring(2,item.laabove.length);
+	        amtIntRate.intRate = item.sirate;
+	        amtIntRateArr.push(amtIntRate);
+	    });
+	    return amtIntRateArr;
+	}
+
+	$scope.sirTableSave = function(){    
+		$http({
+        	method: 'POST',
+          	url:sharedProperties.getBaseURL() + '/i/saveAmtIntRate',
+          	data: {template: $scope.Saveastemplatewithname,     
+		           amtIntRate: getSaveTemplatewithname(),         
+		           submit:"Submit"}      
+        }).then(function successCallback(response) {
+          console.log(response);          
+          if (response['data']['returnCode'] == SUCCESS) {         
+            $scope.sirTableLoadTemplateName();
+        }
+        else {          
+        } 
+      }, function errorCallback(response) {         
+          console.log(response);
+          console.log('Error -->' + response);
+        }); 
 	}
 
 	$scope.specialInterestRateTable = [];
@@ -411,9 +509,6 @@ $scope.decimallimit = function(inte,deci,sName,id,event){
     	if(angular.isDefined($scope.StockCode) && ( $scope.StockCode!=null && $scope.StockCode!='' )) {
     		basicfillField++;			
     	}
-    	if(angular.isDefined($scope.IPOCode) && ($scope.IPOCode!=null && $scope.IPOCode!='')){
-    		basicfillField++;
-    	}
     	if(angular.isDefined($scope.EnglishStockName)&&($scope.EnglishStockName!=null && $scope.EnglishStockName!='')){
     		basicfillField++;
     	}
@@ -450,12 +545,6 @@ $scope.decimallimit = function(inte,deci,sName,id,event){
     	if(angular.isDefined($scope.OnlineIPOEndTime) && ( $scope.OnlineIPOEndTime!=null && $scope.OnlineIPOEndTime!='' )) {
     		basicfillField++;			
     	}
-    	if(angular.isDefined($scope.IPOClosingDate) && ( $scope.IPOClosingDate!=null && $scope.IPOClosingDate!='' )) {
-    		basicfillField++;			
-    	}
-    	if(angular.isDefined($scope.IPOClosingTime) && ( $scope.IPOClosingTime!=null && $scope.IPOClosingTime!='' )) {
-    		basicfillField++;			
-    	}
       if(angular.isDefined($scope.ApplicationPeriodStartDate) && ( $scope.ApplicationPeriodStartDate!=null && $scope.ApplicationPeriodStartDate!='' )) {
         basicfillField++;     
       }
@@ -486,9 +575,9 @@ $scope.decimallimit = function(inte,deci,sName,id,event){
     	if(angular.isDefined($scope.InvestorCompensationLevyRate) && ( $scope.InvestorCompensationLevyRate!=null && $scope.InvestorCompensationLevyRate!='' )) {
     		feefillField++;			
     	}
-    	if($scope.CurrencyofHandingFee.model && ( $scope.CurrencyofHandingFee.model!=null && $scope.CurrencyofHandingFee.model!='' )) {
-    		feefillField++;			
-    	}
+    	if($scope.StockCurrency.model && ( $scope.StockCurrency.model!=null && $scope.StockCurrency.model!='' )) {
+        feefillField++;     
+      }
     	if(angular.isDefined($scope.HandingFee) && ( $scope.HandingFee!=null && $scope.HandingFee!='' )) {
     		feefillField++;			
     	}
@@ -502,7 +591,7 @@ $scope.decimallimit = function(inte,deci,sName,id,event){
 
     function quantityPro(){
     	var quantityfillField = 0;
-    	if(angular.isDefined($scope.QuantityFrom) && ( $scope.QuantityFrom !=null && $scope.QuantityFrom !=='')) {
+    	/*if(angular.isDefined($scope.QuantityFrom) && ( $scope.QuantityFrom !=null && $scope.QuantityFrom !=='')) {
     		quantityfillField++;			
     	}
     	if(angular.isDefined($scope.QuantityTo) && ( $scope.QuantityTo!=null && $scope.QuantityTo!='' )) {
@@ -510,7 +599,7 @@ $scope.decimallimit = function(inte,deci,sName,id,event){
     	}
     	if(angular.isDefined($scope.Interval) && ( $scope.Interval!=null && $scope.Interval!='' )) {
     		quantityfillField++;			
-    	}
+    	}*/
     	if(angular.isDefined($scope.CalculationMethod) && ( $scope.CalculationMethod!=null && $scope.CalculationMethod!='' )) {
     		quantityfillField++;			
     	}
@@ -579,13 +668,10 @@ $scope.decimallimit = function(inte,deci,sName,id,event){
       return operationalfillField;
     } 
 
-    $scope.basictotal = 20;
+    $scope.basictotal = 17;
     $scope.feetotal = 7;
-    $scope.quantitytotal = 5;
-    $scope.financingtotal = 11;
-    $scope.operationaltotal = 4;
-    $scope.totalMandatorField = 47;
-
+    $scope.quantitytotal = 2;    
+    
     function totalFieldPro(){
     	var fp= $scope.financingProgress;
     	var qp= $scope.quantityProgress;
@@ -596,7 +682,10 @@ $scope.decimallimit = function(inte,deci,sName,id,event){
       return totalp;
     }
 
-    $interval(function () {
+    $interval(function () {      
+      $scope.financingtotal =$scope.showbelow?11:1;
+      $scope.operationaltotal = $scope.showbelow?4:2;
+      $scope.totalMandatorField = $scope.showbelow?41:29;
     	$scope.basicProgress = basicPro();
     	$scope.feeProgress = feePro();
     	$scope.quantityProgress = quantityPro();
@@ -604,7 +693,8 @@ $scope.decimallimit = function(inte,deci,sName,id,event){
       $scope.operationalProgress = operationalPro();
       $scope.filledFields =totalFieldPro();
       var tof =$scope.filledFields;
-      $scope.totalFieldProgress =Math.floor((tof/47)*100) ;
+      $scope.totalFieldProgress =Math.floor((tof/$scope.totalMandatorField)*100) ;
+      $scope.widthGui = {'width': ($scope.totalFieldProgress>22 ? $scope.totalFieldProgress : 22) + '%'};
     }, 500);
 
 
@@ -667,12 +757,12 @@ $scope.decimallimit = function(inte,deci,sName,id,event){
         $scope.createIpoData.subStartTime= tempdata.substring(0,4)+tempdata.substring(5,7)+tempdata.substring(8)+temptime.substring(0,2)+temptime.substring(3);
       }
 
-      //subCloseTime    
-      if($scope.IPOClosingDate&&$scope.IPOClosingTime){
-        var tempdata = $scope.IPOClosingDate;
-        var temptime = $scope.IPOClosingTime;
+      //subCloseTime 
+      if($scope.OnlineIPOEndDate&&$scope.OnlineIPOEndTime){
+        var tempdata = $scope.OnlineIPOEndDate;
+        var temptime = $scope.OnlineIPOEndTime;
         $scope.createIpoData.subCloseTime= tempdata.substring(0,4)+tempdata.substring(5,7)+tempdata.substring(8)+temptime.substring(0,2)+temptime.substring(3);
-      }       
+      }     
       
       $scope.createIpoData.name=$scope.EnglishStockName||"";
       $scope.createIpoData.tcName=$scope.TranditionalChineseName||"";
@@ -687,13 +777,13 @@ $scope.decimallimit = function(inte,deci,sName,id,event){
       //offerStartTime    
       if($scope.ApplicationPeriodStartDate){
         var tempdata = $scope.ApplicationPeriodStartDate;      
-        $scope.createIpoData.offerStartTime= tempdata.substring(0,4)+tempdata.substring(5,7)+tempdata.substring(8)+"0800";
+        $scope.createIpoData.offerStartTime= tempdata.substring(0,4)+tempdata.substring(5,7)+tempdata.substring(8,10)+tempdata.substring(11,13)+tempdata.substring(14);
       }
 
       //offerCloseTime    
       if($scope.ApplicationPeriodEndDate){
         var tempdata = $scope.ApplicationPeriodEndDate;      
-        $scope.createIpoData.offerCloseTime= tempdata.substring(0,4)+tempdata.substring(5,7)+tempdata.substring(8)+"0800";
+        $scope.createIpoData.offerCloseTime= tempdata.substring(0,4)+tempdata.substring(5,7)+tempdata.substring(8,10)+tempdata.substring(11,13)+tempdata.substring(14);
       }
 
       //lotSize
@@ -702,7 +792,7 @@ $scope.decimallimit = function(inte,deci,sName,id,event){
       //priceFixDate
       if($scope.PriceFixingDate){
         var tempdata = $scope.PriceFixingDate;      
-        $scope.createIpoData.priceFixDate= tempdata.substring(0,4)+tempdata.substring(5,7)+tempdata.substring(8)+'0800';
+        $scope.createIpoData.priceFixDate= tempdata.substring(0,4)+tempdata.substring(5,7)+tempdata.substring(8,10)+tempdata.substring(11,13)+tempdata.substring(14);
       }else{
         $scope.createIpoData.priceFixDate='';
       }
@@ -710,7 +800,7 @@ $scope.decimallimit = function(inte,deci,sName,id,event){
       //announceDate
       if($scope.ResultAnnouncementDate){
         var tempdata = $scope.ResultAnnouncementDate;      
-        $scope.createIpoData.announceDate= tempdata.substring(0,4)+tempdata.substring(5,7)+tempdata.substring(8)+'0800';
+        $scope.createIpoData.announceDate= tempdata.substring(0,4)+tempdata.substring(5,7)+tempdata.substring(8,10)+tempdata.substring(11,13)+tempdata.substring(14);
       }else{
         $scope.createIpoData.announceDate='';
       }
@@ -718,7 +808,7 @@ $scope.decimallimit = function(inte,deci,sName,id,event){
       //estRefundDate
       if($scope.DispatchofSharesandRefundDate){
         var tempdata = $scope.DispatchofSharesandRefundDate;      
-        $scope.createIpoData.estRefundDate= tempdata.substring(0,4)+tempdata.substring(5,7)+tempdata.substring(8)+'0800';
+        $scope.createIpoData.estRefundDate= tempdata.substring(0,4)+tempdata.substring(5,7)+tempdata.substring(8,10)+tempdata.substring(11,13)+tempdata.substring(14);
       }else{
         $scope.createIpoData.estRefundDate='';
       }
@@ -726,7 +816,7 @@ $scope.decimallimit = function(inte,deci,sName,id,event){
       //listingDate
       if($scope.ListingDate){
         var tempdata = $scope.ListingDate;      
-        $scope.createIpoData.listingDate= tempdata.substring(0,4)+tempdata.substring(5,7)+tempdata.substring(8)+'0800';
+        $scope.createIpoData.listingDate= tempdata.substring(0,4)+tempdata.substring(5,7)+tempdata.substring(8,10)+tempdata.substring(11,13)+tempdata.substring(14);
       }
 
       //marginStatus
@@ -735,43 +825,65 @@ $scope.decimallimit = function(inte,deci,sName,id,event){
       }
       if($scope.showbelow==false){
         $scope.createIpoData.marginStatus='N';
-      }    
+      }
 
+      if($scope.showbelow){
       //marginStartTime    
       if($scope.FinancingStartDate&&$scope.FinancingStartTime){
         var tempdata = $scope.FinancingStartDate;
         var temptime = $scope.FinancingStartTime;
         $scope.createIpoData.marginStartTime= tempdata.substring(0,4)+tempdata.substring(5,7)+tempdata.substring(8)+temptime.substring(0,2)+temptime.substring(3);
       }
-
       //marginCloseTime    
       if($scope.FinancingEndDate&&$scope.FinancingEndTime){
         var tempdata = $scope.FinancingEndDate;
         var temptime = $scope.FinancingEndTime;
         $scope.createIpoData.marginCloseTime= tempdata.substring(0,4)+tempdata.substring(5,7)+tempdata.substring(8)+temptime.substring(0,2)+temptime.substring(3);
       }
-
+      $scope.createIpoData.clientIntDay=$scope.InterestDay||"";          
+      $scope.createIpoData.MaxLoanAmountperApplication=$scope.MaxLoanAmountperApplication||"";
+      $scope.createIpoData.MinLoanAmountperApplication=$scope.MinLoanAmountperApplication||"";
+      $scope.createIpoData.MinnoofsharespapliedforIPOLoan=$scope.MinnoofsharespapliedforIPOLoan||"";
+      $scope.createIpoData.Loadfromtemplates=$scope.Loadfromtemplates||"";
+      $scope.createIpoData.Saveastemplatewithname=$scope.Saveastemplatewithname||"";
       //maxMarginRate
       $scope.createIpoData.maxMarginRate=($scope.MaxLoanRatio/100).toFixed(4);
-      //marginRateFilter
-      $scope.createIpoData.marginRateFilter=$scope.AllowedLoanRatioSelectedby||"";
+      //marginRateFilter      
+      if(angular.isDefined($scope.AllowedLoanRatioSelectedby) && ( $scope.AllowedLoanRatioSelectedby!=null && $scope.AllowedLoanRatioSelectedby!='' ))
+      {
+        var tempStr =$scope.AllowedLoanRatioSelectedby;
+        var tempStrArr = tempStr.split(',').reverse();
+        var reStr='';
+        angular.forEach(tempStrArr, function(item) {
+            reStr =reStr+(item/100).toFixed(3)+',';
+        })
+        $scope.createIpoData.marginRateFilter=reStr.substring(0,reStr.length-1);
+      }
+
       //useMaxMargin      
       if($scope.MustUseMaxLoan==true){
         $scope.createIpoData.useMaxMargin='Y';
       }
       if($scope.MustUseMaxLoan==false){
         $scope.createIpoData.useMaxMargin='N';
-      } 
+      }
+      $scope.createIpoData.basicIntRate=($scope.BasicInterestRate/100).toFixed(6);
+      var amtIntRateArr = [];
+      angular.forEach($scope.specialInterestRateTable, function(item) {
+        var amtIntRate = {};      
+        amtIntRate.loanAmt = item.laabove.substring(2,item.laabove.length);
+        amtIntRate.intRate = item.sirate;
+        amtIntRateArr.push(amtIntRate);
+      });
+    
+    var amtIntRateJson = JSON.stringify(amtIntRateArr); 
+      $scope.createIpoData.amtIntRate=amtIntRateJson;
+    }
 
       //api Uncharted---    
       $scope.createIpoData.OnlineIPOEndDate=$scope.OnlineIPOEndDate;
       $scope.createIpoData.OnlineIPOEndTime=$scope.OnlineIPOEndTime;
-      $scope.createIpoData.IPOCode=$scope.IPOCode||"";    
-      $scope.createIpoData.MaxLoanAmountperApplication=$scope.MaxLoanAmountperApplication||"";
-      $scope.createIpoData.MinLoanAmountperApplication=$scope.MinLoanAmountperApplication||"";
-      $scope.createIpoData.MinnoofsharespapliedforIPOLoan=$scope.MinnoofsharespapliedforIPOLoan||"";
-      $scope.createIpoData.Loadfromtemplates=$scope.Loadfromtemplates||"";
-      $scope.createIpoData.Saveastemplatewithname=$scope.Saveastemplatewithname||"";
+      $scope.createIpoData.IPOCode=$scope.IPOCode||"";
       $scope.createIpoData.FinalOfferPrice=$scope.FinalOfferPrice||"";
       //----
       $scope.createIpoData.commRate=($scope.CommissionRate/100).toFixed(6);
@@ -782,15 +894,14 @@ $scope.decimallimit = function(inte,deci,sName,id,event){
       $scope.createIpoData.tcPropspectusURL=$scope.ProspectusesSimplifiedChineseURL||"";
       $scope.createIpoData.scPropspectusURL=$scope.ProspectusesTranditionalChineseURL||"";
       $scope.createIpoData.externalRemark=$scope.RemarkforExternal||"";
-      $scope.createIpoData.internalRemark=$scope.RemarkforInternal||"";    
-      $scope.createIpoData.clientIntDay=$scope.InterestDay||"";    
+      $scope.createIpoData.internalRemark=$scope.RemarkforInternal||"";         
       
       if(angular.isDefined($scope.ClientRebateRate) && $scope.ClientRebateRate!=null && $scope.ClientRebateRate!=''){
         $scope.createIpoData.clientRebateRate=($scope.ClientRebateRate/100).toFixed(6);
       }else{
         $scope.createIpoData.clientRebateRate="";
       } 
-      $scope.createIpoData.handlingFeeCcy=$scope.CurrencyofHandingFee.model||"";
+      $scope.createIpoData.handlingFeeCcy=$scope.StockCurrency.model||"";
       $scope.createIpoData.handingFee=$scope.HandingFee||"";
       $scope.createIpoData.finHandingFee=$scope.FinancingHandingFee||"";
 
@@ -805,7 +916,9 @@ $scope.decimallimit = function(inte,deci,sName,id,event){
           tArray.push(keycurr);
         }      
       });    
-      $scope.createIpoData.appQtyAmtRange=appQtyAmtRangeArr;
+	  	  
+	  var appQtyAmtRangeJson = JSON.stringify(appQtyAmtRangeArr);	 
+      $scope.createIpoData.appQtyAmtRange=appQtyAmtRangeJson;
 
       var appQtyAmtArr = [],tempArry = [],rangeIdCursorR = 0;
       angular.forEach($scope.quantityAmountTable, function(item) {
@@ -821,16 +934,9 @@ $scope.decimallimit = function(inte,deci,sName,id,event){
         appQtyAmtArr.push(appQtyAmt);
         
       });
-      $scope.createIpoData.appQtyAmt=appQtyAmtArr;    
-
-      var amtIntRateArr = [];
-      angular.forEach($scope.specialInterestRateTable, function(item) {
-        var amtIntRate = {};      
-        amtIntRate.loanAmt = item.laabove.substring(2,item.laabove.length);
-        amtIntRate.intRate = item.sirate;
-        amtIntRateArr.push(amtIntRate);
-      });
-      $scope.createIpoData.amtIntRate=amtIntRateArr;
+	 
+	  var appQtyAmtJson = JSON.stringify(appQtyAmtArr);	 
+      $scope.createIpoData.appQtyAmt=appQtyAmtJson;      
       
       if($scope.CalculationMethod=="RLSUA"){
         $scope.createIpoData.calcMethod='1';
@@ -844,7 +950,7 @@ $scope.decimallimit = function(inte,deci,sName,id,event){
       if($scope.CalculationMethod=="BOUCARBIC"){
         $scope.createIpoData.calcMethod='4';
       }    
-      $scope.createIpoData.basicIntRate=($scope.BasicInterestRate/100).toFixed(6);
+      
       $scope.createIpoData.submitType=submitType;
       $scope.createIpoData.submit="Submit";
       
@@ -890,49 +996,46 @@ $scope.decimallimit = function(inte,deci,sName,id,event){
       if(subStartTime!=null&&subStartTime!=''){
         $scope.OnlineIPOStartDate =subStartTime.substring(0,4)+'/'+subStartTime.substring(4,6)+'/'+subStartTime.substring(6,8);
         $scope.OnlineIPOStartTime =subStartTime.substring(8,10)+':'+subStartTime.substring(10,12);
-      }
-
-      $scope.OnlineIPOEndDate ='';
-      $scope.OnlineIPOEndTime ='';
+      }     
 
       var subCloseTime =ipodata.subCloseTime;
       if(subCloseTime!=null&&subCloseTime!=''){
-        $scope.IPOClosingDate =subCloseTime.substring(0,4)+'/'+subCloseTime.substring(4,6)+'/'+subCloseTime.substring(6,8);
-        $scope.IPOClosingTime =subCloseTime.substring(8,10)+':'+subCloseTime.substring(10,12);
+        $scope.OnlineIPOEndDate =subCloseTime.substring(0,4)+'/'+subCloseTime.substring(4,6)+'/'+subCloseTime.substring(6,8);
+        $scope.OnlineIPOEndTime =subCloseTime.substring(8,10)+':'+subCloseTime.substring(10,12);
       }
 
       var priceFixDate =ipodata.priceFixDate;
       if(priceFixDate!=null&&priceFixDate!=''){
-        $scope.PriceFixingDate =priceFixDate.substring(0,4)+'/'+priceFixDate.substring(4,6)+'/'+priceFixDate.substring(6,8);          
+        $scope.PriceFixingDate =priceFixDate.substring(0,4)+'/'+priceFixDate.substring(4,6)+'/'+priceFixDate.substring(6,8)+' '+priceFixDate.substring(8,10)+':'+priceFixDate.substring(10,12);          
       }
 
       var offerStartTime =ipodata.offerStartTime;
       if(offerStartTime!=null&&offerStartTime!=''){
-        $scope.ApplicationPeriodStartDate =offerStartTime.substring(0,4)+'/'+offerStartTime.substring(4,6)+'/'+offerStartTime.substring(6,8);          
+        $scope.ApplicationPeriodStartDate =offerStartTime.substring(0,4)+'/'+offerStartTime.substring(4,6)+'/'+offerStartTime.substring(6,8)+' '+offerStartTime.substring(8,10)+':'+offerStartTime.substring(10,12);          
       }
       
       var offerCloseTime =ipodata.offerCloseTime;
       if(offerCloseTime!=null&&offerCloseTime!=''){
-        $scope.ApplicationPeriodEndDate =offerCloseTime.substring(0,4)+'/'+offerCloseTime.substring(4,6)+'/'+offerCloseTime.substring(6,8);          
+        $scope.ApplicationPeriodEndDate =offerCloseTime.substring(0,4)+'/'+offerCloseTime.substring(4,6)+'/'+offerCloseTime.substring(6,8)+' '+offerCloseTime.substring(8,10)+':'+offerCloseTime.substring(10,12);          
       }
       
       var announceDate = ipodata.announceDate;
       if(announceDate!=null&&announceDate!=''){              
-        $scope.ResultAnnouncementDate =announceDate.substring(0,4)+'/'+announceDate.substring(4,6)+'/'+announceDate.substring(6,8);
+        $scope.ResultAnnouncementDate =announceDate.substring(0,4)+'/'+announceDate.substring(4,6)+'/'+announceDate.substring(6,8)+' '+announceDate.substring(8,10)+':'+announceDate.substring(10,12);
       }else{
         $scope.ResultAnnouncementDate='';
       }
 
       var estRefundDate = ipodata.estRefundDate;
       if(estRefundDate!=null&&estRefundDate!=''){              
-        $scope.DispatchofSharesandRefundDate =estRefundDate.substring(0,4)+'/'+estRefundDate.substring(4,6)+'/'+estRefundDate.substring(6,8);
+        $scope.DispatchofSharesandRefundDate =estRefundDate.substring(0,4)+'/'+estRefundDate.substring(4,6)+'/'+estRefundDate.substring(6,8)+' '+estRefundDate.substring(8,10)+':'+estRefundDate.substring(10,12);
       }else{
         $scope.DispatchofSharesandRefundDate='';
       }
 
       var listingDate =ipodata.listingDate;
       if(listingDate!=null&&listingDate!=''){
-        $scope.ListingDate =listingDate.substring(0,4)+'/'+listingDate.substring(4,6)+'/'+listingDate.substring(6,8);          
+        $scope.ListingDate =listingDate.substring(0,4)+'/'+listingDate.substring(4,6)+'/'+listingDate.substring(6,8)+' '+listingDate.substring(8,10)+':'+listingDate.substring(10,12);          
       }
 
       $scope.FinalOfferPrice='';
@@ -961,7 +1064,6 @@ $scope.decimallimit = function(inte,deci,sName,id,event){
         $scope.ClientRebateRate='';
       }
 
-      $scope.CurrencyofHandingFee.model=ipodata.handlingFeeCcy;
       $scope.HandingFee=ipodata.handlingFee;
       $scope.FinancingHandingFee=ipodata.finHandlingFee;
 
@@ -1075,9 +1177,21 @@ $scope.decimallimit = function(inte,deci,sName,id,event){
         }
         if(ipodata.useMaxMargin=='N'){
           $scope.MustUseMaxLoan=false;
-        } 
+        }
 
-        $scope.AllowedLoanRatioSelectedby=ipodata.marginRateFilter;       
+        if(ipodata.marginRateFilter!="")
+        {
+          var tempStr =ipodata.marginRateFilter;
+          var tempStrArr = tempStr.split(',');
+          var reStr='';
+          angular.forEach(tempStrArr, function(item) {
+              reStr =reStr+(item*100).toFixed(0)+',';
+          })
+          $scope.AllowedLoanRatioSelectedby=reStr.substring(0,reStr.length-1);
+        }else{
+            $scope.AllowedLoanRatioSelectedby=ipodata.marginRateFilter;
+        }       
+              
         $scope.BasicInterestRate=(ipodata.basicIntRate*100).toFixed(4);
 
         /*TABLE TWO*/
@@ -1102,7 +1216,7 @@ $scope.decimallimit = function(inte,deci,sName,id,event){
         });
         $scope.specialInterestRateTable=amtIntRateArr;  
         
-        $scope.Loadfromtemplates='';
+        $scope.Loadfromtemplates.model='';
         $scope.Saveastemplatewithname='';
 
         /*IPODetail Field*/             
@@ -1172,16 +1286,13 @@ $scope.decimallimit = function(inte,deci,sName,id,event){
         });
       }
 
-      $scope.StockCurrency="";
-      $scope.CurrencyofHandingFee=""
-      $scope.StockCurrency = {model: "", getStockCurrency:[]};
-      $scope.CurrencyofHandingFee = {model: "", getCurrencyofHandingFee:[]};
+      $scope.StockCurrency="";      
+      $scope.StockCurrency = {model: "", getStockCurrency:[]};      
       $scope.convertToCreateIPOList = function(sysSetting){
         var tempData = sysSetting['currencyMaster'];
 
         angular.forEach(tempData, function(item) {
-          $scope.StockCurrency.getStockCurrency.push(item.currency);
-          $scope.CurrencyofHandingFee.getCurrencyofHandingFee.push(item.currency);
+          $scope.StockCurrency.getStockCurrency.push(item.currency);          
         })      
         
         var tempDataY = sysSetting['systemParameter'];
@@ -1233,20 +1344,18 @@ $scope.decimallimit = function(inte,deci,sName,id,event){
         }
         $http({
           method: 'POST',
-        //url:strURL,
         url:sharedProperties.getBaseURL() + strURL,
         data: getCreateIpoData("Submit") 
-        //{clientId createipo?data}
       }).then(function successCallback(response) {
         console.log(response);
         if (response['data']['returnCode'] == SUCCESS) {          
-          $scope.machker = false;
-          $scope.vemode = false;               
+          $scope.vemode = false;
+          sharedProperties.setEditMode(false);
         }
-        else {          
+        else { 
+            alert(response['data']['returnCode']);         
         }         
       }, function errorCallback(response) {
-        //$scope.displayDefaultError();
         console.log(response);
         console.log('Error -->' + response);
       });
@@ -1262,72 +1371,50 @@ $scope.decimallimit = function(inte,deci,sName,id,event){
       }     
       $http({
         method: 'POST',
-          //url:strURL,
           url:sharedProperties.getBaseURL() + strURL,
           data:  getCreateIpoData("Save")      
         }).then(function successCallback(response) {
           console.log(response);
           if (response['data']['returnCode'] == SUCCESS) {          
-            $scope.machker = false;
-            $scope.vemode = false;               
+            $scope.vemode = false;
+            sharedProperties.setEditMode(false);
           }
-          else {          
+          else {
+            alert(response['data']['returnCode']);          
           } 
         }, function errorCallback(response) {
-          //$scope.displayDefaultError();
           console.log(response);
           console.log('Error -->' + response);
         });   
       }
 
       /*adminIPODetail*/
-      $scope.createIPOadminIPODetail = function(){         
-       $http({
-        method: 'POST',
-          //url:'/i/adminIPODetail',
-          url:sharedProperties.getBaseURL() + '/i/adminIPODetail',
-          data:  {"submit":"Submit","ipoIds":$scope.ipoIds}      
-        }).then(function successCallback(response) {
-          console.log(response);
-          if (response['data']['returnCode'] == SUCCESS) {          
-            $scope.loadIPODetailData(response['data']['IPOs']['0']);
-            $scope.isModify=true;
-                /*$scope.machker = false;
-                $scope.vemode = false;*/          
-              }
-              else {          
-              } 
-            }, function errorCallback(response) {          
-              console.log(response);
-              console.log('Error -->' + response);
-            });   
-      }
-
-      /*adminIPOBook*/
-      $scope.createIPOadminIPOBook = function(){     
-       $http({
-        method: 'POST',
-          //url:'/i/adminIPOBook',
-          url:sharedProperties.getBaseURL() + '/i/adminIPOBook',
-          data: {dateType : 'Mod',     
-          dayRange : '30',
-          dateFrom : '201612010000',
-          dateTo : '201712280000',
-          submit:"Submit",
-          selfModify: 'Y'}      
-        }).then(function successCallback(response) {
-          console.log(response);
-          if (response['data']['returnCode'] == SUCCESS) {         
-            if(response['data']['IPOs']['length']>0){
-             $scope.ipoIds = response['data']['IPOs'][2]['ipoId'];                  
-           }else{
-            alert("null data");
-          }
+      $scope.createIPOadminIPODetail = function(){
+        if(sharedProperties.isCreateIPO()){
+              return ;
         }
-        else {          
-        } 
-      }, function errorCallback(response) {
-          //$scope.displayDefaultError();
+       $http({
+        method: 'POST',
+          url:sharedProperties.getBaseURL() + '/i/adminIPODetail',
+          data:  {"submit":"Submit","ipoIds":sharedProperties.getCurrentIPOId()}      
+        }).then(function successCallback(response) {
+              console.log(response);
+              if (response.data.returnCode == SUCCESS) {          
+                $scope.loadIPODetailData(response['data']['IPOs']['0']);
+                $scope.isModify=true;
+                var tempStatus =response['data']['IPOs']['0']['approveStatus'];
+                if(tempStatus!='P'){                
+                    $scope.vemode = false;
+                    sharedProperties.setEditMode(false); 
+                }else{
+                    $scope.vemode = true;
+                    sharedProperties.setEditMode(true);
+                }                                   
+              }
+              else {
+                alert(response['data']['returnCode']);
+              } 
+        }, function errorCallback(response) {          
           console.log(response);
           console.log('Error -->' + response);
         });   
@@ -1337,12 +1424,15 @@ $scope.decimallimit = function(inte,deci,sName,id,event){
       $scope.createIPOdelete = function(){     
        $http({
         method: 'POST',
-          //url:'/i/deleteIPO',
           url:sharedProperties.getBaseURL() + '/i/deleteIPO',
-          data:{"ipoId":$scope.ipoId,"version":"1"}       
+          data:{"ipoId":$scope.ipoId,"version":$scope.version}       
         }).then(function successCallback(response) {
           console.log(response);
-          console.log("SUCCESS");         
+          if (response['data']['returnCode'] == SUCCESS) {         
+            alert("delete-success");
+          }else{
+            alert(response['data']['returnCode']);
+          }        
         }, function errorCallback(response) {
           //$scope.displayDefaultError();
           console.log(response);
@@ -1354,12 +1444,15 @@ $scope.decimallimit = function(inte,deci,sName,id,event){
       $scope.createIPOaccept = function(){     
        $http({
         method: 'POST',
-          //url:'/i/ipoApproval',
           url:sharedProperties.getBaseURL() + '/i/ipoApproval',
           data:{"ipoId":$scope.ipoId,"version":$scope.version,"approvalStatus":"Y"}         
         }).then(function successCallback(response) {
           console.log(response);
-          
+          if (response['data']['returnCode'] == SUCCESS) {           
+            alert("accept-success");
+          }else{
+            alert(response['data']['returnCode']);
+          } 
         }, function errorCallback(response) {          
           console.log('Error -->' + response);
         });   
@@ -1368,12 +1461,15 @@ $scope.decimallimit = function(inte,deci,sName,id,event){
       $scope.createIPOreject = function(){     
        $http({
         method: 'POST',
-          //url:'/i/ipoApproval',
           url:sharedProperties.getBaseURL() + '/i/ipoApproval',
           data:{"ipoId":$scope.ipoId,"version":$scope.version,"approvalStatus":"N"}         
         }).then(function successCallback(response) {
           console.log(response);
-          
+          if (response['data']['returnCode'] == SUCCESS) {           
+            alert("reject-success");
+          }else{
+            alert(response['data']['returnCode']);
+          } 
         }, function errorCallback(response) {          
           console.log(response);
           console.log('Error -->' + response);
@@ -1382,9 +1478,9 @@ $scope.decimallimit = function(inte,deci,sName,id,event){
 
 
       /*Edit*/
-      $scope.createIPOedit = function(){     
-        $scope.machker = false;
-        $scope.vemode = true;    
+      $scope.createIPOedit = function(){        
+        $scope.vemode = true;
+        sharedProperties.setEditMode(true);            
       }
       
       /*Back*/
@@ -1397,32 +1493,38 @@ $scope.decimallimit = function(inte,deci,sName,id,event){
       /*Postpone*/
       $scope.createIPOpostpone = function(){     
        $http({
-        method: 'POST',
-        url:'/i/xxxxxx',
-          //sharedProperties.getBaseURL() + '/i/createIPO',
-          data:"test"        
+	        method: 'POST',
+	        url:sharedProperties.getBaseURL() + '/i/postponeIPO',
+	        data:{"ipoId":$scope.ipoId,"version":$scope.version}       
         }).then(function successCallback(response) {
-          console.log('success -->' +response);
-          alert("success");
+        	console.log(response);
+          if (response['data']['returnCode'] == SUCCESS) {           
+            alert("postpone-success");
+          }else{
+            alert(response['data']['returnCode']);
+          }          
         }, function errorCallback(response) {
-          //$scope.displayDefaultError();
-          console.log('Error -->' + response);
+       		console.log(response);         
+          	console.log('Error -->');
         });   
       }
 
       /*Remuse*/
       $scope.createIPOresume = function(){     
        $http({
-        method: 'POST',
-        url:'/i/xxxxxx',
-          //sharedProperties.getBaseURL() + '/i/createIPO',
-          data:"test"        
+	        method: 'POST',
+	        url:sharedProperties.getBaseURL() + '/i/resumeIPO',
+	        data:{"ipoId":$scope.ipoId,"version":$scope.version}        
         }).then(function successCallback(response) {
-          console.log('success -->' +response);
-          alert("success");
-        }, function errorCallback(response) {
-          //$scope.displayDefaultError();
-          console.log('Error -->' + response);
+        	console.log(response);          	
+            if (response['data']['returnCode'] == SUCCESS) {           
+            alert("resume-success");
+          }else{
+            alert(response['data']['returnCode']);
+          }         
+        }, function errorCallback(response) { 
+        	console.log(response);         
+          	console.log('Error -->');
         });   
       }
 
@@ -1503,9 +1605,260 @@ $scope.decimallimit = function(inte,deci,sName,id,event){
   //2017/12/20
   
 
-  
+  // Pie Chart Properties:
 
+	//$scope.bgColors = ['#FAAAAA', '#FADB6B', '#ACD491', '#A4C2E6', '#f9b8f9', '#FF8C00',  '#c5fd9b', '#9370DB', '#ccfffc', '#CD853F'];
+	//$scope.colors = ['#F34448', '#E87C3B', '#598439', '#4371B4', '#EB13EB', '#FF6347', '#68EB05', '#6A5ACD',  '#1FFFF0' , '#8B4513'];
+	$scope.getDonutChart = function() {
+		//var bgColors = ['#FFB6C1', '#FFD700', '#32CD32', '#1E90FF', '#f9b8f9', '#FF8C00',  '#c5fd9b', '#9370DB', '#ccfffc', '#CD853F'];
+		//var colors = ['#FF4500', '#DAA520', '#006400', '#00008B', '#EB13EB', '#FF6347', '#68EB05', '#6A5ACD',  '#1FFFF0' , '#8B4513'];	
+		var BORDERWIDTH_CHART_1 = 0;
+		var BORDER_COLOR = '#FFFFFF';
+		var OFFSET_ANGLE_CHART_2 = BORDERWIDTH_CHART_1/4;
+
+		// Code starts here:
+		var options = {
+				chart: {
+					renderTo: 'donutChart',           
+				},
+				credits: {
+						 enabled: false
+			   },      
+				title: {
+					text: '<span style="font-size:35px;">'+ $scope.overallTotalUsage + '</span><br><span>&nbsp;&nbsp;used<span>',
+					style: {"color": "#A9A9A9", "fontFamily":"Consolas", "font-size":"15px"},
+					verticalAlign: 'middle',
+					y: -20,
+					useHTML: true,
+				},
+				subtitle: {
+							text: '<span style="text-align:center">&nbsp;Total</span><br>HKD ' + $scope.formatedOverallTotalInChart ,
+					style: {"color": "#49A0D3", "fontFamily":"Consolas", "font-size":"15px"},
+					verticalAlign: 'middle',
+					y: 45,   
+					useHTML: true,
+							},
+				tooltip: {
+					formatter: function() {
+						var s;
+						if (this.point.name == 'Slice') { // the pie chart
+							return false;
+						} else {
+							s = ''+
+								this.point.name;
+						}
+						return s;
+					}
+				},
+				plotOptions: {
+					series: {
+						cursor: 'pointer',
+						animation: {
+							duration: 0
+						},
+						point: {
+								events: {
+									click: function () { 									
+									$scope.setSelected(this.x, this.z);
+									}
+								}
+							}
+						}
+				},
+				series: [{
+					type: 'pie',
+					name: 'background',
+					data: $scope.outerRing,
+					enableMouseTracking: false,
+					borderColor: BORDER_COLOR,
+					borderWidth: BORDERWIDTH_CHART_1,
+					innerSize: '70%',
+					size: '100%',
+					colors: $scope.bgColors,
+					dataLabels: false,
+					center: [125, 125],
+				}]
+		};
+				var begin = 0;
+				var end   = 0;
+				var totalLength = 0;
+				var arrayLength = $scope.innerRing.length;
+
+		for (var i = 0; i < arrayLength; i++) {
+			var perc  = $scope.innerRing[i];	   
+			var color = [$scope.colors[i]];
+			var label = $scope.categories[i];
+			var poolId = $scope.poolId[i];
+			var status = $scope.status[i];
+			var value = perc*100;
+			if (i == 0){
+			begin = 0;
+			end = ($scope.outerRing[i]/100)*360*($scope.innerRing[i]);
+			totalLength = totalLength + ($scope.outerRing[i]/100)*360;
+			}
+			else {
+			begin = totalLength;
+			end   = totalLength + ($scope.outerRing[i]/100)*360*($scope.innerRing[i]);
+			totalLength = totalLength + ($scope.outerRing[i]/100)*360;
+			}
+				
+			options.series.push({
+					type: 'pie',
+					name: 'foreground',
+					cumulative: 1, 
+					data: [{
+						name: label,
+						y: value,
+						x: poolId,
+						z: status}],
+					borderColor: 'white',
+					borderWidth: 0,
+					innerSize: '87%',
+					size: '80%',
+					colors: color,
+					dataLabels: false,
+					center: [125, 125],
+					startAngle: begin,
+					endAngle: end,}
+			);
+		}
+
+	// and create the chart
+	$(document).ready(function() {
+		var chart = new Highcharts.Chart(options);
+	});
+}
 	
+	//get finPoolBook
+	$scope.getAdminFinPoolBook = function() {	
+		console.log(sharedProperties.getCurrentIPOId());		
+			$http({
+				//method: 'GET',
+				//url: 'adminFinPoolBook2.json'			
+				method: 'POST',
+				url: sharedProperties.getBaseURL() + '/i/adminFinPoolBook',			
+				data: {ipoId : sharedProperties.getCurrentIPOId()}				  
+			}).then(function successCallback(response) {
+				if (response['data']['returnCode'] == SUCCESS) {
+					$scope.convertToAdminFinPoolList(response['data']['currentFinPools']);
+					//get client data
+					//if (sharedProperties.getClientId() != null) {
+					//	$scope.getCurrentIPOClientData();
+					//} 
+				}
+				else {
+					$scope.displayError(response['data']['returnCode']);
+				}
+			}, function errorCallback(response) {
+				$scope.displayDefaultError();
+			});
+		}
+		
+		$scope.convertToAdminFinPoolList = function(adminFinPoolBook) {	
+			$scope.adminFinPools = [];
+			$scope.overallTotal = 0;	
+			$scope.overallTotalUsedValue = 0;
+			$scope.formatedOverallTotalInChart = '';
+			$scope.formatedOverallTotalInTable = '';	
+			//for pie chart
+			$scope.outerRing = [];
+			$scope.innerRing = [];
+			$scope.categories = [];
+			$scope.bgColors = ['#FAAAAA', '#FADB6B', '#ACD491', '#A4C2E6', '#f9b8f9', '#FF8C00',  '#c5fd9b', '#9370DB', '#ccfffc', '#CD853F'];
+			$scope.colors = ['#F34448', '#E87C3B', '#598439', '#4371B4', '#EB13EB', '#FF6347', '#68EB05', '#6A5ACD',  '#1FFFF0' , '#8B4513'];
+			$scope.poolId = [];
+			$scope.status = [];
+			$scope.overallTotalUsage = '';
+			var index = 0;
+			var poolIds = [];
+			//show when empty finPool
+			if (adminFinPoolBook.length == 0) {
+				$scope.outerRing.push(100);	
+				$scope.innerRing.push(0);
+				$scope.bgColors = ['#DCDCDC'];	
+				$scope.colors = ['#DCDCDC'];
+				$scope.overallTotalUsage = '---%';
+				$scope.formatedOverallTotalInChart = '---';
+				$scope.formatedOverallTotalInTable = '0';
+				
+				var finPool = {};
+				finPool['poolName'] = '---';
+				finPool['ccy'] = '---';
+				finPool['totalValue'] = '---';
+				finPool['overallPercentage'] = '---';
+				finPool['showUsage'] = '---';	
+				$scope.adminFinPools.push(finPool);
+				}
+				// show when have record
+				else {		
+						angular.forEach(adminFinPoolBook, function(item) {
+						$scope.overallTotal	= $scope.overallTotal + item['totalValue'];	
+						$scope.overallTotalUsedValue = $scope.overallTotalUsedValue + item['usedValue'];			
+						})
+						$scope.formatedOverallTotalInChart = formatAmount($scope.overallTotal);
+						$scope.formatedOverallTotalInTable = formatAmount($scope.overallTotal);
+						$scope.overallTotalUsage = formatNumber("" + ($scope.overallTotalUsedValue/$scope.overallTotal*100), 0) + "%";		
+						angular.forEach(adminFinPoolBook, function(item) {
+							var finPool = {};
+							finPool['index'] = index;
+							index++;
+							finPool['poolId'] = item['poolId'];
+							finPool['poolName'] = item['poolName'];
+							finPool['ipoId'] = item['ipoId'];
+							finPool['ccy'] = item['ccy'];
+							finPool['status'] = item['status'];														
+							finPool['approveStatus'] = item['approveStatus'];
+							finPool['approveUserId'] = item['approveUserId'];							
+							finPool['poolStatus'] = item['poolStatus'];
+							finPool['version'] = item['version'];							
+							finPool['totalValue'] = formatAmount(item['totalValue']);
+							finPool['usedValue'] = item['usedValue'];														
+							finPool['alertThreshold'] = item['alertThreshold'];
+							
+							
+							//status
+							//if (item['status'] == 'A' || item['status'] == 'M') {
+								if (item['approveStatus'] == 'W') {
+									finPool['showStatus'] = 'Draft';
+								}
+								if (item['approveStatus'] == 'A') {
+									finPool['showStatus'] = 'Approved'
+								}
+								if (item['approveStatus'] == 'P') {
+									finPool['showStatus'] = 'Pending';
+								}
+								if (item['approveStatus'] == 'R') {
+									finPool['showStatus'] = 'Rejected';
+								}
+							
+							//}
+													
+							finPool['showAlertThreshold'] = item['alertThreshold'] *100;				
+							finPool['overallPercentage'] = formatNumber("" + (item['totalValue']/$scope.overallTotal*100), 1 ) + "%";	
+							finPool['showUsage'] = formatNumber("" + (item['usedValue']/item['totalValue']*100), 1) + "%";	
+							finPool['usage'] = item['usedValue']/item['totalValue'];
+							//highChart value			
+							$scope.outerRing.push(item['totalValue']/$scope.overallTotal*100);	
+							$scope.innerRing.push(item['usedValue']/item['totalValue']);
+							$scope.categories.push(item['poolName']);
+							$scope.poolId.push(finPool['poolId']);
+							$scope.status.push(finPool['showStatus']);
+																			
+							$scope.adminFinPools.push(finPool);
+							poolIds.push(item['poolId']);
+						})	
+					}		
+			$scope.adminFinPoolCount = $scope.adminFinPools.length;		
+			$scope.getDonutChart();
+		}
+	
+	$scope.isAlert = function(usage, alert) {			
+		return usage > alert;				
+	}
+
+	$scope.editFinPool = function() {
+		$location.path('/createFinPool'); 
+	}
 
 	
 	/* guide */
@@ -1526,7 +1879,7 @@ $scope.decimallimit = function(inte,deci,sName,id,event){
 
   /*HEIGHT*/
   function adjustLayoutHeight() {    
-    var scrollbodyHeight =$(window).height() -265-38;//265
+    var scrollbodyHeight =$(window).height() -260;//-265-38
     if (scrollbodyHeight > 0) {      
       $("#scrollbody").css('height', scrollbodyHeight);
     }else{
@@ -1537,8 +1890,14 @@ $scope.decimallimit = function(inte,deci,sName,id,event){
   //init
   $scope.init = function() {    
     adjustLayoutHeight();
+    $scope.makerCheckerChange();
+    $scope.viewEditChange();
     $scope.createIPOgetSysSetting();   
-    
+    $scope.sirTableLoadTemplateName();
+    $scope.createIPOadminIPODetail();
+    $scope.makerCheckerChange();
+    $scope.viewEditChange();
+	$scope.getAdminFinPoolBook();
   }   
   $scope.init();
 

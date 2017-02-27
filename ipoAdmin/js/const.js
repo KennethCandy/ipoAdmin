@@ -29,3 +29,6 @@ var Grey = "#A9A9A9";
 var DEVICE_ITRADE = 'I';
 var DEVICE_CLIENT = 'C';
 
+// role type
+var ROLE_CHECKER = 'C';
+var ROLE_MAKER = 'M';

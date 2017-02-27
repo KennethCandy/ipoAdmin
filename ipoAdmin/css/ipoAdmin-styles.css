@@ -21,7 +21,7 @@ h1 {
 
 body {
 background-color:#F0F0F0;
-} 
+}
 /* --- maintenance start --- */
 
 .float.affix{
@@ -255,6 +255,7 @@ text-decoration: none;
  border: 1px solid #F0F0F0;
  padding:0 0 0 10px;
  color: #1E90FF;
+ text-align: left;
 
 }
 #floating-panel .floating-panel-table td {
@@ -433,21 +434,21 @@ bottom: -30px;
 	content: ">";
 }
 ::-webkit-input-placeholder { /* WebKit, Blink, Edge */
-    color:    #55bbde !important;
+    color:    #3399CB !important;
     font-style:italic;
 }
 ::-moz-placeholder { /* Mozilla Firefox 4 to 18 */
-   color:    #55bbde !important;
+   color:    #3399CB !important;
    opacity:  1;
    font-style:italic;
 }
 ::-moz-placeholder { /* Mozilla Firefox 19+ */
-   color:    #55bbde !important;
+   color:    #3399CB !important;
    opacity:  1;
    font-style:italic;   
 }
-::-ms-input-placeholder { /* Internet Explorer 10-11 */
-   color:    #55bbde !important;
+.form-control:-ms-input-placeholder { /* Internet Explorer 10-11 */
+   color:    #3399CB !important;
    font-style:italic;   
 }
 .glyphicon-calendar:before{
@@ -498,13 +499,14 @@ hr {
   fieldset { display: table-cell; }
 }
 .tdclass{
+  font-size: 15px;  
 	text-align: center;
-	color: #12d6f6;	
+	color: #3399CD;	
 	border-top: none !important;	
 }
 .thclass{	
 	text-align: center;
-	background-color:#338db0;
+	background-color:#3399CD;
 	color: #fff;
 	border-top: none !important;	
 }
@@ -516,7 +518,7 @@ hr {
 }
 
 .selectdown{
-	color: #12d6f6;
+	color: #3399CB;
 	font-style:italic;
 }
 .warningfont::before{
@@ -594,9 +596,9 @@ hr {
 	border-left: 20px solid #55bbde !important;
 } 
 .spanStyle{
-  color: black;
+  color: #777;
   font-weight: bold;
-  font-size: 18px;
+  font-size: 16px;
 }
 .timestyle{
     padding-top: 0px !important;
@@ -650,4 +652,136 @@ hr {
    bottom:20px;
    height:35px;
 }
+label{
+    color: #a9a9a9;
+}
+#addcm{
+   background-color:#3399cb;
+}
+#three{
+   background-color:#3399cb;
+}
+#loadt{
+   background-color:#3399cb;
+}
+#addlaasir{
+  background-color:#3399cb;
+}
+#savetn{
+  background-color:#3399cb;
+}
+#four{
+  background-color:#3399cb;
+}
+#proDt{
+  background-color:#3399cd !important;
+}
+#liOne{
+  color: #a9a9a9;
+}
+.pcss{
+  color:#a9a9a9;
+  font-size: 15px;
+}
+.hColor{
+  color:#777;
+}
+#scrollbody{
+    margin-left: 170px;
+}
 
+/*finPool css start*/
+#finPoolTable  td, th {
+	border: 1px solid #FFFFFF;
+    text-align: center;
+    font-weight: bold;
+	
+			
+}
+#finPoolTable   th {
+	color:#808080;
+				
+}
+
+
+#finPoolTable {
+width:80%; 
+text-align: center;
+background-color: white;
+}
+
+
+
+/*finPool css end*/
+.finPoolPage-pool {
+	position: relative;
+	top: 75px;
+	background-color : white;
+	margin-left:20px;
+	margin-right:20px;
+	margin-bottom:20px;
+	padding-top:30px;
+	padding-bottom:30px;			
+}
+
+.finPoolPage-details {
+	position: relative;
+	top: 75px;
+	background-color : white;
+	margin-left:20px;
+	margin-right:20px;
+	margin-bottom:10px;				
+}
+
+hr.lineStyle {
+border-top: 2px solid #87CEEB;
+}
+
+#parallelogram {
+    position: relative;
+    bottom: 40px;
+	left: 180px;
+	width: 0;
+	height: 0;
+	border-top: 30px solid #87CEEB;
+	border-right: 30px solid transparent;
+	
+	
+}
+#parallelogramTitle {
+background-color:#87CEEB;
+width:180px;
+height:30px;
+color:white;
+text-align:center;
+font-size:15px;
+padding-top:3px;
+}
+.parallelogramRight {
+position: relative;
+bottom: 75px;
+text-align:right;
+font-size:15px;
+color:#87CEEB;
+font-weight: bold; 
+}
+
+.poolSelected {
+    background-color: #87CEEB;
+    color: white;
+}
+
+.poolNotSelected #selectedRowBlue{
+background-color: white;
+    color: #7EAED2;
+}
+
+.poolNotSelected #selectedRowBlack{
+background-color: white;
+    color: #A9A9A9;
+}
+
+.box{
+	width:100px;
+	height:100px;
+}

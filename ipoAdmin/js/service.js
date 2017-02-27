@@ -22,7 +22,39 @@ app.service('sharedProperties', ['$rootScope', function ($rootScope) {
 		},
 		setDeviceType: function(value) {
 			getSessionStorage().setItem('deviceType', value);
-		},	
+		},
+		isCheckerRole: function() {
+			if (getSessionStorage().getItem('roleType') == null) {
+				getSessionStorage().setItem('roleType', ROLE_MAKER);
+			}
+			return getSessionStorage().getItem('roleType') == ROLE_CHECKER;
+		},		
+		setCheckerRole: function(value) {
+			if (value) {
+				getSessionStorage().setItem('roleType', ROLE_CHECKER);
+			}
+			else {
+				getSessionStorage().setItem('roleType', ROLE_MAKER);
+			}
+		},
+		isCreateIPO: function() {
+			if (getSessionStorage().getItem('createIPO') == null) {
+				getSessionStorage().setItem('createIPO', false);
+			}
+			return getSessionStorage().getItem('createIPO') == 'true';
+		},
+		setCreateIPO: function(value) {
+			getSessionStorage().setItem('createIPO', value);
+		},
+		isEditMode: function() {
+			if (getSessionStorage().getItem('editMode') == null) {
+				getSessionStorage().setItem('editMode', false);
+			}
+			return getSessionStorage().getItem('editMode') == 'true';
+		},
+		setEditMode: function(value) {
+			getSessionStorage().setItem('editMode', value);
+		},
 		getCurrentIPOId: function() {
 			return getSessionStorage().getItem('currentIPOId');
 		},

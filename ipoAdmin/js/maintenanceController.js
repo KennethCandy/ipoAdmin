@@ -3,11 +3,6 @@ angular.module('ipoAdminApp.maintenanceController', [])
 .controller('maintenanceCtrl', [ '$scope', '$rootScope', '$window', '$sce', '$http', '$translate', 'sharedProperties', 'redirectService', 'applicationStatusService', function($scope, $rootScope, $window, $sce, $http, $translate, sharedProperties, redirectService, applicationStatusService) {
 	
 		$scope.getAdminIPO = function() {
-			console.log($scope.option);
-			console.log($scope.day);
-			console.log($scope.dateFrom);
-			console.log($scope.dateTo);
-			console.log($scope.myselfCheckbox);		
 		$http({
 			//method: 'GET',
 			//url: 'adminIPOBook.json'			
@@ -683,7 +678,28 @@ angular.module('ipoAdminApp.maintenanceController', [])
 		})
 		
 		}
+		
+	$scope.onClickNewIPO = function() {
+		sharedProperties.setEditMode(true);
+		sharedProperties.setCreateIPO(true);
+	}
+		
+	$scope.onClickModifyIPO = function(ipoId) {
+		//sharedProperties.setCheckerRole(true);
+		if (sharedProperties.isCheckerRole()) {
+			sharedProperties.setEditMode(true);
+		}
+		else {
+			sharedProperties.setEditMode(false);
+		}
+		sharedProperties.setCurrentIPOId(ipoId);
+		sharedProperties.setCreateIPO(false);
+	}
 	  	  
+	$scope.isCheckerRole = function() {
+		return sharedProperties.isCheckerRole();
+	}
+		  
 	//init
 	$scope.init = function() {
 		$scope.sharedProperties = sharedProperties;
@@ -692,8 +708,11 @@ angular.module('ipoAdminApp.maintenanceController', [])
 		//if (getSessionStorage().getItem('agreed') != AGREED) {
 		//	return redirectService.toDisclaimer();
 		//}
-		sharedProperties.setBypassLoginData(jsonFromClient); 
-		
+		if (typeof(jsonFromClient) != "undefined") {
+			sharedProperties.setBypassLoginData(jsonFromClient); 		
+		}
+		// TEMP ALTER MARKER / CHECKER HERE FOR TESTING
+		$scope.sharedProperties.setCheckerRole(false);
 		$scope.sortBtnActive('lastModTimeBtn');
 		$scope.statusBtnActive('greyBtn');
 		$scope.getAdminIPO();

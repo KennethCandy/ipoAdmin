@@ -1,0 +1,280 @@
+<div id="header" class="container">
+	<nav class="navbar">
+		<div class="container-fluid">
+
+			<h1 class="admin-header" style="min-width:1000px">
+				<span>IPO > </span><span><a ui-sref="maintenance">IPO Maintenance<a></span><span class="admin-header-selected"> > <span><a ui-sref="createIPO">IPOMaster<a></span><span class="admin-header-selected"> > Financing Pool Maintenance</span></span>
+			</h1>
+
+		</div>
+	</nav>
+</div>
+
+
+		<!-- Floating Panel start-->			  
+		<div class="col-sm-2" style="float:left;position:fixed;bottom:10%;z-index:9999;">
+			<table class="table" >						
+				<tbody>	
+					<tr ng-if = "showNewEdit()">
+						<td style="border-top: 0px"><button type="button" class="btn btn-primary" style="width:160px;text-align: left" ng-click="showNewPool()"><i class="fa fa-plus" aria-hidden="true"></i>&nbsp;  New Pool</button></td>				
+					</tr>
+					<tr ng-if = "showAccRej()">
+						<td style="border-top: 0px"><button type="button" class="btn btn-success" style="width:160px;text-align: left" ng-click="finPoolAccRej('Y')"><i class="fa fa-check" aria-hidden="true"></i>&nbsp;  {{'createIPO.Accept'|translate}}</button></td>				   
+					</tr>
+					<tr ng-if = "showAccRej()">
+						<td style="border-top: 0px"><button type="button" class="btn-ribbon" style="width:160px;text-align: left" ng-click="finPoolAccRej('N')"><i class="fa fa-times" aria-hidden="true"></i>&nbsp;  {{'createIPO.Reject'|translate}}</button></td>					
+					</tr>
+					
+					<tr ng-if = "showNewEdit() && newmodpool">
+						<td style="border-top: 0px"><button type="button" class="btn btn-info" style="width:160px;text-align: left" ng-click="editPool()"><i class="fa fa-pencil" aria-hidden="true"></i>&nbsp;  {{'createIPO.Edit'|translate}}</button></td>			
+					</tr>
+					<tr ng-if = "showSSDPR()">
+						<td style="border-top: 0px"><button type="button" class="btn btn-info" style="width:160px;text-align: left" ng-click="createFinPoolsubmit('Save')"><i class="fa fa-floppy-o" aria-hidden="true"></i>&nbsp;  {{'createIPO.SaveDraft'|translate}}</button></td>			
+					</tr>
+					<tr ng-if = "showSSDPR()">
+						<td style="border-top: 0px"><button type="button" class="btn btn-primary" style="width:160px;text-align: left" ng-click="createFinPoolsubmit('Submit')"><i class="fa fa-paper-plane-o" aria-hidden="true"></i>&nbsp;  {{'createIPO.Submit'|translate}}</button></td>				
+					</tr>
+					<tr>
+						<td style="border-top: 0px"><button type="button" class="btn btn-ryellow" style="width:160px;text-align: left" ng-click="createFinPoolback()"><i class="fa fa-reply" aria-hidden="true"></i>&nbsp;  {{'createIPO.Back'|translate}}</button></td>			
+					</tr>
+					<tr ng-if = "showSSDPR()">
+						<td style="border-top: 0px"><button type="button" class="btn btn-danger" style="width:160px;text-align: left" ng-click="deleteFinPool()"><i class="fa fa-times-circle-o" aria-hidden="true"></i>&nbsp;  {{'createIPO.Delete'|translate}}</button></td>	
+					</tr>					
+					<tr ng-if = "showSSDPR()">
+						<td style="border-top: 0px"><button type="button" class="btn btn-warning" style="width:160px;text-align: left"><i class="fa fa-chevron-left" aria-hidden="true"></i>&nbsp;  Cancel</button></td>			
+					</tr>							  
+				</tbody>
+			</table>	  
+		</div><!-- Floating Panel end-->
+
+
+<div class="container-fluid finPoolPage-details">
+	<div class="row">
+		<div class="col-sm-12" >
+			<hr style="margin-top: 5px;">
+			<h4>{{adminIPODetail.secId}} {{adminIPODetail.enName}}</h4>
+			<span>IPO Code {{ipoId}}</span>
+			<hr style="margin-top: 10px;margin-bottom: 10px">
+		</div>
+		<div class="col-sm-12" style="padding-left: 0px">
+			<div class="col-sm-8"style="margin:0px ;height:30px">
+				<h4  style="margin-top:0px; margin-bottom:0px;color:{{adminIPODetail.theme}}">{{adminIPODetail.status}}</h4>					
+			</div>
+			
+			<div class="col-sm-4"><span ng-class="getMinute(currentIPO.marginCloseTime)"></span>
+				<p class="text-center">{{'createIPO.Lastmodifiedby'|translate}} <strong>{{adminIPODetail.modifyUserId}}</strong> {{'createIPO.on'|translate}} <strong>{{adminIPODetail.fmtLastModDate}}</strong> {{'createIPO.at'|translate}} <strong>{{adminIPODetail.fmtLastModTime}}</strong></p>					
+			</div>
+		</div>
+	</div>
+</div>
+<div class="container-fluid finPoolPage-pool">
+	<div class="row">
+		<div class="form-group"style="height:80px;">
+					<div class="col-sm-5">
+						<div id="donutChart" style="width: 300px; height: 300px; margin: 0 auto"></div>
+					</div>
+					<div class="col-sm-7">						
+							  <table id="finPoolTable" class="table">
+									<thead>
+									  <tr class="active">
+										<th>Active Pools</th>
+										<th colspan="3">Size</th>
+										<th>Usage</th>
+										<th>Status</th>
+										<th>Alert</th>										
+									  </tr>
+									</thead>
+									
+									  <tr>
+										<td style="color:#808080">Total</td>
+										<td style="color:#49A0D3">HKD</td>
+										<td style="color:#49A0D3" ng-bind="formatedOverallTotalInTable"></td>
+										<td></td>
+										<td style="color:#49A0D3" ng-bind="overallTotalUsage"></td>
+										<td colspan="2"></td>
+									  </tr>                           				  
+									  <tr ng-repeat="adminFinPool in adminFinPools" ng-click="setSelected(adminFinPool.poolId, adminFinPool.showStatus)" ng-class=" adminFinPool.poolId == idSelectedPool ? 'poolSelected' : 'poolNotSelected'">
+										<td style="text-align:left;"><span class="box" style="background:{{bgColors[adminFinPool.index]}}">&nbsp;&nbsp;</span><span class="box" style="background:{{colors[adminFinPool.index]}}">&nbsp;&nbsp;</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span id="selectedRowBlack" ng-bind="adminFinPool.poolName"></span></td>
+										<td id="selectedRowBlue" ng-bind="adminFinPool.ccy"></td>
+										<td id="selectedRowBlue" ng-bind="adminFinPool.totalValue"></td>
+										<td id="selectedRowBlack" ng-bind="adminFinPool.overallPercentage"></td>
+										<td id="selectedRowBlue" ng-bind="adminFinPool.showUsage"></td>
+										
+										<td ng-if="adminFinPool.showStatus == 'Approved'" id="selectedRowBlue"><span style="color:#7EAED2" class="glyphicon glyphicon-ok"></span>Approved</td>
+										<td ng-if="adminFinPool.showStatus == 'Draft'" id="selectedRowBlue"><span class="glyphicon glyphicon-pencil"></span>Draft</td>
+										<td ng-if="adminFinPool.showStatus == 'Pending'" id="selectedRowBlue"><span class="glyphicon glyphicon-time"></span>Pending</td>
+										<td ng-if="adminFinPool.showStatus == 'Rejected'" id="selectedRowBlue"><span class="glyphicon glyphicon-remove"></span>Rejected</td>
+																				
+										<td ng-if="isAlert(adminFinPool.usage, adminFinPool.alertThreshold)"><span style="color:red" class="glyphicon glyphicon-bell"></span></td>	
+										<td ng-if="!isAlert(adminFinPool.usage, adminFinPool.alertThreshold)"></td>
+									</tr>							                           				  														
+									<tr><td colspan="7"></td></tr>
+									<tr class="active">
+										<th>Inactive Pools</th>
+										<th colspan="3">Size</th>										
+										<th colspan="3">Status</th>
+									</tr>																								  
+									 <!-- <tr ng-repeat="adminFinPool in adminFinPools">-->
+									   <tr>
+										<td style="color:#A9A9A9" ng-bind="adminFinPool.poolName"></td>
+										<td style="color:#7EAED2" ng-bind="adminFinPool.ccy"></td>
+										<td></td>
+										<td style="color:#7EAED2" ng-bind="adminFinPool.totalValue"></td>								
+										<td></td>
+										<td style="color:#7EAED2"><span class="glyphicon glyphicon-ban-circle"></span>Disabled</td>
+										<!--
+										<td style="color:#7EAED2"> <span style="color:#7EAED2" class="glyphicon glyphicon-ok"></span>Approved</td>
+										<td style="color:#7EAED2"><span class="glyphicon glyphicon-pencil"></span>Draft</td>								
+										<td style="color:#7EAED2"><span class="glyphicon glyphicon-time"></span>Pending</td>
+										<td style="color:#7EAED2"><span class="glyphicon glyphicon-remove"></span>Rejected</td>
+										<td style="color:#7EAED2"><span class="glyphicon glyphicon-trash"></span>Deleted</td>
+										-->
+										<td></td>								
+									</tr>									
+									
+							  </table>									  												
+					</div>
+					<!--financingPool detail-->
+					<div class="col-sm-12" style="background-color:white;height:300px" ng-show="!showbelow">
+											
+					</div>
+				<div ng-show="showbelow" style="padding-bottom:20px;background-color:white;margin-bottom:20px;">
+					<div class="col-sm-12 ">
+						<br>
+						<hr class="lineStyle">
+						<p id="parallelogramTitle">Financing Pool Details</p><p id="parallelogram">&nbsp;</p>
+						<p class="parallelogramRight" ng-if="!newmodpool">New Financing Pool</p>
+						<p class="parallelogramRight" ng-if="modHeader()">Modify Financing Pool</p>	
+					</div>
+					
+			<form class="form-horizontal" role="form" name="finPoolForm" novalidate >	
+					<div class="form-group" ng-if="newmodpool">
+						<label for="poolId" class="col-sm-offset-2 col-sm-3 control-label">Code</label>
+						<div class="col-sm-3">					     
+							<label class="col-sm-5 control-label resetfcolor">{{poolDetail.poolId || "---"}}</label>   				
+						</div>					    
+					</div>
+					<div class="form-group">
+						<label for="poolName" class="col-sm-offset-2 col-sm-3 control-label">Name</label>
+						<div class="col-sm-3">
+							<input type="text" class="form-control" id="poolName" name="poolName" placeholder="{{'createIPO.Required'|translate}}" ng-model="poolName" ng-show="showSSDPR()" required>
+							<label  class=" control-label resetfcolor"ng-show="!showSSDPR()">{{poolDetail.poolName || "---"}}</label>
+							<span class=" warningfont" ng-show="finPoolForm.poolName.$dirty && finPoolForm.poolName.$invalid">
+								<i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+								<span ng-show="finPoolForm.poolName.$error.required" >Name {{'createIPO.isrequired'|translate}}</span>	
+							</span>							
+						</div>					    
+					</div>
+					<div class="form-group" >
+						<label for="currency" class="col-sm-offset-2 col-sm-3 control-label">Currency</label>
+						<div class="col-sm-3">					     
+							<label class="col-sm-5 control-label resetfcolor">HKD</label>   				
+						</div>					    
+					</div>
+					<div class="form-group">
+						<label for="totalAmount" class="col-sm-offset-2 col-sm-3 control-label">Total Amount</label>
+						<div class="col-sm-3">
+							<input type="text" class="form-control" id="totalAmount" name="totalAmount" placeholder="{{'createIPO.Required'|translate}}" ng-model="totalAmount" ng-show="showSSDPR()" required  ng-keydown=" onlyNumber(15,totalAmount,$event)" >
+							<label  class=" control-label resetfcolor"ng-show="!showSSDPR()">{{poolDetail.totalValue || "---"}}</label>
+							<span class=" warningfont" ng-show="finPoolForm.totalAmount.$dirty && finPoolForm.totalAmount.$invalid">
+								<i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+								<span ng-show="finPoolForm.totalAmount.$error.required" >Total Amount {{'createIPO.isrequired'|translate}}</span>	
+							</span>						
+						</div>					    
+					</div>
+					<div class="form-group">
+						<label for="priority" class="col-sm-offset-2 col-sm-3 control-label">Priority</label>  
+						<div class="col-sm-3">	
+							<div class="input-group">							    
+								<input type="text" class="form-control" id="priority"name="priority" placeholder="{{'createIPO.Required'|translate}}"ng-show="showSSDPR()"ng-model="priority"required ng-keydown=" onlyNumber(1,priority,$event)">
+								<label class=" control-label resetfcolor"ng-show="!showSSDPR()">{{poolDetail.priority|| "---"}}</label>
+								<span class="input-group-addon" ng-show="showSSDPR()" style="background-color:white">1 = highest priority</span>
+							</div>
+							
+						</div>					   
+					</div>
+					<label class="col-sm-offset-5 col-sm-6 control-label" style="text-align:left;margin-top:-20px;margin-bottom:15px;">
+						<span class=" warningfont" ng-show="finPoolForm.priority.$dirty && finPoolForm.priority.$invalid">
+							<i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+							<span ng-show="finPoolForm.priority.$error.required" >Priority {{'createIPO.isrequired'|translate}}</span>							
+						</span>
+					</label>
+				
+					<div class="form-group has-feedback">
+							<label for="startDate" class="col-sm-offset-2 col-sm-3 control-label control-label">Start Date</label>
+							<div class="col-sm-3">
+								<span class="glyphicon glyphicon-calendar form-control-feedback longadd"ng-show="showSSDPR()"></span>
+								<input type="text" class="form-control reqpadlong" id="startDate"name="startDate" placeholder="{{'createIPO.Required'|translate}}"ng-show="showSSDPR()"ng-model="startDate"required>
+								<label  class=" control-label resetfcolor"ng-show="!showSSDPR()">{{poolDetail.startDate|| "---"}}</label>
+								<span class=" warningfont" ng-show="finPoolForm.startDate.$dirty && finPoolForm.startDate.$invalid">
+									<i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+									<span  ng-show="finPoolForm.startDate.$error.required" >Start Date {{'createIPO.isrequired'|translate}}</span>							
+								</span>
+							</div>
+						</div>
+					<div class="form-group has-feedback">
+							<label for="endDate" class="col-sm-offset-2 col-sm-3 control-label control-label">End Date</label>
+							<div class="col-sm-3">
+								<span class="glyphicon glyphicon-calendar form-control-feedback longadd"ng-show="showSSDPR()"></span>
+								<input type="text" class="form-control reqpadlong" id="endDate"name="endDate" placeholder="{{'createIPO.Required'|translate}}"ng-show="showSSDPR()"ng-model="endDate"required>
+								<label  class=" control-label resetfcolor"ng-show="!showSSDPR()">{{poolDetail.endDate|| "---"}}</label>
+								<span class=" warningfont" ng-show="finPoolForm.endDate.$dirty && finPoolForm.endDate.$invalid">
+									<i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+									<span  ng-show="finPoolForm.endDate.$error.required" >End Date {{'createIPO.isrequired'|translate}}</span>							
+								</span>
+							</div>
+						</div>
+					
+					<div class="form-group">
+						<label for="bankCode" class="col-sm-offset-2 col-sm-3 control-label control-label">Bank Code</label>
+						<div class="col-sm-3">
+							<input type="text" class="form-control" id="bankCode" ng-show="showSSDPR()"ng-model="bankCode" ng-blur="FinalOfferPrice= digitlimt(FinalOfferPrice)">
+							<label  class="control-label resetfcolor"ng-show="!showSSDPR()">{{poolDetail.bankRef|| "---"}}</label>
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="alertThreshold" class="col-sm-offset-2 col-sm-3 control-label control-label">Alert Threshold</label> 
+						<div class="col-sm-3">	
+							<div class="input-group">							    
+								<input type="text" class="form-control" id="alertThreshold" ng-show="showSSDPR()"ng-model="alertThreshold" ng-keydown="decimallimit(4,4,ClientRebateRate,'ClientRebateRate',$event)" ng-blur="ClientRebateRate= digitlimt(ClientRebateRate)">
+								<label class=" control-label resetfcolor"ng-show="!showSSDPR()">{{poolDetail.showAlertThreshold || "---"}}%</label>
+								<span class="input-group-addon "ng-show="showSSDPR()" style="background-color:white;">% (amount being used)</span>								
+							</div>
+						</div>							    
+					</div>
+					<div class="form-group">
+						<div class="col-sm-offset-2 col-sm-3">
+							<div class="checkbox"style="float:right" id="poolStatus" ng-if="newmodpool">
+								<label><input type="checkbox"  ng-checked="poolStatus == true" ng-click="onclickPoolStatus();" ng-disabled="disableFields()"></label>
+							</div>
+						</div>			
+						<div class="col-sm-3">	
+							<label for="Enabled" class="col-sm-5 control-label" style="
+							text-align: left; padding-left: 0">Enabled</label>						
+						</div>
+					</div>					
+					<div class="form-group">								  
+						<label for="RemarkforInternal" class="col-sm-offset-2 col-sm-3 control-label control-label">Remark for Internal</label>	   
+						<div class="col-sm-3">								      
+							<textarea class="form-control" id="remarkforInternal" rows="3" ng-show="showSSDPR()"ng-model="remarkforInternal"ng-keydown="numberofchar(254,remarkforInternal,$event)"ng-blur="remarkforInternal=digitsofchar(255,remarkforInternal)"></textarea>
+							<label style="word-break:break-all;word-wrap:break-word;" class=" control-label resetfcolor"ng-show="!showSSDPR()">{{poolDetail.internalRemark|| "---"}}</label>
+						</div>								    
+					</div>
+					<div class="form-group" ng-if="newmodpool">
+						<label for="status" class="col-sm-offset-2 col-sm-3 control-label">Status</label>
+						<div class="col-sm-3">					     
+							<label class="col-sm-5 control-label resetfcolor">Approved</label>   				
+						</div>					    
+					</div>
+					<div class="form-group" ng-if="newmodpool">
+						<label for="approvedBy" class="col-sm-offset-2 col-sm-3 control-label">Last Modified By</label>
+						<div class="col-sm-5">					     
+							<label class="col-sm-5 control-label resetfcolor">{{poolDetail.modifyUserId || "---"}} on {{poolDetail.modifyDate || "---"}} at {{poolDetail.modifyTime || "---"}}</label>   				
+						</div>					    
+					</div>
+			</form>
+		  </div>
+		</div>
+	</div>
+</div>
+

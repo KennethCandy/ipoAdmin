@@ -1,5 +1,5 @@
 <nav class="navbar navbar-default">
-	<div id="header" class="container-fluid">	
+	<div id="header" class="container-fluid" style="background-color:#F0F0F0;">	
 			<h1 class="admin-header">
 				<span>{{'maintenance.IPO'|translate}} > <span class="admin-header-selected">{{'maintenance.IPOMaintenance'|translate}}</span>
 			</h1>					
@@ -90,7 +90,7 @@
 		<div style="height:705px"id="floating-panel" class="row main-body" >
 			  <div class="col-sm-2">
 				<div class="float" id="floatingFilter">
-					  <button type="button" class="btn btn-primary" ui-sref="createIPO" style="width:140px;margin-bottom:35px"><span class="glyphicon glyphicon-plus"></span>{{'maintenance.newIPO'|translate}}</button>
+					  <button type="button" class="btn btn-primary" ui-sref="createIPO" ng-click="onClickNewIPO()" ng-show="!isCheckerRole()" style="width:140px;margin-bottom:35px"><span class="glyphicon glyphicon-plus"></span>{{'maintenance.newIPO'|translate}}</button>
 						<table class="floating-panel-table" >
 							<thead>
 							  <tr>
@@ -198,7 +198,7 @@
 				 
 				 <!--record-->
 					<div class="row">							  						  
-							<div class="panel-group" ng-repeat="adminIPO in adminIPOs | orderBy:sortType:sortReverse | filter:searchStatus | filter:showFinMode | filter:showUser | filter:showStatus ">
+							<div class="panel-group" ng-repeat="adminIPO in adminIPOs | orderBy:sortType:sortReverse | filter:searchStatus | filter:showFinMode | filter:showUser | filter:showStatus " ui-sref="createIPO" ng-click="onClickModifyIPO(adminIPO.ipoId)">
 						<div style="max-width:1600px;min-width:740px;margin-right:50px">
 								<div id="record-format" class="panel panel-default">
 								  <table id="record-table" ng-style="recordTheme(adminIPO.theme)">

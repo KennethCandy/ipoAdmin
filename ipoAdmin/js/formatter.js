@@ -27,6 +27,65 @@ function padLeft(str, length) {
   }
 }
 
+function formatAmount(n) {
+       if (n != null && n != "undefined") {	   
+	   var length = String(n).length;
+	   var result = "";
+           if (length >= 4 && length < 7) {
+			result = (Math.floor(n/100)/10);
+			if (result.toString().indexOf('.') < 0) {
+            result += ".0";
+           }
+			return result + "K";
+           }
+           else if (length >= 7 && length < 10) {
+		   result = (Math.floor(n/100000)/10);
+		   if (result.toString().indexOf('.') < 0) {
+            result += ".0";
+           }
+			return result + "M";
+           }
+		   else if (length >= 10 && length < 13) {
+		   result = (Math.floor(n/100000000)/10);
+		   if (result.toString().indexOf('.') < 0) {
+            result += ".0";
+           }
+            return result + "B";
+           }
+		   else if (length >= 13) {
+		   result = (Math.floor(n/100000000000)/10);
+		   if (result.toString().indexOf('.') < 0) {
+            result += ".0";
+           }
+            return result + "T";
+           }
+		   else {
+            return numFormatter(n);
+           }
+       }
+       return "";
+    }
+
+function formatNumber(n, dp) {
+       if (n != null && n != "undefined") {
+           if (dp > 0 && n.indexOf('.') < 0) {
+            n += ".0";
+           }
+           if (dp > 0) {
+            try {               
+				var part = n.toString().split(".");							
+				part[0] = part[0] + "." + part[1].substring(0, 1);
+				n = part[0];				
+            }
+            catch (e) {
+            }
+           }
+           var parts=n.toString().split(".");
+           return parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",") + (dp > 0 ? "." + parts[1] : "");
+       }
+       return "";
+    }
+
 /*Quantity Amount Table */
 /*table one*/
 function addQuantityAmountTableRange(){

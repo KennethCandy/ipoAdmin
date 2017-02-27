@@ -1,4 +1,4 @@
-angular.module('ipoAdminApp', ['ng', 'ngRoute', 'ui.router', 'ipoAdminApp.maintenanceController', 'ipoAdminApp.createIPOController', 'ipoAdminApp.service' ])
+angular.module('ipoAdminApp', ['ng', 'ngRoute', 'ui.router', 'ipoAdminApp.maintenanceController', 'ipoAdminApp.createFinPoolController', 'ipoAdminApp.createIPOController', 'ipoAdminApp.service' ])
 
 .config(function($stateProvider, $urlRouterProvider) {
 	$stateProvider
@@ -8,6 +8,12 @@ angular.module('ipoAdminApp', ['ng', 'ngRoute', 'ui.router', 'ipoAdminApp.mainte
 		url: '/maintenance',
 		templateUrl: 'maintenance.html',
 		controller: 'maintenanceCtrl'
+	})
+	
+	.state('createFinPool', {
+		url: '/createFinPool',
+		templateUrl: 'createFinPool.html',
+		controller: 'createFinPoolCtrl'
 	})
 
 	.state('createIPO', {

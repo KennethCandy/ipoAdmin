@@ -98,11 +98,20 @@
       return this.clear()
     }
 
-    for (i = offsets.length; i--;) {
-      activeTarget != targets[i]
+    //for (i = offsets.length; i--;) {
+    //  activeTarget != targets[i]
+     //   && scrollTop >= offsets[i]
+      //  && (!offsets[i + 1] || scrollTop <= offsets[i + 1])
+      //  && this.activate(targets[i])
+    //}
+	 for (i = 0;i < offsets.length; i ++ ) {
+     if( activeTarget != targets[i]
         && scrollTop >= offsets[i]
         && (!offsets[i + 1] || scrollTop <= offsets[i + 1])
-        && this.activate(targets[i])
+        && this.activate(targets[i])){
+			alert(i);
+			 break;
+	 }
     }
   }
 
@@ -122,7 +131,7 @@
         '[data-target="' + target + '"],' +
         this.selector + '[href="' + target + '"]'
 
-        selector = tempObj[target];
+        selector = tempObj[target];        
 
     var active = $(selector)
       .parents('li')
@@ -135,6 +144,7 @@
     }
 
     active.trigger('activate.bs.scrollspy')
+		return true;
   }
 
   ScrollSpy.prototype.clear = function () {

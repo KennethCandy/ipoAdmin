@@ -1,8 +1,0 @@
-<!DOCTYPE html>
-<html><head></head><body>
-<form method="post" target="_blank">
-  ipoId:     <input type="text" name="ipoId" value="10001001"><br>
-  version:     <input type="text" name="version" value="1"><br>
-<input type="submit" name="submit" value="Submit">
-</form>
-</body></html>
